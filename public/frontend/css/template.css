@@ -1396,6 +1396,11 @@ border: 1px solid #fff;
         color: #bf1e2d;
         font-weight: bold;
     }
+    .bg-partner{
+            background-color: #f3f3f3;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    }
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

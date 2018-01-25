@@ -46,7 +46,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Bathroom</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng tắm</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
 					</div>					
 				</div>			
 			</div>
@@ -54,7 +54,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Kitchen &amp; Dinning</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ăn</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
@@ -62,7 +62,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Bedroom</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ngủ</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
 					</div>						
 				</div>		
 			</div>
@@ -73,7 +73,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Leisure &amp; Exercise</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng thể dục</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
@@ -123,5 +123,62 @@ $company=$setting['contacted_person']['field_value'];
 			<div class="clr"></div>
 		</div>	
 	</div>
+</div>
+<div class="bg-partner">
+	<?php 
+	$data=getBanner("doi-tac");
+	if(count($data) > 0){
+		$items=$data["items"];
+		if(count($items) > 0){
+			?>
+			<div class="container padding-top-15 padding-bottom-15">
+				<div class="col-lg-12">
+					<script type="text/javascript" language="javascript">
+						$(document).ready(function(){
+							$(".partner").owlCarousel({
+								autoplay:true,                    
+								loop:true,
+								margin:25,                        
+								nav:false,            
+								mouseDrag: true,
+								touchDrag: true,                                
+								responsiveClass:true,
+								responsive:{
+									0:{
+										items:1
+									},
+									600:{
+										items:1
+									},
+									1000:{
+										items:6
+									}
+								}
+							});
+							var chevron_left='<i class="fa fa-chevron-left"></i>';
+							var chevron_right='<i class="fa fa-chevron-right"></i>';
+							$("div.partner div.owl-prev").html(chevron_left);
+							$("div.partner div.owl-next").html(chevron_right);
+						});                
+					</script>
+					<div class="owl-carousel partner owl-theme">
+						<?php 
+						foreach($items as $key => $value){
+							$featuredImg=asset('upload/'.$value['image']) ;
+							$page_url=$value['page_url'];
+							?>
+							<div>
+								<a href="<?php echo $page_url; ?>" target="_blank"><img src="<?php echo $featuredImg; ?>" /></a>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>			
+			</div>  
+			<?php
+		}  
+	}
+	?>
 </div>
 @endsection()               

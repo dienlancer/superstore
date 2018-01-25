@@ -204,24 +204,22 @@ if(count($arrCart) > 0){
 			<div class="container">
 				<div class="col-lg-12">					
 					<div class="social-right">
-						<?php     
-						$args = array(                         
-							'menu_class'            => 'top-menu inline-block',                               
-							'before_wrapper'        => '',
-							'before_title'          => '',
-							'after_title'           => '',
-							'before_wrapper_ul'     =>  '',
-							'after_wrapper_ul'      =>  '',
-							'after_wrapper'         => ''     ,
-							'link_before'           => '', 
-							'link_after'            => '',                                                                    
-							'theme_location'        => 'top-menu' ,
-							'menu_li_actived'       => 'current-menu-item',
-							'menu_item_has_children'=> 'menu-item-has-children',
-							'alias'                 => $seo_alias,
-						);                    
-						wp_nav_menu($args);
-						?>        
+						<ul class="inline-block top-menu">
+					<?php                                                              
+					if( count($arrUser) == 0 ){
+						?>
+						<li ><a href="<?php echo $register_member_link; ?>" ><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Đăng ký</a></li>
+						<li ><a href="<?php echo $account_link; ?>" ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Đăng nhập</a></li>
+						<?php
+					}else{                                     
+						?>
+						<li ><a  href="<?php echo $account_link; ?>"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?php echo $arrUser["username"]; ?></a></li>
+						<li ><a  href="<?php echo $security_link; ?>"><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Đổi mật khẩu</a></li>                                                
+						<li ><a  href="<?php echo $logout_link; ?>"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
+						<?php                                     
+					}
+					?>     
+				</ul>
 						<div class="clr"></div>   
 					</div>
 					<div class="clr"></div>
