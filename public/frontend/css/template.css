@@ -14,7 +14,7 @@ body{
     font-size:14px;
     color:#585858;
     background:transparent;
-    font-family: 'OpenSans';
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     
 }
 table{max-width:100%;}
@@ -280,19 +280,18 @@ ul.list-style-none{
         font-style: italic;
 }
 .searching input[type='text'][name='q']{
-    border: 1px solid #d7d7d7;
+        border: 0px solid #ffffff;
     padding: 5px 10px;
-    font-style: italic;   
+    width: 100%;
 }
 .searching a {
-        position: absolute;
+        padding: 3px 5px;
+    font-size: 17px;
+    background: #f6b948;
+    color: #ffffff;
+    position: absolute;
     top: 0px;
-    right: 15px;    
-    padding: 6px 0px;
-    font-size: 18px;
-}
-.searching{
-    padding:4px 0px;
+    right: 0px;
 }
 .red-menu{
     padding:0 0px;
@@ -759,7 +758,7 @@ div.liverpool:hover div.youtube-img{
     text-shadow: 2px 2px 0px #ffffff;
 }
 .searching{
-    
+        padding: 40px 0px 0px 90px;
 }
 .so-phone{
     text-shadow: 2px 2px 0px #ffffff;
@@ -953,8 +952,7 @@ div.ducati  h2{
     margin-left: 0
 }
 .bg-social{
-    background: #ebebeb;
-    padding: 20px 0px
+    background: #b20c0c;   
 }
 .slogan-left{
     float: left;
@@ -979,9 +977,7 @@ div.ducati  h2{
     background: #114A82;
     color: #ffffff;
 }
-.bg-menu{
-    background: linear-gradient(to left, #fff 73%, #114a82 50%)
-}
+
 .logo{
         padding: 89px 0px;
 }
@@ -1023,7 +1019,7 @@ div.ducati  h2{
     font-size: 14px;
 }
 .menu-plone{
-    padding:17px 0px;
+    padding:0px 0px;
 }
 .gach-ngang{
     border-top: 1px solid #d7d7d7;
@@ -1330,14 +1326,76 @@ border: 1px solid #fff;
     font-weight: bold;
     font-size: 16px;
 }
-#map {
-    height: 100%;
-  }
+
   .duong-ngang-2{
     padding: 0;
     margin-top: 15px;
     margin-bottom: 0;
   }
+  .top-menu{
+    list-style: none;
+  }
+  .top-menu li a{
+        color: #ffffff;
+    padding: 10px 0px;
+    display: block;
+    font-size: 12px;
+  }
+  .bg-home{
+    background: #bf1e2d;
+    padding: 10px 0px;
+  }
+  .top-info{
+    color: #ffffff;
+    font-weight: bold;
+    margin: 25px 0px 0px 0px
+  }
+  .top-info p{
+        padding: 0px 0px;
+    margin: 5px 0px;
+  }
+  form[name='frm-search']{
+        position: relative;
+    width: 66%;
+  }
+  .bg-menu{
+    background: #1F3B73;
+  }
+  .wrapper-notice{
+    background: #f7f7f7;
+    padding-bottom: 15px; 
+  }
+  .supplied-block{
+        padding: 20px 0px;
+    margin: 15px 0px 0px 0px;
+    border: 1px solid #ebebeb;
+    background: #ffffff;
+  }
+  .supplied-block-2 {
+    padding:9px 0px;
+    margin: 15px 0px 0px 0px;
+    border: 1px solid #ebebeb;
+    background: #ffffff;
+}
+    .wapper-body{
+        background: #ffffff;
+    }
+    .walking-box-title{
+               position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 50%;
+    background: #ffffff;
+    text-align: center;
+    padding: 5px 5px;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .walking-box-title a{
+        color: #bf1e2d;
+        font-weight: bold;
+    }
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

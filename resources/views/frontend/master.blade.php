@@ -73,7 +73,6 @@ if(count($arrCart) > 0){
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">  
-
 	<title><?php echo $seo_title; ?></title>
 	<meta name="keywords" content="<?php echo $seo_meta_keyword; ?>">
 	<meta name="description" content="<?php echo $seo_meta_description; ?>">	
@@ -191,62 +190,81 @@ if(count($arrCart) > 0){
 </head>
 <body>		
 	<!-- begin fanpage -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=206740246563578';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<!-- end fanpage -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=206740246563578';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<!-- end fanpage -->
 	<header class="header">	
 		<div class="bg-social">
 			<div class="container">
-				<div class="col-lg-12">
-					<div class="slogan-left">
-						Sở hữu ngay khu biệt thự nghỉ dưỡng cao cấp
-					</div>
+				<div class="col-lg-12">					
 					<div class="social-right">
-						<ul class="inline-block sinka">
-							<li class="social social-facebook"><a href="<?php echo $facebook_url; ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li class="social social-google-plus"><a href="<?php echo $google_plus; ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-							<li class="social social-youtube"><a href="<?php echo $youtube_url; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></i></a></li>
-							<li class="social social-twitter"><a href="<?php echo $twitter_url; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						</ul>
+						<?php     
+						$args = array(                         
+							'menu_class'            => 'top-menu inline-block',                               
+							'before_wrapper'        => '',
+							'before_title'          => '',
+							'after_title'           => '',
+							'before_wrapper_ul'     =>  '',
+							'after_wrapper_ul'      =>  '',
+							'after_wrapper'         => ''     ,
+							'link_before'           => '', 
+							'link_after'            => '',                                                                    
+							'theme_location'        => 'top-menu' ,
+							'menu_li_actived'       => 'current-menu-item',
+							'menu_item_has_children'=> 'menu-item-has-children',
+							'alias'                 => $seo_alias,
+						);                    
+						wp_nav_menu($args);
+						?>        
+						<div class="clr"></div>   
 					</div>
 					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<div class="bg-menu">
+		<div class="bg-home">
 			<div class="container">
-				<div class="col-lg-4">
-					<div class="logo relative">
-						<div class="nuke">
-							<a href="<?php echo url('/'); ?>">                
+				<div class="col-lg-2">
+					<center>
+						<a href="<?php echo url('/'); ?>">                
 							<img src="<?php echo $seo_logo_frontend;?>" />
 						</a>
-						</div>						
-					</div>					
+					</center>				
+				</div> 
+				<div class="col-lg-6">
+					<div class="searching">
+						<form action="<?php echo route('frontend.index.search'); ?>" method="post" name="frm-search">
+							{{ csrf_field() }}
+							<input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm" value="">
+							<a href="javascript:void(0);" onclick="document.forms['frm-search'].submit();">Tìm kiếm</a>
+						</form>
+						<div class="margin-top-5"><font color="#ffffff">Free delivery on orders over £30  •   We are based in the UK</font></div>
+					</div>     
 				</div>
-				<div class="col-lg-8">
-					<div class="info-top">
-						<div class="col-lg-4">
-							<div class="snippet-top"><center><i class="fa fa-map-marker" aria-hidden="true">&nbsp;</i></center></div>
-							<div class="info-global margin-top-5"><center>Oceanview Hall Miami, FL 33141</center></div>
-						</div>
-						<div class="col-lg-4">
-							<div class="snippet-top"><center><i class="fa fa-phone" aria-hidden="true">&nbsp;</i></center></div>
-							<div class="info-global margin-top-5"><center><?php echo $telephone; ?></center></div>
-						</div>
-						<div class="col-lg-4">
-							<div class="snippet-top"><center><i class="fa fa-envelope" aria-hidden="true">&nbsp;</i></center></div>
-							<div class="info-global margin-top-5"><center><?php echo $email_to; ?></center></div>
-						</div>
-						<div class="clr"></div>
+				<div class="col-lg-4">
+					<div class="top-info">						
+						<?php 
+						$data=getPage('top-info');
+						if(count($data)){
+							$content=$data['content'];
+							echo $content;
+						}
+						?>
 					</div>
+				</div>
+				<div class="clr"></div>
+			</div>			
+		</div>
+		<div class="bg-menu">
+			<div class="container">				
+				<div class="col-lg-12">					
 					<div class="menu-plone">
 						<div>
 							<div class="col-lg-9 no-padding">
@@ -271,13 +289,7 @@ if(count($arrCart) > 0){
 								<div class="clr"></div>    
 							</div>
 							<div class="col-lg-3 no-padding">
-								<div class="searching relative">
-								<form action="<?php echo route('frontend.index.search'); ?>" method="post" name="frm-search">
-									{{ csrf_field() }}
-									<input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm" value="">
-									<a href="javascript:void(0);" onclick="document.forms['frm-search'].submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
-								</form>
-							</div>     
+
 							</div>
 							<div class="clr"></div>
 						</div>						
