@@ -367,7 +367,6 @@ Route::match(["get","post"],"xoa/{id}",["as"=>"frontend.index.delete","uses"=>"f
 Route::match(["get","post"],"dang-ky",["as"=>"frontend.index.register","uses"=>"frontend\IndexController@register"]);
 Route::match(["get","post"],"tai-khoan",["as"=>"frontend.index.viewAccount","uses"=>"frontend\IndexController@viewAccount"]);
 Route::match(["get","post"],"dang-nhap",["as"=>"frontend.index.login","uses"=>"frontend\IndexController@login"]);
-Route::match(["get","post"],"dang-nhap-tham-gia/{project_alias?}",["as"=>"frontend.index.loginJoinProject","uses"=>"frontend\IndexController@loginJoinProject"]);
 Route::match(["get","post"],"bao-mat",["as"=>"frontend.index.viewSecurity","uses"=>"frontend\IndexController@viewSecurity"]);
 Route::match(["get","post"],"lien-he",["as"=>"frontend.index.contact","uses"=>"frontend\IndexController@contact"]);
 Route::get("thanh-toan",["as"=>"frontend.index.checkout","uses"=>"frontend\IndexController@checkout"]);
@@ -379,7 +378,6 @@ Route::get("add-to-cart",["as"=>"frontend.index.addToCart","uses"=>"frontend\Ind
 Route::get("show-invoice-detail",["as"=>"frontend.index.showInvoiceDetail","uses"=>"frontend\IndexController@showInvoiceDetail"]);
 Route::post("get-paymentmethod",["as"=>"frontend.index.getPaymentmethod","uses"=>"frontend\IndexController@getPaymentmethod"]);
 Route::post("tim-kiem",["as"=>"frontend.index.search","uses"=>"frontend\IndexController@search"]);
-Route::post("join-project",["as"=>"frontend.index.joinProject","uses"=>"frontend\IndexController@joinProject"]);
 Route::post("load-data-member",["as"=>"frontend.index.loadDataMember","uses"=>"frontend\IndexController@loadDataMember"]);	
 Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","uses"=>"frontend\IndexController@loadDataSupporter"]);		
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);

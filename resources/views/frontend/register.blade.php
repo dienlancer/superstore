@@ -4,12 +4,14 @@
  <h2 class="tieu-de margin-top-15">
     Đăng ký
 </h2>
-<form method="post" name="frm" class="box-article">
-    {{ csrf_field() }}   
+<form method="post" name="frm" class="box-article margin-top-5">
+    {{ csrf_field() }}  
+    <input type="hidden" name="sort_order" value="1">          
+    <input type="hidden" name="status" value="0">          
     <?php                           
     if(count($error) > 0 || count($success) > 0){
         ?>
-        <div class="alert-system margin-top-15">
+        <div class="alert-system padding-top-5">
             <?php                                           
             if(count($error) > 0){
                 ?>
@@ -37,12 +39,13 @@
                 </ul>
                 <?php
             }
-            ?>                                              
+            ?>  
+            <div class="clr"></div>                                            
         </div>              
         <?php
     }
     ?>
-    <table class="com_product30 margin-top-15" border="0" width="90%" cellpadding="0" cellspacing="0">                   
+    <table class="com_product30" border="0" width="90%" cellpadding="0" cellspacing="0">                   
         <tbody>        
             <tr>
                 <td align="right">Tài khoản</td>
@@ -71,11 +74,7 @@
             <tr>
                 <td align="right">Phone</td>
                 <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
-            </tr>            
-            <tr>
-                <td align="right">Fax</td>
-                <td><input type="text" name="fax" value="<?php echo @$data["fax"]; ?>" /></td>            
-            </tr>   
+            </tr>                        
             <tr>
                 <td align="right">Nhóm thành viên</td>
                 <td>

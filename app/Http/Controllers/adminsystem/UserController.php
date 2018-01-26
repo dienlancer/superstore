@@ -305,21 +305,21 @@ class UserController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
+            $str_id                   =   $request->str_id;   
+            $checked                  =   1;
+            $type_msg                 =   "alert-success";
+            $msg                      =   "Xóa thành công";      
+            $arrID                    =   explode(",", $str_id)  ;        
             if(empty($str_id)){
-              $checked              =   0;
-              $type_msg             =   "alert-warning";            
-              $msg                  =   "Please choose at least one item to delete";
+              $checked                =   0;
+              $type_msg               =   "alert-warning";            
+              $msg                    =   "Please choose at least one item to delete";
             }
             if($checked == 1){                
-                  $strID            = implode(',',$arrID);   
-                  $strID            = substr($strID, 0,strlen($strID) - 1);
-                  $sqlUser          = "DELETE FROM `users` WHERE `id` IN (".$strID.")";        
-                  $sqlActivation    = "DELETE FROM `activations` WHERE `user_id` IN  (".$strID.")";
+                  $strID              = implode(',',$arrID);   
+                  $strID              = substr($strID, 0,strlen($strID) - 1);
+                  $sqlUser            = "DELETE FROM `users` WHERE `id` IN (".$strID.")";        
+                  $sqlActivation      = "DELETE FROM `activations` WHERE `user_id` IN  (".$strID.")";
                   $sqlUserGroupMember = "DELETE FROM `user_group_member` WHERE `user_id` IN  (".$strID.")";
                   DB::statement($sqlUser);                      
                   DB::statement($sqlActivation);   
