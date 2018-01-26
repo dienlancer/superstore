@@ -806,15 +806,13 @@ class IndexController extends Controller {
         $layout="two-column";      
         if($request->isMethod('post')){                          
           $data             =   $request->all();     
-
           $username         =   trim(@$request->username) ;    
           $password         =   @$request->password ;
           $password_confirm =   @$request->password_confirm;
           $email            =   trim(@$request->email) ;
           $fullname         =   trim(@$request->fullname);
           $address          =   trim(@$request->address);
-          $phone            =   trim(@$request->phone);
-          $mobilephone      =   trim(@$request->mobilephone);
+          $phone            =   trim(@$request->phone);          
           $fax              =   trim(@$request->fax);          
           if(empty($username)){
             $error["username"] = 'Username không được rỗng';
@@ -868,31 +866,10 @@ class IndexController extends Controller {
               $data["phone"] = ""; 
               $flag = 0;
             }  
-          }
-          if(!empty($mobilephone)){
-            if(mb_strlen($mobilephone) < 10){
-              $error["mobilephone"] = 'Số mobile phải từ 10 ký tự trở lên';
-              $data["mobilephone"] = ""; 
-              $flag = 0;
-            }  
-          }          
+          }              
 
           if($flag==1){
-            $item               =   new CustomerModel;
-            $item->username     =   $username;
-            $item->password     =   md5($password) ;
-            $item->email        =   $email;
-            $item->fullname     =   $fullname;
-            $item->address      =   $address;
-            $item->phone        =   $phone;
-            $item->mobilephone  =   $mobilephone;
-            $item->fax          =   $fax; 
-            $item->status       =   1;  
-            $item->sort_order   =   1;  
-            $item->created_at   =   date("Y-m-d H:i:s",time());
-            $item->updated_at   =   date("Y-m-d H:i:s",time());
-            $item->save(); 
-            $customer        =   CustomerModel::whereRaw("trim(lower(username)) = ?",[trim(mb_strtolower($username,'UTF-8'))])->get()->toArray();            
+            $user=Sentinel::registerAndActivate($request->all());            
             $arrUser["userInfo"]=array("username" => $customer[0]["username"],"id"=>$customer[0]["id"]);                                            
             Session::put($this->_ssNameUser,$arrUser);    
             echo '<script language="javascript" type="text/javascript">alert("Đăng ký thành công")</script>';

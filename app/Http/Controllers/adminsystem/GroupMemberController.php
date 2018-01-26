@@ -67,7 +67,8 @@ class GroupMemberController extends Controller {
      }
     public function save(Request $request){
         $id 					           =	trim($request->id)	;        
-        $fullname 				       =	trim($request->fullname)	;              
+        $fullname 				       =	trim($request->fullname)	;         
+        $alias                   =  trim($request->alias);     
         $sort_order 			       =	trim($request->sort_order);   
         $privilege_id            =  $request->privilege_id;
 
@@ -106,7 +107,8 @@ class GroupMemberController extends Controller {
         } else{
               $item				=	GroupMemberModel::find((int)@$id);                            
         }  
-        $item->fullname 		=	$fullname;            
+        $item->fullname 		=	$fullname;         
+        $item->alias        = $alias;   
         $item->sort_order 	=	(int)$sort_order;     
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save();  	
@@ -254,6 +256,56 @@ class GroupMemberController extends Controller {
             'data'              => $data
           );
           return $info;
-    }    
+    }   
+    public function createAlias(Request $request){
+          $id                =  trim($request->id)  ; 
+          $fullname                =  trim($request->fullname)  ;        
+          $data                    =  array();
+          $info                    =  array();
+          $error                   =  array();
+          $item                    =  null;
+          $checked  = 1;   
+          $alias='';                     
+          if(empty($fullname)){
+           $checked = 0;
+           $error["fullname"]["type_msg"] = "has-error";
+           $error["fullname"]["msg"] = "Thiếu tên bài viết";
+         }else{          
+          $alias=str_slug($fullname,'-');          
+          $dataGroupMember=array();          
+          $checked_trung_alias=0;          
+          if (empty($id)) {              
+              $dataGroupMember=GroupMemberModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();             
+            }else{
+              $dataGroupMember=GroupMemberModel::whereRaw("trim(lower(alias)) = ? and id != ?",[trim(mb_strtolower($alias,'UTF-8')),(int)@$id])->get()->toArray();    
+            }            
+          if (count($dataGroupMember) > 0) {
+            $checked_trung_alias=1;
+          }         
+          if((int)$checked_trung_alias == 1){
+            $code_alias=rand(1,999);
+            $alias=$alias.'-'.$code_alias;
+          }
+        }
+        if ($checked == 1){
+          $info = array(
+            'type_msg'      => "has-success",
+            'msg'         => 'Lưu dữ liệu thành công',
+            "checked"       => 1,
+            "error"       => $error,
+            
+            "alias"       =>$alias
+          );
+        }else {
+          $info = array(
+            'type_msg'      => "has-error",
+            'msg'         => 'Nhập dữ liệu có sự cố',
+            "checked"       => 0,
+            "error"       => $error,
+            "alias"        => $alias
+          );
+        }    
+        return $info;
+      } 
 }
 ?>

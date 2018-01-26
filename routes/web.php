@@ -352,7 +352,8 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("save",["as"=>"adminsystem.group-member.save","uses"=>"adminsystem\GroupMemberController@save"]);
 		Route::post("delete-item",["as"=>"adminsystem.group-member.deleteItem","uses"=>"adminsystem\GroupMemberController@deleteItem"]);		
 		Route::post("sort-order",["as"=>"adminsystem.group-member.sortOrder","uses"=>"adminsystem\GroupMemberController@sortOrder"]);		
-		Route::post("trash",["as"=>"adminsystem.group-member.trash","uses"=>"adminsystem\GroupMemberController@trash"]);		
+		Route::post("trash",["as"=>"adminsystem.group-member.trash","uses"=>"adminsystem\GroupMemberController@trash"]);	
+		Route::post("create-alias",["as"=>"adminsystem.group-member.createAlias","uses"=>"adminsystem\GroupMemberController@createAlias"]);	
 	});	
 });
 Route::match(["get","post"],"adminsystem/login",["as"=>"adminsystem.login","uses"=>"adminsystem\LoginController@login"]);

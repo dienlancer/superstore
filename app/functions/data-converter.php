@@ -123,6 +123,24 @@ function getCategoryArticleName($id=0){
     $title=substr($title, 0,strlen($title)-1);
     return $title;
 }
+function getGroupMemberName($id=0){    
+    $title="";
+    $data=DB::table('users')
+            ->join('user_group_member','users.id','=','user_group_member.user_id')
+            ->join('group_member','group_member.id','=','user_group_member.group_member_id')
+            ->select('users.id','users.fullname as user_fullname','group_member.fullname')
+            ->where('users.id','=',@$id)
+            ->get();
+    if(count($data) > 0){
+        $data=$data->toArray();
+        $data=convertToArray($data);
+        foreach ($data as $key => $value) {
+            $title .=$value['fullname'].',';
+        }
+    }    
+    $title=substr($title, 0,strlen($title)-1);
+    return $title;
+}
 function getCategoryProductName($id=0){    
     $title="";
     $data=DB::table('product')
@@ -650,13 +668,14 @@ function userConverter($data=array(),$controller){
             $deleted='<center><a href="javascript:void(0)" onclick="deleteItem('.$data[$i]["id"].')"><img src="'.asset("/public/adminsystem/images/delete-icon.png").'" /></a></center>';            
             $sort_order = '<center><input name="sort_order" id="sort-order-'.$data[$i]["id"].'" sort_order_id="'.$data[$i]["id"].'" onkeyup="setSortOrder(this)" value="'.$data[$i]["sort_order"].'" size="3" style="text-align:center" onkeypress="return isNumberKey(event);" /></center>';         
             $kicked=0;
-            if((int)$data[$i]["status"]==1){
+            if((int)@$data[$i]["status"]==1){
                 $kicked=0;
             }
             else{
                 $kicked=1;
             }
-            $status     = '<center>'.cmsStatus((int)$data[$i]["id"],(int)$data[$i]["status"],$kicked).'</center>';   
+            $group_member_name=getGroupMemberName((int)@$data[$i]["id"]);
+            $status     = '<center>'.cmsStatus((int)@$data[$i]["id"],(int)@$data[$i]["status"],$kicked).'</center>';   
             $result[$i] = array(
                 'checked'                  =>   '<input type="checkbox" onclick="checkWithList(this)" name="cid"  />',
                 'is_checked'               =>   0,
@@ -664,7 +683,7 @@ function userConverter($data=array(),$controller){
                 "username"                 =>   $data[$i]["username"],                
                 "email"                    =>   $data[$i]["email"],                
                 "fullname"                 =>   $data[$i]["fullname"],      
-                "group_member_name"        =>   $data[$i]["group_member_name"],          
+                "group_member_name"        =>   $group_member_name,          
                 "status"                   =>   $status,
                 "sort_order"               =>   $sort_order,                
                 "created_at"               =>   datetimeConverterVn($data[$i]["created_at"]),

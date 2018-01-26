@@ -1,8 +1,11 @@
-<form method="post" name="frm" class="margin-top-15 box-article">
-    {{ csrf_field() }}
-    <h2 class="tieu-de-bai-viet">
-        Đăng ký
-    </h2>
+ <?php 
+ use App\GroupMemberModel;
+ ?>
+ <h2 class="tieu-de margin-top-15">
+    Đăng ký
+</h2>
+<form method="post" name="frm" class="box-article">
+    {{ csrf_field() }}   
     <?php                           
     if(count($error) > 0 || count($success) > 0){
         ?>
@@ -68,15 +71,32 @@
             <tr>
                 <td align="right">Phone</td>
                 <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
-            </tr>
-            <tr>
-                <td align="right">Mobile phone</td>
-                <td><input type="text" name="mobilephone" value="<?php echo @$data["mobilephone"]; ?>" /></td>            
-            </tr>
+            </tr>            
             <tr>
                 <td align="right">Fax</td>
                 <td><input type="text" name="fax" value="<?php echo @$data["fax"]; ?>" /></td>            
             </tr>   
+            <tr>
+                <td align="right">Nhóm thành viên</td>
+                <td>
+                    <?php 
+                    $alias_1='thanh-vien-vip';
+                    $alias_2='thanh-vien-thuong';
+                    $dataGroupMember=DB::table('group_member')
+                                        ->where(function($query) use ($alias_1,$alias_2){
+                                                $query->where('group_member.alias',@$alias_1)
+                                                ->orWhere('group_member.alias',@$alias_2);
+                                        }) 
+                                        ->select('group_member.id','group_member.fullname','group_member.alias')
+                                        ->groupBy('group_member.id','group_member.fullname','group_member.alias')
+                                        ->get()->
+                                        toArray();
+                    $dataGroupMember=convertToArray($dataGroupMember);
+                    $ddlGroupMember=cmsSelectboxCategory('group_member_id','group_member_id', 'form-control', $dataGroupMember,  0,'');
+                    echo $ddlGroupMember;
+                    ?>
+                </td>            
+            </tr>
             <tr>           
                 <td></td>
                 <td class="com_product31">

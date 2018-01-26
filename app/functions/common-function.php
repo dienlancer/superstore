@@ -94,7 +94,8 @@ function getArrPrivilege(){
   /* begin quyền truy cập */
   $user_id=Sentinel::getUser()->id;      
   $stdPrivilegeID=DB::table("users")
-  ->join("group_member","users.group_member_id","=","group_member.id")
+  ->join('user_group_member','users.id','=','user_group_member.user_id')
+  ->join('group_member','group_member.id','=','user_group_member.group_member_id')
   ->join("group_privilege","group_member.id","=","group_privilege.group_member_id")
   ->where("users.id","=",(int)@$user_id)                
   ->select("group_privilege.privilege_id")
