@@ -82,7 +82,10 @@ if(isset($alias)){
                 case 'category-product':
                 case 'product':
                 case 'search-product':  
-                case 'register':             
+                case 'register':
+                case 'login':
+                case 'security':
+                case 'account':             
                 wp_nav_menu($argsDanhMucSanPham);       
                 $module=getBanner("advertising-product-widget");                        
                 if(count($module) > 0){                    

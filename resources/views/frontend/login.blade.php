@@ -1,12 +1,12 @@
-<form method="post" name="frm" class="margin-top-15 box-article">
-    {{ csrf_field() }}    
-    <h2 class="tieu-de-bai-viet">
-        Đăng nhập
-    </h2>
+ <h2 class="tieu-de margin-top-15">
+    Đăng nhập
+</h2>
+<form method="post" name="frm" class="margin-top-5 box-article">
+    {{ csrf_field() }}        
     <?php                           
     if(count($error) > 0 || count($success) > 0){
         ?>
-        <div class="alert-system margin-top-15">
+        <div class="alert-system margin-top-5">
             <?php                                           
             if(count($error) > 0){
                 ?>
@@ -39,7 +39,7 @@
         <?php
     }
     ?>
-    <table class="com_product30 margin-top-15" border="0" width="40%" cellpadding="0" cellspacing="0">                   
+    <table class="com_product30" border="0" width="40%" cellpadding="0" cellspacing="0">                   
         <tbody>        
             <tr>
                 <td align="right">Tài khoản</td>

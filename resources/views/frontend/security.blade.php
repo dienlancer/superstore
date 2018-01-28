@@ -1,13 +1,13 @@
-<form method="post" name="frm" class="margin-top-15 box-article">
+ <h2 class="tieu-de margin-top-15">
+    Đổi mật khẩu
+</h2>
+<form method="post" name="frm" class="margin-top-5 box-article">
     {{ csrf_field() }}
-    <input type="hidden" name="username" value="<?php echo @$data["username"]; ?>" />
-    <h2 class="tieu-de-bai-viet">
-        Đổi mật khẩu
-    </h2>
+    <input type="hidden" name="username" value="<?php echo @$data["username"]; ?>" />    
     <?php                           
     if(count($error) > 0 || count($success) > 0){
         ?>
-        <div class="alert-system margin-top-15">
+        <div class="alert-system margin-top-5">
             <?php                                           
             if(count($error) > 0){
                 ?>
@@ -40,7 +40,7 @@
         <?php
     }
     ?>
-    <table class="com_product30 margin-top-15" border="0" width="80%" cellpadding="0" cellspacing="0">                   
+    <table class="com_product30" border="0" width="80%" cellpadding="0" cellspacing="0">                   
         <tbody>        
             <tr>
                 <td align="right">Tài khoản</td>

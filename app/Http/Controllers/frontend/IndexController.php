@@ -814,8 +814,7 @@ class IndexController extends Controller {
           $email            =   trim(@$request->email) ;
           $fullname         =   trim(@$request->fullname);
           $address          =   trim(@$request->address);
-          $phone            =   trim(@$request->phone);          
-          $fax              =   trim(@$request->fax); 
+          $phone            =   trim(@$request->phone);                    
           $group_member_id  =   trim(@$request->group_member_id);         
           if(mb_strlen($username) < 6){
             $error["username"] = 'Username không được rỗng';
@@ -869,7 +868,12 @@ class IndexController extends Controller {
               $data["phone"] = ""; 
               $flag = 0;
             }  
-          }              
+          }   
+          if((int)@$group_member_id == 0){
+          	$error["group_member_id"] = 'Vui lòng chọn thành viên';
+            $data["group_member_id"] = ""; 
+            $flag = 0;
+          }           
           if($flag==1){
             $user=Sentinel::registerAndActivate($request->all());                  
             $item=new UserGroupMemberModel;
@@ -891,14 +895,20 @@ class IndexController extends Controller {
         $error=array();
         $success=array();   
         $data=array();        
-        $component="login";        
-        $arrUser=array();    
-        $layout="two-column";              
+        $component="login";                
+        $layout="two-column";     
+        $arrUser=array();              
+      	$user = Sentinel::forceCheck();       	
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) > 0){
+      		return redirect()->route('frontend.index.viewAccount');
+      	}
         if($request->isMethod('post')){              
           Sentinel::authenticate($request->all());
           if(Sentinel::check()){
-            $user=Sentinel::getUser();            
-            Sentinel::loginAndRemember($user);
+            $user=Sentinel::getUser();                        
             echo '<script language="javascript" type="text/javascript">alert("Đăng nhập thành công")</script>';
             return redirect()->route('frontend.index.viewAccount'); 
           }else{
@@ -908,119 +918,119 @@ class IndexController extends Controller {
         return view("frontend.index",compact("component","error","data","success","layout"));        
       }      
       public function viewSecurity(Request $request){
-        $flag=1;
-        $error=array();
-        $success=array();   
-        $data=array();        
-        $component="security";   
-        $layout="two-column";        
-        $arrUser=array();              
-        $user = Sentinel::forceCheck(); 
-        if(!empty($user)){                
-            $arrUser = $user->toArray();    
-        }      
-      if(count($arrUser) == 0){
-        return redirect()->route("frontend.index.login"); 
+      	$flag=1;
+      	$error=array();
+      	$success=array();   
+      	$data=array();        
+      	$component="security";   
+      	$layout="two-column";        
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.login"); 
+      	}
+      	$data=User::find((int)@$arrUser["id"])->toArray();    
+      	$id=(int)@$data["id"];
+      	if($request->isMethod('post')){              
+      		$data =@$request->all();                     
+      		$password=@$request->password ;
+      		$password_confirm=@$request->password_confirm ;                
+      		if(mb_strlen($password) < 6){
+      			$error["password"] = 'Độ dài mật khẩu phải lớn hơn hoặc bằng 6';
+      			$data["password"] = "";
+      			$data["password_confirm"] = ""; 
+      			$flag = 0;
+      		}
+      		if(strcmp($password,$password_confirm)!=0){
+      			$error["password_confirm"] = 'Mật khẩu xác nhận không khớp';
+      			$data["password_confirm"] = "";   
+      			$flag = 0;
+      		}    
+      		if($flag==1){
+      			$item=User::find($id);                         
+      			$item->password         = Hash::make(@$request->password);
+      			$item->save();  
+      			$success['update-password']="Cập nhật mật khẩu thành công";                                                           
+      		}              
+      	}             
+      	return view("frontend.index",compact("component","error","data","success","layout"));                      
       }
-      $data=User::find((int)@$arrUser["id"])->toArray();    
-      $id=(int)@$data["id"];
-      if($request->isMethod('post')){              
-        $data =@$request->all();                     
-        $password=@$request->password ;
-        $password_confirm=@$request->password_confirm ;                
-        if(mb_strlen($password) < 6){
-          $error["password"] = 'Độ dài mật khẩu phải lớn hơn hoặc bằng 6';
-          $data["password"] = "";
-          $data["password_confirm"] = ""; 
-          $flag = 0;
-        }
-        if(strcmp($password,$password_confirm)!=0){
-          $error["password_confirm"] = 'Mật khẩu xác nhận không khớp';
-          $data["password_confirm"] = "";   
-          $flag = 0;
-        }    
-        if($flag==1){
-          $item=User::find($id);                         
-          $item->password         = Hash::make(@$request->password);
-          $item->save();  
-          $success['update-password']="Cập nhật mật khẩu thành công";                                                           
-        }              
-      }             
-      return view("frontend.index",compact("component","error","data","success","layout"));                      
-    }
       public function getLgout(){        
-        Sentinel::logout();       
-        return redirect()->route('frontend.index.login'); 
+      	Sentinel::logout();       
+      	return redirect()->route('frontend.index.login'); 
       }
       public function viewAccount(Request $request){        
-        $flag=1;
-        $error=array();
-        $success=array();   
-        $data=array();        
-        $component="account";   
-        $layout="two-column";       
-        $id=0;         
-        $arrUser=array();              
-        $user = Sentinel::forceCheck(); 
-        if(!empty($user)){                
-            $arrUser = $user->toArray();    
-        }      
-      if(count($arrUser) == 0){
-        return redirect()->route("frontend.index.login"); 
-      }
-        $data=User::find((int)@$arrUser['id'])->toArray();    
-        $id=(int)@$data["id"];                  
-        if($request->isMethod('post')){                          
-          $data             =   $request->all();                         
-          $email            =   trim(@$request->email) ;
-          $fullname         =   trim(@$request->fullname);
-          $address          =   trim(@$request->address);
-          $phone            =   trim(@$request->phone);                                           
-          if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
-            $error["email"] = 'Email không hợp lệ';
-            $data["email"] = '';
-            $flag = 0;
-          }else{
-            $customer=User::whereRaw("trim(lower(email)) = ? and id != ? ",[mb_strtolower($email,'UTF-8'),(int)@$id])->get()->toArray();
-            if(count($customer) > 0){
-              $error["email"] = 'Email đã tồn tại';
-              $data["email"] = ""; 
-              $flag = 0;
-            }
-          }  
-          if(mb_strlen($fullname) < 6){
-            $error["fullname"] = 'Họ tên phải từ 6 ký tự trở lên';
-            $data["fullname"] = ""; 
-            $flag = 0;
-          }  
-          if(mb_strlen($address) < 6){
-            $error["address"] = 'Địa chỉ phải từ 6 ký tự trở lên';
-            $data["address"] = ""; 
-            $flag = 0;
-          }  
-          if(!empty($phone)){
-            if(mb_strlen($phone) < 10){
-              $error["phone"] = 'Số điện thoại phải từ 10 ký tự trở lên';
-              $data["phone"] = ""; 
-              $flag = 0;
-            }  
-          }              
-          if($flag==1){
-            $item               =   User::find((int)@$id);            
-            $item->email        =   $email;
-            $item->fullname     =   $fullname;
-            $item->address      =   $address;
-            $item->phone        =   $phone;            
-            $item->status       =   1;  
-            $item->sort_order   =   1;  
-            $item->created_at   =   date("Y-m-d H:i:s",time());
-            $item->updated_at   =   date("Y-m-d H:i:s",time());
-            $item->save(); 
-            echo '<script language="javascript" type="text/javascript">alert("Cập nhật thông tin thành công")</script>';   
-            return redirect()->route("frontend.index.viewAccount");                    
-          }              
-        }
-        return view("frontend.index",compact("component","error","data","success","layout"));         
+      	$flag=1;
+      	$error=array();
+      	$success=array();   
+      	$data=array();        
+      	$component="account";   
+      	$layout="two-column";       
+      	$id=0;         
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.login"); 
+      	}
+      	$data=User::find((int)@$arrUser['id'])->toArray();    
+      	$id=(int)@$data["id"];                  
+      	if($request->isMethod('post')){                          
+      		$data             =   $request->all();                         
+      		$email            =   trim(@$request->email) ;
+      		$fullname         =   trim(@$request->fullname);
+      		$address          =   trim(@$request->address);
+      		$phone            =   trim(@$request->phone);                                           
+      		if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
+      			$error["email"] = 'Email không hợp lệ';
+      			$data["email"] = '';
+      			$flag = 0;
+      		}else{
+      			$customer=User::whereRaw("trim(lower(email)) = ? and id != ? ",[mb_strtolower($email,'UTF-8'),(int)@$id])->get()->toArray();
+      			if(count($customer) > 0){
+      				$error["email"] = 'Email đã tồn tại';
+      				$data["email"] = ""; 
+      				$flag = 0;
+      			}
+      		}  
+      		if(mb_strlen($fullname) < 6){
+      			$error["fullname"] = 'Họ tên phải từ 6 ký tự trở lên';
+      			$data["fullname"] = ""; 
+      			$flag = 0;
+      		}  
+      		if(mb_strlen($address) < 6){
+      			$error["address"] = 'Địa chỉ phải từ 6 ký tự trở lên';
+      			$data["address"] = ""; 
+      			$flag = 0;
+      		}  
+      		if(!empty($phone)){
+      			if(mb_strlen($phone) < 10){
+      				$error["phone"] = 'Số điện thoại phải từ 10 ký tự trở lên';
+      				$data["phone"] = ""; 
+      				$flag = 0;
+      			}  
+      		}              
+      		if($flag==1){
+      			$item               =   User::find((int)@$id);            
+      			$item->email        =   $email;
+      			$item->fullname     =   $fullname;
+      			$item->address      =   $address;
+      			$item->phone        =   $phone;            
+      			$item->status       =   1;  
+      			$item->sort_order   =   1;  
+      			$item->created_at   =   date("Y-m-d H:i:s",time());
+      			$item->updated_at   =   date("Y-m-d H:i:s",time());
+      			$item->save(); 
+      			echo '<script language="javascript" type="text/javascript">alert("Cập nhật thông tin thành công")</script>';   
+      			return redirect()->route("frontend.index.viewAccount");                    
+      		}              
+      	}
+      	return view("frontend.index",compact("component","error","data","success","layout"));         
       }
       public function checkout(){          
           $arrUser=array(); 
@@ -1087,8 +1097,7 @@ class IndexController extends Controller {
                       $item->fullname=@$request->fullname;
                       $item->address=@$request->address;
                       $item->phone=@$request->phone;
-                      $item->mobilephone=@$request->mobilephone;
-                      $item->fax=@$request->fax;  
+                      $item->mobilephone=@$request->mobilephone;                      
                       $item->payment_method_id=(int)$payment_method;
                       $item->quantity=(int)@$request->quantity;
                       $item->total_price=(float)@$request->total_price;
@@ -1214,8 +1223,7 @@ class IndexController extends Controller {
                       $item->fullname     =   trim(@$request->fullname);
                       $item->address      =   trim(@$request->address);
                       $item->phone        =   trim(@$request->phone);
-                      $item->mobilephone  =   trim(@$request->mobilephone);
-                      $item->fax          =   trim(@$request->fax); 
+                      $item->mobilephone  =   trim(@$request->mobilephone);                      
                       $item->status       =   1;  
                       $item->sort_order   =   1;  
                       $item->created_at   =   date("Y-m-d H:i:s",time());
