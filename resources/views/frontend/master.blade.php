@@ -167,7 +167,12 @@ if(count($arrCart) > 0){
 	<script language="javascript" type="text/javascript" src="{{asset('public/frontend/js/jquery.fancybox.min.js')}}"                 ></script>
 	<link href="{{asset('public/frontend/css/jquery.fancybox.min.css')}}" rel="stylesheet" type="text/css" />
 	<!-- end fancybox -->
+	<!-- begin ckeditor-->
+	<script language="javascript" type="text/javascript" src="{{asset('public/frontend/ckeditor/ckeditor.js')}}"                 ></script>
+    <script language="javascript" type="text/javascript" src="{{asset('public/frontend/ckfinder/ckfinder.js')}}"                 ></script>
+    <!-- end ckeditor-->
 	<!-- begin custom -->
+	<script language="javascript" type="text/javascript" src="{{asset('public/frontend/js/spinner.js')}}"                 ></script>
 	<script src="{{ asset('public/frontend/js/custom.js') }}"></script>    
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/template.css') }}" />
 	<!-- end custom -->
@@ -187,7 +192,8 @@ if(count($arrCart) > 0){
 					
 				}
 			});
-		});    
+		});  
+		var spinner = new Spinner();  
 	</script>	
 </head>
 <body>	
@@ -225,7 +231,7 @@ if(count($arrCart) > 0){
 								$newData= get_field_data_array($dataGroupMember,'alias');								
 								if(array_key_exists('thanh-vien-vip', $newData)){									
 									?>
-									<li><a href="<?php echo route('frontend.product.getListProduct'); ?>"><i class="fa fa-product-hunt" aria-hidden="true"></i>&nbsp;Đăng sản phẩm</a></li>
+									<li><a href="<?php echo route('frontend.product.getList'); ?>"><i class="fa fa-product-hunt" aria-hidden="true"></i>&nbsp;Đăng sản phẩm</a></li>
 									<?php 
 								}
 								?>

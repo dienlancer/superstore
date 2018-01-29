@@ -1,4 +1,12 @@
-
+function checkAllAgent(cid){
+	var tbl=$(cid).closest("table");	
+	var checkStatus = cid.checked;
+	var tbody=$(tbl).find("tbody");
+	var tr=(tbody).children("tr");	
+	$(tr).find(':checkbox').each(function(){
+		checkWithList(this);
+	});
+} 
 function showLstInvoiceDetail(ajaxurl,lnk_image,value,quantity,total_price){
 		var id = value;						
 		var dataObj = {					
@@ -76,6 +84,32 @@ function addToCart(product_id,ajaxurl){
 function hideMsg() {
 	$('.alert-system').fadeOut();
 } 
+function PhanCachSoTien(Ctrl) {
+    var vMoney = Ctrl.value;
+    vMoney = vMoney.replace(/[^\d]+/g, '');
+    var vNewMoney = "";
+    if (vMoney.length > 3) {
+        var x = 1;
+        for (var i = vMoney.length - 1; i >= 0; i--) {            
+            vNewMoney = vNewMoney + "" + vMoney[i];
+            if (x % 3 == 0) {
+                vNewMoney = vNewMoney + ".";
+            }
+            x++;
+
+        }
+
+        var tmp = "";
+        for (var i = vNewMoney.length - 1; i >= 0; i--) {
+            tmp = tmp + "" + vNewMoney[i];
+        }
+
+        vNewMoney = tmp.replace(/^[\.]/g, '');
+    } else {
+        vNewMoney = vMoney;
+    }
+    Ctrl.value = vNewMoney;
+}
 $(document).ready(function(){	
 	timeout = setTimeout(hideMsg,10000);	
 	basicTable.init();		

@@ -4,6 +4,6 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.filebrowserBrowseUrl = '/greenecolife/public/adminsystem/ckfinder/ckfinder.html',
-    config.filebrowserUploadUrl = '/greenecolife/public/adminsystem/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+	config.filebrowserBrowseUrl = '/superstore/public/adminsystem/ckfinder/ckfinder.html',
+    config.filebrowserUploadUrl = '/superstore/public/adminsystem/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
 };

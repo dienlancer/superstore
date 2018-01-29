@@ -67,7 +67,7 @@ class ProductController extends Controller {
               $title=$this->_title . " : Add new";
            break;     
         }    
-        $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id","image","sort_order","status","created_at","updated_at")->orderBy("sort_order","asc")->get()->toArray();        
+        $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();        
         $arrCategoryProductRecursive=array();
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ;      
         return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","controller","task","title","icon"));

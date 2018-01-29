@@ -8,7 +8,6 @@ use App\ArticleModel;
 use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
-use App\ProductModel;
 use App\PaginationModel;
 use DB;
 class CategoryProductController extends Controller {

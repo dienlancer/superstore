@@ -113,7 +113,8 @@ if(isset($alias)){
                 case 'login':
                 case 'security':
                 case 'account':
-                case "manage-list-product":
+                case "list-product":
+                case "form-product":
                 $arrUser =array();   
                 $user = Sentinel::forceCheck(); 
                 if(!empty($user)){                
@@ -122,14 +123,14 @@ if(isset($alias)){
                 $newData=array();
                 if(count($arrUser) > 0){
                     $dataGroupMember=DB::table('group_member')
-                                                ->join('user_group_member','group_member.id','=','user_group_member.group_member_id')
-                                                ->where('user_group_member.user_id',(int)@$arrUser['id'])
-                                                ->select('group_member.alias')
-                                                ->groupBy('group_member.alias')
-                                                ->get()
-                                                ->toArray();
-                                $dataGroupMember=convertToArray($dataGroupMember);  
-                                $newData= get_field_data_array($dataGroupMember,'alias');       
+                    ->join('user_group_member','group_member.id','=','user_group_member.group_member_id')
+                    ->where('user_group_member.user_id',(int)@$arrUser['id'])
+                    ->select('group_member.alias')
+                    ->groupBy('group_member.alias')
+                    ->get()
+                    ->toArray();
+                    $dataGroupMember=convertToArray($dataGroupMember);  
+                    $newData= get_field_data_array($dataGroupMember,'alias');       
                 }                
                 ?>
                 <div class="box-category margin-top-15">
@@ -139,7 +140,8 @@ if(isset($alias)){
                             <?php 
                             if(array_key_exists('thanh-vien-vip', $newData)){                                   
                                     ?>
-                                    <li><a href="<?php echo route('frontend.product.getListProduct'); ?>">Danh sách sản phẩm</a></li>
+                                    <li><a href="<?php echo route('frontend.product.getList'); ?>">Danh sách sản phẩm</a></li>
+                                    <li><a href="<?php echo route('frontend.product.getForm',['add']); ?>">Thêm mới sản phẩm</a></li>
                                     <?php 
                                 }
                             ?>
@@ -214,8 +216,11 @@ if(isset($alias)){
                 case "hoa-don":                                                
                 ?>@include("frontend.invoice")<?php
                 break;     
-                case "manage-list-product":
+                case "list-product":
                 ?>@include("frontend.list-product")<?php   
+                break;    
+                case "form-product":
+                ?>@include("frontend.form-product")<?php   
                 break;                                                                      
             }
             ?>

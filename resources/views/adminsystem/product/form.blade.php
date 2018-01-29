@@ -67,8 +67,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             echo $inputPictureHidden; 
             echo $inputChildPictureHidden;
             echo $inputID;
+            echo $inputAliasMenu;
             ?>                
-            <?php echo $inputAliasMenu; ?>         
             <div class="form-body">                
                 <div class="row">
                     <div class="form-group col-md-12">

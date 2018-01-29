@@ -381,8 +381,17 @@ Route::post("load-data-member",["as"=>"frontend.index.loadDataMember","uses"=>"f
 Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","uses"=>"frontend\IndexController@loadDataSupporter"]);		
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);
 Route::match(["get","post"],"lien-he-voi-chung-toi",["as"=>"frontend.index.contactUs","uses"=>"frontend\IndexController@contactUs"]);
-/*Route::get("danh-sach-san-pham",["as"=>"frontend.product.getListProduct","uses"=>"frontend\ProductController@getFormProduct"]);
-Route::get("dang-san-pham",["as"=>"frontend.product.getFormProduct","uses"=>"frontend\ProductController@getFormProduct"]);*/
-Route::match(["get","post"],"danh-sach-san-pham",["as"=>"frontend.product.getListProduct","uses"=>"frontend\ProductController@getListProduct"]);		
-Route::get("form/{task}/{id?}",["as"=>"frontend.product.getFormProduct","uses"=>"frontend\ProductController@getFormProduct"]);
+/* begin đăng sản phẩm */
+Route::match(["get","post"],"danh-sach-san-pham",["as"=>"frontend.product.getList","uses"=>"frontend\ProductController@getList"]);		
+Route::post("load-data",["as"=>"frontend.product.loadData","uses"=>"frontend\ProductController@loadData"]);	
+Route::get("form/{task}/{id?}",["as"=>"frontend.product.getForm","uses"=>"frontend\ProductController@getForm"]);
+Route::post("save",["as"=>"frontend.product.save","uses"=>"frontend\ProductController@save"]);
+Route::post("delete-item",["as"=>"frontend.product.deleteItem","uses"=>"frontend\ProductController@deleteItem"]);		
+Route::post("sort-order",["as"=>"frontend.product.sortOrder","uses"=>"frontend\ProductController@sortOrder"]);
+Route::post("update-status",["as"=>"frontend.product.updateStatus","uses"=>"frontend\ProductController@updateStatus"]);
+Route::post("change-status",["as"=>"frontend.product.changeStatus","uses"=>"frontend\ProductController@changeStatus"]);
+Route::post("trash",["as"=>"frontend.product.trash","uses"=>"frontend\ProductController@trash"]);
+Route::post("upload-file",["as"=>"frontend.product.uploadFile","uses"=>"frontend\ProductController@uploadFile"]);
+Route::post("create-alias",["as"=>"frontend.product.createAlias","uses"=>"frontend\ProductController@createAlias"]);
+/* end đăng sản phẩm */
 ?>

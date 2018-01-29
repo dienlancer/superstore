@@ -1401,6 +1401,28 @@ border: 1px solid #fff;
     border-top: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
     }
+    .frm-vip .control-label{
+        text-align: right;
+margin-bottom: 0;
+padding-top: 7px;
+    }
+    .frm-vip .form-control{
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .frm-vip .form-group{
+        margin-bottom: 0;
+    }
+    .frm-vip .btn{
+        border-color: #2f353b;
+        color: #2f353b;
+        background:transparent;
+        border-radius : 0;
+    }
+    .frm-vip .btn:hover{
+        background: #2f353b;
+        color: #ffffff;
+    }
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;
