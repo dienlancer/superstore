@@ -43,9 +43,7 @@ function product2Converter($data=array(),$controller){
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }          
             $id=$data[$i]["id"];  
-            $alias=$data[$i]['alias'];
-            $category_name=getCategoryProductName($id);
-            
+            $alias=$data[$i]['alias'];            
             $result[$i] = array(
                 'checked'                  =>   '<input type="checkbox" onclick="checkWithListProduct(this)" name="cid"  />',
                 'is_checked'               =>   0,
@@ -53,7 +51,7 @@ function product2Converter($data=array(),$controller){
                 
                 "fullname"                 =>   $data[$i]["fullname"], 
                 
-                "category_name"            =>   $category_name,                
+                "category_name"            =>   $data[$i]["category_name"],                
                 "image"                    =>   $image,
                 
             );
@@ -141,24 +139,7 @@ function getGroupMemberName($id=0){
     $title=substr($title, 0,strlen($title)-1);
     return $title;
 }
-function getCategoryProductName($id=0){    
-    $title="";
-    $data=DB::table('product')
-            ->join('product_category','product.id','=','product_category.product_id')
-            ->join('category_product','product_category.category_product_id','=','category_product.id')
-            ->select('product.id','product.fullname as product_name','category_product.fullname')
-            ->where('product.id','=',@$id)
-            ->get();
-    if(count($data) > 0){
-        $data=$data->toArray();
-        $data=convertToArray($data);
-        foreach ($data as $key => $value) {
-            $title .=$value['fullname'].',';
-        }
-    }    
-    $title=substr($title, 0,strlen($title)-1);
-    return $title;
-}
+
 function articleConverter($data=array(),$controller){        
     $result = array();
     $setting= getSettingSystem();
@@ -479,8 +460,7 @@ function productConverter($data=array(),$controller){
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }          
             $id=$data[$i]["id"];  
-            $alias=$data[$i]['alias'];
-            $category_name=getCategoryProductName($id);
+            $alias=$data[$i]['alias'];            
             $price='<div class="calmoney">'.fnPrice((int)@$data[$i]["price"]).'</div>'; 
             $sale_price='<div class="calmoney">'.fnPrice((int)@$data[$i]["sale_price"]).'</div>'; 
             $result[$i] = array(
@@ -490,7 +470,7 @@ function productConverter($data=array(),$controller){
                 "code"                     =>   $data[$i]["code"],
                 "fullname"                 =>   $data[$i]["fullname"], 
                 "alias"                    =>   $alias     ,          
-                "category_name"            =>   $category_name,                
+                "category_name"            =>   $data[$i]['category_name'],                
                 "image"                    =>   $image,
                 "price"                    =>   $price,
                 "sale_price"                    =>   $sale_price,
@@ -1011,14 +991,13 @@ function productComponentConverter($data=array(),$controller,$menu_type_id){
                 $link_image=url("/upload/" . $product_width.'x'.$product_height . "-".$data[$i]["image"]);            
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }           
-            $id=$data[$i]["id"];   
-            $category_name=getCategoryProductName($id);    
+            $id=$data[$i]["id"];               
             $linkMenu=route('adminsystem.menu.getForm',['add',$menu_type_id,0,$data[$i]["alias"]]);
             $fullname='<a href="'.$linkMenu.'">'.$data[$i]['fullname'].'</a>';
             $result[$i] = array(                      
                 "id"                       =>   $id,
                 "fullname"                 =>   $fullname,   
-                "category_name"            =>   $category_name,                                    
+                "category_name"            =>   $data[$i]['category_name'],                                    
                 "image"                    =>   $image,
                 "sort_order"               =>   $sort_order,                
             );

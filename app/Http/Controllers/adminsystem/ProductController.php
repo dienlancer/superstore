@@ -34,16 +34,15 @@ class ProductController extends Controller {
   	}	
   	public function loadData(Request $request){      
       $query=DB::table('product')
-      ->join('product_category','product.id','=','product_category.product_id')
-      ->join('category_product','category_product.id','=','product_category.category_product_id')  ;      
+      ->join('category_product','product.category_id','=','category_product.id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_product_id)){
-        $query->where('product_category.category_product_id',(int)@$request->category_product_id);
+      if(!empty(@$request->category_id)){
+        $query->where('product.category_id',(int)@$request->category_id);
       }   
-      $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
-                  ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
+      $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname as category_name','product.sort_order','product.status','product.created_at','product.updated_at')
+                  ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname','product.sort_order','product.status','product.created_at','product.updated_at')
                   ->orderBy('product.sort_order', 'asc')
                   ->get()
                   ->toArray();      
@@ -55,16 +54,14 @@ class ProductController extends Controller {
         $controller=$this->_controller;     
         $title="";
         $icon=$this->_icon; 
-        $arrRowData=array();
-        $arrProductCategory=array();
+        $arrRowData=array();        
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";  
         if(in_array($requestControllerAction, $arrPrivilege)){
           switch ($task) {
            case 'edit':
               $title=$this->_title . " : Update";
-              $arrRowData=ProductModel::find((int)@$id)->toArray();       
-              $arrProductCategory=ProductCategoryModel::whereRaw("product_id = ?",[(int)@$id])->get()->toArray();
+              $arrRowData=ProductModel::find((int)@$id)->toArray();                    
            break;
            case 'add':
               $title=$this->_title . " : Add new";
@@ -73,7 +70,7 @@ class ProductController extends Controller {
         $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id","image","sort_order","status","created_at","updated_at")->orderBy("sort_order","asc")->get()->toArray();        
         $arrCategoryProductRecursive=array();
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ;      
-        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","arrProductCategory","controller","task","title","icon"));
+        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","controller","task","title","icon"));
         }else{
             return view("adminsystem.no-access");
         }
@@ -97,7 +94,7 @@ class ProductController extends Controller {
             $image_hidden         =   trim($request->image_hidden);  
             $child_image          =   trim($request->child_image);                    
             $sort_order           =   trim($request->sort_order);          
-            $category_product_id	=		($request->category_product_id);            
+            $category_id	        =		trim($request->category_id);            
             $data 		            =   array();
             $info 		            =   array();
             $error 		            =   array();
@@ -138,16 +135,16 @@ class ProductController extends Controller {
                 }      	
             }          
       
-      if(count($category_product_id) == 0){
+      if(count($category_id) == 0){
         $checked = 0;
-        $error["category_product_id"]["type_msg"]   = "has-error";
-        $error["category_product_id"]["msg"]      = "Thiếu danh mục";
+        $error["category_id"]["type_msg"]   = "has-error";
+        $error["category_id"]["msg"]      = "Thiếu danh mục";
       }
       else{
-        if(empty($category_product_id[0])){
+        if(empty($category_id[0])){
           $checked = 0;
-          $error["category_product_id"]["type_msg"]   = "has-error";
-          $error["category_product_id"]["msg"]      = "Thiếu danh mục";
+          $error["category_id"]["type_msg"]   = "has-error";
+          $error["category_id"]["msg"]      = "Thiếu danh mục";
         }
       }
       if(empty($sort_order)){
@@ -179,15 +176,15 @@ class ProductController extends Controller {
           }  
           $item->code             = $code;
           $item->fullname 		    =	$fullname;                
-          $item->alias 			      =	$alias;  
-          
+          $item->alias 			      =	$alias;            
           $item->meta_keyword     = $meta_keyword;
           $item->meta_description = $meta_description;                  
           $item->status           = (int)@$status; 
           $item->price            = (int)(str_replace('.', '',@$price)) ;
           $item->sale_price       = (int)(str_replace('.', '',@$sale_price)) ;                                 
           $item->detail           = $detail;       
-          $item->intro            = $intro;                                           
+          $item->intro            = $intro;  
+          $item->category_id      = (int)@$category_id;                                         
           $item->sort_order 	    =	(int)$sort_order;                
           $item->updated_at 	    =	date("Y-m-d H:i:s",time());  
           // begin upload product child image  
@@ -211,31 +208,7 @@ class ProductController extends Controller {
             $menu_id=(int)$dataMenu[0]['id'];
             $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
             DB::statement($sql);    
-          }  
-          if(count(@$category_product_id) > 0){                            
-              $arrProductCategory=ProductCategoryModel::whereRaw("product_id = ?",[@$item->id])->select("category_product_id")->get()->toArray();
-              $arrCategoryProductID=array();
-              foreach ($arrProductCategory as $key => $value) {
-                $arrCategoryProductID[]=$value["category_product_id"];
-              }
-              $selected=@$category_product_id;
-              sort($selected);
-              sort($arrCategoryProductID);         
-              $resultCompare=0;
-              if($selected == $arrCategoryProductID){
-                $resultCompare=1;       
-              }
-              if($resultCompare==0){
-                ProductCategoryModel::whereRaw("product_id = ?",[(int)@$item->id])->delete();  
-                foreach ($selected as $key => $value) {
-                  $category_product_id=$value;
-                  $productCategory=new ProductCategoryModel;
-                  $productCategory->product_id=(int)@$item->id;
-                  $productCategory->category_product_id=(int)$category_product_id;            
-                  $productCategory->save();
-                }
-              }       
-          }
+          }            
           $info = array(
             'type_msg' 			=> "has-success",
             'msg' 				=> 'Save data successfully',
@@ -280,8 +253,7 @@ class ProductController extends Controller {
             $msg                    =   "Xóa thành công";                    
             if($checked == 1){
               $item = ProductModel::find((int)@$id);
-                $item->delete();
-                ProductCategoryModel::whereRaw("product_id = ?",[(int)$id])->delete();
+                $item->delete();                
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -336,10 +308,8 @@ class ProductController extends Controller {
             if($checked == 1){                
                   $strID = implode(',',$arrID);   
                   $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sqlDeleteproduct = "DELETE FROM `product` WHERE `id` IN  (".$strID.")";       
-                  $sqlDeleteproductCategory = "DELETE FROM `product_category` WHERE `product_id` IN (".$strID.")";                
-                  DB::statement($sqlDeleteproduct);
-                  DB::statement($sqlDeleteproductCategory);           
+                  $sql = "DELETE FROM `product` WHERE `id` IN  (".$strID.")";                         
+                  DB::statement($sql);                 
             }
             $data                   =   $this->loadData($request);
             $info = array(

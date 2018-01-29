@@ -1032,6 +1032,7 @@ class IndexController extends Controller {
       	}
       	return view("frontend.index",compact("component","error","data","success","layout"));         
       }
+      
       public function checkout(){          
           $arrUser=array(); 
           $link="";       

@@ -9,7 +9,7 @@ $linkDelete			=	route('adminsystem.'.$controller.'.deleteItem');
 $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
-$ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
+$ddlCategoryProduct     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryProductRecursive, 0,"");
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
 ?>
 <form class="form-horizontal" role="form" name="frm">	
@@ -80,13 +80,13 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 
 	function getList() {  	
 		var token = $('form[name="frm"] input[name="_token"]').val(); 
-        var category_product_id=$('select[name="category_product_id"]').val();
+        var category_id=$('select[name="category_id"]').val();
         var filter_search=$('form[name="frm"] input[name="filter_search"]').val();
         
         var dataItem={            
             '_token': token,
             'filter_search':filter_search,
-            'category_product_id':category_product_id,
+            'category_id':category_id,
             
         };
        
@@ -119,11 +119,11 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 	}	
 	function changeStatus(id,status){		
 		var token = $('input[name="_token"]').val();   
-		var category_product_id=$('select[name="category_product_id"]').val();
+		var category_id=$('select[name="category_id"]').val();
 		var dataItem={   
 			'id':id,
 			'status':status,         
-			'category_product_id':category_product_id,
+			'category_id':category_id,
 			'_token': token
 		};
 		$.ajax({
@@ -153,10 +153,10 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			return 0;
 		}
 		var token 	 = $('input[name="_token"]').val();   
-		var category_product_id=$('select[name="category_product_id"]').val();
+		var category_id=$('select[name="category_id"]').val();
 		var dataItem ={   
 			'id':id,			
-			'category_product_id':category_product_id,
+			'category_id':category_id,
 			'_token': token
 		};
 		$.ajax({
@@ -177,7 +177,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 	}
 	function updateStatus(status){		
 		var token 	= 	$('input[name="_token"]').val();   
-		var category_product_id=$('select[name="category_product_id"]').val();
+		var category_id=$('select[name="category_id"]').val();
 		var dt 		= 	vProductTable.data();
 		var str_id	=	"";		
 		for(var i=0;i<dt.length;i++){
@@ -189,7 +189,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 		var dataItem ={   
 			'str_id':str_id,
 			'status':status,			
-			'category_product_id':category_product_id,
+			'category_id':category_id,
 			'_token': token
 		};
 		$.ajax({
@@ -219,7 +219,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			return 0;
 		}
 		var token 	= 	$('input[name="_token"]').val();   
-		var category_product_id=$('select[name="category_product_id"]').val();
+		var category_id=$('select[name="category_id"]').val();
 		var dt 		= 	vProductTable.data();
 		var str_id	=	"";		
 		for(var i=0;i<dt.length;i++){
@@ -230,7 +230,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 		}		
 		var dataItem ={   
 			'str_id':str_id,	
-			'category_product_id':category_product_id,			
+			'category_id':category_id,			
 			'_token': token
 		};
 		$.ajax({
@@ -253,10 +253,10 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 	function sort(){			
 		var token 	= 	$('input[name="_token"]').val();   
 		var sort_json=$('input[name="sort_json"]').val();
-		var category_product_id=$('select[name="category_product_id"]').val();
+		var category_id=$('select[name="category_id"]').val();
 		var dataItem ={   
 			sort_json:sort_json,	
-			'category_product_id':category_product_id,	
+			'category_id':category_id,	
 			'_token': token
 		};        
 		$.ajax({

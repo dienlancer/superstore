@@ -81,11 +81,7 @@ if(isset($alias)){
                 case 'products':        
                 case 'category-product':
                 case 'product':
-                case 'search-product':  
-                case 'register':
-                case 'login':
-                case 'security':
-                case 'account':             
+                case 'search-product':                              
                 wp_nav_menu($argsDanhMucSanPham);       
                 $module=getBanner("advertising-product-widget");                        
                 if(count($module) > 0){                    
@@ -112,6 +108,48 @@ if(isset($alias)){
                     </div>
                     <?php
                 }                                                         
+                break;
+                case 'register':
+                case 'login':
+                case 'security':
+                case 'account':
+                case "manage-list-product":
+                $arrUser =array();   
+                $user = Sentinel::forceCheck(); 
+                if(!empty($user)){                
+                    $arrUser = $user->toArray();    
+                } 
+                $newData=array();
+                if(count($arrUser) > 0){
+                    $dataGroupMember=DB::table('group_member')
+                                                ->join('user_group_member','group_member.id','=','user_group_member.group_member_id')
+                                                ->where('user_group_member.user_id',(int)@$arrUser['id'])
+                                                ->select('group_member.alias')
+                                                ->groupBy('group_member.alias')
+                                                ->get()
+                                                ->toArray();
+                                $dataGroupMember=convertToArray($dataGroupMember);  
+                                $newData= get_field_data_array($dataGroupMember,'alias');       
+                }                
+                ?>
+                <div class="box-category margin-top-15">
+                    <h2 class="menu-right-title">Tác vụ</h2>
+                    <div class="category-product-wrapper">
+                        <ul class="categoryproduct">
+                            <?php 
+                            if(array_key_exists('thanh-vien-vip', $newData)){                                   
+                                    ?>
+                                    <li><a href="<?php echo route('frontend.product.getListProduct'); ?>">Danh sách sản phẩm</a></li>
+                                    <?php 
+                                }
+                            ?>
+                            <li><a href="<?php echo route("frontend.index.viewAccount"); ?>">Thông tin tài khoản</a></li>
+                            <li><a href="<?php echo route("frontend.index.viewSecurity"); ?>">Đổi mật khẩu</a></li>
+                            <li><a href="<?php echo route("frontend.index.getLgout"); ?>">Thoát</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <?php
                 break;                            
             }                                       
             ?>                            
@@ -175,7 +213,10 @@ if(isset($alias)){
                 break;
                 case "hoa-don":                                                
                 ?>@include("frontend.invoice")<?php
-                break;                                                                        
+                break;     
+                case "manage-list-product":
+                ?>@include("frontend.list-product")<?php   
+                break;                                                                      
             }
             ?>
         </div>
@@ -198,7 +239,7 @@ if(isset($alias)){
                     break; 
                     case "category-video": 
                     ?>@include("frontend.category-video")<?php   
-                    break;                                                                                     
+                    break;                                                                                             
                 }  
                 ?>
              

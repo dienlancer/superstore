@@ -465,26 +465,25 @@ class MenuController extends Controller {
       }
       public function getProductList(Request $request){
         $filter_search="";    
-        $category_product_id=0;  
+        $category_id=0;  
         $menu_type_id=$request->menu_type_id;
         $query=DB::table('product')
-      ->join('product_category','product.id','=','product_category.product_id')
-      ->join('category_product','category_product.id','=','product_category.category_product_id')  ;      
-      if(!empty(@$request->filter_search)){
-        $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
-      }     
-      if(!empty(@$request->category_product_id)){
-        $query->where('product_category.category_product_id',(int)@$request->category_product_id);
-      }   
-      $data=$query->select('product.id','product.code','product.alias','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
-                  ->groupBy('product.id','product.code','product.alias','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
-                  ->orderBy('product.sort_order', 'asc')
-                  ->get()
-                  ->toArray();      
-      $data=convertToArray($data);    
+        ->join('category_product','product.category_id','=','category_product.id')  ;     
+        if(!empty(@$request->filter_search)){
+          $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
+        }     
+        if(!empty(@$request->category_id)){
+          $query->where('product.category_id',(int)@$request->category_id);
+        }   
+        $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname as category_name','product.sort_order','product.status','product.created_at','product.updated_at')
+        ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname','product.sort_order','product.status','product.created_at','product.updated_at')
+        ->orderBy('product.sort_order', 'asc')
+        ->get()
+        ->toArray();      
+        $data=convertToArray($data); 
         $data=productComponentConverter($data,$this->_controller,$menu_type_id);            
         return $data;
-    } 
+      } 
     public function getPageComponent($menu_type_id = 0){
         $controller=$this->_controller;         
         $title='Page component';

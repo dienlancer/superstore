@@ -1,4 +1,5 @@
 <?php 
+use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 $seo=getSeo();
 $telephone=$setting['telephone']['field_value'];
@@ -66,7 +67,8 @@ if(count($arrCart) > 0){
 	foreach ($arrCart as $key => $value){
 		$quantity+=(int)$value['product_quantity'];              
 	}
-}        
+}   
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,7 +94,7 @@ if(count($arrCart) > 0){
 	<meta property="og:url" content="<?php echo $seo_page_url; ?>">
 	<!-- begin google analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $seo_google_analytics; ?>"></script>
-	<script>
+	<script language="javascript" type="text/javascript">
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
@@ -188,7 +190,7 @@ if(count($arrCart) > 0){
 		});    
 	</script>	
 </head>
-<body>		
+<body>	
 	<!-- begin fanpage -->
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
@@ -205,21 +207,35 @@ if(count($arrCart) > 0){
 				<div class="col-lg-12">					
 					<div class="social-right">
 						<ul class="inline-block top-menu">
-					<?php                                                              
-					if( count($arrUser) == 0 ){
-						?>
-						<li ><a href="<?php echo $register_member_link; ?>" ><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Đăng ký</a></li>
-						<li ><a href="<?php echo $account_link; ?>" ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Đăng nhập</a></li>
-						<?php
-					}else{                                     
-						?>
-						<li ><a  href="<?php echo $account_link; ?>"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?php echo $arrUser["username"]; ?></a></li>
-						<li ><a  href="<?php echo $security_link; ?>"><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Đổi mật khẩu</a></li>                                                
-						<li ><a  href="<?php echo $logout_link; ?>"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
-						<?php                                     
-					}
-					?>     
-				</ul>
+							<?php                                                              
+							if( count($arrUser) == 0 ){
+								?>
+								<li ><a href="<?php echo $register_member_link; ?>" ><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Đăng ký</a></li>
+								<li ><a href="<?php echo $account_link; ?>" ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Đăng nhập</a></li>
+								<?php
+							}else{ 								
+								$dataGroupMember=DB::table('group_member')
+												->join('user_group_member','group_member.id','=','user_group_member.group_member_id')
+												->where('user_group_member.user_id',(int)@$arrUser['id'])
+												->select('group_member.alias')
+												->groupBy('group_member.alias')
+												->get()
+												->toArray();
+								$dataGroupMember=convertToArray($dataGroupMember);	
+								$newData= get_field_data_array($dataGroupMember,'alias');								
+								if(array_key_exists('thanh-vien-vip', $newData)){									
+									?>
+									<li><a href="<?php echo route('frontend.product.getListProduct'); ?>"><i class="fa fa-product-hunt" aria-hidden="true"></i>&nbsp;Đăng sản phẩm</a></li>
+									<?php 
+								}
+								?>
+								<li ><a  href="<?php echo $account_link; ?>"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?php echo $arrUser["username"]; ?></a></li>
+								<li ><a  href="<?php echo $security_link; ?>"><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Đổi mật khẩu</a></li>                                                
+								<li ><a  href="<?php echo $logout_link; ?>"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
+								<?php                                     
+							}
+							?>     
+						</ul>
 						<div class="clr"></div>   
 					</div>
 					<div class="clr"></div>

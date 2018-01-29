@@ -19,7 +19,7 @@ $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrSt
 $inputIntro            =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputDetail            =   '<textarea id="detail" name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
-$ddlCategoryProduct     =   cmsSelectboxCategoryProductMultiple("category_product_id","category_product_id[]", 'form-control', @$arrCategoryProductRecursive, @$arrProductCategory,"");
+$ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
@@ -243,21 +243,21 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         var code                 =   $('input[name="code"]');
         var fullname             =   $('input[name="fullname"]');
         var alias                =   $('input[name="alias"]');     
-        var category_product_id  =   $('select[name="category_product_id[]"]');   
+        var category_id  =   $('select[name="category_id"]');   
         var sort_order           =   $('input[name="sort_order"]');
         var status               =   $('select[name="status"]');
         
         $(code).closest('.form-group').removeClass("has-error");
         $(fullname).closest('.form-group').removeClass("has-error");        
         $(alias).closest('.form-group').removeClass("has-error");
-        $(category_product_id).closest('.form-group').removeClass("has-error");
+        $(category_id).closest('.form-group').removeClass("has-error");
         $(sort_order).closest('.form-group').removeClass("has-error");
         $(status).closest('.form-group').removeClass("has-error");        
 
         $(code).closest('.form-group').find('span').empty().hide();
         $(fullname).closest('.form-group').find('span').empty().hide();        
         $(alias).closest('.form-group').find('span').empty().hide();
-        $(category_product_id).closest('.form-group').find('span').empty().hide();
+        $(category_id).closest('.form-group').find('span').empty().hide();
         $(sort_order).closest('.form-group').find('span').empty().hide();
         $(status).closest('.form-group').find('span').empty().hide();        
     }
@@ -294,7 +294,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         
         var meta_keyword=$('textarea[name="meta_keyword"]').val();
         var meta_description=$('textarea[name="meta_description"]').val();
-        var category_product_id=$('select[name="category_product_id[]"]').val();
+        var category_id=$('select[name="category_id"]').val();
         var image = $('input[name="image"]').val();
         if (image != ''){
             image = image.substr(image.lastIndexOf('\\') + 1);       
@@ -344,7 +344,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             "sale_price":sale_price,
             "intro":intro,
             "detail":detail,
-            "category_product_id":category_product_id,                        
+            "category_id":category_id,                        
             "child_image":child_image,            
             "sort_order":sort_order,
             "status":status,
@@ -382,10 +382,10 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                         $('input[name="alias"]').closest('.form-group').find('span').text(data_error.alias.msg);
                         $('input[name="alias"]').closest('.form-group').find('span').show();                       
                     }
-                    if(typeof data_error.category_product_id               != "undefined"){
-                        $('select[name="category_product_id[]"]').closest('.form-group').addClass(data_error.category_product_id.type_msg);
-                        $('select[name="category_product_id[]"]').closest('.form-group').find('span').text(data_error.category_product_id.msg);
-                        $('select[name="category_product_id[]"]').closest('.form-group').find('span').show();                        
+                    if(typeof data_error.category_id               != "undefined"){
+                        $('select[name="category_id"]').closest('.form-group').addClass(data_error.category_id.type_msg);
+                        $('select[name="category_id"]').closest('.form-group').find('span').text(data_error.category_id.msg);
+                        $('select[name="category_id"]').closest('.form-group').find('span').show();                        
                     }
                     if(typeof data_error.sort_order               != "undefined"){
                         $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);

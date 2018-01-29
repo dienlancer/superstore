@@ -8,7 +8,7 @@ use App\ArticleModel;
 use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
-use App\ProductCategoryModel;
+use App\ProductModel;
 use App\PaginationModel;
 use DB;
 class CategoryProductController extends Controller {
@@ -107,7 +107,7 @@ class CategoryProductController extends Controller {
         
         $meta_keyword         =   trim($request->meta_keyword);
         $meta_description     =   trim($request->meta_description);
-        $category_product_id	  =		trim($request->category_product_id);
+        $category_id	  =		trim($request->category_id);
         $image                  =   trim($request->image);
         $image_hidden           =   trim($request->image_hidden);
         $sort_order 			      =		trim($request->sort_order);
@@ -166,7 +166,7 @@ class CategoryProductController extends Controller {
         
         $item->meta_keyword     = $meta_keyword;
         $item->meta_description = $meta_description;           
-        $item->parent_id 		=	(int)$category_product_id;            
+        $item->parent_id 		=	(int)$category_id;            
         $item->sort_order 	=	(int)$sort_order;
         $item->status 			=	(int)$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
@@ -230,7 +230,7 @@ class CategoryProductController extends Controller {
             $type_msg           =   "alert-warning";            
             $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
           }
-          $data                   =   ProductCategoryModel::whereRaw("category_product_id = ?",[(int)@$id])->get()->toArray();              
+          $data                   =   ProductModel::whereRaw("category_id = ?",[(int)@$id])->get()->toArray();              
           if(count($data) > 0){
             $checked     =   0;
             $type_msg           =   "alert-warning";            
@@ -292,7 +292,7 @@ class CategoryProductController extends Controller {
                   $type_msg           =   "alert-warning";            
                   $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
                 }
-                $data                   =   ProductCategoryModel::whereRaw("category_product_id = ?",[(int)@$value])->get()->toArray();                     
+                $data                   =   ProductModel::whereRaw("category_id = ?",[(int)@$value])->get()->toArray();                     
                 if(count($data) > 0){
                   $checked     =   0;
                   $type_msg           =   "alert-warning";            
