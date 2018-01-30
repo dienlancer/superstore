@@ -40,21 +40,21 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			</div>                                 
 		</div>
 		<div class="row">
-                <div class="col-md-4">
-                    <div><b>Loại sản phẩm</b>  </div>
-                    <div><?php echo $ddlCategoryProduct ; ?></div>
-                </div>            
-                <div class="col-md-4">
-                    <div><b>Sản phẩm</b>  </div>
-                    <div><?php echo $inputFilterSearch; ?></div>
-                </div>            
-                <div class="col-md-4">
-                    <div>&nbsp;</div>
-                    <div>
-                        <button type="button" class="btn dark btn-outline sbold uppercase btn-product" onclick="getList();">Tìm kiếm</button>                                         
-                    </div>                
-                </div>                
-        </div>   
+			<div class="col-md-4">
+				<div><b>Loại sản phẩm</b>  </div>
+				<div><?php echo $ddlCategoryProduct ; ?></div>
+			</div>            
+			<div class="col-md-4">
+				<div><b>Sản phẩm</b>  </div>
+				<div><?php echo $inputFilterSearch; ?></div>
+			</div>            
+			<div class="col-md-4">
+				<div>&nbsp;</div>
+				<div>
+					<button type="button" class="btn dark btn-outline sbold uppercase btn-product" onclick="getList();">Tìm kiếm</button>                                         
+				</div>                
+			</div>                
+		</div>   
 		<div class="portlet-body">		
 			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-product">
 				<thead>

@@ -1,5 +1,5 @@
 <?php
-
+//use Cartalyst;
 /*
  * CKFinder Configuration File
  *
@@ -73,18 +73,24 @@ $config['backends'][] = array(
 
 /*================================ Resource Types =====================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_resourceTypes
-
+$arrUser=array();      
+use Sentinel;        
+$user = Sentinel::forceCheck(); 
+if(!empty($user)){                
+  $arrUser = $user->toArray();    
+}      
+$folder_name='vip-'.(int)@$arrUser['id'];
+$directory='vip-member'.'/'.$folder_name;
 $config['defaultResourceTypes'] = '';
-
 $config['resourceTypes'][] = array(
-    'name'              => 'vip-member-upload', // Single quotes not allowed.
-    'directory'         => 'vip-member-upload',
+    'name'              => 'abc', // Single quotes not allowed.
+    'directory'         => $directory,
     'maxSize'           => 0,
     'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip,bmp,gif,jpeg,jpg,png',
     'deniedExtensions'  => '',
     'backend'           => 'default'
 );
-
+echo "<pre>".print_r($config,true)."</pre>";
 /*$config['resourceTypes'][] = array(
     'name'              => 'testupload',
     'directory'         => 'testupload',

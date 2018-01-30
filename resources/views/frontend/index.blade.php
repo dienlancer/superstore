@@ -81,7 +81,9 @@ if(isset($alias)){
                 case 'products':        
                 case 'category-product':
                 case 'product':
-                case 'search-product':                              
+                case 'search-product':    
+                case 'register':
+                case 'login':                          
                 wp_nav_menu($argsDanhMucSanPham);       
                 $module=getBanner("advertising-product-widget");                        
                 if(count($module) > 0){                    
@@ -108,9 +110,7 @@ if(isset($alias)){
                     </div>
                     <?php
                 }                                                         
-                break;
-                case 'register':
-                case 'login':
+                break;                
                 case 'security':
                 case 'account':
                 case "list-product":

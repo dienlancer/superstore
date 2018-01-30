@@ -23,9 +23,16 @@ class MediaController extends Controller {
 		return view("frontend.index",compact("component","layout","controller"));                  
 	}	   
   	public function loadData(Request $request){
-  		$strDirUpload=base_path("upload");
+  		$arrUser=array();              
+	    $user = Sentinel::forceCheck(); 
+	    if(!empty($user)){                
+	      $arrUser = $user->toArray();    
+	    }      
+	    $folder_name='vip-'.(int)@$arrUser['id'];
+	    $directory='vip-member'.DS.$folder_name;
+  		$strDirUpload=base_path($directory);
   		$data = scandir($strDirUpload);		  		
-  		$data=mediaConverter($data,$this->_controller);		           		
+  		$data=media2Converter($data,$this->_controller,$directory);		           		
   		return $data;
   	}	 
   	public function getForm($task){	
@@ -40,19 +47,28 @@ class MediaController extends Controller {
   			return redirect()->route("frontend.index.login"); 
   		}	 
   		$controller=$this->_controller;	
-  		$title=$this->_title . " : Add new";
-  		$icon=$this->_icon; 				
-  		return view("frontend.".$this->_controller.".form",compact("component","layout","controller","task","title","icon"));
+  				
+  		return view("frontend.index",compact("component","layout","controller","task"));
   	}
-	public function uploadFile(Request $request){                     
-        $fileObj=$_FILES["image"];          
-        $fileName="";
-        if($fileObj['tmp_name'] != null){                
-          $fileName   = $fileObj['name'];
-          $file_path=base_path("upload".DS.$fileName);
-          @copy($fileObj['tmp_name'],$file_path);                   
-        }   
-      }
+  	public function uploadFile(Request $request){                     
+  		$fileObj=$_FILES["image"];          
+  		$fileName="";
+  		$arrUser=array();              
+	    $user = Sentinel::forceCheck(); 
+	    if(!empty($user)){                
+	      $arrUser = $user->toArray();    
+	    }      
+	    $folder_name='vip-'.(int)@$arrUser['id'];
+	    $directory='vip-member'.DS.$folder_name;
+	    if(!is_dir($directory)){    
+    		mkdir($directory, 0755);
+		}
+  		if($fileObj['tmp_name'] != null){                
+  			$fileName   = $fileObj['name'];
+  			$file_path=base_path($directory.DS.$fileName);
+  			@copy($fileObj['tmp_name'],$file_path);                   
+  		}   
+  	}
 	public function trash(Request $request){
 		$str_id                 =   $request->str_id;   
 		$checked                =   1;
@@ -63,12 +79,20 @@ class MediaController extends Controller {
 			$type_msg           =   "alert-warning";            
 			$msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
 		}
+		$arrUser=array();              
+	    $user = Sentinel::forceCheck(); 
+	    if(!empty($user)){                
+	      $arrUser = $user->toArray();    
+	    }      
+	    $folder_name='vip-'.(int)@$arrUser['id'];
+	    $directory='vip-member'.DS.$folder_name;
 		if($checked == 1){                                  
 			$str_id=substr($str_id, 0,strlen($str_id) - 1);      
 			$arrID                  =   explode(",", $str_id)  ;
 			foreach ($arrID as $key => $value) {
 				if(!empty($value)){
-					$pathFile=base_path("upload/".$value);
+
+					$pathFile=base_path($directory.DS.$value);
 					if(file_exists($pathFile)){
 						unlink($pathFile);
 					}	
@@ -88,8 +112,15 @@ class MediaController extends Controller {
 		$id                     =   $request->id;              
 		$checked                =   1;
 		$type_msg               =   "alert-success";
-		$msg                    =   "Xóa thành công";                    
-		$pathFile 				= 	base_path("upload/".$id);			
+		$msg                    =   "Xóa thành công";    
+		$arrUser=array();              
+	    $user = Sentinel::forceCheck(); 
+	    if(!empty($user)){                
+	      $arrUser = $user->toArray();    
+	    }      
+	    $folder_name='vip-'.(int)@$arrUser['id'];
+	    $directory='vip-member'.DS.$folder_name;               
+		$pathFile 				= 	base_path($directory.DS.$id);			
 		if(!file_exists($pathFile)){
 			$checked=0;
 		}			         	    

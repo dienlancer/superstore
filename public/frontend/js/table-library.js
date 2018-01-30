@@ -1,5 +1,6 @@
 var vMemberTable           =   null;
 var vProductTable           =   null;
+var vMediaTable           =   null;
 var basicTable = function () {    
     var initMemberTable = function () {
         vMemberTable = $('#tbl-member').DataTable({
@@ -31,13 +32,29 @@ var basicTable = function () {
             ]            
         });        
     };
+    var initMediaTable = function () {
+        vMediaTable = $('#tbl-media').DataTable({
+            aLengthMenu: [
+                [10, -1],
+                [10, "All"]
+            ],
+            iDisplayLength: -1,
+            columns: [                
+                { data: "checked"            },  
+                { data: "featured_file"      },                              
+                { data: "fullname"      },                
+                { data: "deleted"    },                
+            ]
+        });        
+    };
     return {
         init: function () {
             if (!jQuery().dataTable){
                 return;        
             }        
             initMemberTable();    
-            initProductTable();        
+            initProductTable();  
+            initMediaTable();      
         }
     };
 }();

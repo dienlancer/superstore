@@ -1155,6 +1155,63 @@ function mediaConverter($data=array(),$controller){
     }
     return $result;
 }
+function media2Converter($data=array(),$controller,$directory){        
+    $result = array();    
+    if( count($data) > 0){
+        for($i = 0 ;$i < count($data);$i++){            
+            $deleted='<center><a href="javascript:void(0)" onclick="deleteItem(\''.$data[$i].'\')"><img src="'.asset("/public/adminsystem/images/delete-icon.png").'" /></a></center>';            
+            $id=$data[$i];      
+            $featured_file="";
+            $file_path=base_path($directory.DS.$data[$i]);
+            if(file_exists($file_path)){
+                /* begin check if file image */
+                if(@is_array(getimagesize($file_path))){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('upload/'.$data[$i]).'" ><img src="'.asset('upload/'.$data[$i]).'" style="width:25%" /></a>';
+                }
+                /* end check if file image */
+                /* begin check if file ico */
+                $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.ico)$#";
+                if(preg_match($pattern, $data[$i],$match)==true){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('upload/'.$data[$i]).'" ><img src="'.asset('upload/'.$data[$i]).'" /></a>';
+                }
+                /* end check if file ico */
+                /* begin check if file word */
+                $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx)$#";
+                if(preg_match($pattern, $data[$i],$match)==true){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/word.png').'"><img src="'.asset('public/adminsystem/images/word.png').'" /></a>';
+                }
+                /* end check if file word */
+                /* begin check if file excel */
+                $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$#";
+                if(preg_match($pattern, $data[$i],$match)==true){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/excel.png').'"><img src="'.asset('public/adminsystem/images/excel.png').'" /></a>';
+                }
+                /* end check if file excel */
+                /* begin check if file pdf */
+                $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$#";
+                if(preg_match($pattern, $data[$i],$match)==true){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/pdf.png').'"><img src="'.asset('public/adminsystem/images/pdf.png').'" /></a>';
+                }
+                /* end check if file pdf */
+                /* begin check if file pdf */
+                $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.zip|.rar)$#";
+                if(preg_match($pattern, $data[$i],$match)==true){
+                    $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/zip.png').'"><img src="'.asset('public/adminsystem/images/zip.png').'" /></a>';
+                }
+                /* end check if file pdf */
+            }            
+            $result[$i] = array(
+                'checked'                  =>   '<input type="checkbox" onclick="checkWithList(this)" name="cid"  />',
+                'is_checked'               =>   0,
+                "id"                       =>   $id,
+                "featured_file"            =>   $featured_file,
+                "fullname"                 =>   $id,                                                        
+                "deleted"                  =>   $deleted
+            );
+        }
+    }
+    return $result;
+}
 function memberConverter($data=array()){        
     $result = array();    
     if( count($data) > 0){

@@ -12,7 +12,7 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 <form method="post" name="frm" class="margin-top-5 box-article frm-vip" enctype="multipart/form-data">
 	{{ csrf_field() }}	
 	<div class="portlet light bordered">
-		<div class="portlet-title">
+		<div class="portlet-title padding-top-15">
 			<div class="alert alert-success" id="alert" style="display: none">
 				<strong>Success!</strong> 
 			</div>			  
@@ -28,19 +28,22 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 				</div>    
 			</div>                                 
 		</div>		
-		<div class="portlet-body">		
-			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-media">
-				<thead>
-					<tr>
-						<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>                						
-						<th>Media</th>
-						<th>Tên file</th>						
-						<th width="1%">Xóa</th>                    
-					</tr>
-				</thead>
-				<tbody>                                                
-				</tbody>
-			</table>
+		<div class="portlet-body margin-top-15">
+			<div class="col-md-12">
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-media">
+					<thead>
+						<tr>
+							<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>                						
+							<th>Media</th>
+							<th>Tên file</th>						
+							<th width="1%">Xóa</th>                    
+						</tr>
+					</thead>
+					<tbody>                                                
+					</tbody>
+				</table>
+			</div>
+			<div class="clr"></div>					
 		</div>
 	</div>	
 </form>
@@ -94,7 +97,7 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  				
-				showMsg('alert',data.msg,data.type_msg);               		
+				alert('Đã xoá');             		
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -136,7 +139,7 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {
-				showMsg('alert',data.msg,data.type_msg);  
+				alert('Đã xoá');  
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();

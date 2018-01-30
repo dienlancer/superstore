@@ -1,18 +1,16 @@
-@extends("adminsystem.master")
-@section("content")
+
 <?php 
-$linkCancel             =   route('adminsystem.'.$controller.'.getList');
-$linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
+$linkCancel             =   route('frontend.'.$controller.'.getList');
+$linkSave               =   route('frontend.'.$controller.'.save');
+$linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
 ?>
-<form class="form-horizontal" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
+<h2 class="tieu-de margin-top-15">
+    Media
+</h2>   
+<form class="margin-top-5 padding-top-5 box-article frm-vip" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
     {{ csrf_field() }}           
     <div class="portlet light bordered">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="{{$icon}}"></i>
-                <span class="caption-subject font-dark sbold uppercase">{{$title}}</span>
-            </div>
+        <div class="portlet-title margin-top-5">            
             <div class="actions">
              <div class="table-toolbar">
                 <div class="row">
@@ -23,16 +21,16 @@ $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
                 </div>    
             </div>
         </div>
-        <div class="portlet-body form">        
+        <div class="portlet-body form ">        
             <div class="form-body">
-                <div class="row">
+                <div class="row margin-top-15">
                     <div class="form-group col-md-12">
                         <a href="javascript:void(0);" onclick="addRow();" class="btn btn-sm green"> Thêm mới
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
                 </div>                
-                <div class="row">
+                <div class="row margin-top-15">
                     <div class="form-group col-md-12">
                         <table class="table table-bordered table-recursive setting-system">
                             <thead>
@@ -85,4 +83,4 @@ $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
         tbody.deleteRow(index);                      
     }        
 </script>
-@endsection()            
+   
