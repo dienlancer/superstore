@@ -382,16 +382,29 @@ Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","use
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);
 Route::match(["get","post"],"lien-he-voi-chung-toi",["as"=>"frontend.index.contactUs","uses"=>"frontend\IndexController@contactUs"]);
 /* begin đăng sản phẩm */
-Route::match(["get","post"],"danh-sach-san-pham",["as"=>"frontend.product.getList","uses"=>"frontend\ProductController@getList"]);		
-Route::post("load-data",["as"=>"frontend.product.loadData","uses"=>"frontend\ProductController@loadData"]);	
-Route::get("form/{task}/{id?}",["as"=>"frontend.product.getForm","uses"=>"frontend\ProductController@getForm"]);
-Route::post("save",["as"=>"frontend.product.save","uses"=>"frontend\ProductController@save"]);
-Route::post("delete-item",["as"=>"frontend.product.deleteItem","uses"=>"frontend\ProductController@deleteItem"]);		
-Route::post("sort-order",["as"=>"frontend.product.sortOrder","uses"=>"frontend\ProductController@sortOrder"]);
-Route::post("update-status",["as"=>"frontend.product.updateStatus","uses"=>"frontend\ProductController@updateStatus"]);
-Route::post("change-status",["as"=>"frontend.product.changeStatus","uses"=>"frontend\ProductController@changeStatus"]);
-Route::post("trash",["as"=>"frontend.product.trash","uses"=>"frontend\ProductController@trash"]);
-Route::post("upload-file",["as"=>"frontend.product.uploadFile","uses"=>"frontend\ProductController@uploadFile"]);
-Route::post("create-alias",["as"=>"frontend.product.createAlias","uses"=>"frontend\ProductController@createAlias"]);
+Route::group(["prefix"=>"product"],function(){
+	Route::match(["get","post"],"list",["as"=>"frontend.product.getList","uses"=>"frontend\ProductController@getList"]);		
+	Route::post("load-data",["as"=>"frontend.product.loadData","uses"=>"frontend\ProductController@loadData"]);	
+	Route::get("form/{task}/{id?}",["as"=>"frontend.product.getForm","uses"=>"frontend\ProductController@getForm"]);
+	Route::post("save",["as"=>"frontend.product.save","uses"=>"frontend\ProductController@save"]);
+	Route::post("delete-item",["as"=>"frontend.product.deleteItem","uses"=>"frontend\ProductController@deleteItem"]);		
+	Route::post("sort-order",["as"=>"frontend.product.sortOrder","uses"=>"frontend\ProductController@sortOrder"]);
+	Route::post("update-status",["as"=>"frontend.product.updateStatus","uses"=>"frontend\ProductController@updateStatus"]);
+	Route::post("change-status",["as"=>"frontend.product.changeStatus","uses"=>"frontend\ProductController@changeStatus"]);
+	Route::post("trash",["as"=>"frontend.product.trash","uses"=>"frontend\ProductController@trash"]);
+	Route::post("upload-file",["as"=>"frontend.product.uploadFile","uses"=>"frontend\ProductController@uploadFile"]);
+	Route::post("create-alias",["as"=>"frontend.product.createAlias","uses"=>"frontend\ProductController@createAlias"]);
+});
 /* end đăng sản phẩm */
+/* begin media */
+Route::group(["prefix"=>"media"],function(){		
+	Route::get("list",["as"=>"frontend.media.getList","uses"=>"frontend\MediaController@getList"]);
+	Route::post("load-data",["as"=>"frontend.media.loadData","uses"=>"frontend\MediaController@loadData"]);		
+	Route::get("form/{task}/{id?}",["as"=>"frontend.media.getForm","uses"=>"frontend\MediaController@getForm"]);
+	Route::post("save",["as"=>"frontend.media.save","uses"=>"frontend\MediaController@save"]);
+	Route::post("delete-item",["as"=>"frontend.media.deleteItem","uses"=>"frontend\MediaController@deleteItem"]);				
+	Route::post("trash",["as"=>"frontend.media.trash","uses"=>"frontend\MediaController@trash"]);		
+	Route::post("upload-file",["as"=>"frontend.media.uploadFile","uses"=>"frontend\MediaController@uploadFile"]);	
+});
+/* end media */
 ?>

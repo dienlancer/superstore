@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 29, 2018 lúc 12:28 PM
+-- Thời gian đã tạo: Th1 30, 2018 lúc 06:07 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -1159,7 +1159,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (448, 8, 'PPGJaXq6NaHLG1dnSP9FOkjzFSdKqvvI', '2018-01-28 21:38:01', '2018-01-28 21:38:01'),
 (449, 1, 'vBzzq1RtNsCmGiczUJLFsHSyNzTTubXg', '2018-01-28 21:38:13', '2018-01-28 21:38:13'),
 (451, 1, 'B3WzQ8UpMARDoY28vEkB7erfEEpHmLT1', '2018-01-28 21:38:37', '2018-01-28 21:38:37'),
-(454, 8, 'tn7HvCBoyGphTHqjxPl0d3fJ3TWVRmTi', '2018-01-29 00:39:35', '2018-01-29 00:39:35');
+(454, 8, 'tn7HvCBoyGphTHqjxPl0d3fJ3TWVRmTi', '2018-01-29 00:39:35', '2018-01-29 00:39:35'),
+(456, 8, 'gU8To4B0ykgTivl93DHjDJqucgL0L8kg', '2018-01-29 18:20:32', '2018-01-29 18:20:32'),
+(457, 1, 'oo71n7ghA1RolYX2RzzeXwiTJ4KcV6zr', '2018-01-29 18:33:51', '2018-01-29 18:33:51');
 
 -- --------------------------------------------------------
 
@@ -1319,17 +1321,11 @@ CREATE TABLE `product` (
   `detail` text CHARACTER SET utf8,
   `count_view` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
-
---
--- Đang đổ dữ liệu cho bảng `product`
---
-
-INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, 'ohweik6lyd', 'Sản phẩm 1', 'metakeyword 1', 'metadescription 1', 'san-pham-1', 'blog-1.png', 0, '[\"blog-2.png\",\"blog-3.png\",\"blog-4.png\"]', '100000.00', '90000.00', 'giới thiệu 1', '<p>chi tiết 1</p>', NULL, 8, 1, '2018-01-29 10:05:52', '2018-01-29 10:05:52');
 
 -- --------------------------------------------------------
 
@@ -2048,7 +2044,10 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 (444, 6, 'user', NULL, '2018-01-26 03:35:32', '2018-01-26 03:35:32'),
 (445, NULL, 'global', NULL, '2018-01-28 09:40:43', '2018-01-28 09:40:43'),
 (446, NULL, 'ip', '127.0.0.1', '2018-01-28 09:40:43', '2018-01-28 09:40:43'),
-(447, 7, 'user', NULL, '2018-01-28 09:40:43', '2018-01-28 09:40:43');
+(447, 7, 'user', NULL, '2018-01-28 09:40:43', '2018-01-28 09:40:43'),
+(448, NULL, 'global', NULL, '2018-01-29 18:33:51', '2018-01-29 18:33:51'),
+(449, NULL, 'ip', '127.0.0.1', '2018-01-29 18:33:51', '2018-01-29 18:33:51'),
+(450, 1, 'user', NULL, '2018-01-29 18:33:51', '2018-01-29 18:33:51');
 
 -- --------------------------------------------------------
 
@@ -2079,10 +2078,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-01-28 21:38:37', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-28 21:38:37'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-01-29 18:33:51', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-29 18:33:51'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-01-29 00:39:35', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-01-29 00:39:35');
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-01-29 18:20:32', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-01-29 18:20:32');
 
 -- --------------------------------------------------------
 
@@ -2435,7 +2434,7 @@ ALTER TABLE `category_banner`
 -- AUTO_INCREMENT cho bảng `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `category_video`
@@ -2519,7 +2518,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2537,7 +2536,7 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
@@ -2591,7 +2590,7 @@ ALTER TABLE `supporter`
 -- AUTO_INCREMENT cho bảng `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=448;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=451;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

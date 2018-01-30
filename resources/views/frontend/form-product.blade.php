@@ -1,5 +1,4 @@
 <?php 
-$controller='product';
 $linkCancel             =   route('frontend.'.$controller.'.getList');
 $linkSave               =   route('frontend.'.$controller.'.save');
 $linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
@@ -11,6 +10,8 @@ $inputMetakeyword             =   '<textarea  name="meta_keyword" rows="2" cols=
 $inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputPrice             =   '<input type="text" class="form-control" name="price" onkeyup="PhanCachSoTien(this);"      value="'.convertToTextPrice(@$arrRowData['price']).'">';
 $inputSalePrice             =   '<input type="text" class="form-control" name="sale_price" onkeyup="PhanCachSoTien(this);"        value="'.convertToTextPrice(@$arrRowData['sale_price']).'">';
+$status                 =    (int)@$arrRowData['status']  ;
+$inputStatus                =   '<input type="hidden" name="status"  value="'.@$status.'" />'; 
 $inputIntro            =   '<textarea  name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputDetail            =   '<textarea name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="1" disabled >';
@@ -48,13 +49,14 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 	echo $inputPictureHidden; 
 	echo $inputChildPictureHidden;
 	echo $inputID;
+	echo $inputStatus;
 	echo $inputAliasMenu;
 	?>                                                      
 	<div class="form-body">                
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Sản phẩm</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Sản phẩm</b></label>
+				<div class="col-md-9">
 					<?php echo $inputFullName; ?>
 					<span class="help-block"></span>
 				</div>
@@ -62,8 +64,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>
 		<div class="row">  
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Alias</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Alias</b></label>
+				<div class="col-md-9">
 					<?php echo $inputAlias; ?>
 					<span class="help-block"></span>
 				</div>
@@ -71,8 +73,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>      		
 		<div class="row"> 
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Giá</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Giá</b></label>
+				<div class="col-md-9">
 					<?php echo $inputPrice; ?>
 					<span class="help-block"></span>
 				</div>
@@ -80,8 +82,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>    
 		<div class="row"> 
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Giá khuyến mãi</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Giá khuyến mãi</b></label>
+				<div class="col-md-9">
 					<?php echo $inputSalePrice; ?>
 					<span class="help-block"></span>
 				</div>
@@ -89,8 +91,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>    
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Loại sản phẩm</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Loại sản phẩm</b></label>
+				<div class="col-md-9">
 					<?php echo $ddlCategoryProduct; ?>
 					<span class="help-block"></span>
 				</div>
@@ -98,24 +100,24 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>
 		<div class="row">                      
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Hình</b></label>
+				<label class="col-md-3 control-label"><b>Hình</b></label>
 				<div class="col-md-4">
 					<input type="file" id="image" name="image"  />   
 					<div class="picture-area"><?php echo $picture; ?>                      </div>
 					<div class="clr"></div>
 
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div>
 						<a href="javascript:void(0);" onclick="addRow();" class="btn"> Thêm mới
 							
 						</a>
 					</div>
-					<table class="table-image" id="table-image" border="0" cellpadding="0" cellspacing="0" border="1" width="100%">
+					<table class="table-image" border="0" cellpadding="0" cellspacing="0" border="1" width="100%">
 						<thead>
 							<tr>                                    
 								<th><center>Thumbnails</center></th>                                  
-								<th width="1%" ></th>
+								<th ></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -147,8 +149,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>       
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Sắp xếp</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Sắp xếp</b></label>
+				<div class="col-md-9">
 					<?php echo $inputSortOrder; ?>
 					<span class="help-block"></span>
 				</div>
@@ -156,8 +158,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>		           
 		<div class="row">  
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Meta keyword</b></label>
-				<div class="col-md-10">
+				<label class="col-md-3 control-label"><b>Meta keyword</b></label>
+				<div class="col-md-9">
 					<?php echo $inputMetakeyword; ?>
 					<span class="help-block"></span>
 				</div>
@@ -165,8 +167,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Meta description</b></label>
-				<div class="col-md-10">                            
+				<label class="col-md-3 control-label"><b>Meta description</b></label>
+				<div class="col-md-9">                            
 					<?php echo $inputMetadescription; ?>
 					<span class="help-block"></span>
 				</div>
@@ -174,8 +176,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div>
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Giới thiệu</b></label>
-				<div class="col-md-10">                            
+				<label class="col-md-3 control-label"><b>Giới thiệu</b></label>
+				<div class="col-md-9">                            
 					<?php echo $inputIntro; ?>
 					<span class="help-block"></span>
 				</div>
@@ -183,8 +185,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 		</div> 
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"><b>Chi tiết</b></label>
-				<div class="col-md-10">                            
+				<label class="col-md-3 control-label"><b>Chi tiết</b></label>
+				<div class="col-md-9">                            
 					<?php echo $inputDetail; ?>
 					<span class="help-block"></span>
 					<script type="text/javascript" language="javascript">
@@ -195,11 +197,11 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 					<span class="help-block"></span>
 				</div>
 			</div>                       
-		</div> 
+		</div> 		
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-2 control-label"></label>
-				<div class="col-md-10">                            
+				<label class="col-md-3 control-label"></label>
+				<div class="col-md-9">                            
 					<a href="javascript:void(0);" onclick="save();" class="btn purple">Lưu</a> 
 				</div>
 			</div>     
@@ -216,16 +218,18 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         var sort_order           =   $('input[name="sort_order"]');
         
         
+        
         $(fullname).closest('.form-group').removeClass("has-error");        
         $(alias).closest('.form-group').removeClass("has-error");
         $(category_id).closest('.form-group').removeClass("has-error");
         $(sort_order).closest('.form-group').removeClass("has-error");        
-
+        
         
         $(fullname).closest('.form-group').find('span').empty().hide();        
         $(alias).closest('.form-group').find('span').empty().hide();
         $(category_id).closest('.form-group').find('span').empty().hide();
-        $(sort_order).closest('.form-group').find('span').empty().hide();              
+        $(sort_order).closest('.form-group').find('span').empty().hide(); 
+             
     }
 
     function uploadFileImport(ctrl_image){    
@@ -288,7 +292,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         var price=$('input[name="price"]').val();
         var sale_price=$('input[name="sale_price"]').val();
         var intro=$('textarea[name="intro"]').val(); 
-        var detail=CKEDITOR.instances['detail'].getData();        
+        var detail=CKEDITOR.instances['detail'].getData();    
+        var status=$('input[name="status"]').val();           
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
         resetErrorStatus();
@@ -310,6 +315,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             "category_id":category_id,                        
             "child_image":child_image,            
             "sort_order":sort_order,
+            "status":status,         
             "_token": token
         };
         $.ajax({
@@ -348,8 +354,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                         $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);
                         $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
                         $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
-                    }
-                                    
+                    }                                   
                 }
                 spinner.hide();
             },

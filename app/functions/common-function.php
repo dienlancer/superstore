@@ -90,6 +90,12 @@ function randomString($length = 5){
   $result   = substr($arrCharacter, 0, $length);
   return $result;
 }
+function randomCodeNumber(){
+  $data = range(0,9);
+  $subject=implode($data, '');
+  $subject=str_shuffle($subject);
+  return $subject;
+}
 function getArrPrivilege(){
   /* begin quyền truy cập */
   $user_id=Sentinel::getUser()->id;      

@@ -492,17 +492,16 @@ function product3Converter($data=array(),$controller){
     $product_height=$setting['product_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
-            $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
+            $edited='<center><a href="'.route('frontend.'.$controller.'.getForm',['edit',$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
             $deleted='<center><a href="javascript:void(0)" onclick="deleteItem('.$data[$i]["id"].')"><img src="'.asset("/public/adminsystem/images/delete-icon.png").'" /></a></center>';
             $kicked=0;
+            $status='';
             if((int)$data[$i]["status"]==1){
-                $kicked=0;
+                $status     = '<center><img src="'.asset('/public/adminsystem/images/active.png').'"  /></center>';
             }
             else{
-                $kicked=1;
-            }
-            $status     = '<center>'.cmsStatus((int)$data[$i]["id"],(int)$data[$i]["status"],$kicked).'</center>';
-            $sort_order = '<center><input name="sort_order" id="sort-order-'.$data[$i]["id"].'" sort_order_id="'.$data[$i]["id"].'" onkeyup="setSortOrder(this)" value="'.$data[$i]["sort_order"].'" size="3" style="text-align:center" onkeypress="return isNumberKey(event);" /></center>';
+                $status     = '<center><img src="'.asset('/public/adminsystem/images/inactive.png').'"  /></center>';
+            }                        
             $link_image="";
             $image="";
             if(!empty($data[$i]["image"])){
@@ -523,8 +522,8 @@ function product3Converter($data=array(),$controller){
                 "category_name"            =>   $data[$i]['category_name'],                
                 "image"                    =>   $image,
                 "price"                    =>   $price,
-                "sale_price"                    =>   $sale_price,
-                "sort_order"               =>   $sort_order,
+                "sale_price"               =>   $sale_price,
+                
                 "status"                   =>   $status,
                 "created_at"               =>   datetimeConverterVn($data[$i]["created_at"]),
                 "updated_at"               =>   datetimeConverterVn($data[$i]["updated_at"]),

@@ -115,6 +115,8 @@ if(isset($alias)){
                 case 'account':
                 case "list-product":
                 case "form-product":
+                case "list-media":
+                case "form-media":
                 $arrUser =array();   
                 $user = Sentinel::forceCheck(); 
                 if(!empty($user)){                
@@ -140,8 +142,8 @@ if(isset($alias)){
                             <?php 
                             if(array_key_exists('thanh-vien-vip', $newData)){                                   
                                     ?>
-                                    <li><a href="<?php echo route('frontend.product.getList'); ?>">Danh sách sản phẩm</a></li>
-                                    <li><a href="<?php echo route('frontend.product.getForm',['add']); ?>">Thêm mới sản phẩm</a></li>
+                                    <li><a href="<?php echo route('frontend.product.getList'); ?>">Sản phẩm</a></li>                                    
+                                    <li><a href="<?php echo route('frontend.media.getList'); ?>">Media</a></li>
                                     <?php 
                                 }
                             ?>
@@ -221,6 +223,12 @@ if(isset($alias)){
                 break;    
                 case "form-product":
                 ?>@include("frontend.form-product")<?php   
+                break; 
+                case "list-media":
+                ?>@include("frontend.list-media")<?php   
+                break;    
+                case "form-media":
+                ?>@include("frontend.form-media")<?php   
                 break;                                                                      
             }
             ?>
