@@ -39,6 +39,7 @@ if(count(@$arrRowData) > 0){
 	}    
 }   
 $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"  value="'.@$str_child_image.'" />';
+ 
 ?>
 <h2 class="tieu-de margin-top-15">
 	Đăng sản phẩm
@@ -426,4 +427,9 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             },
         });
     }
+    $(document).ready(function(){
+    	/*var finder = new CKFinder();
+    	console.log(finder);*/
+		
+    })
 </script>

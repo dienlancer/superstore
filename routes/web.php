@@ -215,6 +215,54 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("trash",["as"=>"adminsystem.district.trash","uses"=>"adminsystem\DistrictController@trash"]);
 		Route::post("create-alias",["as"=>"adminsystem.district.createAlias","uses"=>"adminsystem\DistrictController@createAlias"]);
 	});	
+	Route::group(["prefix"=>"trademark"],function(){		
+		Route::get("list",["as"=>"adminsystem.trademark.getList","uses"=>"adminsystem\TrademarkController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.trademark.loadData","uses"=>"adminsystem\TrademarkController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.trademark.getForm","uses"=>"adminsystem\TrademarkController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.trademark.save","uses"=>"adminsystem\TrademarkController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.trademark.deleteItem","uses"=>"adminsystem\TrademarkController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.trademark.sortOrder","uses"=>"adminsystem\TrademarkController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.trademark.updateStatus","uses"=>"adminsystem\TrademarkController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.trademark.changeStatus","uses"=>"adminsystem\TrademarkController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.trademark.trash","uses"=>"adminsystem\TrademarkController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.trademark.createAlias","uses"=>"adminsystem\TrademarkController@createAlias"]);
+	});	
+	Route::group(["prefix"=>"origin"],function(){		
+		Route::get("list",["as"=>"adminsystem.origin.getList","uses"=>"adminsystem\OriginController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.origin.loadData","uses"=>"adminsystem\OriginController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.origin.getForm","uses"=>"adminsystem\OriginController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.origin.save","uses"=>"adminsystem\OriginController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.origin.deleteItem","uses"=>"adminsystem\OriginController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.origin.sortOrder","uses"=>"adminsystem\OriginController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.origin.updateStatus","uses"=>"adminsystem\OriginController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.origin.changeStatus","uses"=>"adminsystem\OriginController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.origin.trash","uses"=>"adminsystem\OriginController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.origin.createAlias","uses"=>"adminsystem\OriginController@createAlias"]);
+	});	
+	Route::group(["prefix"=>"unit"],function(){		
+		Route::get("list",["as"=>"adminsystem.unit.getList","uses"=>"adminsystem\UnitController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.unit.loadData","uses"=>"adminsystem\UnitController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.unit.getForm","uses"=>"adminsystem\UnitController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.unit.save","uses"=>"adminsystem\UnitController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.unit.deleteItem","uses"=>"adminsystem\UnitController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.unit.sortOrder","uses"=>"adminsystem\UnitController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.unit.updateStatus","uses"=>"adminsystem\UnitController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.unit.changeStatus","uses"=>"adminsystem\UnitController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.unit.trash","uses"=>"adminsystem\UnitController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.unit.createAlias","uses"=>"adminsystem\UnitController@createAlias"]);
+	});	
+	Route::group(["prefix"=>"color"],function(){		
+		Route::get("list",["as"=>"adminsystem.color.getList","uses"=>"adminsystem\ColorController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.color.loadData","uses"=>"adminsystem\ColorController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.color.getForm","uses"=>"adminsystem\ColorController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.color.save","uses"=>"adminsystem\ColorController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.color.deleteItem","uses"=>"adminsystem\ColorController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.color.sortOrder","uses"=>"adminsystem\ColorController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.color.updateStatus","uses"=>"adminsystem\ColorController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.color.changeStatus","uses"=>"adminsystem\ColorController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.color.trash","uses"=>"adminsystem\ColorController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.color.createAlias","uses"=>"adminsystem\ColorController@createAlias"]);
+	});	
 	Route::group(["prefix"=>"project-article"],function(){		
 		Route::get("list",["as"=>"adminsystem.project-article.getList","uses"=>"adminsystem\ProjectArticleController@getList"]);
 		Route::post("load-data",["as"=>"adminsystem.project-article.loadData","uses"=>"adminsystem\ProjectArticleController@loadData"]);		

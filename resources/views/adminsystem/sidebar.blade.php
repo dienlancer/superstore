@@ -23,6 +23,10 @@ $li_product='';
 $li_customer='';
 $li_payment_method='';
 $li_invoice='';
+$li_trademark='';
+$li_origin='';
+$li_color='';
+$li_unit='';
 
 $li_menu_type='';
 $li_page='';
@@ -104,6 +108,22 @@ switch ($controller) {
     break;
     case 'invoice':        
     $li_invoice='active open';
+    $li_product_management='active open';
+    break; 
+    case 'trademark':        
+    $li_trademark='active open';
+    $li_product_management='active open';
+    break;
+    case 'origin':        
+    $li_origin='active open';
+    $li_product_management='active open';
+    break;
+    case 'color':        
+    $li_color='active open';
+    $li_product_management='active open';
+    break; 
+    case 'unit':        
+    $li_unit='active open';
     $li_product_management='active open';
     break; 
     case 'menu-type':
@@ -220,6 +240,30 @@ switch ($controller) {
                 <a href="{!! route('adminsystem.invoice.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
                     <span class="title">Đơn hàng</span>                                            
+                </a>                                                                      
+            </li>
+            <li class="nav-item  <?php echo $li_trademark; ?>">
+                <a href="{!! route('adminsystem.trademark.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Thương hiệu</span>                                            
+                </a>                                                                      
+            </li>
+            <li class="nav-item  <?php echo $li_origin; ?>">
+                <a href="{!! route('adminsystem.origin.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Xuất xứ</span>                                            
+                </a>                                                                      
+            </li>
+            <li class="nav-item  <?php echo $li_color; ?>">
+                <a href="{!! route('adminsystem.color.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Màu</span>                                            
+                </a>                                                                      
+            </li>
+            <li class="nav-item  <?php echo $li_unit; ?>">
+                <a href="{!! route('adminsystem.unit.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Đơn vị tính</span>                                            
                 </a>                                                                      
             </li>
         </ul>

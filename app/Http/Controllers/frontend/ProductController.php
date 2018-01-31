@@ -192,23 +192,32 @@ class ProductController extends Controller {
       }       
       if ($checked == 1) {    
           if(empty($id)){
-                $item         =   new ProductModel;       
-                $item->code             = $code;
-                $item->created_at   = date("Y-m-d H:i:s",time());        
-                if(!empty($image)){
-                  $item->image    =   trim($image) ;  
-                }                       
-          } else{
-                $item       = ProductModel::find((int)@$id);   
-                $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                           
-          }  
-          
+            $item         =   new ProductModel;       
+            $item->code             = $code;
+            if(!empty($image)){
+              $item->image    =   trim($image) ;  
+            }  
+            /* begin user_id */
+            $arrUser =array();   
+            $user = Sentinel::forceCheck(); 
+            if(!empty($user)){                
+              $arrUser = $user->toArray();    
+            } 
+            if(count($arrUser) > 0){
+              $item->user_id=(int)@$arrUser['id'];
+            }
+            /* end user_id */  
+            $item->created_at   = date("Y-m-d H:i:s",time());        
+          }else{
+            $item       = ProductModel::find((int)@$id);   
+            $item->image=null;                       
+            if(!empty($image_hidden)){
+              $item->image =$image_hidden;          
+            }
+            if(!empty($image))  {
+              $item->image=$image;                                                
+            }                           
+          }            
           $item->fullname         = $fullname;                
           $item->alias            = $alias;            
           $item->meta_keyword     = $meta_keyword;
@@ -218,17 +227,7 @@ class ProductController extends Controller {
           $item->sale_price       = (int)(str_replace('.', '',@$sale_price)) ;                                 
           $item->detail           = $detail;       
           $item->intro            = $intro;  
-          $item->category_id      = (int)@$category_id;  
-          /* begin user_id */
-          $arrUser =array();   
-          $user = Sentinel::forceCheck(); 
-          if(!empty($user)){                
-            $arrUser = $user->toArray();    
-          } 
-          if(count($arrUser) > 0){
-            $item->user_id=(int)@$arrUser['id'];
-          }
-          /* end user_id */                                       
+          $item->category_id      = (int)@$category_id;                                                 
           $item->sort_order       = (int)$sort_order;                
           $item->updated_at       = date("Y-m-d H:i:s",time());  
           // begin upload product child image  

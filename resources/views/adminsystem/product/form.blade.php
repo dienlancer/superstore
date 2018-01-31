@@ -5,7 +5,7 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputCode              =   '<input type="text" class="form-control" name="code"   id="code"       value="'.@$arrRowData['code'].'">'; 
+
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"  onblur="createAlias()"     value="'.@$arrRowData['fullname'].'">';
 $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">'; 
  
@@ -87,16 +87,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                             <span class="help-block"></span>
                         </div>
                     </div>     
-                </div>      
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Mã sản phẩm</b></label>
-                        <div class="col-md-10">
-                            <?php echo $inputCode; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div>  
-                </div>
+                </div>                      
                 <div class="row"> 
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Giá</b></label>
@@ -240,21 +231,20 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 <script type="text/javascript" language="javascript">
     function resetErrorStatus(){
         var id                   =   $('input[name="id"]');
-        var code                 =   $('input[name="code"]');
+        
         var fullname             =   $('input[name="fullname"]');
         var alias                =   $('input[name="alias"]');     
         var category_id  =   $('select[name="category_id"]');   
         var sort_order           =   $('input[name="sort_order"]');
         var status               =   $('select[name="status"]');
         
-        $(code).closest('.form-group').removeClass("has-error");
+        
         $(fullname).closest('.form-group').removeClass("has-error");        
         $(alias).closest('.form-group').removeClass("has-error");
         $(category_id).closest('.form-group').removeClass("has-error");
         $(sort_order).closest('.form-group').removeClass("has-error");
         $(status).closest('.form-group').removeClass("has-error");        
-
-        $(code).closest('.form-group').find('span').empty().hide();
+       
         $(fullname).closest('.form-group').find('span').empty().hide();        
         $(alias).closest('.form-group').find('span').empty().hide();
         $(category_id).closest('.form-group').find('span').empty().hide();
@@ -286,8 +276,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         $("input[name='image_hidden']").val("");        
     }
     function save(){
-        var id=$('input[name="id"]').val();        
-        var code = $('input[name="code"]').val();
+        var id=$('input[name="id"]').val();                
         var fullname=$('input[name="fullname"]').val();        
         var alias=$('input[name="alias"]').val();
         var alias_menu=$('input[name="alias_menu"]').val();
@@ -329,8 +318,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         var token = $('input[name="_token"]').val();   
         resetErrorStatus();
         var dataItem={
-            "id":id,
-            "code":code,
+            "id":id,            
             "fullname":fullname,            
             "alias":alias,
             "alias_menu":alias_menu,
@@ -366,12 +354,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                     }                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
-                    var data_error=data.error;
-                    if(typeof data_error.code               != "undefined"){
-                        $('input[name="code"]').closest('.form-group').addClass(data_error.code.type_msg);
-                        $('input[name="code"]').closest('.form-group').find('span').text(data_error.code.msg);
-                        $('input[name="code"]').closest('.form-group').find('span').show();                        
-                    }   
+                    var data_error=data.error;                    
                     if(typeof data_error.fullname               != "undefined"){
                         $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
                         $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);

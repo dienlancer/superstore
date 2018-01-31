@@ -91,7 +91,7 @@ function randomString($length = 5){
   return $result;
 }
 function randomCodeNumber(){
-  $data = range(0,9);
+  $data = range(1,9);
   $subject=implode($data, '');
   $subject=str_shuffle($subject);
   return $subject;

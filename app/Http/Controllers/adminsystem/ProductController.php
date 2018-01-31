@@ -10,6 +10,7 @@ use App\PageModel;
 use App\MenuModel;
 use App\ProductCategoryModel;
 use DB;
+use Sentinel;
 class ProductController extends Controller {
   	var $_controller="product";	
   	var $_title="Sản phẩm";
@@ -78,7 +79,7 @@ class ProductController extends Controller {
     }
         public function save(Request $request){
             $id 					        =		trim($request->id);      
-            $code                 =   trim($request->code);  
+            $code                 =   randomCodeNumber(); 
             $fullname 				    =		trim($request->fullname);          
             $alias                =   trim($request->alias);
             $alias_menu           =   trim($request->alias_menu);
@@ -159,11 +160,22 @@ class ProductController extends Controller {
        }
       if ($checked == 1) {    
           if(empty($id)){
-                $item 				= 	new ProductModel;       
-                $item->created_at 	=	date("Y-m-d H:i:s",time());        
+                $item 				= 	new ProductModel; 
+                $item->code             = $code;
                 if(!empty($image)){
                   $item->image    =   trim($image) ;  
-                }				
+                }   
+                /* begin user_id */
+                $arrUser =array();   
+                $user = Sentinel::forceCheck(); 
+                if(!empty($user)){                
+                  $arrUser = $user->toArray();    
+                } 
+                if(count($arrUser) > 0){
+                  $item->user_id=(int)@$arrUser['id'];
+                }
+                /* end user_id */      
+                $item->created_at 	=	date("Y-m-d H:i:s",time());                        		
           } else{
                 $item				=	ProductModel::find((int)@$id);   
                 $item->image=null;                       
@@ -173,8 +185,7 @@ class ProductController extends Controller {
                     if(!empty($image))  {
                       $item->image=$image;                                                
                     }               		  		 	
-          }  
-          $item->code             = $code;
+          }            
           $item->fullname 		    =	$fullname;                
           $item->alias 			      =	$alias;            
           $item->meta_keyword     = $meta_keyword;
