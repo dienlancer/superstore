@@ -11,10 +11,10 @@ $inputMetadescription             =   '<textarea  name="meta_description" rows="
 $inputPrice             =   '<input type="text" class="form-control" name="price" onkeyup="PhanCachSoTien(this);"      value="'.convertToTextPrice(@$arrRowData['price']).'">';
 $inputSalePrice             =   '<input type="text" class="form-control" name="sale_price" onkeyup="PhanCachSoTien(this);"        value="'.convertToTextPrice(@$arrRowData['sale_price']).'">';
 $status                 =    (int)@$arrRowData['status']  ;
-$inputStatus                =   '<input type="hidden" name="status"  value="'.@$status.'" />'; 
+$inputStatus                =   '<input type="hidden" name="status"  value="'.@$status.'" />';
 $inputIntro            =   '<textarea  name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputDetail            =   '<textarea name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="1" disabled >';
+$inputSortOrder         =   '<input type="hidden" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'"  >';
 $ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",@$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
 $inputWidthSize         =   '<input type="text" class="form-control" name="width_size" id="width_size"     value="'.@$arrRowData['width_size'].'">';
 $inputHeightSize         =   '<input type="text" class="form-control" name="height_size" id="height_size"     value="'.@$arrRowData['height_size'].'">';
@@ -57,6 +57,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 	echo $inputID;
 	echo $inputStatus;
 	echo $inputAliasMenu;
+	echo $inputSortOrder;
 	?>                                                      
 	<div class="form-body">                
 		<div class="row">
@@ -198,16 +199,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                             <span class="help-block"></span>
                         </div>
                     </div> 
-                </div> 
-		<div class="row">
-			<div class="form-group col-md-12">
-				<label class="col-md-3 control-label"><b>Sắp xếp</b></label>
-				<div class="col-md-9">
-					<?php echo $inputSortOrder; ?>
-					<span class="help-block"></span>
-				</div>
-			</div>   
-		</div>		           
+                </div> 			           
 		<div class="row">  
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-label"><b>Meta keyword</b></label>
