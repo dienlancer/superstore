@@ -54,8 +54,8 @@ class CategoryParamController extends Controller {
 		if(!empty(@$request->filter_search)){
 			$query->where('n.fullname','like','%'.trim(@$request->filter_search).'%');
 		}
-		$data=$query->select('n.id','n.fullname','n.alias','n.parent_id','a.fullname as parent_fullname','n.sort_order','n.status','n.created_at','n.updated_at')                           
-		->groupBy('n.id','n.fullname','n.alias','n.parent_id','a.fullname','n.sort_order','n.status','n.created_at','n.updated_at')
+		$data=$query->select('n.id','n.fullname','n.alias','n.parent_id','a.fullname as parent_fullname','n.param_value','n.sort_order','n.status','n.created_at','n.updated_at')                           
+		->groupBy('n.id','n.fullname','n.alias','n.parent_id','a.fullname','n.param_value','n.sort_order','n.status','n.created_at','n.updated_at')
 		->orderBy('n.sort_order', 'asc')
 		->skip($position)
 		->take($totalItemsPerPage)
@@ -104,8 +104,7 @@ class CategoryParamController extends Controller {
         $id 					           =	trim($request->id)	;        
         $fullname 				       =	trim($request->fullname)	;
         $alias 					         = 	trim($request->alias);   
-        $meta_keyword            =  trim($request->meta_keyword);
-        $meta_description        =  trim($request->meta_description);
+        
         $category_id	           =	trim($request->category_id);  
         $param_value             =  trim($request->param_value);        
         $sort_order 			       =	trim($request->sort_order);
@@ -153,8 +152,7 @@ class CategoryParamController extends Controller {
         $item->fullname 		=	$fullname;
         $item->alias 			  =	$alias;
         
-        $item->meta_keyword     = $meta_keyword;
-        $item->meta_description = $meta_description;           
+        
         $item->parent_id 		=	(int)$category_id;      
         $item->param_value  = @$param_value;      
         $item->sort_order 	=	(int)$sort_order;

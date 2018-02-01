@@ -138,8 +138,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("sort-order",["as"=>"adminsystem.category-param.sortOrder","uses"=>"adminsystem\CategoryParamController@sortOrder"]);
 		Route::post("update-status/{status}",["as"=>"adminsystem.category-param.updateStatus","uses"=>"adminsystem\CategoryParamController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.category-param.changeStatus","uses"=>"adminsystem\CategoryParamController@changeStatus"]);
-		Route::post("trash",["as"=>"adminsystem.category-param.trash","uses"=>"adminsystem\CategoryParamController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.category-param.uploadFile","uses"=>"adminsystem\CategoryParamController@uploadFile"]);
+		Route::post("trash",["as"=>"adminsystem.category-param.trash","uses"=>"adminsystem\CategoryParamController@trash"]);		
 		Route::post("create-alias",["as"=>"adminsystem.category-param.createAlias","uses"=>"adminsystem\CategoryParamController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"category-banner"],function(){		

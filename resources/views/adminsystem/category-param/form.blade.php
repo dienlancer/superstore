@@ -145,8 +145,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             
             async: false,
             success: function (data) {
-                if(data.checked==true){
-                    uploadFileImport();
+                if(data.checked==true){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
