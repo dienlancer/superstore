@@ -23,6 +23,7 @@ $li_product='';
 $li_customer='';
 $li_payment_method='';
 $li_invoice='';
+$li_category_param='';
 
 $li_menu_type='';
 $li_page='';
@@ -88,6 +89,10 @@ switch ($controller) {
     
     case 'category-product':  
     $li_category_product='active open';
+    $li_product_management='active open';
+    break; 
+    case 'category-param':  
+    $li_category_param='active open';
     $li_product_management='active open';
     break;   
     case 'product': 
@@ -220,6 +225,12 @@ switch ($controller) {
                 <a href="{!! route('adminsystem.invoice.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
                     <span class="title">Đơn hàng</span>                                            
+                </a>                                                                      
+            </li>
+            <li class="nav-item  <?php echo $li_category_param; ?>">
+                <a href="{!! route('adminsystem.category-param.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Tham số sản phẩm</span>                                            
                 </a>                                                                      
             </li>
         </ul>

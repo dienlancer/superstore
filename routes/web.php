@@ -130,6 +130,18 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("upload-file",["as"=>"adminsystem.category-article.uploadFile","uses"=>"adminsystem\CategoryArticleController@uploadFile"]);
 		Route::post("create-alias",["as"=>"adminsystem.category-article.createAlias","uses"=>"adminsystem\CategoryArticleController@createAlias"]);
 	});	
+	Route::group(["prefix"=>"category-param"],function(){		
+		Route::match(["get","post"],"list",["as"=>"adminsystem.category-param.getList","uses"=>"adminsystem\CategoryParamController@getList"]);	
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.category-param.getForm","uses"=>"adminsystem\CategoryParamController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.category-param.save","uses"=>"adminsystem\CategoryParamController@save"]);
+		Route::get("delete-item/{id}",["as"=>"adminsystem.category-param.deleteItem","uses"=>"adminsystem\CategoryParamController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.category-param.sortOrder","uses"=>"adminsystem\CategoryParamController@sortOrder"]);
+		Route::post("update-status/{status}",["as"=>"adminsystem.category-param.updateStatus","uses"=>"adminsystem\CategoryParamController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.category-param.changeStatus","uses"=>"adminsystem\CategoryParamController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.category-param.trash","uses"=>"adminsystem\CategoryParamController@trash"]);
+		Route::post("upload-file",["as"=>"adminsystem.category-param.uploadFile","uses"=>"adminsystem\CategoryParamController@uploadFile"]);
+		Route::post("create-alias",["as"=>"adminsystem.category-param.createAlias","uses"=>"adminsystem\CategoryParamController@createAlias"]);
+	});	
 	Route::group(["prefix"=>"category-banner"],function(){		
 		Route::get("list",["as"=>"adminsystem.category-banner.getList","uses"=>"adminsystem\CategoryBannerController@getList"]);
 		Route::post("load-data",["as"=>"adminsystem.category-banner.loadData","uses"=>"adminsystem\CategoryBannerController@loadData"]);		
