@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /*
  * CKFinder Configuration File
  *
@@ -77,10 +77,11 @@ $config['backends'][] = array(
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_resourceTypes
 
 $config['defaultResourceTypes'] = '';
-
+$folder_name='vip-'.(int)@$_SESSION['vmuser'];
+$directory='vip-member'.'/'.$folder_name;
 $config['resourceTypes'][] = array(
-    'name'              => 'Upload', // Single quotes not allowed.
-    'directory'         => 'upload',
+    'name'              => $folder_name, // Single quotes not allowed.
+    'directory'         => $directory,
     'maxSize'           => 0,
     'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
     'deniedExtensions'  => '',

@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers\frontend;
+session_start();
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -883,6 +884,7 @@ class IndexController extends Controller {
             $item->updated_at=date("Y-m-d H:i:s",time());
             $item->save();                        
             Sentinel::loginAndRemember($user);
+            $_SESSION[$this->_ssNameUser]=(int)@$user->id;            
             echo '<script language="javascript" type="text/javascript">alert("Đăng ký thành công")</script>';
             return redirect()->route('frontend.index.viewAccount');                        
           }              
@@ -908,7 +910,8 @@ class IndexController extends Controller {
         if($request->isMethod('post')){              
           Sentinel::authenticate($request->all());
           if(Sentinel::check()){
-            $user=Sentinel::getUser();                        
+            $user=Sentinel::getUser();     
+            $_SESSION[$this->_ssNameUser]=(int)@$user->id;
             echo '<script language="javascript" type="text/javascript">alert("Đăng nhập thành công")</script>';
             return redirect()->route('frontend.index.viewAccount'); 
           }else{
@@ -958,8 +961,10 @@ class IndexController extends Controller {
       	}             
       	return view("frontend.index",compact("component","error","data","success","layout"));                      
       }
-      public function getLgout(){        
+      public function getLgout(){               
       	Sentinel::logout();       
+        session_unset(); 
+        session_destroy(); 
       	return redirect()->route('frontend.index.login'); 
       }
       public function viewAccount(Request $request){        
@@ -977,7 +982,7 @@ class IndexController extends Controller {
       	}      
       	if(count($arrUser) == 0){
       		return redirect()->route("frontend.index.login"); 
-      	}
+      	}        
       	$data=User::find((int)@$arrUser['id'])->toArray();    
       	$id=(int)@$data["id"];                  
       	if($request->isMethod('post')){                          

@@ -486,9 +486,5 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             },
         });
     }
-    $(document).ready(function(){
-    	/*var finder = new CKFinder();
-    	console.log(finder);*/
-		
-    })
+    
 </script>
