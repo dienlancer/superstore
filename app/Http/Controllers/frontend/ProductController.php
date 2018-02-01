@@ -32,9 +32,7 @@ use App\AlbumModel;
 use App\PhotoModel;
 use App\CategoryVideoModel;
 use App\VideoModel;
-use App\TradeMarkModel;
-use App\OriginModel;
-use App\UnitModel;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Session;
@@ -114,11 +112,9 @@ class ProductController extends Controller {
     $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();        
     $arrCategoryProductRecursive=array();
     categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ;  
-    $dataTradeMark=TradeMarkModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
-        $dataOrigin=OriginModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
-        $dataUnit=UnitModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
+    
     $controller=$this->_controller;  
-    return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","dataTradeMark","dataOrigin","dataUnit","arrRowData","task"));
+    return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","arrRowData","task"));
   }
   public function save(Request $request){
             $id                   =   trim($request->id);      
@@ -135,14 +131,10 @@ class ProductController extends Controller {
             $detail               =   trim($request->detail);
             $intro                =   trim($request->intro);
             $image_hidden         =   trim($request->image_hidden);  
-            $child_image          =   trim($request->child_image);                    
+            $child_image          =   trim($request->child_image); 
+            $size_type            =   trim($request->size_type);                   
             $sort_order           =   trim($request->sort_order);          
-            $category_id          =   trim($request->category_id);    
-            $width_size           =   trim($request->width_size);
-            $height_size          =   trim($request->height_size);      
-            $trademark_id         =   trim($request->trademark_id);
-            $origin_id            =   trim($request->origin_id);
-            $unit_id              =   trim($request->unit_id);             
+            $category_id          =   trim($request->category_id);                
             $data                 =   array();
             $info                 =   array();
             $error                =   array();
@@ -196,11 +188,7 @@ class ProductController extends Controller {
           $error["category_id"]["msg"]      = "Thiếu danh mục";
         }
       }
-      if(empty($sort_order)){
-           $checked = 0;
-           $error["sort_order"]["type_msg"]   = "has-error";
-           $error["sort_order"]["msg"]    = "Sort order is required";
-      }       
+       
       if ($checked == 1) {    
           if(empty($id)){
             $item         =   new ProductModel;       
@@ -238,12 +226,8 @@ class ProductController extends Controller {
           $item->sale_price       = (int)(str_replace('.', '',@$sale_price)) ;                                 
           $item->detail           = $detail;       
           $item->intro            = $intro;  
-          $item->category_id      = (int)@$category_id;  
-          $item->trademark_id     = (int)@$trademark_id;
-          $item->origin_id        = (int)@$origin_id;
-          $item->unit_id          = (int)@$unit_id;  
-          $item->width_size       = (int)@$width_size;
-          $item->height_size      = (int)@$height_size;                                                     
+          $item->category_id      = (int)@$category_id;    
+          $item->size_type            = $size_type;                                                     
           $item->sort_order       = (int)@$sort_order;                
           $item->updated_at       = date("Y-m-d H:i:s",time());  
           // begin upload product child image  

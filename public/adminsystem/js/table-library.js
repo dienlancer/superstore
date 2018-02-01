@@ -9,11 +9,7 @@ var vSupporterTable           =   null;
 var vOrganizationTable           =   null;
 var vProvinceTable           =   null;
 var vDistrictTable           =   null;
-var vTradeMarkTable           =   null;
-var vOriginTable           =   null;
-var vSizeStandardTable           =   null;
-var vUnitTable           =   null;
-var vColorTable           =   null;
+
 var vProjectArticleTable           =   null;
 var vMediaTable           =   null;
 var vPageTable           =   null;
@@ -308,93 +304,7 @@ var basicTable = function () {
                 { data: "deleted"    },                
             ]
         });        
-    };
-    var initTradeMarkTable = function () {
-        vTradeMarkTable = $('#tbl-trademark').DataTable({
-            aLengthMenu: [
-                [10, -1],
-                [10, "All"]
-            ],
-            iDisplayLength: -1,
-            columns: [                
-                { data: "checked"            },                
-                { data: "fullname"      },                    
-                { data: "sort_order"    },
-                { data: "status"        },                                
-                { data: "edited"    },         
-                { data: "deleted"    },                
-            ]
-        });        
-    };
-    var initOriginTable = function () {
-        vOriginTable = $('#tbl-origin').DataTable({
-            aLengthMenu: [
-                [10, -1],
-                [10, "All"]
-            ],
-            iDisplayLength: -1,
-            columns: [                
-                { data: "checked"            },                
-                { data: "fullname"      },                    
-                { data: "sort_order"    },
-                { data: "status"        },                                
-                { data: "edited"    },         
-                { data: "deleted"    },                
-            ]
-        });        
-    };
-    var initSizeStandardTable = function () {
-        vSizeStandardTable = $('#tbl-size-standard').DataTable({
-            aLengthMenu: [
-                [10, -1],
-                [10, "All"]
-            ],
-            iDisplayLength: -1,
-            columns: [                
-                { data: "checked"            },                
-                { data: "fullname"      },                    
-                { data: "sort_order"    },
-                { data: "status"        },                                
-                { data: "edited"    },         
-                { data: "deleted"    },                
-            ]
-        });        
-    };
-    var initUnitTable = function () {
-        vUnitTable = $('#tbl-unit').DataTable({
-            aLengthMenu: [
-                [10, -1],
-                [10, "All"]
-            ],
-            iDisplayLength: -1,
-            columns: [                
-                { data: "checked"            },                
-                { data: "fullname"      },                    
-                { data: "sort_order"    },
-                { data: "status"        },                                
-                { data: "edited"    },         
-                { data: "deleted"    },                
-            ]
-        });        
-    };
-    var initColorTable = function () {
-        vColorTable = $('#tbl-color').DataTable({
-            aLengthMenu: [
-                [10, -1],
-                [10, "All"]
-            ],
-            iDisplayLength: -1,
-            columns: [                
-                { data: "checked"            },                
-                { data: "fullname"      },   
-                { data: "code"      },                                    
-                { data: "sort_order"    },
-                { data: "status"        },                                
-                { data: "edited"    },         
-                { data: "deleted"    },                
-            ]
-        });        
-    };
+    };    
     var initMediaTable = function () {
         vMediaTable = $('#tbl-media').DataTable({
             aLengthMenu: [
@@ -850,10 +760,6 @@ var basicTable = function () {
             initVideoTable();
             initProvinceTable();
             initDistrictTable();  
-            initTradeMarkTable();         
-            initOriginTable(); 
-            initColorTable();
-            initUnitTable();
         }
     };
 }();

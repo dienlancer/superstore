@@ -9,9 +9,7 @@ use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
 use App\ProductCategoryModel;
-use App\TradeMarkModel;
-use App\OriginModel;
-use App\UnitModel;
+
 use DB;
 use Sentinel;
 class ProductController extends Controller {
@@ -74,10 +72,8 @@ class ProductController extends Controller {
         $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();        
         $arrCategoryProductRecursive=array();
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
-        $dataTradeMark=TradeMarkModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
-        $dataOrigin=OriginModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
-        $dataUnit=UnitModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();
-        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","dataTradeMark","dataOrigin","dataUnit","arrRowData","controller","task","title","icon"));
+        
+        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","controller","task","title","icon"));
         }else{
             return view("adminsystem.no-access");
         }
@@ -102,11 +98,7 @@ class ProductController extends Controller {
             $child_image          =   trim($request->child_image);                    
             $sort_order           =   trim($request->sort_order);          
             $category_id	        =		trim($request->category_id); 
-            $width_size           =   trim($request->width_size);
-            $height_size          =   trim($request->height_size);      
-            $trademark_id         =   trim($request->trademark_id);
-            $origin_id            =   trim($request->origin_id);
-            $unit_id              =   trim($request->unit_id);     
+            $size_type            =   trim($request->size_type);
             $data 		            =   array();
             $info 		            =   array();
             $error 		            =   array();
@@ -206,12 +198,8 @@ class ProductController extends Controller {
           $item->sale_price       = (int)(str_replace('.', '',@$sale_price)) ;                                 
           $item->detail           = $detail;       
           $item->intro            = $intro;  
-          $item->category_id      = (int)@$category_id;  
-          $item->trademark_id     = (int)@$trademark_id;
-          $item->origin_id        = (int)@$origin_id;
-          $item->unit_id          = (int)@$unit_id;  
-          $item->width_size       = (int)@$width_size;
-          $item->height_size      = (int)@$height_size;                                     
+          $item->category_id      = (int)@$category_id;                            
+          $item->size_type            = $size_type;  
           $item->sort_order 	    =	(int)$sort_order;                
           $item->updated_at 	    =	date("Y-m-d H:i:s",time());  
           // begin upload product child image  

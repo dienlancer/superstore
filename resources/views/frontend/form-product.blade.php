@@ -16,11 +16,7 @@ $inputIntro            =   '<textarea  name="intro" rows="5" cols="100" class="f
 $inputDetail            =   '<textarea name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
 $inputSortOrder         =   '<input type="hidden" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'"  >';
 $ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",@$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
-$inputWidthSize         =   '<input type="text" class="form-control" name="width_size" id="width_size"     value="'.@$arrRowData['width_size'].'">';
-$inputHeightSize         =   '<input type="text" class="form-control" name="height_size" id="height_size"     value="'.@$arrRowData['height_size'].'">';
-$ddlTradeMark            =   cmsSelectboxCategory("trademark_id","trademark_id","form-control",$dataTradeMark,@$arrRowData['trademark_id'],"");
-$ddlOrigin      =   cmsSelectboxCategory("origin_id","origin_id","form-control",$dataOrigin,@$arrRowData['origin_id'],"");
-$ddlUnit      =   cmsSelectboxCategory("unit_id","unit_id","form-control",$dataUnit,@$arrRowData['unit_id'],"");
+$inputSizeType         =   '<input type="text" class="form-control" name="size_type"     value="'.@$arrRowData['size_type'].'">';
 $id                     =   (count(@$arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
@@ -105,7 +101,15 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 				</div>
 			</div> 
 		</div>
-
+		<div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label"><b>Kích thước</b></label>
+                        <div class="col-md-9">
+                            <?php echo $inputSizeType; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>   
+                </div> 
 		<div class="row">                      
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-label"><b>Hình</b></label>
@@ -154,52 +158,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 					</table>    
 				</div>
 			</div>     
-		</div>      
-		<div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-3 control-label"><b>Thương hiệu</b></label>
-                        <div class="col-md-9">
-                            <?php echo $ddlTradeMark; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-3 control-label"><b>Xuất xứ</b></label>
-                        <div class="col-md-9">
-                            <?php echo $ddlOrigin; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-3 control-label"><b>Đơn vị tính</b></label>
-                        <div class="col-md-9">
-                            <?php echo $ddlUnit; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-3 control-label"><b>Chiều rộng</b></label>
-                        <div class="col-md-9">
-                            <?php echo $inputWidthSize; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-3 control-label"><b>Chiều cao</b></label>
-                        <div class="col-md-9">
-                            <?php echo $inputHeightSize; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div> 			           
+		</div>  
+
 		<div class="row">  
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-label"><b>Meta keyword</b></label>
@@ -332,14 +292,10 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         }
         if(arr_child_image.length > 0){
                 child_image=arr_child_image.toString();          
-        }             
-        var trademark_id=$('select[name="trademark_id"]').val();
-        var origin_id=$('select[name="origin_id"]').val();
-        var unit_id=$('select[name="unit_id"]').val();
-        var width_size=$('input[name="width_size"]').val();
-        var height_size=$('input[name="height_size"]').val();         
+        }                     
         var price=$('input[name="price"]').val();
         var sale_price=$('input[name="sale_price"]').val();
+        var size_type=$('input[name="size_type"]').val();
         var intro=$('textarea[name="intro"]').val(); 
         var detail=CKEDITOR.instances['detail'].getData();    
         var status=$('input[name="status"]').val();           
@@ -354,14 +310,10 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             "meta_keyword":meta_keyword,
             "meta_description":meta_description,
             "image":image,
-            "image_hidden":image_hidden,
-            "trademark_id":trademark_id,
-            "origin_id":origin_id,
-            "unit_id":unit_id,      
-            "width_size":width_size,
-            "height_size":height_size,                    
+            "image_hidden":image_hidden,           
             "price":price,
             "sale_price":sale_price,
+            "size_type":size_type,
             "intro":intro,
             "detail":detail,
             "category_id":category_id,                        

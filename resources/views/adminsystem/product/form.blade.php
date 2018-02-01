@@ -19,12 +19,8 @@ $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrSt
 $inputIntro            =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputDetail            =   '<textarea id="detail" name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSizeType         =   '<input type="text" class="form-control" name="size_type"     value="'.@$arrRowData['size_type'].'">';
 $ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
-$inputWidthSize         =   '<input type="text" class="form-control" name="width_size" id="width_size"     value="'.@$arrRowData['width_size'].'">';
-$inputHeightSize         =   '<input type="text" class="form-control" name="height_size" id="height_size"     value="'.@$arrRowData['height_size'].'">';
-$ddlTradeMark            =   cmsSelectboxCategory("trademark_id","trademark_id","form-control",$dataTradeMark,@$arrRowData['trademark_id'],"");
-$ddlOrigin      =   cmsSelectboxCategory("origin_id","origin_id","form-control",$dataOrigin,@$arrRowData['origin_id'],"");
-$ddlUnit      =   cmsSelectboxCategory("unit_id","unit_id","form-control",$dataUnit,@$arrRowData['unit_id'],"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
@@ -119,52 +115,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                             <span class="help-block"></span>
                         </div>
                     </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Thương hiệu</b></label>
-                        <div class="col-md-10">
-                            <?php echo $ddlTradeMark; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Xuất xứ</b></label>
-                        <div class="col-md-10">
-                            <?php echo $ddlOrigin; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Đơn vị tính</b></label>
-                        <div class="col-md-10">
-                            <?php echo $ddlUnit; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Chiều rộng</b></label>
-                        <div class="col-md-10">
-                            <?php echo $inputWidthSize; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Chiều cao</b></label>
-                        <div class="col-md-10">
-                            <?php echo $inputHeightSize; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div> 
-                </div>
+                </div>                
                 <div class="row">                      
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
@@ -213,7 +164,16 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                             </table>    
                         </div>
                     </div>     
-                </div>       
+                </div>  
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Kích thước</b></label>
+                        <div class="col-md-10">
+                            <?php echo $inputSizeType; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>   
+                </div>     
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Sắp xếp</b></label>
@@ -333,10 +293,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         
         var meta_keyword=$('textarea[name="meta_keyword"]').val();
         var meta_description=$('textarea[name="meta_description"]').val();
-        var category_id=$('select[name="category_id"]').val();
-        var trademark_id=$('select[name="trademark_id"]').val();
-        var origin_id=$('select[name="origin_id"]').val();
-        var unit_id=$('select[name="unit_id"]').val();
+        var category_id=$('select[name="category_id"]').val();        
         var image = $('input[name="image"]').val();
         if (image != ''){
             image = image.substr(image.lastIndexOf('\\') + 1);       
@@ -364,11 +321,10 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         }        
         var status=$('select[name="status"]').val();             
         var price=$('input[name="price"]').val();
-        var sale_price=$('input[name="sale_price"]').val();
-        var width_size=$('input[name="width_size"]').val();
-        var height_size=$('input[name="height_size"]').val();
+        var sale_price=$('input[name="sale_price"]').val();       
         var intro=$('textarea[name="intro"]').val(); 
         var detail=CKEDITOR.instances['detail'].getData();        
+        var size_type=$('input[name="size_type"]').val();
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
         resetErrorStatus();
@@ -384,14 +340,10 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             "status":status,                     
             "price":price,
             "sale_price":sale_price,
+            "size_type":size_type,
             "intro":intro,
             "detail":detail,
-            "category_id":category_id,  
-            "trademark_id":trademark_id,
-            "origin_id":origin_id,
-            "unit_id":unit_id,      
-            "width_size":width_size,
-            "height_size":height_size,                
+            "category_id":category_id,                          
             "child_image":child_image,            
             "sort_order":sort_order,
             "status":status,
