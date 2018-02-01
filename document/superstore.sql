@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 31, 2018 lúc 07:07 PM
+-- Thời gian đã tạo: Th2 01, 2018 lúc 12:07 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -263,6 +263,25 @@ INSERT INTO `category_banner` (`id`, `fullname`, `theme_location`, `status`, `so
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `category_param`
+--
+
+DROP TABLE IF EXISTS `category_param`;
+CREATE TABLE `category_param` (
+  `id` bigint(20) NOT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `param_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `category_product`
 --
 
@@ -296,7 +315,72 @@ INSERT INTO `category_product` (`id`, `fullname`, `meta_keyword`, `meta_descript
 (8, 'Nhà cửa - Tân trang nhà', '', '', 'nha-cua-tan-trang-nha', NULL, 1, 0, 8, '2018-01-26 01:55:28', '2018-01-26 01:55:28'),
 (9, 'Sức khoẻ - Sắc đẹp', '', '', 'suc-khoe-sac-dep', NULL, 1, 0, 9, '2018-01-26 01:55:51', '2018-01-26 01:55:51'),
 (10, 'Tivi - Thiết bị âm thanh', '', '', 'tivi-thiet-bi-am-thanh', NULL, 1, 0, 10, '2018-01-26 01:56:07', '2018-01-26 01:56:12'),
-(11, 'Ô tô - Xe máy - Thể thao', '', '', 'o-to-xe-may-the-thao', NULL, 1, 0, 11, '2018-01-26 01:56:44', '2018-01-26 01:56:44');
+(11, 'Ô tô - Xe máy - Thể thao', '', '', 'o-to-xe-may-the-thao', NULL, 1, 0, 11, '2018-01-26 01:56:44', '2018-01-26 01:56:44'),
+(12, 'Điện thoại mới', 'metakeyword Điện thoại mới', 'metadescription Điện thoại mới', 'dien-thoai-moi', NULL, 1, 1, 1, '2018-02-01 03:00:35', '2018-02-01 03:05:54'),
+(13, 'Điện thoại cũ', 'metakeyword Điện thoại cũ', 'metadescription Điện thoại cũ', 'dien-thoai-cu', NULL, 1, 1, 2, '2018-02-01 03:04:34', '2018-02-01 03:04:34'),
+(14, 'Laptop', 'metakeyword laptop', 'metadescription laptop', 'laptop', NULL, 1, 1, 3, '2018-02-01 03:05:37', '2018-02-01 03:05:54'),
+(15, 'Máy tính bảng', 'metakeyword Máy tính bảng', 'metadescription Máy tính bảng', 'may-tinh-bang', NULL, 1, 1, 4, '2018-02-01 03:06:32', '2018-02-01 03:06:32'),
+(16, 'Máy tính để bàn', 'metakeyword Máy tính để bàn', 'metadescription Máy tính để bàn', 'may-tinh-de-ban', NULL, 1, 1, 5, '2018-02-01 03:07:07', '2018-02-01 03:07:56'),
+(17, 'Máy in và phụ kiện', 'metakeyword Máy in và phụ kiện', 'metadescription Máy in và phụ kiện', 'may-in-va-phu-kien', NULL, 1, 1, 6, '2018-02-01 03:07:37', '2018-02-01 03:07:56'),
+(18, 'Chuột bàn phím', 'metakeyword Chuột bàn phím', 'metadescription Chuột bàn phím', 'chuot-ban-phim', NULL, 1, 1, 7, '2018-02-01 03:08:45', '2018-02-01 03:08:45'),
+(19, 'Linh kiện máy tính - Laptop', 'metakeyword Linh kiện máy tính - Laptop', 'metadescription Linh kiện máy tính - Laptop', 'linh-kien-may-tinh-laptop', NULL, 1, 1, 8, '2018-02-01 03:09:25', '2018-02-01 03:09:25'),
+(20, 'Card màn hình', 'metakeyword Card màn hình', 'metadescription Card màn hình', 'card-man-hinh', NULL, 1, 19, 1, '2018-02-01 03:10:17', '2018-02-01 03:10:17'),
+(21, 'Ổ cứng gắn trong', 'metakeyword Ổ cứng gắn trong', 'metadescription Ổ cứng gắn trong', 'o-cung-gan-trong', NULL, 1, 19, 2, '2018-02-01 03:10:44', '2018-02-01 03:10:44'),
+(22, 'Ram máy tính', 'metakeyword Ram máy tính', 'metadescription Ram máy tính', 'ram-may-tinh', NULL, 1, 19, 3, '2018-02-01 03:11:14', '2018-02-01 03:11:14'),
+(23, 'Phụ kiện máy tính laptop', 'metakeyword Phụ kiện máy tính laptop', 'metadescription Phụ kiện máy tính laptop', 'phu-kien-may-tinh-laptop', NULL, 1, 1, 9, '2018-02-01 03:11:59', '2018-02-01 03:11:59'),
+(24, 'Đế tản nhiệt laptop', 'metakeyword Đế tản nhiệt laptop', 'metadescription Đế tản nhiệt laptop', 'de-tan-nhiet-laptop', NULL, 1, 23, 1, '2018-02-01 03:12:37', '2018-02-01 03:12:37'),
+(25, 'Sạc laptop', 'metakeyword Sạc laptop', 'metadescription Sạc laptop', 'sac-laptop', NULL, 1, 23, 2, '2018-02-01 03:13:05', '2018-02-01 03:13:05'),
+(26, 'Pin laptop', 'metakeyword Pin laptop', 'metadescription Pin laptop', 'pin-laptop', NULL, 1, 23, 3, '2018-02-01 03:13:36', '2018-02-01 03:13:43'),
+(27, 'Máy chiếu và phụ kiện', 'metakeyword Máy chiếu và phụ kiện', 'metadescription Máy chiếu và phụ kiện', 'may-chieu-va-phu-kien', NULL, 1, 1, 10, '2018-02-01 03:14:30', '2018-02-01 03:14:38'),
+(28, 'Phần mềm máy tính', 'metakeyword Phần mềm máy tính', 'metadescription Phần mềm máy tính', 'phan-mem-may-tinh', NULL, 1, 1, 11, '2018-02-01 03:15:15', '2018-02-01 03:15:15'),
+(29, 'Thời trang thiết kế', 'metakeyword Thời trang thiết kế', 'metadescription Thời trang thiết kế', 'thoi-trang-thiet-ke', NULL, 1, 2, 1, '2018-02-01 03:19:13', '2018-02-01 03:19:13'),
+(30, 'Set trang phục - Jumbsuit', 'metakeyword Set trang phục - Jumbsuit', 'metadescription Set trang phục - Jumbsuit', 'set-trang-phuc-jumbsuit', NULL, 1, 2, 2, '2018-02-01 03:20:04', '2018-02-01 03:20:04'),
+(31, 'Đồ mặc nhà - Đồ ngủ', 'metakeyword Đồ mặc nhà - Đồ ngủ', 'metadescription Đồ mặc nhà - Đồ ngủ', 'do-mac-nha-do-ngu', NULL, 1, 2, 3, '2018-02-01 03:20:50', '2018-02-01 03:20:50'),
+(32, 'Đồ bơi - Đồ đi biển', 'metakeyword Đồ bơi - Đồ đi biển', 'metadescription Đồ bơi - Đồ đi biển', 'do-boi-do-di-bien', NULL, 1, 2, 4, '2018-02-01 03:21:44', '2018-02-01 03:21:44'),
+(33, 'Thời trang big size', 'metakeyword Thời trang big size', 'metadescription Thời trang big size', 'thoi-trang-big-size', NULL, 1, 2, 5, '2018-02-01 03:22:22', '2018-02-01 03:22:29'),
+(34, 'Đầm váy', 'metakeyword Đầm váy', 'metadescription Đầm váy', 'dam-vay', NULL, 1, 2, 7, '2018-02-01 03:23:04', '2018-02-01 03:23:04'),
+(35, 'Áo khoác', '', '', 'ao-khoac', NULL, 1, 2, 8, '2018-02-01 03:23:35', '2018-02-01 03:23:35'),
+(36, 'Thời trang trung niên', '', '', 'thoi-trang-trung-nien', NULL, 1, 2, 9, '2018-02-01 03:24:01', '2018-02-01 03:24:01'),
+(37, 'Áo nữ', '', '', 'ao-nu', NULL, 1, 2, 10, '2018-02-01 03:24:36', '2018-02-01 03:24:45'),
+(38, 'Quần nữ', '', '', 'quan-nu', NULL, 1, 2, 11, '2018-02-01 03:25:05', '2018-02-01 03:25:05'),
+(39, 'Đồ lót', '', '', 'do-lot', NULL, 1, 2, 12, '2018-02-01 03:25:28', '2018-02-01 03:25:34'),
+(40, 'Chân váy', '', '', 'chan-vay', NULL, 1, 2, 12, '2018-02-01 03:25:53', '2018-02-01 03:25:53'),
+(41, 'Quần áo thể thao nữ', '', '', 'quan-ao-the-thao-nu', NULL, 1, 2, 13, '2018-02-01 03:26:11', '2018-02-01 03:26:11'),
+(42, 'Đầm váy - Thiết kế', '', '', 'dam-vay-thiet-ke', NULL, 1, 29, 1, '2018-02-01 03:27:04', '2018-02-01 03:27:04'),
+(43, 'Áo nữ thiết kế', '', '', 'ao-nu-thiet-ke', NULL, 1, 29, 1, '2018-02-01 03:27:21', '2018-02-01 03:27:21'),
+(44, 'Chân váy thiết kế', '', '', 'chan-vay-thiet-ke', NULL, 1, 29, 1, '2018-02-01 03:27:40', '2018-02-01 03:27:40'),
+(45, 'Quần nữ thiết kế', '', '', 'quan-nu-thiet-ke', NULL, 1, 29, 1, '2018-02-01 03:28:24', '2018-02-01 03:28:24'),
+(46, 'Áo và quần dài', '', '', 'ao-va-quan-dai', NULL, 1, 30, 1, '2018-02-01 03:29:02', '2018-02-01 03:29:02'),
+(47, 'Áo và chân váy', '', '', 'ao-va-chan-vay', NULL, 1, 30, 1, '2018-02-01 03:29:24', '2018-02-01 03:29:24'),
+(48, 'Jumpsuit', '', '', 'jumpsuit', NULL, 1, 30, 1, '2018-02-01 03:29:46', '2018-02-01 03:30:06'),
+(49, 'Bộ mặc nhà nữ', '', '', 'bo-mac-nha-nu', NULL, 1, 31, 1, '2018-02-01 03:30:38', '2018-02-01 03:31:17'),
+(50, 'Váy ngủ', '', '', 'vay-ngu', NULL, 1, 31, 1, '2018-02-01 03:31:39', '2018-02-01 03:31:39'),
+(51, 'Bikini', '', '', 'bikini', NULL, 1, 32, 1, '2018-02-01 03:32:07', '2018-02-01 03:32:19'),
+(52, 'Quần áo - Váy đi biển', '', '', 'quan-ao-vay-di-bien', NULL, 1, 32, 1, '2018-02-01 03:32:38', '2018-02-01 03:32:38'),
+(53, 'Đầm xòe', '', '', 'dam-xoe', NULL, 1, 34, 1, '2018-02-01 03:34:06', '2018-02-01 03:34:06'),
+(54, 'Đầm suông', '', '', 'dam-suong', NULL, 1, 34, 1, '2018-02-01 03:34:27', '2018-02-01 03:34:27'),
+(55, 'Đầm ôm', '', '', 'dam-om', NULL, 1, 34, 1, '2018-02-01 03:34:43', '2018-02-01 03:34:43'),
+(56, 'Đầm maxi', '', '', 'dam-maxi', NULL, 1, 34, 1, '2018-02-01 03:35:07', '2018-02-01 03:35:07'),
+(57, 'Đầm dạ hội', '', '', 'dam-da-hoi', NULL, 1, 34, 1, '2018-02-01 03:35:22', '2018-02-01 03:35:22'),
+(58, 'Áo khoác vest - Blazer', '', '', 'ao-khoac-vest-blazer', NULL, 1, 35, 1, '2018-02-01 03:36:07', '2018-02-01 03:36:07'),
+(59, 'Áo khoác dạ - Măng tô - Áo choàng', '', '', 'ao-khoac-da-mang-to-ao-choang', NULL, 1, 35, 1, '2018-02-01 03:36:36', '2018-02-01 03:36:36'),
+(60, 'Áo khoác chống nắng', '', '', 'ao-khoac-chong-nang', NULL, 1, 35, 1, '2018-02-01 03:36:55', '2018-02-01 03:36:55'),
+(61, 'Áo khoác len - Cardigan', '', '', 'ao-khoac-len-cardigan', NULL, 1, 35, 1, '2018-02-01 03:37:23', '2018-02-01 03:37:23'),
+(62, 'Áo khoác cách điệu', '', '', 'ao-khoac-cach-dieu', NULL, 1, 35, 1, '2018-02-01 03:38:18', '2018-02-01 03:38:18'),
+(63, 'Đầm trung niên', '', '', 'dam-trung-nien', NULL, 1, 36, 1, '2018-02-01 03:38:46', '2018-02-01 03:38:46'),
+(64, 'Áo trung niên', '', '', 'ao-trung-nien', NULL, 1, 36, 1, '2018-02-01 03:39:07', '2018-02-01 03:39:07'),
+(65, 'Đồ mặc nhà - Đồ ngủ trung niên', '', '', 'do-mac-nha-do-ngu-trung-nien', NULL, 1, 36, 1, '2018-02-01 03:39:38', '2018-02-01 03:39:38'),
+(66, 'Áo sơ mi nữ', '', '', 'ao-so-mi-nu', NULL, 1, 37, 1, '2018-02-01 03:40:10', '2018-02-01 03:40:10'),
+(67, 'Áo kiểu', '', '', 'ao-kieu', NULL, 1, 37, 1, '2018-02-01 03:40:27', '2018-02-01 03:40:27'),
+(68, 'Áo đôi', '', '', 'ao-doi', NULL, 1, 37, 1, '2018-02-01 03:40:47', '2018-02-01 03:40:47'),
+(69, 'Áo dài', '', '', 'ao-dai', NULL, 1, 37, 1, '2018-02-01 03:41:09', '2018-02-01 03:41:09'),
+(70, 'Áo thun có tay', '', '', 'ao-thun-co-tay', NULL, 1, 37, 1, '2018-02-01 03:41:37', '2018-02-01 03:41:37'),
+(71, 'Quần jean', '', '', 'quan-jean', NULL, 1, 38, 1, '2018-02-01 03:42:25', '2018-02-01 03:42:25'),
+(72, 'Quần tây', '', '', 'quan-tay', NULL, 1, 38, 1, '2018-02-01 03:42:45', '2018-02-01 03:42:45'),
+(73, 'Quần short nữ', '', '', 'quan-short-nu', NULL, 1, 38, 1, '2018-02-01 03:43:09', '2018-02-01 03:43:09'),
+(74, 'Quần legging', '', '', 'quan-legging', NULL, 1, 38, 1, '2018-02-01 03:43:25', '2018-02-01 03:43:25'),
+(75, 'Áo ngực', '', '', 'ao-nguc', NULL, 1, 39, 1, '2018-02-01 03:44:08', '2018-02-01 03:44:08'),
+(76, 'Quần lót nữ', '', '', 'quan-lot-nu', NULL, 1, 39, 1, '2018-02-01 03:44:52', '2018-02-01 03:44:52');
 
 -- --------------------------------------------------------
 
@@ -325,36 +409,6 @@ CREATE TABLE `category_video` (
 
 INSERT INTO `category_video` (`id`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `parent_id`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Video', 'metakeyword video', 'metadescription video', 'video', NULL, 'thuvienhinh-1.png', 1, 1, '2018-01-09 10:03:48', '2018-01-09 11:08:05');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `color`
---
-
-DROP TABLE IF EXISTS `color`;
-CREATE TABLE `color` (
-  `id` bigint(20) NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sort_order` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `color`
---
-
-INSERT INTO `color` (`id`, `fullname`, `alias`, `code`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Đỏ', 'do', '#ff0000', 6, 1, '2018-01-31 09:53:24', '2018-01-31 10:36:02'),
-(5, 'Vàng', 'vang', '#fff600', 1, 1, '2018-01-31 10:07:25', '2018-01-31 10:34:00'),
-(6, 'Tím', 'tim', '#ba00ff', 2, 1, '2018-01-31 10:34:35', '2018-01-31 10:36:02'),
-(7, 'Hồng', 'hong', '#ff00c6', 3, 1, '2018-01-31 10:34:56', '2018-01-31 10:36:02'),
-(8, 'Xanh dương', 'xanh-duong', '#005aff', 4, 1, '2018-01-31 10:35:39', '2018-01-31 10:36:02'),
-(9, 'Xanh lá cây', 'xanh-la-cay', '#00cd30', 5, 1, '2018-01-31 10:35:56', '2018-01-31 10:36:02');
 
 -- --------------------------------------------------------
 
@@ -439,7 +493,7 @@ CREATE TABLE `group_member` (
 --
 
 INSERT INTO `group_member` (`id`, `fullname`, `alias`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'administrator', 1, '2016-12-17 05:05:18', '2018-01-31 10:45:09'),
+(1, 'Administrator', 'administrator', 1, '2016-12-17 05:05:18', '2018-02-01 04:33:44'),
 (2, 'Bài viết', 'bai-viet', 2, '2016-12-17 05:05:41', '2018-01-26 04:49:29'),
 (3, 'Thành viên vip', 'thanh-vien-vip', 3, '2018-01-26 04:06:49', '2018-01-26 04:49:35'),
 (4, 'Thành viên thường', 'thanh-vien-thuong', 4, '2018-01-26 04:08:16', '2018-01-26 04:49:49');
@@ -532,87 +586,79 @@ INSERT INTO `group_privilege` (`id`, `group_member_id`, `privilege_id`, `created
 (3105, 2, 143, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3106, 2, 144, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3180, 3, 0, '2018-01-26 04:06:59', '2018-01-26 04:06:59'),
-(3412, 1, 1, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3413, 1, 2, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3414, 1, 3, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3415, 1, 4, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3416, 1, 5, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3417, 1, 16, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3418, 1, 17, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3419, 1, 18, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3420, 1, 19, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3421, 1, 24, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3422, 1, 25, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3423, 1, 33, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3424, 1, 43, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3425, 1, 44, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3426, 1, 49, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3427, 1, 50, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3428, 1, 55, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3429, 1, 56, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3430, 1, 57, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3431, 1, 58, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3432, 1, 59, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3433, 1, 60, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3434, 1, 61, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3435, 1, 62, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3436, 1, 63, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3437, 1, 67, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3438, 1, 68, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3439, 1, 79, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3440, 1, 80, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3441, 1, 85, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3442, 1, 86, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3443, 1, 103, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3444, 1, 104, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3445, 1, 105, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3446, 1, 106, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3447, 1, 107, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3448, 1, 108, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3449, 1, 109, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3450, 1, 110, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3451, 1, 111, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3452, 1, 112, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3453, 1, 113, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3454, 1, 114, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3455, 1, 115, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3456, 1, 116, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3457, 1, 117, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3458, 1, 118, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3459, 1, 119, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3460, 1, 120, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3461, 1, 121, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3462, 1, 122, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3463, 1, 123, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3464, 1, 124, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3465, 1, 125, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3466, 1, 126, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3467, 1, 127, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3468, 1, 128, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3469, 1, 129, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3470, 1, 130, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3471, 1, 131, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3472, 1, 132, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3473, 1, 133, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3474, 1, 134, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3475, 1, 135, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3476, 1, 136, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3477, 1, 137, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3478, 1, 138, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3479, 1, 139, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3480, 1, 140, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3481, 1, 141, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3482, 1, 142, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3483, 1, 143, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3484, 1, 144, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3485, 1, 145, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3486, 1, 146, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3487, 1, 147, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3488, 1, 148, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3489, 1, 149, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3490, 1, 150, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3491, 1, 151, '2018-01-31 10:45:09', '2018-01-31 10:45:09'),
-(3492, 1, 152, '2018-01-31 10:45:09', '2018-01-31 10:45:09');
+(3493, 1, 1, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3494, 1, 2, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3495, 1, 3, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3496, 1, 4, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3497, 1, 5, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3498, 1, 16, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3499, 1, 17, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3500, 1, 18, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3501, 1, 19, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3502, 1, 24, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3503, 1, 25, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3504, 1, 33, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3505, 1, 43, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3506, 1, 44, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3507, 1, 49, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3508, 1, 50, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3509, 1, 55, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3510, 1, 56, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3511, 1, 57, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3512, 1, 58, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3513, 1, 59, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3514, 1, 60, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3515, 1, 61, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3516, 1, 62, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3517, 1, 63, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3518, 1, 67, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3519, 1, 68, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3520, 1, 79, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3521, 1, 80, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3522, 1, 85, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3523, 1, 86, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3524, 1, 103, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3525, 1, 104, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3526, 1, 105, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3527, 1, 106, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3528, 1, 107, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3529, 1, 108, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3530, 1, 109, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3531, 1, 110, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3532, 1, 111, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3533, 1, 112, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3534, 1, 113, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3535, 1, 114, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3536, 1, 115, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3537, 1, 116, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3538, 1, 117, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3539, 1, 118, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3540, 1, 119, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3541, 1, 120, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3542, 1, 121, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3543, 1, 122, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3544, 1, 123, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3545, 1, 124, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3546, 1, 125, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3547, 1, 126, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3548, 1, 127, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3549, 1, 128, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3550, 1, 129, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3551, 1, 130, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3552, 1, 131, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3553, 1, 132, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3554, 1, 133, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3555, 1, 134, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3556, 1, 135, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3557, 1, 136, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3558, 1, 137, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3559, 1, 138, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3560, 1, 139, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3561, 1, 140, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3562, 1, 141, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3563, 1, 142, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3564, 1, 143, '2018-02-01 04:33:44', '2018-02-01 04:33:44'),
+(3565, 1, 144, '2018-02-01 04:33:44', '2018-02-01 04:33:44');
 
 -- --------------------------------------------------------
 
@@ -839,37 +885,6 @@ CREATE TABLE `organization` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `origin`
---
-
-DROP TABLE IF EXISTS `origin`;
-CREATE TABLE `origin` (
-  `id` bigint(20) NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sort_order` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `origin`
---
-
-INSERT INTO `origin` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Nga', 'nga', 1, 1, '2018-01-31 08:55:19', '2018-01-31 09:32:37'),
-(4, 'Anh', 'anh', 6, 1, '2018-01-31 08:56:00', '2018-01-31 09:40:37'),
-(6, 'Việt Nam', 'viet-nam', 8, 1, '2018-01-31 08:56:29', '2018-01-31 09:39:40'),
-(11, 'Mỹ', 'my', 7, 1, '2018-01-31 08:58:43', '2018-01-31 09:40:37'),
-(13, 'Thái Lan', 'thai-lan', 5, 1, '2018-01-31 09:33:20', '2018-01-31 09:40:37'),
-(15, 'Nhật Bản', 'nhat-ban', 2, 1, '2018-01-31 09:40:15', '2018-01-31 09:40:37'),
-(16, 'Hàn Quốc', 'han-quoc', 4, 1, '2018-01-31 09:40:22', '2018-01-31 09:40:37'),
-(17, 'Trung Quốc', 'trung-quoc', 3, 1, '2018-01-31 09:40:29', '2018-01-31 09:40:37');
 
 -- --------------------------------------------------------
 
@@ -1237,7 +1252,16 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (464, 8, 'ajfSvynTDfObqdqWFVTaN52EkMP1AUNJ', '2018-01-31 10:29:33', '2018-01-31 10:29:33'),
 (465, 8, 'ag2Euhwpe5LXZvoQ1FsRXSH2yo0EHwsm', '2018-01-31 10:35:49', '2018-01-31 10:35:49'),
 (467, 8, 'yR8tHjT4HKlrVJLADJ5LykJbP27czCKC', '2018-01-31 10:38:45', '2018-01-31 10:38:45'),
-(468, 1, 'gJnB66CrVq6a8Mo6GhtYiOtLZhZ1LTMd', '2018-01-31 10:50:07', '2018-01-31 10:50:07');
+(468, 1, 'gJnB66CrVq6a8Mo6GhtYiOtLZhZ1LTMd', '2018-01-31 10:50:07', '2018-01-31 10:50:07'),
+(475, 1, 'L7DcvNPiOQIUjCUATn61Y2sh3g3R2k49', '2018-01-31 19:35:25', '2018-01-31 19:35:25'),
+(476, 1, 'QK86h3fyZTBFMRUhuP0ZKm1Wq4kzxPbS', '2018-01-31 19:35:25', '2018-01-31 19:35:25'),
+(478, 1, 'VqoYkwd6LBv1rVWPEtIMR05InmYOuszG', '2018-01-31 19:55:02', '2018-01-31 19:55:02'),
+(479, 1, 'JztvQ0vdnItZtqSiZD0Fi6NEK6c5PjZc', '2018-01-31 19:55:02', '2018-01-31 19:55:02'),
+(481, 8, 'zX2GBFJB6Jpcz8jaXScc8XmWSgARW6y1', '2018-02-01 01:42:35', '2018-02-01 01:42:35'),
+(482, 8, 'JWqpm7p61IXddy2YyuMkzHTdg7OWwVdL', '2018-02-01 01:50:31', '2018-02-01 01:50:31'),
+(483, 1, 'Ck89j1QoAOeoNZvhYi5wPRW4nTm0C1dq', '2018-02-01 02:29:04', '2018-02-01 02:29:04'),
+(486, 1, 'AKrOzoCvVttxLIVRMnTD6GPbj2iWGwvK', '2018-02-01 02:56:37', '2018-02-01 02:56:37'),
+(487, 1, 'BaciCQSFrRR68rCmWlXSBTzmdHd27uiN', '2018-02-01 02:56:37', '2018-02-01 02:56:37');
 
 -- --------------------------------------------------------
 
@@ -1372,15 +1396,7 @@ INSERT INTO `privilege` (`id`, `fullname`, `controller`, `action`, `sort_order`,
 (141, 'province-list', 'province', 'list', 1, '2018-01-21 17:53:20', '2018-01-21 17:53:20'),
 (142, 'province-form', 'province', 'form', 2, '2018-01-21 17:53:29', '2018-01-21 17:53:29'),
 (143, 'district-list', 'district', 'list', 1, '2018-01-22 02:03:24', '2018-01-22 02:03:24'),
-(144, 'district-form', 'district', 'form', 2, '2018-01-22 02:03:34', '2018-01-22 02:03:34'),
-(145, 'trademark-list', 'trademark', 'list', 1, '2018-01-31 07:54:38', '2018-01-31 07:54:38'),
-(146, 'trademark-form', 'trademark', 'form', 2, '2018-01-31 07:54:51', '2018-01-31 07:54:51'),
-(147, 'origin-list', 'origin', 'list', 1, '2018-01-31 08:50:59', '2018-01-31 08:50:59'),
-(148, 'origin-form', 'origin', 'form', 2, '2018-01-31 08:51:13', '2018-01-31 08:51:13'),
-(149, 'color-list', 'color', 'list', 1, '2018-01-31 09:49:27', '2018-01-31 09:49:27'),
-(150, 'color-form', 'color', 'form', 2, '2018-01-31 09:49:37', '2018-01-31 09:49:37'),
-(151, 'unit-list', 'unit', 'list', 1, '2018-01-31 10:43:55', '2018-01-31 10:43:55'),
-(152, 'unit-form', 'unit', 'form', 2, '2018-01-31 10:44:04', '2018-01-31 10:44:04');
+(144, 'district-form', 'district', 'form', 2, '2018-01-22 02:03:34', '2018-01-22 02:03:34');
 
 -- --------------------------------------------------------
 
@@ -1405,11 +1421,7 @@ CREATE TABLE `product` (
   `detail` text CHARACTER SET utf8,
   `count_view` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `trademark_id` int(11) DEFAULT NULL,
-  `origin_id` int(11) DEFAULT NULL,
-  `unit_id` int(11) DEFAULT NULL,
-  `width_size` int(11) DEFAULT NULL,
-  `height_size` int(11) DEFAULT NULL,
+  `size_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -1420,9 +1432,9 @@ CREATE TABLE `product` (
 -- Đang đổ dữ liệu cho bảng `product`
 --
 
-INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `trademark_id`, `origin_id`, `unit_id`, `width_size`, `height_size`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, '537429816', 'Sản phẩm 1', 'meta keyword 1', 'meta description 1', 'san-pham-1', 'category-1.png', 1, '[\"category-2.png\",\"category-3.png\"]', '100000.00', '90000.00', 'giới thiệu 1', '<p>chi tiết 1</p>', NULL, 2, 11, 11, 4, 200, 80, 1, 1, '2018-01-31 16:46:25', '2018-01-31 17:22:43'),
-(3, '561483297', 'Sản phẩm 2', 'meta keyword 2', 'meta description 2', 'san-pham-2', 'category-1.png', 1, '[\"category-2.png\",\"category-3.png\",\"category-4.png\"]', '300000.00', '200000.00', 'giới thiệu 2', '<p>chi tiết 2</p>', NULL, 2, 11, 11, 4, 300, 100, 8, 1, '2018-01-31 17:34:19', '2018-01-31 17:51:27');
+INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `size_type`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
+(4, '273185649', 'Đầm dự tiệc tay ren sang trọng - ĐR 431', 'metakeyword Đầm dự tiệc tay ren sang trọng - ĐR 431', 'metadescription Đầm dự tiệc tay ren sang trọng - ĐR 431', 'dam-du-tiec-tay-ren-sang-trong-dr-431', 'dam-vay-1.jpg', 1, NULL, '160000.00', '90000.00', 'giới thiệu Đầm dự tiệc tay ren sang trọng - ĐR 431', '<p>chi tiết&nbsp;Đầm dự tiệc tay ren sang trọng - ĐR 431</p>', NULL, 42, '100 x 200', 1, 1, '2018-02-01 04:15:10', '2018-02-01 08:38:12'),
+(5, '846273591', 'Sản phẩm 1', 'meta keyword 1', 'meta description 1', 'san-pham-1', 'dam-vay-3.jpg', 0, '[\"dam-vay-4.jpg\",\"dam-vay-5.jpg\"]', '100000.00', '90000.00', 'giới thiệu 1', '<p>chi tiết 1</p>', NULL, 15, '200 x 30', 8, 0, '2018-02-01 08:47:45', '2018-02-01 08:47:45');
 
 -- --------------------------------------------------------
 
@@ -1643,7 +1655,7 @@ CREATE TABLE `setting_system` (
 --
 
 INSERT INTO `setting_system` (`id`, `fullname`, `alias`, `title`, `meta_keyword`, `meta_description`, `author`, `copyright`, `google_site_verification`, `google_analytics`, `logo_frontend`, `favicon`, `setting`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'settingsystem', 'setting-system', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ', 'máy tính,  laptop cũ,  điện thoại thông minh', 'Bán lẻ máy tính, laptop, điện thoại mới cũ trên toàn quốc. DC Mobile một trong những thương hiệu có tiếng lâu đời về các sản phẩm công nghệ', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ [seodekiemtien@gmail.com]', 'KqqAiIZhyvjETFMGGAwT_GliP8lOHb4-lIpwli3Fua8', '444111222', 'logo.png', 'favicon.ico', '[{\"field_name\":\"Số bài viết trên 1 trang\",\"field_code\":\"article_perpage\",\"field_value\":\"10\"},{\"field_name\":\"Độ rộng hình bài viết\",\"field_code\":\"article_width\",\"field_value\":\"400\"},{\"field_name\":\"Độ cao hình bài viết\",\"field_code\":\"article_height\",\"field_value\":\"250\"},{\"field_name\":\"Số sản phẩm trên 1 trang\",\"field_code\":\"product_perpage\",\"field_value\":\"32\"},{\"field_name\":\"Độ rộng hình sản phẩm\",\"field_code\":\"product_width\",\"field_value\":\"400\"},{\"field_name\":\"Độ cao hình sản phẩm\",\"field_code\":\"product_height\",\"field_value\":\"250\"},{\"field_name\":\"Đơn vị tiền tệ\",\"field_code\":\"currency_unit\",\"field_value\":\"vi_VN\"},{\"field_name\":\"Smtp host\",\"field_code\":\"smtp_host\",\"field_value\":\"smtp.gmail.com\"},{\"field_name\":\"Smtp port\",\"field_code\":\"smtp_port\",\"field_value\":\"465\"},{\"field_name\":\"Smtp authication\",\"field_code\":\"authentication\",\"field_value\":\"1\"},{\"field_name\":\"Encription\",\"field_code\":\"encription\",\"field_value\":\"ssl\"},{\"field_name\":\"Smtp username\",\"field_code\":\"smtp_username\",\"field_value\":\"dien.toannang@gmail.com\"},{\"field_name\":\"Smtp password\",\"field_code\":\"smtp_password\",\"field_value\":\"bjsdgetadsutdono\"},{\"field_name\":\"Email to\",\"field_code\":\"email_to\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Contact person\",\"field_code\":\"contacted_person\",\"field_value\":\"Công Ty TNHH GreenEcoLife\"},{\"field_name\":\"Trụ sở\",\"field_code\":\"address\",\"field_value\":\"50/2/59 Dương Quảng Hàm, Phường 5, Quận Gò Vấp\"},{\"field_name\":\"Hotline\",\"field_code\":\"telephone\",\"field_value\":\"0902.90.74.75\"},{\"field_name\":\"Facebook\",\"field_code\":\"facebook_url\",\"field_value\":\"https://www.facebook.com/nguyenvan.laptrinh\"},{\"field_name\":\"Twitter\",\"field_code\":\"twitter_url\",\"field_value\":\"https://twitter.com/\"},{\"field_name\":\"Google Plus\",\"field_code\":\"google_plus\",\"field_value\":\"https://plus.google.com/u/0/?hl=vi\"},{\"field_name\":\"Youtube\",\"field_code\":\"youtube_url\",\"field_value\":\"https://www.youtube.com/watch?v=kAcV7S3sySU\"},{\"field_name\":\"Instagram\",\"field_code\":\"instagram_url\",\"field_value\":\"http://flickr.com\"},{\"field_name\":\"Pinterest\",\"field_code\":\"pinterest_url\",\"field_value\":\"http://daidung.vn/\"},{\"field_name\":\"Map\",\"field_code\":\"map_url\",\"field_value\":\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7765505259867!2d106.68751671435092!3d10.828404792286284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528f0d3be7c47%3A0x3f95e11384c4817f!2zNTAgRMawxqFuZyBRdeG6o25nIEjDoG0sIHBoxrDhu51uZyA1LCBHw7IgVuG6pXAsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1515998374369\"},{\"field_name\":\"Văn phòng giao dịch\",\"field_code\":\"office\",\"field_value\":\"27/13/8 Đường số 27, P.Hiệp Bình Chánh, Q.Thủ Đức\"},{\"field_name\":\"Skype NVKD 1\",\"field_code\":\"skype_nvkd_1\",\"field_value\":\"quocquy2010\"},{\"field_name\":\"Skype NVKD 2\",\"field_code\":\"skype_nvkd_2\",\"field_value\":\"greenecolife.vn\"},{\"field_name\":\"Skype NVKD 3\",\"field_code\":\"skype_nvkd_3\",\"field_value\":\"hiiamduc\"},{\"field_name\":\"Skype NVKD 4\",\"field_code\":\"skype_nvkd_4\",\"field_value\":\"phong.nguyen1984\"},{\"field_name\":\"Email NVKD 1\",\"field_code\":\"email_nvkd_1\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 2\",\"field_code\":\"email_nvkd_2\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 3\",\"field_code\":\"email_nvkd_3\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 4\",\"field_code\":\"email_nvkd_4\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Tel NVKD 1\",\"field_code\":\"tel_nvkd_1\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"Tel NVKD 2\",\"field_code\":\"tel_nvkd_2\",\"field_value\":\"0902.90.74.75\"},{\"field_name\":\"Tel NVKD 3\",\"field_code\":\"tel_nvkd_3\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"Tel NVKD 4\",\"field_code\":\"tel_nvkd_4\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"NVKD1\",\"field_code\":\"name_nvkd_1\",\"field_value\":\"Mr Cooc Cui\"},{\"field_name\":\"NVKD2\",\"field_code\":\"name_nvkd_2\",\"field_value\":\"Mr Anh Lạc\"},{\"field_name\":\"NVKD3\",\"field_code\":\"name_nvkd_3\",\"field_value\":\"Nguyễn Tấn Phát\"},{\"field_name\":\"NVKD4\",\"field_code\":\"name_nvkd_4\",\"field_value\":\"Nguyễn Hùng Phương\"}]', 1, 1, '2017-12-03 07:45:35', '2018-01-25 02:56:47');
+(1, 'settingsystem', 'setting-system', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ', 'máy tính,  laptop cũ,  điện thoại thông minh', 'Bán lẻ máy tính, laptop, điện thoại mới cũ trên toàn quốc. DC Mobile một trong những thương hiệu có tiếng lâu đời về các sản phẩm công nghệ', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ', 'DC Mobile Chuyên kinh doanh điện thoại, máy tính laptop mới cũ [seodekiemtien@gmail.com]', 'KqqAiIZhyvjETFMGGAwT_GliP8lOHb4-lIpwli3Fua8', '444111222', 'logo.png', 'favicon.ico', '[{\"field_name\":\"Số bài viết trên 1 trang\",\"field_code\":\"article_perpage\",\"field_value\":\"10\"},{\"field_name\":\"Độ rộng hình bài viết\",\"field_code\":\"article_width\",\"field_value\":\"400\"},{\"field_name\":\"Độ cao hình bài viết\",\"field_code\":\"article_height\",\"field_value\":\"250\"},{\"field_name\":\"Số sản phẩm trên 1 trang\",\"field_code\":\"product_perpage\",\"field_value\":\"32\"},{\"field_name\":\"Độ rộng hình sản phẩm\",\"field_code\":\"product_width\",\"field_value\":\"400\"},{\"field_name\":\"Độ cao hình sản phẩm\",\"field_code\":\"product_height\",\"field_value\":\"400\"},{\"field_name\":\"Đơn vị tiền tệ\",\"field_code\":\"currency_unit\",\"field_value\":\"vi_VN\"},{\"field_name\":\"Smtp host\",\"field_code\":\"smtp_host\",\"field_value\":\"smtp.gmail.com\"},{\"field_name\":\"Smtp port\",\"field_code\":\"smtp_port\",\"field_value\":\"465\"},{\"field_name\":\"Smtp authication\",\"field_code\":\"authentication\",\"field_value\":\"1\"},{\"field_name\":\"Encription\",\"field_code\":\"encription\",\"field_value\":\"ssl\"},{\"field_name\":\"Smtp username\",\"field_code\":\"smtp_username\",\"field_value\":\"dien.toannang@gmail.com\"},{\"field_name\":\"Smtp password\",\"field_code\":\"smtp_password\",\"field_value\":\"bjsdgetadsutdono\"},{\"field_name\":\"Email to\",\"field_code\":\"email_to\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Contact person\",\"field_code\":\"contacted_person\",\"field_value\":\"Công Ty TNHH GreenEcoLife\"},{\"field_name\":\"Trụ sở\",\"field_code\":\"address\",\"field_value\":\"50/2/59 Dương Quảng Hàm, Phường 5, Quận Gò Vấp\"},{\"field_name\":\"Hotline\",\"field_code\":\"telephone\",\"field_value\":\"0902.90.74.75\"},{\"field_name\":\"Facebook\",\"field_code\":\"facebook_url\",\"field_value\":\"https://www.facebook.com/nguyenvan.laptrinh\"},{\"field_name\":\"Twitter\",\"field_code\":\"twitter_url\",\"field_value\":\"https://twitter.com/\"},{\"field_name\":\"Google Plus\",\"field_code\":\"google_plus\",\"field_value\":\"https://plus.google.com/u/0/?hl=vi\"},{\"field_name\":\"Youtube\",\"field_code\":\"youtube_url\",\"field_value\":\"https://www.youtube.com/watch?v=kAcV7S3sySU\"},{\"field_name\":\"Instagram\",\"field_code\":\"instagram_url\",\"field_value\":\"http://flickr.com\"},{\"field_name\":\"Pinterest\",\"field_code\":\"pinterest_url\",\"field_value\":\"http://daidung.vn/\"},{\"field_name\":\"Map\",\"field_code\":\"map_url\",\"field_value\":\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7765505259867!2d106.68751671435092!3d10.828404792286284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528f0d3be7c47%3A0x3f95e11384c4817f!2zNTAgRMawxqFuZyBRdeG6o25nIEjDoG0sIHBoxrDhu51uZyA1LCBHw7IgVuG6pXAsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1515998374369\"},{\"field_name\":\"Văn phòng giao dịch\",\"field_code\":\"office\",\"field_value\":\"27/13/8 Đường số 27, P.Hiệp Bình Chánh, Q.Thủ Đức\"},{\"field_name\":\"Skype NVKD 1\",\"field_code\":\"skype_nvkd_1\",\"field_value\":\"quocquy2010\"},{\"field_name\":\"Skype NVKD 2\",\"field_code\":\"skype_nvkd_2\",\"field_value\":\"greenecolife.vn\"},{\"field_name\":\"Skype NVKD 3\",\"field_code\":\"skype_nvkd_3\",\"field_value\":\"hiiamduc\"},{\"field_name\":\"Skype NVKD 4\",\"field_code\":\"skype_nvkd_4\",\"field_value\":\"phong.nguyen1984\"},{\"field_name\":\"Email NVKD 1\",\"field_code\":\"email_nvkd_1\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 2\",\"field_code\":\"email_nvkd_2\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 3\",\"field_code\":\"email_nvkd_3\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Email NVKD 4\",\"field_code\":\"email_nvkd_4\",\"field_value\":\"dienit02@gmail.com\"},{\"field_name\":\"Tel NVKD 1\",\"field_code\":\"tel_nvkd_1\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"Tel NVKD 2\",\"field_code\":\"tel_nvkd_2\",\"field_value\":\"0902.90.74.75\"},{\"field_name\":\"Tel NVKD 3\",\"field_code\":\"tel_nvkd_3\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"Tel NVKD 4\",\"field_code\":\"tel_nvkd_4\",\"field_value\":\"0918.17.88.96\"},{\"field_name\":\"NVKD1\",\"field_code\":\"name_nvkd_1\",\"field_value\":\"Mr Cooc Cui\"},{\"field_name\":\"NVKD2\",\"field_code\":\"name_nvkd_2\",\"field_value\":\"Mr Anh Lạc\"},{\"field_name\":\"NVKD3\",\"field_code\":\"name_nvkd_3\",\"field_value\":\"Nguyễn Tấn Phát\"},{\"field_name\":\"NVKD4\",\"field_code\":\"name_nvkd_4\",\"field_value\":\"Nguyễn Hùng Phương\"}]', 1, 1, '2017-12-03 07:45:35', '2018-02-01 04:10:34');
 
 -- --------------------------------------------------------
 
@@ -2153,67 +2165,25 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 (456, 1, 'user', NULL, '2018-01-31 00:07:44', '2018-01-31 00:07:44'),
 (457, NULL, 'global', NULL, '2018-01-31 10:50:07', '2018-01-31 10:50:07'),
 (458, NULL, 'ip', '127.0.0.1', '2018-01-31 10:50:07', '2018-01-31 10:50:07'),
-(459, 1, 'user', NULL, '2018-01-31 10:50:07', '2018-01-31 10:50:07');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `trademark`
---
-
-DROP TABLE IF EXISTS `trademark`;
-CREATE TABLE `trademark` (
-  `id` bigint(20) NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sort_order` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `trademark`
---
-
-INSERT INTO `trademark` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Chicland', 'chicland', 5, 1, '2018-01-31 07:58:56', '2018-01-31 09:14:25'),
-(5, 'Nem', 'nem', 8, 1, '2018-01-31 08:13:52', '2018-01-31 09:16:43'),
-(6, 'Seven AM', 'seven-am', 6, 1, '2018-01-31 08:14:27', '2018-01-31 09:14:25'),
-(11, 'Nike', 'nike', 7, 1, '2018-01-31 08:22:47', '2018-01-31 09:14:25'),
-(12, 'Ampso', 'ampso', 2, 1, '2018-01-31 09:13:47', '2018-01-31 09:14:25'),
-(13, 'Ivy Moda', 'ivy-moda', 3, 1, '2018-01-31 09:14:01', '2018-01-31 09:14:25'),
-(14, 'Elise', 'elise', 4, 1, '2018-01-31 09:14:12', '2018-01-31 09:14:25'),
-(15, 'Nissan', 'nissan', 1, 1, '2018-01-31 09:16:37', '2018-01-31 09:16:37');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `unit`
---
-
-DROP TABLE IF EXISTS `unit`;
-CREATE TABLE `unit` (
-  `id` bigint(20) NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sort_order` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `unit`
---
-
-INSERT INTO `unit` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(4, 'Chiếc', 'chiec', 5, 1, '2018-01-31 10:47:59', '2018-01-31 16:22:50'),
-(8, 'Bao', 'bao', 6, 1, '2018-01-31 10:50:36', '2018-01-31 16:22:50'),
-(9, 'Bịch', 'bich', 4, 1, '2018-01-31 10:50:48', '2018-01-31 16:22:50'),
-(10, 'Vĩ', 'vi', 1, 1, '2018-01-31 10:50:59', '2018-01-31 16:21:57'),
-(11, 'Lọ', 'lo', 2, 1, '2018-01-31 16:22:20', '2018-01-31 16:22:50'),
-(12, 'Cái', 'cai', 3, 1, '2018-01-31 16:22:27', '2018-01-31 16:22:50');
+(459, 1, 'user', NULL, '2018-01-31 10:50:07', '2018-01-31 10:50:07'),
+(460, NULL, 'global', NULL, '2018-01-31 20:44:30', '2018-01-31 20:44:30'),
+(461, NULL, 'ip', '127.0.0.1', '2018-01-31 20:44:30', '2018-01-31 20:44:30'),
+(462, 1, 'user', NULL, '2018-01-31 20:44:30', '2018-01-31 20:44:30'),
+(463, NULL, 'global', NULL, '2018-02-01 01:50:34', '2018-02-01 01:50:34'),
+(464, NULL, 'ip', '127.0.0.1', '2018-02-01 01:50:34', '2018-02-01 01:50:34'),
+(465, 1, 'user', NULL, '2018-02-01 01:50:34', '2018-02-01 01:50:34'),
+(466, NULL, 'global', NULL, '2018-02-01 02:10:55', '2018-02-01 02:10:55'),
+(467, NULL, 'ip', '127.0.0.1', '2018-02-01 02:10:55', '2018-02-01 02:10:55'),
+(468, 1, 'user', NULL, '2018-02-01 02:10:55', '2018-02-01 02:10:55'),
+(469, NULL, 'global', NULL, '2018-02-01 02:28:57', '2018-02-01 02:28:57'),
+(470, NULL, 'ip', '127.0.0.1', '2018-02-01 02:28:57', '2018-02-01 02:28:57'),
+(471, 1, 'user', NULL, '2018-02-01 02:28:57', '2018-02-01 02:28:57'),
+(472, NULL, 'global', NULL, '2018-02-01 02:54:48', '2018-02-01 02:54:48'),
+(473, NULL, 'ip', '127.0.0.1', '2018-02-01 02:54:48', '2018-02-01 02:54:48'),
+(474, 1, 'user', NULL, '2018-02-01 02:54:48', '2018-02-01 02:54:48'),
+(475, NULL, 'global', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
+(476, NULL, 'ip', '127.0.0.1', '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
+(477, 1, 'user', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25');
 
 -- --------------------------------------------------------
 
@@ -2244,10 +2214,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-01-31 10:50:07', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-31 10:50:07'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-01 02:56:37', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-01 02:56:37'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-01-31 10:38:45', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-01-31 10:38:45');
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-01 02:55:04', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-01 02:55:04');
 
 -- --------------------------------------------------------
 
@@ -2354,6 +2324,12 @@ ALTER TABLE `category_banner`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `category_param`
+--
+ALTER TABLE `category_param`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `category_product`
 --
 ALTER TABLE `category_product`
@@ -2363,12 +2339,6 @@ ALTER TABLE `category_product`
 -- Chỉ mục cho bảng `category_video`
 --
 ALTER TABLE `category_video`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `color`
---
-ALTER TABLE `color`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2435,12 +2405,6 @@ ALTER TABLE `module_item`
 -- Chỉ mục cho bảng `organization`
 --
 ALTER TABLE `organization`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `origin`
---
-ALTER TABLE `origin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2543,18 +2507,6 @@ ALTER TABLE `throttle`
   ADD KEY `throttle_user_id_index` (`user_id`);
 
 --
--- Chỉ mục cho bảng `trademark`
---
-ALTER TABLE `trademark`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `unit`
---
-ALTER TABLE `unit`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -2621,22 +2573,22 @@ ALTER TABLE `category_banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `category_param`
+--
+ALTER TABLE `category_param`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT cho bảng `category_video`
 --
 ALTER TABLE `category_video`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT cho bảng `color`
---
-ALTER TABLE `color`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `customer`
@@ -2660,7 +2612,7 @@ ALTER TABLE `group_member`
 -- AUTO_INCREMENT cho bảng `group_privilege`
 --
 ALTER TABLE `group_privilege`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3493;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3576;
 
 --
 -- AUTO_INCREMENT cho bảng `invoice`
@@ -2699,12 +2651,6 @@ ALTER TABLE `module_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `origin`
---
-ALTER TABLE `origin`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
 -- AUTO_INCREMENT cho bảng `page`
 --
 ALTER TABLE `page`
@@ -2720,7 +2666,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=469;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2732,13 +2678,13 @@ ALTER TABLE `photo`
 -- AUTO_INCREMENT cho bảng `privilege`
 --
 ALTER TABLE `privilege`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
@@ -2792,19 +2738,7 @@ ALTER TABLE `supporter`
 -- AUTO_INCREMENT cho bảng `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=460;
-
---
--- AUTO_INCREMENT cho bảng `trademark`
---
-ALTER TABLE `trademark`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT cho bảng `unit`
---
-ALTER TABLE `unit`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=478;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

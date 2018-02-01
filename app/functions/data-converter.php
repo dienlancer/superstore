@@ -103,6 +103,43 @@ function categoryArticleConverter($data=array(),$controller){
     }
     return $result;
 }
+function categoryParamConverter($data=array(),$controller){        
+    $result = array();    
+    if( count($data) > 0){
+        for($i = 0 ;$i < count($data);$i++){
+            $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
+            $linkDelete=route('adminsystem.'.$controller.'.deleteItem',[$data[$i]['id']]);
+            $deleted='<center><a onclick="return xacnhanxoa();" href="'.$linkDelete.'" ><img src="'.asset("/public/adminsystem/images/delete-icon.png").'" /></a></center>';
+            
+            $kicked=0;
+            if((int)$data[$i]["status"]==1){
+                $kicked=0;
+            }
+            else{
+                $kicked=1;
+            }
+            $status     = '<center>'.cmsStatus((int)$data[$i]["id"],(int)$data[$i]["status"],$kicked).'</center>';
+            
+            $sort_order = '<center><input name="sort_order['.$data[$i]['id'].']" type="text"   value="'.$data[$i]["sort_order"].'" size="3" style="text-align:center" onkeypress="return isNumberKey(event);" /></center>';                              
+            $result[$i] = array(
+                'checked'                  =>   '<input type="checkbox"  name="cid[]" value="'.$data[$i]["id"].'" />',                
+                "id"                       =>   $data[$i]["id"],
+                "fullname"                 =>   $data[$i]["fullname"],
+                "parent_fullname"          =>   $data[$i]["parent_fullname"],
+                "alias"                    =>   $data[$i]["alias"],
+                "parent_id"                =>   $data[$i]["parent_id"],
+                "param_value"              =>   $data[$i]["param_value"],
+                "sort_order"               =>   $sort_order,
+                "status"                   =>   $status,
+                "created_at"               =>   datetimeConverterVn($data[$i]["created_at"]),
+                "updated_at"               =>   datetimeConverterVn($data[$i]["updated_at"]),
+                "edited"                   =>   $edited,
+                "deleted"                  =>   $deleted
+            );
+        }
+    }
+    return $result;
+}
 function getCategoryArticleName($id=0){    
     $title="";
     $data=DB::table('article')
@@ -306,6 +343,50 @@ function menuTypeConverter($data=array(),$controller){
     return $result;
 }
 function menuConverter($data=array(),$controller){        
+    $result = array();
+
+    if( count($data) > 0){
+        for($i = 0 ;$i < count($data);$i++){            
+            $alias='no-alias';
+            if(!empty($data[$i]['alias'])){
+                $alias=$data[$i]['alias'];
+            }            
+            $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',$data[$i]['menu_type_id'],$data[$i]['id'],$alias]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
+            $linkDelete=route('adminsystem.'.$controller.'.deleteItem',[$data[$i]['id']]);
+            $deleted='<center><a onclick="return xacnhanxoa();" href="'.$linkDelete.'" ><img src="'.asset("/public/adminsystem/images/delete-icon.png").'" /></a></center>';
+            
+            $kicked=0;
+            if((int)$data[$i]["status"]==1){
+                $kicked=0;
+            }
+            else{
+                $kicked=1;
+            }
+            $status     = '<center>'.cmsStatus((int)$data[$i]["id"],(int)$data[$i]["status"],$kicked).'</center>';
+            
+            $sort_order = '<center><input name="sort_order['.$data[$i]['id'].']" type="text"  value="'.$data[$i]["sort_order"].'" size="3" style="text-align:center" onkeypress="return isNumberKey(event);" /></center>';            
+            $result[$i] = array(
+                'checked'                  =>   '<input type="checkbox"  name="cid[]" value="'.$data[$i]["id"].'" />',                
+                "id"                       =>   $data[$i]["id"],
+                "fullname"                 =>   $data[$i]["fullname"],
+                "alias"                    =>   $data[$i]["alias"],
+                "level"                    =>   $data[$i]["level"],                               
+                "parent_id"                =>   $data[$i]["parent_id"],
+                "parent_fullname"          =>   $data[$i]["parent_fullname"],                
+                "menu_type_id"             =>   $data[$i]["menu_type_id"],                
+                "level"                    =>   $data[$i]["level"],                
+                "sort_order"               =>   $sort_order,
+                "status"                   =>   $status,
+                "created_at"               =>   datetimeConverterVn($data[$i]["created_at"]),
+                "updated_at"               =>   datetimeConverterVn($data[$i]["updated_at"]),
+                "edited"                   =>   $edited,
+                "deleted"                  =>   $deleted
+            );
+        }
+    }
+    return $result;
+}
+function productParamConverter($data=array(),$controller){        
     $result = array();
 
     if( count($data) > 0){
