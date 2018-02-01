@@ -11,6 +11,7 @@ var vProvinceTable           =   null;
 var vDistrictTable           =   null;
 var vTradeMarkTable           =   null;
 var vOriginTable           =   null;
+var vSizeStandardTable           =   null;
 var vUnitTable           =   null;
 var vColorTable           =   null;
 var vProjectArticleTable           =   null;
@@ -327,6 +328,23 @@ var basicTable = function () {
     };
     var initOriginTable = function () {
         vOriginTable = $('#tbl-origin').DataTable({
+            aLengthMenu: [
+                [10, -1],
+                [10, "All"]
+            ],
+            iDisplayLength: -1,
+            columns: [                
+                { data: "checked"            },                
+                { data: "fullname"      },                    
+                { data: "sort_order"    },
+                { data: "status"        },                                
+                { data: "edited"    },         
+                { data: "deleted"    },                
+            ]
+        });        
+    };
+    var initSizeStandardTable = function () {
+        vSizeStandardTable = $('#tbl-size-standard').DataTable({
             aLengthMenu: [
                 [10, -1],
                 [10, "All"]
