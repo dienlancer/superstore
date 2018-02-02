@@ -5,9 +5,9 @@ $map_url=$setting['map_url']['field_value'];
 <form action="" method="POST">
 	<input type="hidden" name="filter_page" value="1">         
 	{{ csrf_field() }}	
-	<h2 class="tieu-de-bai-viet">
+	<div class="tieu-de-bai-viet">
 		<?php echo $title; ?>
-	</h2>
+	</div>
 	<div>
 		<?php 
 		if(count($items) > 0){

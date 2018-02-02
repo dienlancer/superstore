@@ -2,9 +2,9 @@
 $setting=getSettingSystem();
 $map_url=$setting['map_url']['field_value'];       
 ?>
-<h2 class="tieu-de margin-top-15">
+<div class="tieu-de margin-top-15">
 	Liên hệ
-</h2>		
+</div>		
 <div class="box-article margin-top-10">
 	<div class="col-md-4 contact no-padding-left">
 		<form method="post" name="frm-contact" class="margin-top-15" enctype="multipart/form-data">							

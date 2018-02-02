@@ -1,4 +1,4 @@
-<h3 class="page-title h-title">Thanh toán</h3>
+<div class="page-title h-title">Thanh toán</div>
     <?php
 $setting=getSettingSystem();
 $product_width = $setting['product_width']['field_value'];

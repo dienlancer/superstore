@@ -1,8 +1,8 @@
 <form method="post" name="frm" class="margin-top-15 box-article">
     {{ csrf_field() }}    
-    <h2 class="tieu-de-bai-viet">
+    <div class="tieu-de-bai-viet">
         Đăng nhập
-    </h2>
+    </div>
     <?php                           
     if(count($error) > 0 || count($success) > 0){
         ?>

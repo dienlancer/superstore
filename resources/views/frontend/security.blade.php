@@ -1,6 +1,6 @@
- <h2 class="tieu-de margin-top-15">
+ <div class="tieu-de margin-top-15">
     Đổi mật khẩu
-</h2>
+</div>
 <form method="post" name="frm" class="margin-top-5 box-article">
     {{ csrf_field() }}
     <input type="hidden" name="username" value="<?php echo @$data["username"]; ?>" />    

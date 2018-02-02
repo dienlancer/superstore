@@ -46,9 +46,9 @@ if(count($item) > 0){
 		$category_name=implode(' / ', $arr_category_name);		
 	}		
 	?>
-	<h2 class="breadcrumb-title margin-top-15">
+	<div class="breadcrumb-title margin-top-15">
 			<?php echo $category_name; ?>
-		</h2>
+		</div>
 	<div class="margin-top-10 box-article">		
 		<div>
             <div class="col-lg-4 no-padding-left">

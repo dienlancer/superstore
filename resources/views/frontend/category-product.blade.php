@@ -1,18 +1,18 @@
-<form method="post" class="frm margin-top-15" name="frm">
+<form method="post" class="frm" name="frm">
 	<input type="hidden" name="filter_page" value="1">         
 	{{ csrf_field() }}	
 	<?php 		
 	if(empty($breadcrumb)){
 		?>
-		<h2 class="tieu-de">
+		<div class="tieu-de margin-top-15">
 			<?php echo $title; ?>		
-		</h2>
+		</div>
 		<?php
 	}else{
 		?>
-		<h2 class="breadcrumb-title">
+		<div class="breadcrumb-title margin-top-15">
 			<?php echo $breadcrumb; ?>
-		</h2>
+		</div>
 		<?php
 	}	
 	?>
@@ -25,7 +25,7 @@
 				$alias=$value['alias'];
 				$fullname=$value['fullname'];
 				$permalink=route('frontend.index.index',[$alias]) ;
-				$featuredImg =get_featured_image($value['image']) ;						
+				$featuredImg =get_product_thumbnail($value['image']) ;						
 				?>
 				<div class="col-sm-3 no-padding-left">
 					<div class="margin-top-15">

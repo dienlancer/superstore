@@ -1,6 +1,6 @@
- <h2 class="tieu-de margin-top-15">
+ <div class="tieu-de margin-top-15">
     Đăng nhập
-</h2>
+</div>
 <form method="post" name="frm" class="margin-top-5 box-article">
     {{ csrf_field() }}        
     <?php                           

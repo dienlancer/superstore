@@ -275,6 +275,9 @@ switch ($component) {
                     case "category-video": 
                     ?>@include("frontend.category-video")<?php   
                     break;                                                                                             
+                    case "category-product":                  
+                    ?>@include("frontend.category-product")<?php
+                    break; 
                 }  
                 ?>
              

@@ -26,15 +26,15 @@ if(count($item) > 0){
     /* end setting */  
     if(empty($breadcrumb)){
         ?>
-        <h2 class="tieu-de margin-top-15">
+        <div class="tieu-de margin-top-15">
             <?php echo $title; ?>       
-        </h2>
+        </div>
         <?php
     }else{
         ?>
-        <h2 class="breadcrumb-title margin-top-15">
+        <div class="breadcrumb-title margin-top-15">
             <?php echo $breadcrumb; ?>
-        </h2>
+        </div>
         <?php
     }   
 	?>        

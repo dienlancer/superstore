@@ -3,7 +3,7 @@
 $product_width = $setting['product_width']['field_value'];
 $product_height = $setting['product_height']['field_value'];
 ?>
-<h3 class="page-title h-title">Thông tin hóa đơn</h3>
+<div class="page-title h-title">Thông tin hóa đơn</div>
 <form action="" name="frm">
     {{ csrf_field() }}
     <table id="com_product16" class="com_product16" cellpadding="0" cellspacing="0" width="100%">

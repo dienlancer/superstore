@@ -4,15 +4,15 @@
 	<?php 		
 	if(empty($breadcrumb)){
 		?>
-		<h2 class="tieu-de">
+		<div class="tieu-de">
 			<?php echo $title; ?>		
-		</h2>
+		</div>
 		<?php
 	}else{
 		?>
-		<h2 class="breadcrumb-title">
+		<div class="breadcrumb-title">
 			<?php echo $breadcrumb; ?>
-		</h2>
+		</div>
 		<?php
 	}	
 	?>

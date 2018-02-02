@@ -1,9 +1,9 @@
  <?php 
  use App\GroupMemberModel;
  ?>
- <h2 class="tieu-de margin-top-15">
+ <div class="tieu-de margin-top-15">
     Đăng ký
-</h2>
+</div>
 <form method="post" name="frm" class="box-article margin-top-5">
     {{ csrf_field() }}  
     <input type="hidden" name="sort_order" value="1">          

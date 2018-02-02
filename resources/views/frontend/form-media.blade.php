@@ -4,9 +4,9 @@ $linkCancel             =   route('frontend.'.$controller.'.getList');
 $linkSave               =   route('frontend.'.$controller.'.save');
 $linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
 ?>
-<h2 class="tieu-de margin-top-15">
+<div class="tieu-de margin-top-15">
     Media
-</h2>   
+</div>   
 <form class="margin-top-5 padding-top-5 box-article frm-vip" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
     {{ csrf_field() }}           
     <div class="portlet light bordered">

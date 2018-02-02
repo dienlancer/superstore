@@ -43,9 +43,9 @@ if(count(@$arrRowData) > 0){
 $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"  value="'.@$str_child_image.'" />';
  
 ?>
-<h2 class="tieu-de margin-top-15">
+<div class="tieu-de margin-top-15">
 	Đăng sản phẩm
-</h2>		
+</div>		
 <form method="post" name="frm" class="margin-top-5 padding-top-5 box-article frm-vip" enctype="multipart/form-data">
 	{{ csrf_field() }}          
 	<?php 

@@ -43,9 +43,9 @@ if(count($item) > 0){
     $street=$item['street'];
     
     ?>  
-    <h2 class="tieu-de margin-top-15">
+    <div class="tieu-de margin-top-15">
             Dự án
-        </h2>
+        </div>
 <div class="margin-top-10 box-article">		
     <div>
         <div class="col-lg-4 no-padding-left">
