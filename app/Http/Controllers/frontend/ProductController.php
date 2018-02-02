@@ -63,15 +63,17 @@ class ProductController extends Controller {
     return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive"));
   }  
   public function loadData(Request $request){   
-    
+      $category_id=(int)@$request->category_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_product');        
       $query=DB::table('product')
       ->join('category_product','product.category_id','=','category_product.id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_id)){
-        $query->where('product.category_id',(int)@$request->category_id);
-      }   
+      if(count($arrCategoryID)){
+        $query->whereIn('product.category_id',$arrCategoryID);
+      }  
       /* begin user_id */
       $arrUser =array();   
       $user = Sentinel::forceCheck(); 

@@ -8,17 +8,23 @@ if(isset($alias)){
 @section("content")
 <?php 
 $wrapper='';
+$col_left='';
+$col_right='';
 switch ($component) {
-    case 'security':
     case 'account':
+    case 'security':    
     case "list-product":
     case "list-media":
     case "form-product":                
     case "form-media":
         $wrapper='container-fluid';
+        $col_left='col-lg-2';
+        $col_right='col-lg-10';
     break;
     default:        
         $wrapper='container';
+        $col_left='col-lg-3';
+        $col_right='col-lg-9';
     break;
 }
 ?>
@@ -27,7 +33,7 @@ switch ($component) {
     switch ($layout){
         case 'two-column':  
         ?>
-        <div class="col-lg-3">
+        <div class="<?php echo $col_left; ?>">
             <?php                                      
             $argsTinTucSuKien = array(                         
                 'menu_class'            => 'categoryarticle',                            
@@ -126,9 +132,9 @@ switch ($component) {
                     </div>
                     <?php
                 }                                                         
-                break;                
-                case 'security':
-                case 'account':
+                break;          
+                case 'account':      
+                case 'security':                
                 case "list-product":
                 case "list-media":
                 case "form-product":                
@@ -174,7 +180,7 @@ switch ($component) {
             }                                       
             ?>                            
         </div>
-        <div class="col-lg-9">
+        <div class="<?php echo $col_right; ?>">
             <?php
             switch ($component) {                                                                      
                 case "category-article":    

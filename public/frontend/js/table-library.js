@@ -22,8 +22,7 @@ var basicTable = function () {
             iDisplayLength: -1,
             columns: [                
                 { data: "checked"       },                
-                { data: "fullname"      },
-                { data: "alias"         },
+                { data: "fullname"      },                
                 { data: "category_name"         },                            
                 { data: "image"         },                
                 { data: "status"        },                                
