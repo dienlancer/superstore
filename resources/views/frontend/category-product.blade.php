@@ -24,16 +24,32 @@
 				$id=$value['id'];
 				$alias=$value['alias'];
 				$fullname=$value['fullname'];
+				$fullname_excerpt=substr($fullname, 0,100);
 				$permalink=route('frontend.index.index',[$alias]) ;
-				$featuredImg =get_product_thumbnail($value['image']) ;						
+				$featuredImg =get_product_thumbnail($value['image']) ;	
+				$price=$value['price'];
+				$sale_price=$value['sale_price'];
+				$html_price='';                     
+                if((int)@$sale_price > 0){              
+                    $sale_price_html ='<span class="price-regular">'.fnPrice($sale_price).'</span>';
+                    $price_old_html='<span class="price-old">'.fnPrice($price).'</span>' ;                 
+                    $html_price='<div class="sale-price">'.$sale_price_html.'</div><div class="old-price">'.$price_old_html.'</div><div class="clr"></div>' ;              
+                }else{
+                    $html_price='<span class="price-regular">'.fnPrice($price).'</span>' ;                  
+                }   					
 				?>
 				<div class="col-sm-3 no-padding-left">
-					<div class="margin-top-15">
+					<div class="margin-top-15 box-product">
 						<div>
 							<center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $featuredImg; ?>" /></a></figure></center>
+						</div>		
+						<div class="margin-top-5">
+							<?php echo $html_price; ?>
+						</div>							
+						<div class="margin-top-5 box-product-title">
+							<a href="<?php echo $permalink; ?>" title="<?php echo $fullname; ?>" ><?php echo $fullname_excerpt; ?></a>
 						</div>
-						<div class="box-product-title margin-top-5"><a href="<?php echo $permalink; ?>"><b><?php echo $fullname; ?></b></a></div>						
-					</div>
+					</div>					
 				</div>
 				<?php			
 				if($k%4==0 || $k==count($items)){

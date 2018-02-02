@@ -450,11 +450,11 @@ class IndexController extends Controller {
         $pagination=new PaginationModel($arrPagination);
         $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
         $data=DB::table('product')                
-                ->select('product.id','product.alias','product.fullname','product.image','product.intro')
+                ->select('product.id','product.alias','product.fullname','product.image','product.intro','product.price','product.sale_price')
                 ->whereIn('product.category_id', $arr_category_id)
                 ->where('product.status',1)       
-                ->groupBy('product.id','product.alias','product.fullname','product.image','product.intro')
-                ->orderBy('product.created_at', 'desc')
+                ->groupBy('product.id','product.alias','product.fullname','product.image','product.intro','product.price','product.sale_price')
+                ->orderBy('product.sort_order', 'asc')
                 ->skip($position)
                 ->take($totalItemsPerPage)
                 ->get()->toArray();   
