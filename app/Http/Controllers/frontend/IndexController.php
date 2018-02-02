@@ -467,7 +467,7 @@ class IndexController extends Controller {
       if(count($row) > 0){
         $item=$row[0];
       }    
-      $layout="two-column";       
+      $layout="full-width";       
       break;     
       case 'products':              
       $data=DB::table('product')                                  

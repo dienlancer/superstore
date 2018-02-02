@@ -1,15 +1,15 @@
 <?php 
-use App\ProductCategoryModel;
 use App\ProductModel;
+use App\ProductParamModel;
+use App\CategoryParamModel;
 use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 if(count($item) > 0){
-
     $id=$item["id"];
     $fullname = $item["fullname"];
     $intro=$item["intro"];
     $detail=$item['detail'];  
-    $small_img=get_featured_image($item['image']);
+    $small_img=get_product_thumbnail($item['image']);
     $large_img=asset('upload/'.$item['image']) ;
     /* begin cập nhật count view */
     $count_view=(int)@$item['count_view'];
@@ -27,10 +27,10 @@ if(count($item) > 0){
     $office=$setting['office']['field_value'];
     /* end setting */    
     /* begin category */
-    $dataProductCategory=DB::table('product_category')
-    ->join('category_product','product_category.category_product_id','=','category_product.id')     
+    $dataProductCategory=DB::table('category_product')
+    ->join('product','category_product.id','=','product.category_id')     
     ->select('category_product.id','category_product.fullname','category_product.alias')
-    ->where('product_category.product_id','=',(int)@$id)                    
+    ->where('product.id','=',(int)@$id)                    
     ->groupBy('category_product.id','category_product.fullname','category_product.alias')
     ->orderBy('category_product.sort_order','asc')
     ->get()->toArray();
@@ -67,29 +67,47 @@ if(count($item) > 0){
         <div>
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
-                    <img id="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
+                    <img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
                 </div>
             </div>
             <div class="col-lg-8 no-padding-left">
-                <div class="margin-top-15 product-detail-title">
+                <h1 class="margin-top-15 product-detail-title">
                     <?php echo $title; ?>
-                </div>
+                </h1>
                 <div class="margin-top-5">
                     <b>Lượt xem:</b>&nbsp;<?php echo $count_view; ?>
                 </div>
-                <div class="margin-top-5 product-price">
-                    <b>Giá:</b>&nbsp;Liên hệ
-                </div>                
+                <hr class="product-ngang" />
                 <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/tru-so.png'); ?>">&nbsp;Vp giao dịch:&nbsp;<?php echo $office; ?>
+                	<?php 
+                	$price=$item['price'];
+                	$sale_price=$item['sale_price'];
+                	$html_price='';                     
+                	if((int)@$sale_price > 0){              
+                		$price_on_html ='<span class="price-detail-on">'.fnPrice($sale_price).'</span>';
+                		$price_off_html='<span class="price-detail-off margin-left-15">Giá cũ: '.fnPrice($price).'</span>' ;                 
+                		$html_price=$price_on_html.$price_off_html ;              
+                	}else{
+                		$html_price='<span class="price-on">'.fnPrice($price).'</span>' ;                  
+                	}   	
+                	echo $html_price;
+                	?>
                 </div>
+                <!-- begin màu -->
                 <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/sendmail.png'); ?>">&nbsp;Email: <?php echo $email_to; ?>
+                	<?php 
+                		$dataColor=CategoryParamModel::whereRaw('alias = ?',['mau'])->select('id','alias','fullname')->get()->toArray();
+                		$dataColorChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataColor[0]['id']])->select('id','alias','fullname','param_value')->get()->toArray();
+                		foreach ($dataColorChildren as $key => $value) {
+                			$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                			if(count($dataParam) > 0){
+                				echo $value['fullname'];
+                			}
+                		}
+                		                		                		
+                	?>
                 </div>
-                <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/earth-web.png'); ?>">&nbsp;Website: <?php echo url('/'); ?>
-                </div>
-                <hr class="product-ngang">
+                <!-- end màu -->
             </div>
             <div class="clr"></div>
         </div>
@@ -120,11 +138,9 @@ if(count($item) > 0){
         <?php                     
         
         if(count($dataProductCategory) > 0){            
-            $dataProduct=DB::table('product')
-            ->join('product_category','product.id','=','product_category.product_id')
-            ->join('category_product','category_product.id','=','product_category.category_product_id')                   
+            $dataProduct=DB::table('product')                        
             ->select('product.id','product.alias','product.fullname','product.image','product.intro')
-            ->whereIn('product_category.category_product_id', $arr_category_id)
+            ->whereIn('product.category_id', $arr_category_id)
             ->where('product.id','<>',(int)@$id)
             ->where('product.status',1)       
             ->groupBy('product.id','product.alias','product.fullname','product.image','product.intro')
@@ -156,7 +172,7 @@ if(count($item) > 0){
                                         items:1
                                     },
                                     1000:{
-                                        items:3
+                                        items:4
                                     }
                                 }
                             });
@@ -169,7 +185,7 @@ if(count($item) > 0){
                     <div class="owl-carousel related-products owl-theme">
                         <?php 
                         foreach($dataProduct as $key => $value){
-                            $featuredImg=get_featured_image($value['image']) ;
+                            $featuredImg=get_product_thumbnail($value['image']) ;
                             $permalink=route('frontend.index.index',[$value['alias']]);
                             $title=$value['fullname'];
                             ?>
@@ -191,7 +207,7 @@ if(count($item) > 0){
 }
 ?>
 <script language="javascript" type="text/javascript">
-    jQuery('#zoom_img').elevateZoom({
+    jQuery('.zoom_img').elevateZoom({
         zoomType: "inner",
         cursor: "crosshair",
         zoomWindowFadeIn: 500,
