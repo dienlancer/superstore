@@ -1437,10 +1437,12 @@ form[name='frm-search']{
     border-right: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
 }
-.price-regular{
+.price-on{
     color: #F00;
+    font-weight: bold;
+    font-size: 16px;
 }
-.price-old{
+.price-off{
     color: #505050;
     text-decoration: line-through;
 }

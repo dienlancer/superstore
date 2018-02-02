@@ -31,11 +31,11 @@
 				$sale_price=$value['sale_price'];
 				$html_price='';                     
                 if((int)@$sale_price > 0){              
-                    $sale_price_html ='<span class="price-regular">'.fnPrice($sale_price).'</span>';
-                    $price_old_html='<span class="price-old">'.fnPrice($price).'</span>' ;                 
-                    $html_price='<div class="sale-price">'.$sale_price_html.'</div><div class="old-price">'.$price_old_html.'</div><div class="clr"></div>' ;              
+                    $price_on_html ='<span class="price-on">'.fnPrice($sale_price).'</span>';
+                    $price_off_html='<span class="price-off">'.fnPrice($price).'</span>' ;                 
+                    $html_price='<div class="sale-price">'.$price_on_html.'</div><div class="old-price">'.$price_off_html.'</div><div class="clr"></div>' ;              
                 }else{
-                    $html_price='<span class="price-regular">'.fnPrice($price).'</span>' ;                  
+                    $html_price='<span class="price-on">'.fnPrice($price).'</span>' ;                  
                 }   					
 				?>
 				<div class="col-sm-3 no-padding-left">
