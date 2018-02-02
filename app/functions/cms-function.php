@@ -70,7 +70,7 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
     $xhtml .= '</select>';
     return $xhtml;
   }
-  function cmsSelectboxCategoryProductMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
+  function cmsSelectboxCategoryParamMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
     $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
     $xhtml .= '<option value = "">--Chọn danh mục--</option>';
     foreach($arrValue as $key => $value){
@@ -79,7 +79,7 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
       $strOption='<option value="'.$id.'">'.$name.'</option>';
       if(!empty($arrValueSelected)){
           foreach($arrValueSelected as $key_1 => $value_1) {
-              if((int)$id == (int)$value_1["category_product_id"]){
+              if((int)$id == (int)$value_1["param_id"]){
                 $strOption = str_replace('<option', '<option selected="selected" ', $strOption);
               }
           }

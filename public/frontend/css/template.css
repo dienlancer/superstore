@@ -1423,6 +1423,15 @@ padding-top: 7px;
         background: #2f353b;
         color: #ffffff;
     }
+    .table-image td, .table-image th{
+    padding: 5px;
+    border-left: 1px solid #dddddd;
+    border-top: 1px solid #dddddd
+}
+.table-image{
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

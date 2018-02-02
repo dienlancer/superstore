@@ -21,6 +21,7 @@ $inputDetail            =   '<textarea id="detail" name="detail" rows="5" cols="
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $inputSizeType         =   '<input type="text" class="form-control" name="size_type"     value="'.@$arrRowData['size_type'].'">';
 $ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
+$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id","category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrProductParam,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
@@ -112,6 +113,15 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
                         <label class="col-md-2 control-label"><b>Loại sản phẩm</b></label>
                         <div class="col-md-10">
                             <?php echo $ddlCategoryProduct; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div> 
+                </div>   
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Thuộc tính</b></label>
+                        <div class="col-md-10">
+                            <?php echo $ddlCategoryParam; ?>
                             <span class="help-block"></span>
                         </div>
                     </div> 
@@ -293,7 +303,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         
         var meta_keyword=$('textarea[name="meta_keyword"]').val();
         var meta_description=$('textarea[name="meta_description"]').val();
-        var category_id=$('select[name="category_id"]').val();        
+        var category_id=$('select[name="category_id"]').val();  
+        var category_param_id=$('select[name="category_param_id[]"]').val();      
         var image = $('input[name="image"]').val();
         if (image != ''){
             image = image.substr(image.lastIndexOf('\\') + 1);       
@@ -343,7 +354,8 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             "size_type":size_type,
             "intro":intro,
             "detail":detail,
-            "category_id":category_id,                          
+            "category_id":category_id,    
+            "category_param_id":category_param_id,                      
             "child_image":child_image,            
             "sort_order":sort_order,
             "status":status,

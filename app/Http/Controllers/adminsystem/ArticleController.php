@@ -34,14 +34,17 @@ class ArticleController extends Controller {
         }
   	}	    
   	public function loadData(Request $request){      
+      $category_id=(int)@$request->category_article_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_article');     
       $query=DB::table('article')
       ->join('article_category','article.id','=','article_category.article_id')
       ->join('category_article','category_article.id','=','article_category.category_article_id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_article_id)){
-        $query->where('article_category.category_article_id',(int)@$request->category_article_id);
+      if(count($arrCategoryID) > 0){
+        $query->whereIn('article_category.category_article_id',$arrCategoryID);
       }   
       $data=$query->select('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
                   ->groupBy('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')

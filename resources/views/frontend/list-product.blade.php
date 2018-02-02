@@ -125,11 +125,11 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			url: '<?php echo $linkDelete; ?>',
 			type: 'POST', 			
 			data: dataItem,
-			success: function (data, status, jqXHR) {  				
-				alert('Đã xoá');               		
+			success: function (data, status, jqXHR) {  								            		
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
 				spinner.hide();
+				alert('Đã xoá');   
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();
@@ -166,11 +166,11 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			type: 'POST', 
 			             
 			data: dataItem,
-			success: function (data, status, jqXHR) {
-				alert('Đã xoá');               		
+			success: function (data, status, jqXHR) {				              	
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
 				spinner.hide();
+				alert('Đã xoá'); 
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();

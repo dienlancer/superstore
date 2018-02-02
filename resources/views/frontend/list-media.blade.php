@@ -97,10 +97,11 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  				
-				alert('Đã xoá');             		
+				    		
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();
+				alert('Đã xoá');         
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();
@@ -139,10 +140,11 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {
-				alert('Đã xoá');  
+				
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();
+				alert('Đã xoá');  
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();

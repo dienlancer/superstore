@@ -13,6 +13,7 @@ use App\ProjectArticleModel;
 use App\MenuModel;
 use App\ArticleCategoryModel;
 use App\PaginationModel;
+use App\ProductParamModel;
 use DB;
 class CategoryParamController extends Controller {
 	var $_controller="category-param";	
@@ -80,19 +81,22 @@ class CategoryParamController extends Controller {
       	$title="";
       	$icon=$this->_icon; 
       	$arrRowData=array();   
+       
       	$arrPrivilege=getArrPrivilege();
       	$requestControllerAction=$this->_controller."-form";    
       	if(in_array($requestControllerAction, $arrPrivilege)){
       		switch ($task) {
       			case 'edit':
       			$title=$this->_title . " : Update";
-      			$arrRowData=CategoryParamModel::find((int)@$id)->toArray();      
+      			$arrRowData=CategoryParamModel::find((int)@$id)->toArray(); 
+            
       			break;
       			case 'add':
       			$title=$this->_title . " : Add new";
       			break;      
       		}             
       		$arrCategory=CategoryParamModel::whereRaw("id != ?",[(int)@$id])->select("id","fullname","parent_id")->orderBy("sort_order","asc")->get()->toArray();
+          
       		$arrCategoryRecursive=array();      
       		categoryRecursiveForm($arrCategory ,0,"",$arrCategoryRecursive)  ;      
       		return view("adminsystem.".$this->_controller.".form",compact("arrCategoryRecursive","arrRowData","controller","task","title","icon")); 
@@ -146,8 +150,7 @@ class CategoryParamController extends Controller {
               $item 				= 	new CategoryParamModel;       
               $item->created_at 	=	date("Y-m-d H:i:s",time());                      		
         } else{
-            $item				=	CategoryParamModel::find((int)@$id);   
-                       
+            $item				=	CategoryParamModel::find((int)@$id);                          
         }  
         $item->fullname 		=	$fullname;
         $item->alias 			  =	$alias;                
@@ -209,6 +212,12 @@ class CategoryParamController extends Controller {
             $type_msg           =   "alert-warning";            
             $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
           }          
+          $data                   =   ProductParamModel::whereRaw("param_id = ?",[(int)@$id])->get()->toArray();              
+          if(count($data) > 0){
+            $checked     =   0;
+            $type_msg           =   "alert-warning";            
+            $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+          }
           if($checked == 1){
             $item               =   CategoryParamModel::find((int)@$id);
             $item->delete();            
@@ -264,7 +273,13 @@ class CategoryParamController extends Controller {
                   $checked     =   0;
                   $type_msg           =   "alert-warning";            
                   $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
-                }                
+                }    
+                $data                   =   ProductParamModel::whereRaw("param_id = ?",[(int)@$value])->get()->toArray();              
+                if(count($data) > 0){
+                  $checked     =   0;
+                  $type_msg           =   "alert-warning";            
+                  $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+                }            
               }                
             }
           }

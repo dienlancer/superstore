@@ -9,7 +9,8 @@ use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
 use App\ProductCategoryModel;
-
+use App\ProductParamModel;
+use App\CategoryParamModel;
 use DB;
 use Sentinel;
 class ProductController extends Controller {
@@ -34,14 +35,17 @@ class ProductController extends Controller {
           return view("adminsystem.no-access");
         }
   	}	
-  	public function loadData(Request $request){      
+  	public function loadData(Request $request){    
+      $category_id=(int)@$request->category_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_product');        
       $query=DB::table('product')
       ->join('category_product','product.category_id','=','category_product.id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_id)){
-        $query->where('product.category_id',(int)@$request->category_id);
+      if(count($arrCategoryID)){
+        $query->whereIn('product.category_id',$arrCategoryID);
       }   
       $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname as category_name','product.sort_order','product.status','product.created_at','product.updated_at')
                   ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname','product.sort_order','product.status','product.created_at','product.updated_at')
@@ -57,23 +61,27 @@ class ProductController extends Controller {
         $title="";
         $icon=$this->_icon; 
         $arrRowData=array();        
+        $arrProductParam=array();
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";  
         if(in_array($requestControllerAction, $arrPrivilege)){
           switch ($task) {
            case 'edit':
               $title=$this->_title . " : Update";
-              $arrRowData=ProductModel::find((int)@$id)->toArray();                    
+              $arrRowData=ProductModel::find((int)@$id)->toArray();       
+              $arrProductParam=ProductParamModel::whereRaw("product_id = ?",[(int)@$id])->get()->toArray();                  
            break;
            case 'add':
               $title=$this->_title . " : Add new";
            break;     
         }    
-        $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();        
+        $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();       
+        $arrCategoryParam=CategoryParamModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray(); 
         $arrCategoryProductRecursive=array();
+        $arrCategoryParamRecursive=array();
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
-        
-        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","controller","task","title","icon"));
+        categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ; 
+        return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrCategoryParamRecursive","arrProductParam","arrRowData","controller","task","title","icon"));
         }else{
             return view("adminsystem.no-access");
         }
@@ -98,6 +106,7 @@ class ProductController extends Controller {
             $child_image          =   trim($request->child_image);                    
             $sort_order           =   trim($request->sort_order);          
             $category_id	        =		trim($request->category_id); 
+            $category_param_id    =   ($request->category_param_id);
             $size_type            =   trim($request->size_type);
             $data 		            =   array();
             $info 		            =   array();
@@ -199,7 +208,7 @@ class ProductController extends Controller {
           $item->detail           = $detail;       
           $item->intro            = $intro;  
           $item->category_id      = (int)@$category_id;                            
-          $item->size_type            = $size_type;  
+          $item->size_type        = $size_type;  
           $item->sort_order 	    =	(int)@$sort_order;                
           $item->updated_at 	    =	date("Y-m-d H:i:s",time());  
           // begin upload product child image  
@@ -223,7 +232,31 @@ class ProductController extends Controller {
             $menu_id=(int)$dataMenu[0]['id'];
             $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
             DB::statement($sql);    
-          }            
+          }      
+          if(count(@$category_param_id)>0){                            
+            $arrProductParam=ProductParamModel::whereRaw("product_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
+            $arrCategoryParamID=array();
+            foreach ($arrProductParam as $key => $value) {
+              $arrCategoryParamID[]=$value["param_id"];
+            }
+            $selected=@$category_param_id;
+            sort($selected);
+            sort($arrCategoryParamID);         
+            $resultCompare=0;
+            if($selected == $arrCategoryParamID){
+              $resultCompare=1;       
+            }
+            if($resultCompare==0){
+              ProductParamModel::whereRaw("product_id = ?",[(int)@$item->id])->delete();  
+              foreach ($selected as $key => $value) {
+                $param_id=$value;
+                $productParam=new ProductParamModel;
+                $productParam->product_id=(int)@$item->id;
+                $productParam->param_id=(int)@$param_id;            
+                $productParam->save();
+              }
+            }       
+          }      
           $info = array(
             'type_msg' 			=> "has-success",
             'msg' 				=> 'Save data successfully',

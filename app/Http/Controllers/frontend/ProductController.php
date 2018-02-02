@@ -32,7 +32,8 @@ use App\AlbumModel;
 use App\PhotoModel;
 use App\CategoryVideoModel;
 use App\VideoModel;
-
+use App\ProductParamModel;
+use App\CategoryParamModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Session;
@@ -102,19 +103,23 @@ class ProductController extends Controller {
       return redirect()->route("frontend.index.login"); 
     }
     $arrRowData=array();
+    $arrProductParam=array();
     switch ($task) {
        case 'edit':
-       $arrRowData=ProductModel::find((int)@$id)->toArray();                    
+       $arrRowData=ProductModel::find((int)@$id)->toArray();       
+       $arrProductParam=ProductParamModel::whereRaw("product_id = ?",[(int)@$id])->get()->toArray();                           
        break;
        case 'add':
        break;     
     }    
-    $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();        
-    $arrCategoryProductRecursive=array();
-    categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ;  
-    
+    $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();       
+        $arrCategoryParam=CategoryParamModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray(); 
+        $arrCategoryProductRecursive=array();
+        $arrCategoryParamRecursive=array();
+        categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
+        categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ; 
     $controller=$this->_controller;  
-    return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","arrRowData","task"));
+    return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","arrCategoryParamRecursive","arrProductParam","arrRowData","task"));
   }
   public function save(Request $request){
             $id                   =   trim($request->id);      
@@ -134,7 +139,8 @@ class ProductController extends Controller {
             $child_image          =   trim($request->child_image); 
             $size_type            =   trim($request->size_type);                   
             $sort_order           =   trim($request->sort_order);          
-            $category_id          =   trim($request->category_id);                
+            $category_id          =   trim($request->category_id);
+            $category_param_id    =   ($request->category_param_id);                
             $data                 =   array();
             $info                 =   array();
             $error                =   array();
@@ -251,7 +257,31 @@ class ProductController extends Controller {
             $menu_id=(int)$dataMenu[0]['id'];
             $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
             DB::statement($sql);    
-          }            
+          }   
+          if(count(@$category_param_id)>0){                            
+            $arrProductParam=ProductParamModel::whereRaw("product_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
+            $arrCategoryParamID=array();
+            foreach ($arrProductParam as $key => $value) {
+              $arrCategoryParamID[]=$value["param_id"];
+            }
+            $selected=@$category_param_id;
+            sort($selected);
+            sort($arrCategoryParamID);         
+            $resultCompare=0;
+            if($selected == $arrCategoryParamID){
+              $resultCompare=1;       
+            }
+            if($resultCompare==0){
+              ProductParamModel::whereRaw("product_id = ?",[(int)@$item->id])->delete();  
+              foreach ($selected as $key => $value) {
+                $param_id=$value;
+                $productParam=new ProductParamModel;
+                $productParam->product_id=(int)@$item->id;
+                $productParam->param_id=(int)@$param_id;            
+                $productParam->save();
+              }
+            }       
+          }              
           $info = array(
             'type_msg'      => "has-success",
             'msg'         => 'Save data successfully',
