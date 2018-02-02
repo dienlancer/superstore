@@ -200,7 +200,7 @@ class ProductController extends Controller {
           $item->intro            = $intro;  
           $item->category_id      = (int)@$category_id;                            
           $item->size_type            = $size_type;  
-          $item->sort_order 	    =	(int)$sort_order;                
+          $item->sort_order 	    =	(int)@$sort_order;                
           $item->updated_at 	    =	date("Y-m-d H:i:s",time());  
           // begin upload product child image  
           $arrImage=array();                       

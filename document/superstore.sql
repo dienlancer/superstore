@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 01, 2018 lúc 10:06 PM
+-- Thời gian đã tạo: Th2 02, 2018 lúc 03:20 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -284,11 +284,33 @@ CREATE TABLE `category_param` (
 --
 
 INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_value`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Tham số 1', 'tham-so-1', 0, '1', 1, 1, '2018-02-01 20:40:54', '2018-02-01 20:45:29'),
-(5, 'Tham số 2', 'tham-so-2', 0, '2', 2, 1, '2018-02-01 20:46:48', '2018-02-01 20:48:15'),
-(6, 'Tham số 3', 'tham-so-3', 0, '3', 3, 1, '2018-02-01 20:46:56', '2018-02-01 20:46:56'),
-(7, 'Tham số 4', 'tham-so-4', 0, '4', 4, 1, '2018-02-01 20:47:04', '2018-02-01 20:47:04'),
-(8, 'Tham số 5', 'tham-so-5', 0, '5', 5, 1, '2018-02-01 20:47:38', '2018-02-01 21:05:45');
+(1, 'Xuất xứ', 'xuat-xu', 0, '', 1, 1, '2018-02-01 20:40:54', '2018-02-02 01:34:27'),
+(5, 'Nhật', 'nhat', 1, '', 1, 1, '2018-02-01 20:46:48', '2018-02-02 01:40:43'),
+(9, 'Thương hiệu', 'thuong-hieu', 0, '', 2, 1, '2018-02-02 01:38:44', '2018-02-02 01:38:48'),
+(10, 'Mỹ', 'my', 1, '', 2, 1, '2018-02-02 01:39:59', '2018-02-02 01:39:59'),
+(11, 'Hàn Quốc', 'han-quoc', 1, '', 3, 1, '2018-02-02 01:40:14', '2018-02-02 01:40:14'),
+(12, 'Trung Quốc', 'trung-quoc', 1, '', 4, 1, '2018-02-02 01:40:27', '2018-02-02 01:40:30'),
+(13, 'Nike', 'nike', 9, '', 9, 1, '2018-02-02 01:41:04', '2018-02-02 01:44:02'),
+(14, 'Adidas', 'adidas', 9, '', 2, 1, '2018-02-02 01:41:32', '2018-02-02 01:44:02'),
+(15, 'Jordan', 'jordan', 9, '', 4, 1, '2018-02-02 01:41:45', '2018-02-02 01:44:02'),
+(16, 'Converse', 'converse', 9, '', 5, 1, '2018-02-02 01:42:53', '2018-02-02 01:44:02'),
+(17, 'Reebok', 'reebok', 9, '', 6, 1, '2018-02-02 01:43:05', '2018-02-02 01:44:02'),
+(18, 'Vans', 'vans', 9, '', 7, 1, '2018-02-02 01:43:17', '2018-02-02 01:44:02'),
+(19, 'Under Armour', 'under-armour', 9, '', 8, 1, '2018-02-02 01:43:26', '2018-02-02 01:44:02'),
+(20, 'Puma', 'puma', 9, '', 1, 1, '2018-02-02 01:43:34', '2018-02-02 01:43:34'),
+(21, 'New Balance', 'new-balance', 9, '', 3, 1, '2018-02-02 01:43:49', '2018-02-02 01:44:02'),
+(22, 'Đơn vị', 'don-vi', 0, '', 3, 1, '2018-02-02 01:44:45', '2018-02-02 01:45:02'),
+(23, 'Chiếc', 'chiec', 22, '', 1, 1, '2018-02-02 01:45:15', '2018-02-02 01:45:15'),
+(24, 'Bịch', 'bich', 22, '', 1, 1, '2018-02-02 01:45:25', '2018-02-02 01:45:25'),
+(25, 'Lọ', 'lo', 22, '', 1, 1, '2018-02-02 01:45:34', '2018-02-02 01:45:34'),
+(26, 'Lô hàng', 'lo-hang', 22, '', 1, 1, '2018-02-02 01:46:20', '2018-02-02 01:46:20'),
+(27, 'Màu', 'mau', 0, '', 4, 1, '2018-02-02 01:47:29', '2018-02-02 01:47:29'),
+(28, 'Xanh lá cây', 'xanh-la-cay', 27, '#00c60e', 5, 1, '2018-02-02 01:48:01', '2018-02-02 01:51:22'),
+(29, 'Đỏ', 'do', 27, '#c60000', 4, 1, '2018-02-02 01:48:22', '2018-02-02 01:51:22'),
+(30, 'Tím', 'tim', 27, '#8c00c6', 3, 1, '2018-02-02 01:48:45', '2018-02-02 01:51:22'),
+(31, 'Vàng', 'vang', 27, '#e6e900', 2, 1, '2018-02-02 01:49:17', '2018-02-02 01:51:22'),
+(32, 'Hồng', 'hong', 27, '#ff00e4', 1, 1, '2018-02-02 01:49:49', '2018-02-02 01:51:22'),
+(33, 'Bạc', 'bac', 27, '#e8d65d', 6, 1, '2018-02-02 01:51:00', '2018-02-02 01:51:22');
 
 -- --------------------------------------------------------
 
@@ -1280,7 +1302,10 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (486, 1, 'AKrOzoCvVttxLIVRMnTD6GPbj2iWGwvK', '2018-02-01 02:56:37', '2018-02-01 02:56:37'),
 (487, 1, 'BaciCQSFrRR68rCmWlXSBTzmdHd27uiN', '2018-02-01 02:56:37', '2018-02-01 02:56:37'),
 (488, 1, 'KGY6WVGRXBb3UJWz8YnDSw8hXGgzgkA6', '2018-02-01 11:35:24', '2018-02-01 11:35:24'),
-(489, 1, '6WdgCEIxtViQrSWjU3UK9HL7wyZ34TUX', '2018-02-01 11:35:24', '2018-02-01 11:35:24');
+(489, 1, '6WdgCEIxtViQrSWjU3UK9HL7wyZ34TUX', '2018-02-01 11:35:24', '2018-02-01 11:35:24'),
+(490, 1, 'SfQrjxzVWC8XrSnz8yWht0t3Q8UQdOQr', '2018-02-01 18:27:36', '2018-02-01 18:27:36'),
+(494, 1, 'RjNhUlg5noCoWG1eUNo1StHO874EkDvu', '2018-02-01 19:03:40', '2018-02-01 19:03:40'),
+(496, 8, 'q5ej4SLA1pE4JtQe901qfAYtspVVz7Qg', '2018-02-01 19:11:45', '2018-02-01 19:11:45');
 
 -- --------------------------------------------------------
 
@@ -1459,7 +1484,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `size_type`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
 (4, '273185649', 'Đầm dự tiệc tay ren sang trọng - ĐR 431', 'metakeyword Đầm dự tiệc tay ren sang trọng - ĐR 431', 'metadescription Đầm dự tiệc tay ren sang trọng - ĐR 431', 'dam-du-tiec-tay-ren-sang-trong-dr-431', 'dam-vay-1.jpg', 1, NULL, '160000.00', '90000.00', 'giới thiệu Đầm dự tiệc tay ren sang trọng - ĐR 431', '<p>chi tiết&nbsp;Đầm dự tiệc tay ren sang trọng - ĐR 431</p>', NULL, 42, '100 x 200', 1, 1, '2018-02-01 04:15:10', '2018-02-01 08:38:12'),
-(5, '846273591', 'Sản phẩm 1', 'meta keyword 1', 'meta description 1', 'san-pham-1', 'dam-vay-3.jpg', 0, '[\"dam-vay-4.jpg\",\"dam-vay-5.jpg\"]', '100000.00', '90000.00', 'giới thiệu 1', '<p>chi tiết 1</p>', NULL, 15, '200 x 30', 8, 0, '2018-02-01 08:47:45', '2018-02-01 08:47:45');
+(5, '846273591', 'Sản phẩm 1', 'meta keyword 1', 'meta description 1', 'san-pham-1', 'dam-vay-3.jpg', 0, '[\"dam-vay-4.jpg\",\"dam-vay-5.jpg\"]', '100000.00', '90000.00', 'giới thiệu 1', '<p>chi tiết 1</p>', NULL, 15, '200 x 30', 8, 0, '2018-02-01 08:47:45', '2018-02-02 01:32:13');
 
 -- --------------------------------------------------------
 
@@ -2239,10 +2264,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-01 11:35:24', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-01 11:35:24'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-01 19:03:40', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-01 19:03:40'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-01 02:55:04', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-01 02:55:04');
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-01 19:11:45', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-01 19:11:45');
 
 -- --------------------------------------------------------
 
@@ -2601,7 +2626,7 @@ ALTER TABLE `category_banner`
 -- AUTO_INCREMENT cho bảng `category_param`
 --
 ALTER TABLE `category_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `category_product`
@@ -2691,7 +2716,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=490;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=497;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2709,7 +2734,7 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `project`

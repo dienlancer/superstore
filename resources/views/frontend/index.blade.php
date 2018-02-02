@@ -6,7 +6,23 @@ if(isset($alias)){
 ?>
 @extends("frontend.master")
 @section("content")
-<div class="container box-inner-content">    
+<?php 
+$wrapper='';
+switch ($component) {
+    case 'security':
+    case 'account':
+    case "list-product":
+    case "list-media":
+    case "form-product":                
+    case "form-media":
+        $wrapper='container-fluid';
+    break;
+    default:        
+        $wrapper='container';
+    break;
+}
+?>
+<div class="<?php echo $wrapper; ?> box-inner-content">    
     <?php             
     switch ($layout){
         case 'two-column':  
@@ -114,8 +130,8 @@ if(isset($alias)){
                 case 'security':
                 case 'account':
                 case "list-product":
-                case "form-product":
                 case "list-media":
+                case "form-product":                
                 case "form-media":
                 $arrUser =array();   
                 $user = Sentinel::forceCheck(); 

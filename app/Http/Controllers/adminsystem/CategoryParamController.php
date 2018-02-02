@@ -150,13 +150,11 @@ class CategoryParamController extends Controller {
                        
         }  
         $item->fullname 		=	$fullname;
-        $item->alias 			  =	$alias;
-        
-        
-        $item->parent_id 		=	(int)$category_id;      
+        $item->alias 			  =	$alias;                
+        $item->parent_id 		=	(int)@$category_id;      
         $item->param_value  = @$param_value;      
-        $item->sort_order 	=	(int)$sort_order;
-        $item->status 			=	(int)$status;    
+        $item->sort_order 	=	(int)@$sort_order;
+        $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save();  	        
         $info = array(

@@ -48,7 +48,8 @@ $linkSortOrder			=	route('adminsystem.'.$controller.'.sortOrder');
 						<th width="1%"><input type="checkbox" name="checkall-toggle"></th>           
 						<th>Chủ đề</th>
 						<th>Alias</th>		
-						<th>Chủ đề cha</th>										
+						<th>Chủ đề cha</th>
+						<th>Giá trị</th>										
 						<th width="10%">Sắp xếp</th>
 						<th width="10%">Trạng thái</th>							
 						<th width="1%">Sửa</th>  
@@ -63,6 +64,7 @@ $linkSortOrder			=	route('adminsystem.'.$controller.'.sortOrder');
 							$id=$value['id'];
 							$fullname=$value['fullname'];							
 							$parent_fullname=$value['parent_fullname'];
+							$param_value=$value['param_value'];
 							$alias=$value['alias'];							
 							$sort_order=$value['sort_order'];
 							$status=$value['status'];
@@ -73,7 +75,8 @@ $linkSortOrder			=	route('adminsystem.'.$controller.'.sortOrder');
 								<td><?php echo $checked; ?></td>                
 								<td><?php echo $fullname; ?></td>
 								<td><?php echo $alias; ?></td>		
-								<td><?php echo $parent_fullname; ?></td>												
+								<td><?php echo $parent_fullname; ?></td>
+								<td><?php echo $param_value; ?></td>												
 								<td><?php echo $sort_order; ?></td>
 								<td><?php echo $status; ?></td>							
 								<td><?php echo $edited; ?></td>  
