@@ -432,17 +432,19 @@ class MenuController extends Controller {
         return view("adminsystem.".$this->_controller.".article-component",compact("controller","title","icon","arrCategoryArticleRecursive","menu_type_id")); 
       }
       public function getArticleList(Request $request){
-        $filter_search="";    
-        $category_article_id=0;  
+        $filter_search="";            
         $menu_type_id=$request->menu_type_id;
+        $category_id=(int)@$request->category_article_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_article');     
         $query=DB::table('article')
       ->join('article_category','article.id','=','article_category.article_id')
       ->join('category_article','category_article.id','=','article_category.category_article_id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_article_id)){
-        $query->where('article_category.category_article_id',(int)@$request->category_article_id);
+      if(count($arrCategoryID) > 0){
+        $query->whereIn('article_category.category_article_id',$arrCategoryID);
       }   
       $data=$query->select('article.id','article.fullname','article.alias','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
                   ->groupBy('article.id','article.fullname','article.alias','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
@@ -464,17 +466,19 @@ class MenuController extends Controller {
         return view("adminsystem.".$this->_controller.".product-component",compact("controller","title","icon","arrCategoryProductRecursive","menu_type_id")); 
       }
       public function getProductList(Request $request){
-        $filter_search="";    
-        $category_id=0;  
+        $filter_search="";            
         $menu_type_id=$request->menu_type_id;
+        $category_id=(int)@$request->category_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_product');        
         $query=DB::table('product')
         ->join('category_product','product.category_id','=','category_product.id')  ;     
         if(!empty(@$request->filter_search)){
           $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
         }     
-        if(!empty(@$request->category_id)){
-          $query->where('product.category_id',(int)@$request->category_id);
-        }   
+        if(count($arrCategoryID)){
+        $query->whereIn('product.category_id',$arrCategoryID);
+      }  
         $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname as category_name','product.sort_order','product.status','product.created_at','product.updated_at')
         ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname','product.sort_order','product.status','product.created_at','product.updated_at')
         ->orderBy('product.sort_order', 'asc')
