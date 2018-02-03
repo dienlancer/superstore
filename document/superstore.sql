@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 03, 2018 lúc 06:50 AM
+-- Thời gian đã tạo: Th2 03, 2018 lúc 01:24 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -323,7 +323,12 @@ INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_val
 (43, 'COCOSIN', 'cocosin', 9, '', 1, 1, '2018-02-03 04:15:53', '2018-02-03 04:15:53'),
 (44, 'WEPHOBIA', 'wephobia', 9, '', 1, 1, '2018-02-03 04:16:05', '2018-02-03 04:16:05'),
 (45, 'MAGONN', 'magonn', 9, '', 1, 1, '2018-02-03 04:16:21', '2018-02-03 04:16:21'),
-(46, 'LIBE', 'libe', 9, '', 1, 1, '2018-02-03 04:16:33', '2018-02-03 04:16:33');
+(46, 'LIBE', 'libe', 9, '', 1, 1, '2018-02-03 04:16:33', '2018-02-03 04:16:33'),
+(47, 'Chất liệu', 'chat-lieu', 0, '', 6, 1, '2018-02-03 11:34:21', '2018-02-03 11:34:29'),
+(48, 'Thun', 'thun', 47, '', 2, 1, '2018-02-03 11:34:43', '2018-02-03 11:35:29'),
+(49, 'Vải', 'vai', 47, '', 1, 1, '2018-02-03 11:34:53', '2018-02-03 11:35:29'),
+(50, 'Nhà thiết kế', 'nha-thiet-ke', 0, '', 7, 1, '2018-02-03 11:36:34', '2018-02-03 11:36:34'),
+(51, 'Clara Fashion', 'clara-fashion', 50, '', 1, 1, '2018-02-03 11:36:54', '2018-02-03 11:36:54');
 
 -- --------------------------------------------------------
 
@@ -1374,7 +1379,8 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (533, 1, 'HdLRvWB8aWY9gaFouz9JVIZii2eGcpPp', '2018-02-02 19:05:37', '2018-02-02 19:05:37'),
 (535, 1, 'ot4ul9MDUpNjh3avRZwfDQhckk7zNpNC', '2018-02-02 19:07:26', '2018-02-02 19:07:26'),
 (536, 1, 'QMzisn3xBXMMAegjFxwbyYlkU2opUFRz', '2018-02-02 19:07:26', '2018-02-02 19:07:26'),
-(538, 8, 'ubMneyA1o1wIPK0UHx6I8WuhTRJlYHkP', '2018-02-02 21:16:54', '2018-02-02 21:16:54');
+(538, 8, 'ubMneyA1o1wIPK0UHx6I8WuhTRJlYHkP', '2018-02-02 21:16:54', '2018-02-02 21:16:54'),
+(539, 8, 'qGTddyiGKSzM0wHVkenVijba0gtvLqOt', '2018-02-03 04:53:58', '2018-02-03 04:53:58');
 
 -- --------------------------------------------------------
 
@@ -1552,7 +1558,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `size_type`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
-(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231</p>', 111, 42, '', 8, 1, '2018-02-01 04:15:10', '2018-02-03 05:50:17'),
+(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p style=\"text-align:justify\">Đầm Body Thời Trang Eden Ren Hoa Cao Cấp được l&agrave;m từ chất liệu ren nhập cao cấp v&agrave; kỹ thuật may kh&eacute;o l&eacute;o, tỉ mỉ sẽ mang lại cho bạn sự sang trọng qu&yacute; ph&aacute;i.&nbsp;</p>\n\n<p style=\"text-align:justify\">Điểm nổi bật :</p>\n\n<p style=\"text-align:justify\">-Kiểu d&aacute;ng : đầm body, s&aacute;t n&aacute;ch.</p>\n\n<p style=\"text-align:justify\">-Chất liệu : Ren cao c&acirc;p</p>\n\n<p style=\"text-align:justify\">-M&agrave;u : Đỏ</p>\n\n<p style=\"text-align:justify\">-Size : XS, S,M,L,XL.</p>\n\n<p style=\"text-align:justify\">-Xuất xứ : Việt Nam.</p>\n\n<p style=\"text-align:justify\">-Thương hiệu : Eden.</p>\n\n<p style=\"text-align:justify\">-Trọng lượng :250g.</p>\n\n<p style=\"text-align:justify\">Th&ocirc;ng số sản phẩm:</p>\n\n<p style=\"text-align:justify\">V&ograve;ng ngực x eo x m&ocirc;ng x chiều d&agrave;i :</p>\n\n<p style=\"text-align:justify\">-Size XS : &nbsp;80 x 64 x 84 x 88-90 (cm) (dưới 43kg)</p>\n\n<p style=\"text-align:justify\">-Size S : 82 x 66 x 86 x 88-90 (cm) (43-45kg)</p>\n\n<p style=\"text-align:justify\">-Size M : 84 x 70 x 90 x 88-90 (cm) (45-50kg)</p>\n\n<p style=\"text-align:justify\">-Size L: 88 x 74 x 94 x 88-90 (cm) (50-55kg)</p>\n\n<p style=\"text-align:justify\">-Size XL: 92 x 78 x 98 x 88-90 (cm) (55-60kg)</p>\n\n<p style=\"text-align:center\"><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-2.png\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-1.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-3.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-4.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-5.jpg\" /></p>', 237, 42, '', 8, 1, '2018-02-01 04:15:10', '2018-02-03 12:23:00'),
 (11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'dam-body-thoi-trang-eden-ren-hoa-co-tron-cao-cap-d233', 'D233.jpg', 1, '[\"D233-1.jpg\",\"D233-2.jpg\",\"D233-3.jpg\"]', '569000.00', '0.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tr&ograve;n Cao Cấp - D233&nbsp;</p>', NULL, 42, '', 8, 2, '2018-02-02 04:57:22', '2018-02-02 17:22:42'),
 (12, '347198526', 'Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metakeyword Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metadescription Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'dam-suong-thoi-trang-eden-phoi-luoi-hoa-tiet-theu-hoa-d234', 'D234-1.jpg', 1, '[\"D234-2.jpg\",\"D234-3.jpg\",\"D234-4.jpg\",\"D234-5.jpg\"]', '569000.00', '299000.00', 'giới thiệu Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', '<p>chi tiết&nbsp;Đầm Su&ocirc;ng Thời Trang Eden Phối Lưới Họa Tiết Th&ecirc;u Hoa - D234</p>', NULL, 42, '', 8, 3, '2018-02-02 06:56:02', '2018-02-02 06:57:48'),
 (13, '295683174', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'dam-body-thoi-trang-eden-ren-hoa-co-tim-d235', 'D235.jpg', 1, '[\"D235-1.jpg\",\"D235-2.jpg\",\"D235-3.jpg\"]', '569000.00', '545000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235</p>', NULL, 42, '450 x 20', 8, 4, '2018-02-02 07:18:26', '2018-02-03 02:21:36');
@@ -1601,13 +1607,22 @@ INSERT INTO `product_param` (`id`, `product_id`, `param_id`, `created_at`, `upda
 (98, 13, 37, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
 (99, 13, 38, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
 (100, 13, 39, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
-(135, 4, 11, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(136, 4, 23, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(137, 4, 28, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(138, 4, 30, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(139, 4, 36, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(140, 4, 38, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
-(141, 4, 44, '2018-02-03 04:18:08', '2018-02-03 04:18:08');
+(284, 4, 10, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(285, 4, 23, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(286, 4, 28, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(287, 4, 29, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(288, 4, 30, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(289, 4, 31, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(290, 4, 32, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(291, 4, 33, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(292, 4, 35, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(293, 4, 36, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(294, 4, 37, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(295, 4, 38, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(296, 4, 39, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(297, 4, 45, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(298, 4, 48, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
+(299, 4, 51, '2018-02-03 11:43:17', '2018-02-03 11:43:17');
 
 -- --------------------------------------------------------
 
@@ -2393,7 +2408,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last
 (1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-02 19:07:26', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-02 19:07:26'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-02 21:16:54', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-02 21:16:54');
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-03 04:53:58', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-03 04:53:58');
 
 -- --------------------------------------------------------
 
@@ -2758,7 +2773,7 @@ ALTER TABLE `category_banner`
 -- AUTO_INCREMENT cho bảng `category_param`
 --
 ALTER TABLE `category_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT cho bảng `category_product`
@@ -2848,7 +2863,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=539;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=540;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2872,7 +2887,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT cho bảng `product_param`
 --
 ALTER TABLE `product_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
 -- AUTO_INCREMENT cho bảng `project`

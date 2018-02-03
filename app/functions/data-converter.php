@@ -593,12 +593,13 @@ function product3Converter($data=array(),$controller){
             $alias=$data[$i]['alias'];            
             $price='<div class="calmoney">'.fnPrice((int)@$data[$i]["price"]).'</div>'; 
             $sale_price='<div class="calmoney">'.fnPrice((int)@$data[$i]["sale_price"]).'</div>'; 
+            $fullname='<a href="'.route('frontend.index.index',[$alias]).'">'.$data[$i]['fullname'].'</a>';
             $result[$i] = array(
                 'checked'                  =>   '<input type="checkbox" onclick="checkWithList(this)" name="cid"  />',
                 'is_checked'               =>   0,
                 "id"                       =>   $id,
                 "code"                     =>   $data[$i]["code"],
-                "fullname"                 =>   $data[$i]["fullname"], 
+                "fullname"                 =>   $fullname, 
                 "alias"                    =>   $alias     ,          
                 "category_name"            =>   $data[$i]['category_name'],                
                 "image"                    =>   $image,
@@ -1247,13 +1248,13 @@ function media2Converter($data=array(),$controller,$directory){
             if(file_exists($file_path)){
                 /* begin check if file image */
                 if(@is_array(getimagesize($file_path))){
-                    $featured_file='<a data-fancybox="gallery" href="'.asset('upload/'.$data[$i]).'" ><img src="'.asset('upload/'.$data[$i]).'" style="width:25%" /></a>';
+                    $featured_file='<a data-fancybox="gallery" href="'.asset($directory.'/'.$data[$i]).'" ><img src="'.asset($directory.'/'.$data[$i]).'" style="width:25%" /></a>';
                 }
                 /* end check if file image */
                 /* begin check if file ico */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.ico)$#";
                 if(preg_match($pattern, $data[$i],$match)==true){
-                    $featured_file='<a data-fancybox="gallery" href="'.asset('upload/'.$data[$i]).'" ><img src="'.asset('upload/'.$data[$i]).'" /></a>';
+                    $featured_file='<a data-fancybox="gallery" href="'.asset($directory.'/'.$data[$i]).'" ><img src="'.asset($directory.'/'.$data[$i]).'" /></a>';
                 }
                 /* end check if file ico */
                 /* begin check if file word */

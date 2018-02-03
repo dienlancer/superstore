@@ -28,11 +28,11 @@ class MediaController extends Controller {
 	    if(!empty($user)){                
 	      $arrUser = $user->toArray();    
 	    }      
-	    $folder_name='vip-'.(int)@$arrUser['id'];
-	    $directory='vip-member'.DS.$folder_name;
-  		$strDirUpload=base_path($directory);
+	    $folder_user='vip-'.(int)@$arrUser['id'];
+	    $folder_vip='vip-member'.DS.$folder_user;
+  		$strDirUpload=base_path($folder_vip);
   		$data = scandir($strDirUpload);		  		
-  		$data=media2Converter($data,$this->_controller,$directory);		           		
+  		$data=media2Converter($data,$this->_controller,$folder_vip);		           		
   		return $data;
   	}	 
   	public function getForm($task){	

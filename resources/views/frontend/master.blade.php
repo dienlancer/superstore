@@ -116,7 +116,7 @@ if(count($arrCart) > 0){
 	<!-- begin font-awesome -->
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/font-awesome.css') }}" />
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/all.css') }}" />
-	<link rel="stylesheet" href="{{ asset('public/frontend/web-fonts-with-css/css/fontawesome-all.css') }}" />
+	<link rel="stylesheet" href="{{ asset('public/frontend/css/fontawesome-all.css') }}" />
 	<!-- end font-awesome -->	
 	<!-- begin ddsmoothmenu -->
 	<script src="{{ asset('public/frontend/js/ddsmoothmenu.js') }}"></script>

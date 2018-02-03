@@ -423,25 +423,7 @@ if(count($item) > 0){
         </div>
         <div class="margin-top-15">
             <?php echo $detail; ?>
-        </div>
-        <div class="margin-top-15 thuong-hieu">
-            <a href="<?php echo url('/'); ?>"><?php echo $contacted_person; ?></a> – nhà nhập khẩu và phân phối gỗ nguyên liệu nhập khẩu Mỹ.
-        </div>
-        <div class="margin-top-15">
-            <b>Thông tin liên hệ:</b>&nbsp;<?php echo $contacted_person; ?>
         </div>        
-        <div class="margin-top-5">
-            <b>VPGD:</b> <?php echo $office; ?>
-        </div>        
-        <div class="margin-top-5">
-            <b>Email:</b> <?php echo $email_to; ?>
-        </div>
-        <div class="margin-top-5">
-            <b>Website:</b> <?php echo url('/'); ?>
-        </div>
-        <div class="margin-top-5">
-            <b>Hotline:</b> <?php echo $telephone; ?>
-        </div>              
         <?php              
         $category_id=$item['category_id'];               
         $dataProduct=DB::table('product')                        
