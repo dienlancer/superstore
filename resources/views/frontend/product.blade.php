@@ -5,48 +5,52 @@ use App\CategoryParamModel;
 use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 if(count($item) > 0){
-    $id=$item["id"];
-    $fullname = $item["fullname"];
-    $intro=$item["intro"];
-    $detail=$item['detail'];  
-    $small_img=get_product_thumbnail($item['image']);
-    $large_img=asset('upload/'.$item['image']) ;
-    /* begin cập nhật count view */
-    $count_view=(int)@$item['count_view'];
-    $count_view++;
-    $row                =   ProductModel::find((int)@$id); 
-    $row->count_view=$count_view;
-    $row->save();
-    $count_view_text=number_format($count_view,0,",",".");
-    /* end cập nhật count view */
-    /* begin setting */
-    $address=$setting['address']['field_value'];
-    $email_to=$setting['email_to']['field_value'];
-    $contacted_person=$setting['contacted_person']['field_value'];
-    $telephone=$setting['telephone']['field_value'];
-    $office=$setting['office']['field_value'];
-    /* end setting */    
-    /* begin category */
-    $dataProductCategory=DB::table('category_product')
-    ->join('product','category_product.id','=','product.category_id')     
-    ->select('category_product.id','category_product.fullname','category_product.alias')
-    ->where('product.id','=',(int)@$id)                    
-    ->groupBy('category_product.id','category_product.fullname','category_product.alias')
-    ->orderBy('category_product.sort_order','asc')
-    ->get()->toArray();
-    $arr_category_id=array();
-    $arr_category_name=array(); 
-    $category_name='';  
-    if(count($dataProductCategory) > 0){        
-        $dataProductCategory=convertToArray($dataProductCategory);
-        foreach ($dataProductCategory as $key => $value) {
-            $arr_category_id[]=$value["id"];
-            $permalink=route('frontend.index.index',[$value['alias']]);
-            $arr_category_name[]='<a href="'.$permalink.'">'.$value["fullname"].'</a>' ;                        
-        }       
-        $category_name=implode(' / ', $arr_category_name);      
-    }       
-    /* end category */
+	$id=$item["id"];
+	$fullname = $item["fullname"];
+	$intro=$item["intro"];
+	$detail=$item['detail'];  
+	$small_img=get_product_thumbnail($item['image']);
+	$large_img=asset('upload/'.$item['image']) ;
+	/* begin cập nhật count view */
+	$count_view=(int)@$item['count_view'];
+	$count_view++;
+	$row                =   ProductModel::find((int)@$id); 
+	$row->count_view=$count_view;
+	$row->save();
+	$count_view_text=number_format($count_view,0,",",".");
+	/* end cập nhật count view */
+	/* begin setting */
+	$address=$setting['address']['field_value'];
+	$email_to=$setting['email_to']['field_value'];
+	$contacted_person=$setting['contacted_person']['field_value'];
+	$telephone=$setting['telephone']['field_value'];
+	$office=$setting['office']['field_value'];
+	$product_width = $setting['product_width']['field_value'];
+	$product_height = $setting['product_height']['field_value'];
+	/* end setting */    
+	/* begin category */
+	$dataProductCategory=DB::table('category_product')
+	->join('product','category_product.id','=','product.category_id')     
+	->select('category_product.id','category_product.fullname','category_product.alias')
+	->where('product.id','=',(int)@$id)                    
+	->groupBy('category_product.id','category_product.fullname','category_product.alias')
+	->orderBy('category_product.sort_order','asc')
+	->get()->toArray();
+	$arr_category_id=array();
+	$arr_category_name=array(); 
+	$category_name='';  
+	if(count($dataProductCategory) > 0){        
+		$dataProductCategory=convertToArray($dataProductCategory);
+		foreach ($dataProductCategory as $key => $value) {
+			$arr_category_id[]=$value["id"];
+			$permalink=route('frontend.index.index',[$value['alias']]);
+			$arr_category_name[]='<a href="'.$permalink.'">'.$value["fullname"].'</a>' ;                        
+		}       
+		$category_name=implode(' / ', $arr_category_name);      
+	}       
+	/* end category */
+	$arrPicture=json_decode($item['child_image']);
+	$arrPicture[]=$item['image'];    
     ?>    
     <div class="margin-top-15">
         <?php       
@@ -67,7 +71,52 @@ if(count($item) > 0){
         <div>
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
-                    <img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
+                    <div class="image-detail"><img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" /></div>
+                </div>
+                <div class="margin-top-5">
+                	<script type="text/javascript" language="javascript">
+						$(document).ready(function(){
+							$(".product-thumbnail").owlCarousel({
+								autoplay:true,                    
+								loop:true,
+								margin:5,                        
+								nav:false,            
+								mouseDrag: true,
+								touchDrag: true,                                
+								responsiveClass:true,
+								responsive:{
+									0:{
+										items:1
+									},
+									600:{
+										items:1
+									},
+									1000:{
+										items:4
+									}
+								}
+							});
+							var chevron_left='<i class="fa fa-chevron-left"></i>';
+							var chevron_right='<i class="fa fa-chevron-right"></i>';
+							$("div.product-thumbnail div.owl-prev").html(chevron_left);
+							$("div.product-thumbnail div.owl-next").html(chevron_right);
+						});                
+					</script>
+					<div class="owl-carousel product-thumbnail owl-theme">
+						<?php 
+						if(count($arrPicture) > 0){
+							for($i=0;$i<count($arrPicture);$i++){                                            
+								$small_thumbnail=asset('/upload/'.$product_width.'x'.$product_height.'-'.$arrPicture[$i]);    
+								$large_thumbnail=asset('/upload/'.$arrPicture[$i]);                            
+								?>
+								<div>									
+										<a href="javascript:void(0)" onclick="changeImage('<?php echo $small_thumbnail; ?>','<?php echo $large_thumbnail; ?>');"><img  src="<?php echo $small_thumbnail; ?>" width="<?php echo (int)$product_width/5; ?>" /></a>									                                        
+								</div>
+								<?php                                    
+							}
+						}                            
+						?>        
+					</div>
                 </div>
             </div>
             <div class="col-lg-8 no-padding-left">
@@ -341,7 +390,7 @@ if(count($item) > 0){
                 <div class="margin-top-15">
                     <script type="text/javascript" language="javascript">
                         $(document).ready(function(){
-                            $(".related-products").owlCarousel({
+                            $(".product-thumbnail").owlCarousel({
                                 autoplay:false,                    
                                 loop:true,
                                 margin:25,                        
@@ -363,11 +412,11 @@ if(count($item) > 0){
                             });
                             var chevron_left='<i class="fa fa-chevron-left"></i>';
                             var chevron_right='<i class="fa fa-chevron-right"></i>';
-                            $("div.related-products div.owl-prev").html(chevron_left);
-                            $("div.related-products div.owl-next").html(chevron_right);
+                            $("div.product-thumbnail div.owl-prev").html(chevron_left);
+                            $("div.product-thumbnail div.owl-next").html(chevron_right);
                         });                
                     </script>
-                    <div class="owl-carousel related-products owl-theme">
+                    <div class="owl-carousel product-thumbnail owl-theme">
                         <?php 
                         foreach($dataProduct as $key => $value){
                             $featuredImg=get_product_thumbnail($value['image']) ;
@@ -392,10 +441,22 @@ if(count($item) > 0){
 }
 ?>
 <script language="javascript" type="text/javascript">
-    jQuery('.zoom_img').elevateZoom({
+    $('.zoom_img').elevateZoom({
         zoomType: "inner",
         cursor: "crosshair",
         zoomWindowFadeIn: 500,
         zoomWindowFadeOut: 750
     });
+    function changeImage(small_thumbnail,large_thumbnail){    
+        var image_detail=$(".image-detail");
+        var imghtml='<img class="zoom_img" src="'+small_thumbnail+'" data-zoom-image="'+large_thumbnail+'">';        
+        $(image_detail).empty();
+        $(image_detail).append(imghtml);
+        $('.zoom_img').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750
+        });
+    }
 </script> 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 02, 2018 lúc 12:15 PM
+-- Thời gian đã tạo: Th2 03, 2018 lúc 06:50 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -316,7 +316,14 @@ INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_val
 (36, 'M', 'm', 34, '', 2, 1, '2018-02-02 04:24:54', '2018-02-02 04:25:48'),
 (37, 'L', 'l', 34, '', 3, 1, '2018-02-02 04:25:02', '2018-02-02 04:25:48'),
 (38, 'XL', 'xl', 34, '', 4, 1, '2018-02-02 04:25:11', '2018-02-02 04:25:48'),
-(39, 'XS', 'xs', 34, '', 5, 1, '2018-02-02 04:25:21', '2018-02-02 04:25:48');
+(39, 'XS', 'xs', 34, '', 5, 1, '2018-02-02 04:25:21', '2018-02-02 04:25:48'),
+(40, 'REN', 'ren', 9, '', 1, 1, '2018-02-03 04:15:08', '2018-02-03 04:15:08'),
+(41, 'NOSBYN', 'nosbyn', 9, '', 1, 1, '2018-02-03 04:15:24', '2018-02-03 04:15:24'),
+(42, 'THE BLUE T-SHIRT', 'the-blue-t-shirt', 9, '', 1, 1, '2018-02-03 04:15:38', '2018-02-03 04:15:38'),
+(43, 'COCOSIN', 'cocosin', 9, '', 1, 1, '2018-02-03 04:15:53', '2018-02-03 04:15:53'),
+(44, 'WEPHOBIA', 'wephobia', 9, '', 1, 1, '2018-02-03 04:16:05', '2018-02-03 04:16:05'),
+(45, 'MAGONN', 'magonn', 9, '', 1, 1, '2018-02-03 04:16:21', '2018-02-03 04:16:21'),
+(46, 'LIBE', 'libe', 9, '', 1, 1, '2018-02-03 04:16:33', '2018-02-03 04:16:33');
 
 -- --------------------------------------------------------
 
@@ -1360,7 +1367,14 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (524, 1, 'MQuKcCFJhtuKynkQkFHxyZBLIy8Ivd3r', '2018-02-02 00:24:05', '2018-02-02 00:24:05'),
 (526, 1, '3DniRRSZFO1aYX6cCNqgyiL0OJqpfEVf', '2018-02-02 01:06:18', '2018-02-02 01:06:18'),
 (528, 1, 'OfRdoNYhFL3afKEYmg9oWZjtuhANsBfv', '2018-02-02 01:44:35', '2018-02-02 01:44:35'),
-(529, 1, 'MlR5175cwkutGCxMpXuVrhgCzUgFIt9A', '2018-02-02 01:44:35', '2018-02-02 01:44:35');
+(529, 1, 'MlR5175cwkutGCxMpXuVrhgCzUgFIt9A', '2018-02-02 01:44:35', '2018-02-02 01:44:35'),
+(530, 8, 'ipiaaYYS8qIo8iSdqnZ6VdkRKq1iyooC', '2018-02-02 09:02:53', '2018-02-02 09:02:53'),
+(531, 1, 'wSD7DupM92LgniN8nQQvue0JvXYrEUwC', '2018-02-02 10:18:45', '2018-02-02 10:18:45'),
+(532, 1, 'X2NpDhYEcKGWnyoBxRkMG0nasltzUZq4', '2018-02-02 10:18:45', '2018-02-02 10:18:45'),
+(533, 1, 'HdLRvWB8aWY9gaFouz9JVIZii2eGcpPp', '2018-02-02 19:05:37', '2018-02-02 19:05:37'),
+(535, 1, 'ot4ul9MDUpNjh3avRZwfDQhckk7zNpNC', '2018-02-02 19:07:26', '2018-02-02 19:07:26'),
+(536, 1, 'QMzisn3xBXMMAegjFxwbyYlkU2opUFRz', '2018-02-02 19:07:26', '2018-02-02 19:07:26'),
+(538, 8, 'ubMneyA1o1wIPK0UHx6I8WuhTRJlYHkP', '2018-02-02 21:16:54', '2018-02-02 21:16:54');
 
 -- --------------------------------------------------------
 
@@ -1538,10 +1552,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `size_type`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
-(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231</p>', NULL, 42, '', 1, 1, '2018-02-01 04:15:10', '2018-02-02 04:51:10'),
-(11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'dam-body-thoi-trang-eden-ren-hoa-co-tron-cao-cap-d233', 'D233.jpg', 1, '[\"D233-1.jpg\",\"D233-2.jpg\",\"D233-3.jpg\"]', '569000.00', '0.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tr&ograve;n Cao Cấp - D233&nbsp;</p>', NULL, 42, '', 1, 2, '2018-02-02 04:57:22', '2018-02-02 11:03:59'),
+(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231</p>', 111, 42, '', 8, 1, '2018-02-01 04:15:10', '2018-02-03 05:50:17'),
+(11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'dam-body-thoi-trang-eden-ren-hoa-co-tron-cao-cap-d233', 'D233.jpg', 1, '[\"D233-1.jpg\",\"D233-2.jpg\",\"D233-3.jpg\"]', '569000.00', '0.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tr&ograve;n Cao Cấp - D233&nbsp;</p>', NULL, 42, '', 8, 2, '2018-02-02 04:57:22', '2018-02-02 17:22:42'),
 (12, '347198526', 'Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metakeyword Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metadescription Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'dam-suong-thoi-trang-eden-phoi-luoi-hoa-tiet-theu-hoa-d234', 'D234-1.jpg', 1, '[\"D234-2.jpg\",\"D234-3.jpg\",\"D234-4.jpg\",\"D234-5.jpg\"]', '569000.00', '299000.00', 'giới thiệu Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', '<p>chi tiết&nbsp;Đầm Su&ocirc;ng Thời Trang Eden Phối Lưới Họa Tiết Th&ecirc;u Hoa - D234</p>', NULL, 42, '', 8, 3, '2018-02-02 06:56:02', '2018-02-02 06:57:48'),
-(13, '295683174', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'dam-body-thoi-trang-eden-ren-hoa-co-tim-d235', 'D235.jpg', 1, '[\"D235-1.jpg\",\"D235-2.jpg\",\"D235-3.jpg\"]', '569000.00', '545000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235</p>', NULL, 42, '', 8, 4, '2018-02-02 07:18:26', '2018-02-02 07:20:38');
+(13, '295683174', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'dam-body-thoi-trang-eden-ren-hoa-co-tim-d235', 'D235.jpg', 1, '[\"D235-1.jpg\",\"D235-2.jpg\",\"D235-3.jpg\"]', '569000.00', '545000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235</p>', NULL, 42, '450 x 20', 8, 4, '2018-02-02 07:18:26', '2018-02-03 02:21:36');
 
 -- --------------------------------------------------------
 
@@ -1567,26 +1581,33 @@ INSERT INTO `product_param` (`id`, `product_id`, `param_id`, `created_at`, `upda
 (20, 5, 14, '2018-02-02 03:51:55', '2018-02-02 03:51:55'),
 (21, 5, 24, '2018-02-02 03:51:55', '2018-02-02 03:51:55'),
 (22, 5, 31, '2018-02-02 03:51:55', '2018-02-02 03:51:55'),
-(48, 4, 35, '2018-02-02 04:51:10', '2018-02-02 04:51:10'),
-(49, 4, 36, '2018-02-02 04:51:10', '2018-02-02 04:51:10'),
-(50, 4, 37, '2018-02-02 04:51:10', '2018-02-02 04:51:10'),
-(51, 4, 38, '2018-02-02 04:51:10', '2018-02-02 04:51:10'),
-(52, 4, 39, '2018-02-02 04:51:10', '2018-02-02 04:51:10'),
-(53, 11, 35, '2018-02-02 04:57:22', '2018-02-02 04:57:22'),
-(54, 11, 36, '2018-02-02 04:57:22', '2018-02-02 04:57:22'),
-(55, 11, 37, '2018-02-02 04:57:22', '2018-02-02 04:57:22'),
-(56, 11, 38, '2018-02-02 04:57:22', '2018-02-02 04:57:22'),
-(57, 11, 39, '2018-02-02 04:57:22', '2018-02-02 04:57:22'),
 (58, 12, 35, '2018-02-02 06:56:02', '2018-02-02 06:56:02'),
 (59, 12, 36, '2018-02-02 06:56:02', '2018-02-02 06:56:02'),
 (60, 12, 37, '2018-02-02 06:56:02', '2018-02-02 06:56:02'),
 (61, 12, 38, '2018-02-02 06:56:02', '2018-02-02 06:56:02'),
 (62, 12, 39, '2018-02-02 06:56:02', '2018-02-02 06:56:02'),
-(63, 13, 35, '2018-02-02 07:18:26', '2018-02-02 07:18:26'),
-(64, 13, 36, '2018-02-02 07:18:26', '2018-02-02 07:18:26'),
-(65, 13, 37, '2018-02-02 07:18:26', '2018-02-02 07:18:26'),
-(66, 13, 38, '2018-02-02 07:18:26', '2018-02-02 07:18:26'),
-(67, 13, 39, '2018-02-02 07:18:26', '2018-02-02 07:18:26');
+(86, 11, 19, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(87, 11, 28, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(88, 11, 31, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(89, 11, 35, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(90, 11, 36, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(91, 11, 37, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(92, 11, 38, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(93, 11, 39, '2018-02-02 17:22:42', '2018-02-02 17:22:42'),
+(94, 13, 28, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(95, 13, 30, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(96, 13, 35, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(97, 13, 36, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(98, 13, 37, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(99, 13, 38, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(100, 13, 39, '2018-02-02 17:22:57', '2018-02-02 17:22:57'),
+(135, 4, 11, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(136, 4, 23, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(137, 4, 28, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(138, 4, 30, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(139, 4, 36, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(140, 4, 38, '2018-02-03 04:18:08', '2018-02-03 04:18:08'),
+(141, 4, 44, '2018-02-03 04:18:08', '2018-02-03 04:18:08');
 
 -- --------------------------------------------------------
 
@@ -2335,7 +2356,10 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 (474, 1, 'user', NULL, '2018-02-01 02:54:48', '2018-02-01 02:54:48'),
 (475, NULL, 'global', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
 (476, NULL, 'ip', '127.0.0.1', '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
-(477, 1, 'user', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25');
+(477, 1, 'user', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
+(478, NULL, 'global', NULL, '2018-02-02 19:05:12', '2018-02-02 19:05:12'),
+(479, NULL, 'ip', '127.0.0.1', '2018-02-02 19:05:12', '2018-02-02 19:05:12'),
+(480, 1, 'user', NULL, '2018-02-02 19:05:12', '2018-02-02 19:05:12');
 
 -- --------------------------------------------------------
 
@@ -2366,10 +2390,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-02 01:44:35', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-02 01:44:35'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-02 19:07:26', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-02 19:07:26'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-02 00:19:27', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-02 00:19:27');
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-02 21:16:54', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-02 21:16:54');
 
 -- --------------------------------------------------------
 
@@ -2734,7 +2758,7 @@ ALTER TABLE `category_banner`
 -- AUTO_INCREMENT cho bảng `category_param`
 --
 ALTER TABLE `category_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT cho bảng `category_product`
@@ -2788,13 +2812,13 @@ ALTER TABLE `invoice_detail`
 -- AUTO_INCREMENT cho bảng `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT cho bảng `menu_type`
 --
 ALTER TABLE `menu_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -2824,7 +2848,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=530;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=539;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2848,7 +2872,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT cho bảng `product_param`
 --
 ALTER TABLE `product_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
@@ -2902,7 +2926,7 @@ ALTER TABLE `supporter`
 -- AUTO_INCREMENT cho bảng `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=478;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
