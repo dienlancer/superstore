@@ -115,11 +115,11 @@ class ProductController extends Controller {
        break;     
     }    
     $arrCategoryProduct=CategoryProductModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();       
-        $arrCategoryParam=CategoryParamModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray(); 
-        $arrCategoryProductRecursive=array();
-        $arrCategoryParamRecursive=array();
-        categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
-        categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ; 
+    $arrCategoryParam=CategoryParamModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray(); 
+    $arrCategoryProductRecursive=array();
+    $arrCategoryParamRecursive=array();
+    categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
+    categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ; 
     $controller=$this->_controller;  
     return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","arrCategoryParamRecursive","arrProductParam","arrRowData","task"));
   }
@@ -303,25 +303,7 @@ class ProductController extends Controller {
     }                        
     return $info;       
     }
-  public function changeStatus(Request $request){
-                  $id             =       (int)$request->id;     
-                  $checked                =   1;
-                  $type_msg               =   "alert-success";
-                  $msg                    =   "Cập nhật thành công";              
-                  $status         =       (int)$request->status;
-                  $item           =       ProductModel::find((int)@$id);        
-                  $item->status   =       $status;
-                  $item->save();
-                  $data                   =   $this->loadData($request);
-                  $info = array(
-                    'checked'           => $checked,
-                    'type_msg'          => $type_msg,                
-                    'msg'               => $msg,                
-                    'data'              => $data
-                  );
-                  return $info;
-          }
-        
+  
       public function deleteItem(Request $request){
             $id                     =   (int)$request->id;              
             $checked                =   1;
@@ -340,36 +322,7 @@ class ProductController extends Controller {
             );
             return $info;
       }
-      public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
-                    $checked                =   0;
-                    $type_msg               =   "alert-warning";            
-                    $msg                    =   "Please choose at least one item to delete";
-          }
-          if($checked==1){
-              foreach ($arrID as $key => $value) {
-                if(!empty($value)){
-                    $item=ProductModel::find($value);
-                    $item->status=$status;
-                    $item->save();      
-                }            
-              }
-          }                 
-          $data                   =   $this->loadData($request);
-          $info = array(
-            'checked'           => $checked,
-            'type_msg'          => $type_msg,                
-            'msg'               => $msg,                
-            'data'              => $data
-          );
-          return $info;
-      }
+     
       public function trash(Request $request){
             $str_id                 =   $request->str_id;   
             $checked                =   1;
@@ -396,36 +349,7 @@ class ProductController extends Controller {
             );
             return $info;
       }
-      public function sortOrder(Request $request){
-            $sort_json              =   $request->sort_json;           
-            $data_order             =   json_decode($sort_json);       
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Cập nhật thành công";      
-            if(count($data_order) > 0){              
-              foreach($data_order as $key => $value){       
-                if(!empty($value)){
-                  $item=ProductModel::find((int)$value->id);                
-                  $item->sort_order=(int)$value->sort_order;                         
-                  $item->save();                      
-                }                                                 
-              }           
-            }        
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
-      }
-      public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $product_width=$setting['product_width']['field_value'];
-    $product_height=$setting['product_height']['field_value'];
-      uploadImage($_FILES["image"],$product_width,$product_height);
-    }
+      
     public function createAlias(Request $request){
           $id                =  trim($request->id)  ; 
           $fullname                =  trim($request->fullname)  ;        
