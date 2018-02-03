@@ -283,7 +283,8 @@ class ProductController extends Controller {
                 $productParam->save();
               }
             }       
-          }              
+          }  
+          ProductParamModel::whereRaw("param_id = ?",[0])->delete();                
           $info = array(
             'type_msg'      => "has-success",
             'msg'         => 'Save data successfully',
