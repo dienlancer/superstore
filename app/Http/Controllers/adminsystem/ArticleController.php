@@ -34,17 +34,17 @@ class ArticleController extends Controller {
         }
   	}	    
   	public function loadData(Request $request){      
-      $category_id=(int)@$request->category_article_id;
+      $category_id=(int)@$request->category_id;
         $arrCategoryID[]=@$category_id;
         getStringCategoryID($category_id,$arrCategoryID,'category_article');     
       $query=DB::table('article')
       ->join('article_category','article.id','=','article_category.article_id')
-      ->join('category_article','category_article.id','=','article_category.category_article_id')  ;      
+      ->join('category_article','category_article.id','=','article_category.category_id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
       if(count($arrCategoryID) > 0){
-        $query->whereIn('article_category.category_article_id',$arrCategoryID);
+        $query->whereIn('article_category.category_id',$arrCategoryID);
       }   
       $data=$query->select('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
                   ->groupBy('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
@@ -97,7 +97,7 @@ class ArticleController extends Controller {
           $meta_description     =   trim($request->meta_description);
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);
-          $category_article_id	=		$request->category_article_id;                 
+          $category_id	=		$request->category_id;                 
           $data 		            =   array();
           $info 		            =   array();
           $error 		            =   array();
@@ -121,16 +121,16 @@ class ArticleController extends Controller {
               }      	
           }          
           
-          if(count($category_article_id) == 0){
+          if(count($category_id) == 0){
               $checked = 0;
-              $error["category_article_id"]["type_msg"]   = "has-error";
-              $error["category_article_id"]["msg"]      = "Thiếu danh mục";
+              $error["category_id"]["type_msg"]   = "has-error";
+              $error["category_id"]["msg"]      = "Thiếu danh mục";
           }
           else{
-            if(empty($category_article_id[0])){
+            if(empty($category_id[0])){
               $checked = 0;
-              $error["category_article_id"]["type_msg"]   = "has-error";
-              $error["category_article_id"]["msg"]      = "Thiếu danh mục";
+              $error["category_id"]["type_msg"]   = "has-error";
+              $error["category_id"]["msg"]      = "Thiếu danh mục";
             }
           }
           if(empty($sort_order)){
@@ -179,13 +179,13 @@ class ArticleController extends Controller {
                   $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
                   DB::statement($sql);    
                 } 
-                if(count(@$category_article_id)>0){                            
-                    $arrArticleCategory=ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->select("category_article_id")->get()->toArray();
+                if(count(@$category_id)>0){                            
+                    $arrArticleCategory=ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->select("category_id")->get()->toArray();
                     $arrCategoryArticleID=array();
                     foreach ($arrArticleCategory as $key => $value) {
-                        $arrCategoryArticleID[]=$value["category_article_id"];
+                        $arrCategoryArticleID[]=$value["category_id"];
                     }
-                    $selected=@$category_article_id;
+                    $selected=@$category_id;
                     sort($selected);
                     sort($arrCategoryArticleID);         
                     $resultCompare=0;
@@ -195,10 +195,10 @@ class ArticleController extends Controller {
                     if($resultCompare==0){
                           ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->delete();  
                           foreach ($selected as $key => $value) {
-                            $category_article_id=$value;
+                            $category_id=$value;
                             $articleCategory=new ArticleCategoryModel;
                             $articleCategory->article_id=(int)@$item->id;
-                            $articleCategory->category_article_id=(int)@$category_article_id;            
+                            $articleCategory->category_id=(int)@$category_id;            
                             $articleCategory->save();
                           }
                     }       

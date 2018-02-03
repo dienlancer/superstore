@@ -144,7 +144,7 @@ function getCategoryArticleName($id=0){
     $title="";
     $data=DB::table('article')
             ->join('article_category','article.id','=','article_category.article_id')
-            ->join('category_article','article_category.category_article_id','=','category_article.id')
+            ->join('category_article','article_category.category_id','=','category_article.id')
             ->select('article.id','article.fullname as article_name','category_article.fullname')
             ->where('article.id','=',@$id)
             ->get();

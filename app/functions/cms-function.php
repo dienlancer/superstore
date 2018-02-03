@@ -41,7 +41,7 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
       $strOption='<option value="'.$id.'">'.$name.'</option>';
       if(!empty($arrValueSelected)){
           foreach($arrValueSelected as $key_1 => $value_1) {
-              if((int)$id == (int)$value_1["category_article_id"]){
+              if((int)$id == (int)$value_1["category_id"]){
                 $strOption = str_replace('<option', '<option selected="selected" ', $strOption);
               }
           }
