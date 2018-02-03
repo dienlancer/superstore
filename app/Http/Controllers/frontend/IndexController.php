@@ -539,9 +539,8 @@ class IndexController extends Controller {
           $ssCart=array();
           $arrCart=array();
           if(Session::has($this->_ssNameCart)){
-            $ssCart=Session::get($this->_ssNameCart);
-          }         
-          $arrCart = @$ssCart["cart"];                   
+            $arrCart=Session::get($this->_ssNameCart);
+          }                                   
           if($product_id > 0){            
               if(count($arrCart) == 0){
                 $arrCart[$product_id]["product_quantity"] = $product_quantity;
@@ -562,21 +561,42 @@ class IndexController extends Controller {
               $arrCart[$product_id]["product_price"]=$product_price;                      
               $product_quantity=(int)$arrCart[$product_id]["product_quantity"];
               $product_total_price=$product_price * $product_quantity;
-              $arrCart[$product_id]["product_total_price"]=($product_total_price);
-              $cart["cart"]=$arrCart;                    
-              Session::put($this->_ssNameCart,$cart);                                        
+              $arrCart[$product_id]["product_total_price"]=($product_total_price);                            
+              Session::put($this->_ssNameCart,$arrCart);                                        
           }    
       }
       public function viewCart(Request $request){   
-          $layout="two-column";                      
-        if(!empty(@$request->action)){
-            $action=@$request->action;
-            switch ($action) {
-              case "update-cart"     :  $this->updateCart();
-              break;                  
-            }
+          $layout="full-width";     
+          $component='cart';                 
+        if($request->isMethod('post')){
+            $arrQTY=$request->quantity;                 
+              $ssCart=array();
+              $arrCart=array();
+              if(Session::has($this->_ssNameCart)){
+                $arrCart=Session::get($this->_ssNameCart);
+              }         
+              if(count($arrCart) > 0){
+                foreach ($arrCart as $key => $value) {    
+                    $product_quantity=(int)$arrQTY[$key];
+                    $product_price = (float)$arrCart[$key]["product_price"];
+                    $product_total_price=$product_quantity * $product_price;
+                    $arrCart[$key]["product_quantity"]=$product_quantity;
+                    $arrCart[$key]["product_total_price"]=$product_total_price;
+                }
+                foreach ($arrCart as $key => $value) {
+                  $product_quantity=(int)$arrCart[$key]["product_quantity"];
+                  if($product_quantity==0){
+                    unset($arrCart[$key]);
+                  }
+                }
+              }              
+              $cart["cart"]=$arrCart;                    
+              Session::put($this->_ssNameCart,$arrCart);                   
+              if(count($arrCart)==0){
+                Session::forget($this->_ssNameCart);              
+              }                
         }            
-        return view("frontend.index",compact("layout"));
+        return view("frontend.index",compact("component","layout"));
       }
       public function contact(Request $request){   
         $flag=1;
@@ -729,12 +749,10 @@ class IndexController extends Controller {
           $ssCart=array();
           $arrCart=array();
           if(Session::has($this->_ssNameCart)){
-                $ssCart=Session::get($this->_ssNameCart);
-          }         
-          $arrCart = @$ssCart["cart"];      
-          unset($arrCart[$id]);    
-          $cart["cart"]=$arrCart;                    
-          Session::put($this->_ssNameCart,$cart);             
+                $arrCart=Session::get($this->_ssNameCart);
+          }                   
+          unset($arrCart[$id]);              
+          Session::put($this->_ssNameCart,$arrCart);             
           return redirect()->route('frontend.index.viewCart'); 
       }
 
@@ -901,8 +919,7 @@ class IndexController extends Controller {
       }
       public function getLgout(){               
       	Sentinel::logout();       
-        session_unset(); 
-        session_destroy(); 
+        unset($_SESSION[$this->_ssNameUser]);
       	return redirect()->route('frontend.index.login'); 
       }
       public function viewAccount(Request $request){        
@@ -1005,7 +1022,7 @@ class IndexController extends Controller {
             }                
             $arrCart=array();
             if(Session::has($this->_ssNameCart)){
-              $arrCart=Session::get($this->_ssNameCart)["cart"];
+              $arrCart=Session::get($this->_ssNameCart);
             } 
             if(count($arrCart) == 0){
               return redirect()->route("frontend.index.viewCart");   
@@ -1052,7 +1069,7 @@ class IndexController extends Controller {
                       $item->save();                           
                       $arrCart=array();
                       if(Session::has($this->_ssNameCart)){
-                        $arrCart=Session::get($this->_ssNameCart)["cart"];
+                        $arrCart=Session::get($this->_ssNameCart);
                       }         
                       if(count($arrCart) > 0){
                         foreach ($arrCart as $key => $value) {
@@ -1106,7 +1123,7 @@ class IndexController extends Controller {
             $customer=array();                            
             $arrCart=array();
             if(Session::has($this->_ssNameCart)){
-              $arrCart=Session::get($this->_ssNameCart)["cart"];
+              $arrCart=Session::get($this->_ssNameCart);
             } 
             if(count($arrCart)==0){
               return redirect()->route("frontend.index.viewCart");   
@@ -1219,9 +1236,9 @@ class IndexController extends Controller {
               $ssCart=array();
               $arrCart=array();
               if(Session::has($this->_ssNameCart)){
-                $ssCart=Session::get($this->_ssNameCart);
+                $arrCart=Session::get($this->_ssNameCart);
               }         
-              $arrCart = @$ssCart["cart"];   
+              
               if(count($arrCart) > 0){
                 foreach ($arrCart as $key => $value) {    
                     $product_quantity=(int)$arrQTY[$key];
@@ -1236,35 +1253,33 @@ class IndexController extends Controller {
                     unset($arrCart[$key]);
                   }
                 }
-              }              
-              $cart["cart"]=$arrCart;                    
-              Session::put($this->_ssNameCart,$cart);                   
+              }                            
+              Session::put($this->_ssNameCart,$arrCart);                   
               if(count($arrCart)==0){
                 Session::forget($this->_ssNameCart);              
               }                  
       }
-      public function addToCart(){
-          $id=$_GET['id'];                          
+      public function addToCart(Request $request){
+          $id=$request->id;
+          $quantity=$request->quantity;   
           $data=ProductModel::find((int)$id);          
           $product_id=(int)($data['id']);
           $product_code=$data["code"];
           $product_name=$data["fullname"];
           $product_alias=$data["alias"];
           $product_image=$data["image"];
-          $price=(float)($data["price"]);
-          $sale_price=(float)($data["sale_price"]);
+          $price=(float)@$data["price"];
+          $sale_price=(float)@$data["sale_price"];
           $product_price=$price;
-          if(!empty($sale_price)){
+          if($sale_price > 0){
             $product_price=$sale_price;
-          }
-          $product_quantity=1;   
-          $quantity=0;       
-          $ssCart=array();
+          }   
+          $product_quantity=(int)@$quantity;   
+          $total_quantity=0;                
           $arrCart=array();
           if(Session::has($this->_ssNameCart)){
-            $ssCart=Session::get($this->_ssNameCart);
-          }         
-          $arrCart = @$ssCart["cart"];                   
+            $arrCart=Session::get($this->_ssNameCart);
+          }                             
           if($product_id > 0){            
               if(count($arrCart) == 0){
                 $arrCart[$product_id]["product_quantity"] = $product_quantity;
@@ -1285,21 +1300,20 @@ class IndexController extends Controller {
               $arrCart[$product_id]["product_price"]=$product_price;                      
               $product_quantity=(int)$arrCart[$product_id]["product_quantity"];
               $product_total_price=$product_price * $product_quantity;
-              $arrCart[$product_id]["product_total_price"]=($product_total_price);
-              $cart["cart"]=$arrCart;                    
-              Session::put($this->_ssNameCart,$cart);    
+              $arrCart[$product_id]["product_total_price"]=($product_total_price);                              
+              Session::put($this->_ssNameCart,$arrCart);    
               $arrCart=array();
               if(Session::has($this->_ssNameCart)){    
-                  $arrCart = @Session::get($this->_ssNameCart)["cart"];    
-              }         
+                  $arrCart = @Session::get($this->_ssNameCart);    
+              }    
               if(count($arrCart) > 0){
                 foreach ($arrCart as $key => $value){
-                  $quantity+=(int)$value['product_quantity'];              
+                  $total_quantity+=(int)$value['product_quantity'];              
                 }
               }                                                        
           }    
           $dataReturn=array(
-                            'quantity'=>$quantity,
+                            'quantity'=>$total_quantity,
                             'permalink'=>route('frontend.index.viewCart')
                           );
         return $dataReturn;

@@ -384,7 +384,7 @@ Route::match(["get","post"],"xac-nhan-thanh-toan",["as"=>"frontend.index.confirm
 Route::match(["get","post"],"dang-nhap-thanh-toan",["as"=>"frontend.index.loginCheckout","uses"=>"frontend\IndexController@loginCheckout"]);
 Route::get("hoa-don",["as"=>"frontend.index.getInvoice","uses"=>"frontend\IndexController@getInvoice"]);
 Route::get("lgout",["as"=>"frontend.index.getLgout","uses"=>"frontend\IndexController@getLgout"]);
-Route::get("add-to-cart",["as"=>"frontend.index.addToCart","uses"=>"frontend\IndexController@addToCart"]);
+Route::post("add-to-cart",["as"=>"frontend.index.addToCart","uses"=>"frontend\IndexController@addToCart"]);
 Route::get("show-invoice-detail",["as"=>"frontend.index.showInvoiceDetail","uses"=>"frontend\IndexController@showInvoiceDetail"]);
 Route::post("get-paymentmethod",["as"=>"frontend.index.getPaymentmethod","uses"=>"frontend\IndexController@getPaymentmethod"]);
 Route::post("tim-kiem",["as"=>"frontend.index.search","uses"=>"frontend\IndexController@search"]);

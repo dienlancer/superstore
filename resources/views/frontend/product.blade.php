@@ -32,19 +32,14 @@ if(count($item) > 0){
 	$arrPicture=json_decode($item['child_image']);
 	$arrPicture[]=$item['image']; 	
 	$dataCategory=CategoryProductModel::find((int)@$item['category_id'])->toArray();   
-	$breadcrumb= getBreadCrumbCategoryProduct($dataCategory);
-	/*getRecursiveCategoryProduct((int)@$dataCategory['parent_id'],$arrCategory);
-	$arrCategory[]=$dataCategory;
-	$arrCategory=get_field_data_array($arrCategory,'id');
-	ksort($arrCategory);*/
-	
+	$breadcrumb= getBreadCrumbCategoryProduct($dataCategory);	
     ?>    
     
         <div class="breadcrumb-title margin-top-15">
             <?php echo $breadcrumb; ?>
         </div>
         <form name="frm-product-detail" method="POST" enctype="multipart/form-data">
-        	{{ csrf_field() }}
+        	{{ csrf_field() }}            
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
                     <div class="image-detail"><img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" /></div>
@@ -407,14 +402,17 @@ if(count($item) > 0){
                 	<div class="margin-top-10">
                 		<div class="col-lg-2 no-padding-left"><div class="padding-top-10"><b>Số lượng</b></div></div>
                 		<div class="col-lg-10">
-                			<input name="qty" autofocus="autofocus" autocomplete="off" type="number" min="1" max="9999" class="inpt-qty" required="" value="1">
+                			<input name="qty" autocomplete="off" type="number" min="1" max="9999" class="inpt-qty" required="" value="1">
                 			<span class="add-qty" title="Thêm" 	onclick="eventQty('add');">+</span>
                 			<span class="sub-qty" title="Bớt" 	onclick="eventQty('sub');">-</span>
                 		</div>
                 		<div class="clr"></div>
                 	</div>      
                 </div>   
-                <div class="margin-top-15"><a href="javascript:void(0);" class="add-to-cart"><i class="fas fa-shopping-cart"></i><span class="margin-left-15">Thêm vào giỏ hàng</span></a></div>                                
+                <div class="margin-top-15">
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#modal-alert-add-cart" onclick="addToCart();" class="add-to-cart"><i class="fas fa-shopping-cart"></i><span class="margin-left-15">Thêm vào giỏ hàng</span>
+                    </a>                    
+                </div>                                
             </div>
             <div class="clr"></div>
         </form>
@@ -499,7 +497,7 @@ if(count($item) > 0){
         							<?php echo $html_price; ?>
         						</div>							
         						<div class="margin-top-5 box-product-title">
-        							<a href="<?php echo $permalink; ?>" title="<?php echo $fullname; ?>" ><?php echo $fullname_excerpt; ?></a>
+        							<a href="<?php echo $permalink; ?>" title="<?php echo $fullname; ?>"  ><?php echo $fullname_excerpt; ?></a>
         						</div>
         					</div>					
         				</div>
@@ -509,8 +507,7 @@ if(count($item) > 0){
         		</div>
         	</div>
         	<?php 
-        }             
-        
+        }                     
 }
 ?>
 <script language="javascript" type="text/javascript">
@@ -548,4 +545,32 @@ if(count($item) > 0){
     	}
     	$('input[name="qty"]').val(qty);
     }    
+    function addToCart(){
+        var token = $('input[name="_token"]').val();
+        var quantity = $('input[name="qty"]').val();
+        var dataItem={
+            "id":<?php echo @$item['id']; ?>,            
+            "quantity":quantity,
+            "_token": token
+        };
+        $.ajax({
+            url: '<?php echo route("frontend.index.addToCart"); ?>',
+            type: 'POST',
+            data: dataItem,
+            async: false,
+            success: function (data) {
+                var thong_bao='Sản phẩm đã được thêm vào trong <a href="'+data.permalink+'" class="comproduct49" >giỏ hàng</a> ';               
+                $(".cart-total").empty();           
+                $(".modal-body").empty();       
+                $(".cart-total").text(data.quantity);           
+                $(".modal-body").append(thong_bao);         
+            },
+            error : function (data){
+                
+            },
+            beforeSend  : function(jqXHR,setting){
+                
+            },
+        });
+    }
 </script> 

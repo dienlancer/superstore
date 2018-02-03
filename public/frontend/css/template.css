@@ -1495,9 +1495,8 @@ form[name='frm-search']{
     height: 35px;
     width: 45px;
     border-right: none;
-    text-align: center;
-    padding: 0 5px;
-    font-size: 16px;
+    text-align: center;  
+    font-size: 13px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1533,8 +1532,16 @@ form[name='frm-search']{
     padding: 10px 15px;
     border-radius: 4px;
 }
-.add-to-cart:hover{
+.add-to-cart:hover, .add-to-cart:focus{
     color: #ffffff
+}
+.cart {
+    position: relative;
+    width: 100px;
+}
+.box-cart > a {
+    color: #fff;
+    padding: 0 8px;
 }
 @media (max-width: 767px){    
     div.mobilemenu{

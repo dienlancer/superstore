@@ -281,6 +281,9 @@ switch ($component) {
                     case "product":                  
                     ?>@include("frontend.product")<?php
                     break; 
+                    case "cart":                  
+                    ?>@include("frontend.cart")<?php
+                    break; 
                 }  
                 ?>
              
