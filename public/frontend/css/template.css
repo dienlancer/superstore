@@ -1455,6 +1455,22 @@ form[name='frm-search']{
     color: #505050;
     text-decoration: line-through;
 }
+.block-size{
+    float: left;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.block-color{
+    float: left;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    padding: 10px;
+}
+.block-text{
+    
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

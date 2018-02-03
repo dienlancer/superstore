@@ -93,21 +93,206 @@ if(count($item) > 0){
                 	echo $html_price;
                 	?>
                 </div>
-                <!-- begin màu -->
-                <div class="margin-top-5">
-                	<?php 
-                		$dataColor=CategoryParamModel::whereRaw('alias = ?',['mau'])->select('id','alias','fullname')->get()->toArray();
-                		$dataColorChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataColor[0]['id']])->select('id','alias','fullname','param_value')->get()->toArray();
-                		foreach ($dataColorChildren as $key => $value) {
-                			$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
-                			if(count($dataParam) > 0){
-                				echo $value['fullname'];
-                			}
+                <!-- begin xuất xứ -->
+                <?php 
+                $dataParamFather=CategoryParamModel::whereRaw('alias = ?',['xuat-xu'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
+                if(count($dataParamFather) > 0){
+                	$dataParamChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataParamFather[0]['id']])->select('id','alias','fullname','param_value')->orderBy('sort_order','asc')->get()->toArray();
+                	$arr_id=array();
+                	if(count($dataParamChildren) > 0){
+                		foreach ($dataParamChildren as $key => $value){
+                			$arr_id[]=(int)@$value['id'];
                 		}
-                		                		                		
-                	?>
-                </div>
-                <!-- end màu -->
+                		$dataParam=DB::table('product_param')
+                		->whereIn('product_param.param_id',$arr_id)
+                		->where('product_param.product_id',(int)@$id)
+                		->select('id')
+                		->get()
+                		->toArray();
+                		if(count($dataParam) > 0){
+                			?>
+                			<div class="margin-top-10">
+                				<div class="col-lg-2 no-padding-left"><b>Xuất xứ&nbsp;:</b></div>
+                				<div class="col-lg-10">
+                					<?php 
+                					foreach ($dataParamChildren as $key => $value) {
+                						$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                						if(count($dataParam) > 0){
+                							?><div class="block-text"><?php echo $value['fullname']; ?></div><?php
+                						}
+                					}
+                					?>
+                				</div> 
+                				<div class="clr"></div>               	
+                			</div>
+                			<?php
+                		}
+                	}
+                	?>                	
+                	<?php
+                }
+                ?>                
+                <!-- end xuất xứ -->    
+                <!-- begin thương hiệu -->
+                <?php 
+                $dataParamFather=CategoryParamModel::whereRaw('alias = ?',['thuong-hieu'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
+                if(count($dataParamFather) > 0){
+                	$dataParamChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataParamFather[0]['id']])->select('id','alias','fullname','param_value')->orderBy('sort_order','asc')->get()->toArray();
+                	$arr_id=array();
+                	if(count($dataParamChildren) > 0){
+                		foreach ($dataParamChildren as $key => $value){
+                			$arr_id[]=(int)@$value['id'];
+                		}
+                		$dataParam=DB::table('product_param')
+                		->whereIn('product_param.param_id',$arr_id)
+                		->where('product_param.product_id',(int)@$id)
+                		->select('id')
+                		->get()
+                		->toArray();
+                		if(count($dataParam) > 0){
+                			?>
+                			<div class="margin-top-10">
+                				<div class="col-lg-2 no-padding-left"><b>Thương hiệu&nbsp;:</b></div>
+                				<div class="col-lg-10">
+                					<?php 
+                					foreach ($dataParamChildren as $key => $value) {
+                						$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                						if(count($dataParam) > 0){
+                							?><div class="block-text"><?php echo $value['fullname']; ?></div><?php
+                						}
+                					}
+                					?>
+                				</div> 
+                				<div class="clr"></div>               	
+                			</div>
+                			<?php
+                		}
+                	}
+                	?>                	
+                	<?php
+                }
+                ?>                
+                <!-- end thương hiệu --> 
+                <!-- begin đơn vị -->
+                <?php 
+                $dataParamFather=CategoryParamModel::whereRaw('alias = ?',['don-vi'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
+                if(count($dataParamFather) > 0){
+                	$dataParamChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataParamFather[0]['id']])->select('id','alias','fullname','param_value')->orderBy('sort_order','asc')->get()->toArray();
+                	$arr_id=array();
+                	if(count($dataParamChildren) > 0){
+                		foreach ($dataParamChildren as $key => $value){
+                			$arr_id[]=(int)@$value['id'];
+                		}
+                		$dataParam=DB::table('product_param')
+                		->whereIn('product_param.param_id',$arr_id)
+                		->where('product_param.product_id',(int)@$id)
+                		->select('id')
+                		->get()
+                		->toArray();
+                		if(count($dataParam) > 0){
+                			?>
+                			<div class="margin-top-10">
+                				<div class="col-lg-2 no-padding-left"><b>Đơn vị&nbsp;:</b></div>
+                				<div class="col-lg-10">
+                					<?php 
+                					foreach ($dataParamChildren as $key => $value) {
+                						$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                						if(count($dataParam) > 0){
+                							?><div class="block-text"><?php echo $value['fullname']; ?></div><?php
+                						}
+                					}
+                					?>
+                				</div> 
+                				<div class="clr"></div>               	
+                			</div>
+                			<?php
+                		}
+                	}
+                	?>                	
+                	<?php
+                }
+                ?>                
+                <!-- end đơn vị -->   
+                <!-- begin màu -->
+                <?php 
+                $dataParamFather=CategoryParamModel::whereRaw('alias = ?',['mau'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
+                if(count($dataParamFather) > 0){
+                	$dataParamChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataParamFather[0]['id']])->select('id','alias','fullname','param_value')->orderBy('sort_order','asc')->get()->toArray();
+                	$arr_id=array();
+                	if(count($dataParamChildren) > 0){
+                		foreach ($dataParamChildren as $key => $value){
+                			$arr_id[]=(int)@$value['id'];
+                		}
+                		$dataParam=DB::table('product_param')
+                		->whereIn('product_param.param_id',$arr_id)
+                		->where('product_param.product_id',(int)@$id)
+                		->select('id')
+                		->get()
+                		->toArray();
+                		if(count($dataParam) > 0){
+                			?>
+                			<div class="margin-top-10">
+                				<div class="col-lg-2 no-padding-left"><b>Màu&nbsp;:</b></div>
+                				<div class="col-lg-10">
+                					<?php 
+                					foreach ($dataParamChildren as $key => $value) {
+                						$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                						if(count($dataParam) > 0){
+                							?><div class="block-color" style="background: <?php echo $value['param_value']; ?>"></div><?php
+                						}
+                					}
+                					?>
+                				</div> 
+                				<div class="clr"></div>               	
+                			</div>
+                			<?php
+                		}
+                	}
+                	?>                	
+                	<?php
+                }
+                ?>                
+                <!-- end màu -->  
+                <!-- begin kích thước -->
+                <?php 
+                $dataParamFather=CategoryParamModel::whereRaw('alias = ?',['kich-thuoc'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
+                if(count($dataParamFather) > 0){
+                	$dataParamChildren=CategoryParamModel::whereRaw('parent_id = ?',[(int)@$dataParamFather[0]['id']])->select('id','alias','fullname','param_value')->orderBy('sort_order','asc')->get()->toArray();
+                	$arr_id=array();
+                	if(count($dataParamChildren) > 0){
+                		foreach ($dataParamChildren as $key => $value){
+                			$arr_id[]=(int)@$value['id'];
+                		}
+                		$dataParam=DB::table('product_param')
+                		->whereIn('product_param.param_id',$arr_id)
+                		->where('product_param.product_id',(int)@$id)
+                		->select('id')
+                		->get()
+                		->toArray();
+                		if(count($dataParam) > 0){
+                			?>
+                			<div class="margin-top-10">
+                				<div class="col-lg-2 no-padding-left"><b>Kích thước&nbsp;:</b></div>
+                				<div class="col-lg-10">
+                					<?php 
+                					foreach ($dataParamChildren as $key => $value) {
+                						$dataParam=ProductParamModel::whereRaw('product_id = ? and param_id = ?',[(int)@$id,(int)@$value['id']])->select('id')->get()->toArray();
+                						if(count($dataParam) > 0){
+                							?><div class="block-size"><?php echo $value['fullname']; ?></div><?php
+                						}
+                					}
+                					?>
+                				</div> 
+                				<div class="clr"></div>               	
+                			</div>
+                			<?php
+                		}
+                	}
+                	?>                	
+                	<?php
+                }
+                ?>                
+                <!-- end kích thước -->                           
             </div>
             <div class="clr"></div>
         </div>
