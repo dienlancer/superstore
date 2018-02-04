@@ -46,7 +46,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng tắm</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng tắm</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>					
 				</div>			
 			</div>
@@ -54,7 +54,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ăn</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ăn</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
@@ -62,7 +62,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ngủ</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ngủ</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>						
 				</div>		
 			</div>
@@ -73,7 +73,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng thể dục</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng thể dục</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
@@ -81,7 +81,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Sitting room</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Sitting room</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
@@ -89,7 +89,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>In the car</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>In the car</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
@@ -100,7 +100,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Shopping Trolleys</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Shopping Trolleys</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
@@ -108,7 +108,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Walking stick &amp; Accessories</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Walking stick &amp; Accessories</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
@@ -116,7 +116,7 @@ $company=$setting['contacted_person']['field_value'];
 				<div class="margin-top-15">
 					<div class="relative">
 						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Rollators</span><span class="margin-left-5"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+						<div class="walking-box-title"><a href="javascript:void(0);"><span>Rollators</span><span class="margin-left-5"><i class="fal fa-chevron-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>

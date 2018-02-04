@@ -3,6 +3,7 @@ use App\ProductModel;
 use App\ProductParamModel;
 use App\CategoryParamModel;
 use App\CategoryProductModel;
+use App\GroupMemberModel;
 use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 if(count($item) > 0){

@@ -262,31 +262,42 @@ switch ($component) {
         ?>
         <div class="col-lg-12">
             <?php
-                switch ($component) {                          
-                    case "contact": 
-                    ?>@include("frontend.contact")<?php   
-                    break;      
-                    case "categories-album": 
-                    ?>@include("frontend.categories-album")<?php   
-                    break;   
-                    case "album": 
-                    ?>@include("frontend.album")<?php   
-                    break; 
-                    case "category-video": 
-                    ?>@include("frontend.category-video")<?php   
-                    break;                                                                                             
-                    case "category-product":                  
-                    ?>@include("frontend.category-product")<?php
-                    break; 
-                    case "product":                  
-                    ?>@include("frontend.product")<?php
-                    break; 
-                    case "cart":                  
-                    ?>@include("frontend.cart")<?php
-                    break; 
-                }  
-                ?>
-             
+            switch ($component) {                          
+                case "contact": 
+                ?>@include("frontend.contact")<?php   
+                break;      
+                case "categories-album": 
+                ?>@include("frontend.categories-album")<?php   
+                break;   
+                case "album": 
+                ?>@include("frontend.album")<?php   
+                break; 
+                case "category-video": 
+                ?>@include("frontend.category-video")<?php   
+                break;                                                                                             
+                case "category-product":                  
+                ?>@include("frontend.category-product")<?php
+                break; 
+                case "product":                  
+                ?>@include("frontend.product")<?php
+                break; 
+                case "cart":                  
+                ?>@include("frontend.cart")<?php
+                break; 
+                case "xac-nhan-thanh-toan":                                                
+                ?>@include("frontend.confirm-checkout")<?php
+                break;
+                case "dang-nhap-thanh-toan":                                                
+                ?>@include("frontend.login-checkout")<?php
+                break;
+                case "hoan-tat-thanh-toan":                                                
+                ?>@include("frontend.finished-checkout")<?php
+                break;
+                case "hoa-don":                                                
+                ?>@include("frontend.invoice")<?php
+                break; 
+            }  
+            ?>            
         </div> 
         <div class="clr"></div>           
         <?php
