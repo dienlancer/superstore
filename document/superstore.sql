@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 04, 2018 lúc 05:46 AM
+-- Thời gian đã tạo: Th2 04, 2018 lúc 08:44 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -52,7 +52,9 @@ INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`,
 (6, 1, 'QlzbRQWzVJgg01NkGUVewoQhT4qPKTMZ', 1, '2017-11-12 07:23:56', '2017-11-12 07:23:56', '2017-11-12 07:23:56'),
 (11, 6, 'Smmf8BjLrwkNo9SOvbnEcqCWyFovmfUe', 1, '2018-01-26 01:57:35', '2018-01-26 01:57:35', '2018-01-26 01:57:35'),
 (12, 7, '6XNPqDd8ofeyZ93BU209SFT8smJHyvkc', 1, '2018-01-28 09:36:54', '2018-01-28 09:36:54', '2018-01-28 09:36:54'),
-(13, 8, 'l16IOygny5ihmPBxkIZIVkZjCQmH1wfA', 1, '2018-01-28 10:04:24', '2018-01-28 10:04:24', '2018-01-28 10:04:24');
+(13, 8, 'l16IOygny5ihmPBxkIZIVkZjCQmH1wfA', 1, '2018-01-28 10:04:24', '2018-01-28 10:04:24', '2018-01-28 10:04:24'),
+(14, 9, 'DAf22Uade27AmO71vWsE0n2vGaVSpaQH', 1, '2018-02-04 05:35:55', '2018-02-04 05:35:55', '2018-02-04 05:35:55'),
+(15, 10, 'Co4iZIApmazmeiv6Xffo6LA1IiKfFhhm', 1, '2018-02-04 08:06:20', '2018-02-04 08:06:20', '2018-02-04 08:06:20');
 
 -- --------------------------------------------------------
 
@@ -733,8 +735,6 @@ CREATE TABLE `invoice` (
   `fullname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `mobilephone` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
   `payment_method_id` int(11) NOT NULL,
@@ -743,6 +743,13 @@ CREATE TABLE `invoice` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+--
+-- Đang đổ dữ liệu cho bảng `invoice`
+--
+
+INSERT INTO `invoice` (`id`, `code`, `customer_id`, `username`, `email`, `fullname`, `address`, `phone`, `quantity`, `total_price`, `payment_method_id`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
+(1, '932746581', 8, 'tiennv', 'tiennv@dienkim.com', 'Nguyễn Văn Tiến', '14 Tân Canh', '09889123124', 5, '2605000.00', 2, 1, 1, '2018-02-04 19:00:55', '2018-02-04 19:03:40');
 
 -- --------------------------------------------------------
 
@@ -764,6 +771,14 @@ CREATE TABLE `invoice_detail` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+--
+-- Đang đổ dữ liệu cho bảng `invoice_detail`
+--
+
+INSERT INTO `invoice_detail` (`id`, `invoice_id`, `product_id`, `product_code`, `product_name`, `product_image`, `product_price`, `product_quantity`, `product_total_price`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'D231.jpg', '449000.00', 2, '898000.00', '2018-02-04 19:00:55', '2018-02-04 19:00:55'),
+(2, 1, 11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'D233.jpg', '569000.00', 3, '1707000.00', '2018-02-04 19:00:55', '2018-02-04 19:00:55');
 
 -- --------------------------------------------------------
 
@@ -1056,8 +1071,8 @@ CREATE TABLE `payment_method` (
 --
 
 INSERT INTO `payment_method` (`id`, `fullname`, `alias`, `content`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Chuyển khoản', 'chuyen-khoan', '', 1, 1, '2018-01-07 17:25:13', '2018-01-07 17:25:13'),
-(2, 'Trực tiếp', 'truc-tiep', '', 2, 1, '2018-01-07 17:25:25', '2018-01-07 17:25:25');
+(1, 'Chuyển khoản', 'chuyen-khoan', '<p style=\"text-align:justify\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>', 1, 1, '2018-01-07 17:25:13', '2018-02-04 13:14:45'),
+(2, 'Trực tiếp', 'truc-tiep', '<p style=\"text-align:justify\">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)</p>', 2, 1, '2018-01-07 17:25:25', '2018-02-04 13:15:08');
 
 -- --------------------------------------------------------
 
@@ -1382,7 +1397,11 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (538, 8, 'ubMneyA1o1wIPK0UHx6I8WuhTRJlYHkP', '2018-02-02 21:16:54', '2018-02-02 21:16:54'),
 (539, 8, 'qGTddyiGKSzM0wHVkenVijba0gtvLqOt', '2018-02-03 04:53:58', '2018-02-03 04:53:58'),
 (541, 8, 'Nwn0yVO5SlhBd9eY4Z46SbZ1gEPi5IEr', '2018-02-03 09:41:10', '2018-02-03 09:41:10'),
-(543, 8, '1aF9GIC1ZWN63Q3hyjgcI91MVJfM5syC', '2018-02-03 13:40:10', '2018-02-03 13:40:10');
+(543, 8, '1aF9GIC1ZWN63Q3hyjgcI91MVJfM5syC', '2018-02-03 13:40:10', '2018-02-03 13:40:10'),
+(544, 8, 'Ac5aAgvHGYcsowe9TvjwCmQ4Pp1qNc5P', '2018-02-03 22:01:23', '2018-02-03 22:01:23'),
+(546, 1, '2DXLdK0k8pyyhkft4O1N31OHN3qVoZYv', '2018-02-04 06:13:43', '2018-02-04 06:13:43'),
+(551, 1, '8Vt8s6xqOFyHpiqYk2QykhWXRenYyUJW', '2018-02-04 08:07:49', '2018-02-04 08:07:49'),
+(557, 8, 'COuQ7uk7ZUXmIXoa9x5b5d0WhvRAniBn', '2018-02-04 12:33:20', '2018-02-04 12:33:20');
 
 -- --------------------------------------------------------
 
@@ -1560,10 +1579,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `code`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `image`, `status`, `child_image`, `price`, `sale_price`, `intro`, `detail`, `count_view`, `category_id`, `size_type`, `user_id`, `sort_order`, `created_at`, `updated_at`) VALUES
-(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p style=\"text-align:justify\">Đầm Body Thời Trang Eden Ren Hoa Cao Cấp được l&agrave;m từ chất liệu ren nhập cao cấp v&agrave; kỹ thuật may kh&eacute;o l&eacute;o, tỉ mỉ sẽ mang lại cho bạn sự sang trọng qu&yacute; ph&aacute;i.&nbsp;</p>\n\n<p style=\"text-align:justify\">Điểm nổi bật :</p>\n\n<p style=\"text-align:justify\">-Kiểu d&aacute;ng : đầm body, s&aacute;t n&aacute;ch.</p>\n\n<p style=\"text-align:justify\">-Chất liệu : Ren cao c&acirc;p</p>\n\n<p style=\"text-align:justify\">-M&agrave;u : Đỏ</p>\n\n<p style=\"text-align:justify\">-Size : XS, S,M,L,XL.</p>\n\n<p style=\"text-align:justify\">-Xuất xứ : Việt Nam.</p>\n\n<p style=\"text-align:justify\">-Thương hiệu : Eden.</p>\n\n<p style=\"text-align:justify\">-Trọng lượng :250g.</p>\n\n<p style=\"text-align:justify\">Th&ocirc;ng số sản phẩm:</p>\n\n<p style=\"text-align:justify\">V&ograve;ng ngực x eo x m&ocirc;ng x chiều d&agrave;i :</p>\n\n<p style=\"text-align:justify\">-Size XS : &nbsp;80 x 64 x 84 x 88-90 (cm) (dưới 43kg)</p>\n\n<p style=\"text-align:justify\">-Size S : 82 x 66 x 86 x 88-90 (cm) (43-45kg)</p>\n\n<p style=\"text-align:justify\">-Size M : 84 x 70 x 90 x 88-90 (cm) (45-50kg)</p>\n\n<p style=\"text-align:justify\">-Size L: 88 x 74 x 94 x 88-90 (cm) (50-55kg)</p>\n\n<p style=\"text-align:justify\">-Size XL: 92 x 78 x 98 x 88-90 (cm) (55-60kg)</p>\n\n<p style=\"text-align:center\"><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-2.png\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-1.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-3.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-4.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-5.jpg\" /></p>', 301, 42, '400 x 20', 8, 1, '2018-02-01 04:15:10', '2018-02-04 04:13:51'),
-(11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'dam-body-thoi-trang-eden-ren-hoa-co-tron-cao-cap-d233', 'D233.jpg', 1, '[\"D233-1.jpg\",\"D233-2.jpg\",\"D233-3.jpg\"]', '569000.00', '0.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tr&ograve;n Cao Cấp - D233&nbsp;</p>', 24, 42, '', 8, 2, '2018-02-02 04:57:22', '2018-02-04 02:59:59'),
-(12, '347198526', 'Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metakeyword Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metadescription Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'dam-suong-thoi-trang-eden-phoi-luoi-hoa-tiet-theu-hoa-d234', 'D234-1.jpg', 1, '[\"D234-2.jpg\",\"D234-3.jpg\",\"D234-4.jpg\",\"D234-5.jpg\"]', '569000.00', '299000.00', 'giới thiệu Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', '<p>chi tiết&nbsp;Đầm Su&ocirc;ng Thời Trang Eden Phối Lưới Họa Tiết Th&ecirc;u Hoa - D234</p>', 3, 42, '', 8, 3, '2018-02-02 06:56:02', '2018-02-04 02:55:31'),
-(13, '295683174', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'dam-body-thoi-trang-eden-ren-hoa-co-tim-d235', 'D235.jpg', 1, '[\"D235-1.jpg\",\"D235-2.jpg\",\"D235-3.jpg\"]', '569000.00', '545000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235</p>', 3, 42, '450 x 20', 8, 4, '2018-02-02 07:18:26', '2018-02-04 02:56:03');
+(4, '273185649', 'Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', 'dam-body-thoi-trang-eden-ren-hoa-cao-cap-d231', 'D231.jpg', 1, '[\"D231-1.jpg\",\"D231-2.jpg\",\"D231-3.jpg\"]', '569000.00', '449000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cao Cấp - D231 - D231', '<p style=\"text-align:justify\">Đầm Body Thời Trang Eden Ren Hoa Cao Cấp được l&agrave;m từ chất liệu ren nhập cao cấp v&agrave; kỹ thuật may kh&eacute;o l&eacute;o, tỉ mỉ sẽ mang lại cho bạn sự sang trọng qu&yacute; ph&aacute;i.&nbsp;</p>\n\n<p style=\"text-align:justify\">Điểm nổi bật :</p>\n\n<p style=\"text-align:justify\">-Kiểu d&aacute;ng : đầm body, s&aacute;t n&aacute;ch.</p>\n\n<p style=\"text-align:justify\">-Chất liệu : Ren cao c&acirc;p</p>\n\n<p style=\"text-align:justify\">-M&agrave;u : Đỏ</p>\n\n<p style=\"text-align:justify\">-Size : XS, S,M,L,XL.</p>\n\n<p style=\"text-align:justify\">-Xuất xứ : Việt Nam.</p>\n\n<p style=\"text-align:justify\">-Thương hiệu : Eden.</p>\n\n<p style=\"text-align:justify\">-Trọng lượng :250g.</p>\n\n<p style=\"text-align:justify\">Th&ocirc;ng số sản phẩm:</p>\n\n<p style=\"text-align:justify\">V&ograve;ng ngực x eo x m&ocirc;ng x chiều d&agrave;i :</p>\n\n<p style=\"text-align:justify\">-Size XS : &nbsp;80 x 64 x 84 x 88-90 (cm) (dưới 43kg)</p>\n\n<p style=\"text-align:justify\">-Size S : 82 x 66 x 86 x 88-90 (cm) (43-45kg)</p>\n\n<p style=\"text-align:justify\">-Size M : 84 x 70 x 90 x 88-90 (cm) (45-50kg)</p>\n\n<p style=\"text-align:justify\">-Size L: 88 x 74 x 94 x 88-90 (cm) (50-55kg)</p>\n\n<p style=\"text-align:justify\">-Size XL: 92 x 78 x 98 x 88-90 (cm) (55-60kg)</p>\n\n<p style=\"text-align:center\"><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-2.png\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-1.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-3.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-4.jpg\" /><img alt=\"\" src=\"/superstore/vip-member/vip-8/test-5.jpg\" /></p>', 321, 42, '400 x 20', 8, 1, '2018-02-01 04:15:10', '2018-02-04 19:00:20'),
+(11, '542937681', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', 'dam-body-thoi-trang-eden-ren-hoa-co-tron-cao-cap-d233', 'D233.jpg', 1, '[\"D233-1.jpg\",\"D233-2.jpg\",\"D233-3.jpg\"]', '569000.00', '0.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tròn Cao Cấp - D233', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tr&ograve;n Cao Cấp - D233&nbsp;</p>', 39, 42, '', 8, 2, '2018-02-02 04:57:22', '2018-02-04 19:00:34'),
+(12, '347198526', 'Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metakeyword Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'metadescription Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', 'dam-suong-thoi-trang-eden-phoi-luoi-hoa-tiet-theu-hoa-d234', 'D234-1.jpg', 1, '[\"D234-2.jpg\",\"D234-3.jpg\",\"D234-4.jpg\",\"D234-5.jpg\"]', '569000.00', '299000.00', 'giới thiệu Đầm Suông Thời Trang Eden Phối Lưới Họa Tiết Thêu Hoa - D234', '<p>chi tiết&nbsp;Đầm Su&ocirc;ng Thời Trang Eden Phối Lưới Họa Tiết Th&ecirc;u Hoa - D234</p>', 6, 42, '', 8, 3, '2018-02-02 06:56:02', '2018-02-04 18:43:24'),
+(13, '295683174', 'Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metakeyword Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'metadescription Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', 'dam-body-thoi-trang-eden-ren-hoa-co-tim-d235', 'D235.jpg', 1, '[\"D235-1.jpg\",\"D235-2.jpg\",\"D235-3.jpg\"]', '569000.00', '545000.00', 'giới thiệu Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235', '<p>chi tiết&nbsp;Đầm Body Thời Trang Eden Ren Hoa Cổ Tim - D235</p>', 5, 42, '450 x 20', 8, 4, '2018-02-02 07:18:26', '2018-02-04 18:59:06');
 
 -- --------------------------------------------------------
 
@@ -2376,7 +2395,18 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 (477, 1, 'user', NULL, '2018-02-01 02:56:25', '2018-02-01 02:56:25'),
 (478, NULL, 'global', NULL, '2018-02-02 19:05:12', '2018-02-02 19:05:12'),
 (479, NULL, 'ip', '127.0.0.1', '2018-02-02 19:05:12', '2018-02-02 19:05:12'),
-(480, 1, 'user', NULL, '2018-02-02 19:05:12', '2018-02-02 19:05:12');
+(480, 1, 'user', NULL, '2018-02-02 19:05:12', '2018-02-02 19:05:12'),
+(481, NULL, 'global', NULL, '2018-02-04 06:13:43', '2018-02-04 06:13:43'),
+(482, NULL, 'ip', '127.0.0.1', '2018-02-04 06:13:43', '2018-02-04 06:13:43'),
+(483, 1, 'user', NULL, '2018-02-04 06:13:43', '2018-02-04 06:13:43'),
+(484, NULL, 'global', NULL, '2018-02-04 06:32:59', '2018-02-04 06:32:59'),
+(485, NULL, 'ip', '127.0.0.1', '2018-02-04 06:32:59', '2018-02-04 06:32:59'),
+(486, NULL, 'global', NULL, '2018-02-04 06:33:40', '2018-02-04 06:33:40'),
+(487, NULL, 'ip', '127.0.0.1', '2018-02-04 06:33:40', '2018-02-04 06:33:40'),
+(488, 9, 'user', NULL, '2018-02-04 06:33:40', '2018-02-04 06:33:40'),
+(489, NULL, 'global', NULL, '2018-02-04 08:07:49', '2018-02-04 08:07:49'),
+(490, NULL, 'ip', '127.0.0.1', '2018-02-04 08:07:49', '2018-02-04 08:07:49'),
+(491, 1, 'user', NULL, '2018-02-04 08:07:49', '2018-02-04 08:07:49');
 
 -- --------------------------------------------------------
 
@@ -2407,10 +2437,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-02 19:07:26', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-02 19:07:26'),
-(6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 1, 0, '2018-01-26 01:57:35', '2018-01-26 04:32:59'),
-(7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 1, 0, '2018-01-28 09:40:59', '2018-01-28 18:27:39'),
-(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-03 13:40:10', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 1, 0, '2018-01-28 10:04:24', '2018-02-03 13:40:10');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-04 08:07:49', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-02-04 08:08:20'),
+(6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 3, 0, '2018-01-26 01:57:35', '2018-02-04 08:08:20'),
+(7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 4, 0, '2018-01-28 09:40:59', '2018-02-04 08:08:20'),
+(8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-04 12:33:20', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 5, 0, '2018-01-28 10:04:24', '2018-02-04 12:33:20'),
+(9, 'vinhlt', 'vinhht@dienkim.com', '$2y$10$ib1fvlTyvQLoRQcVt.Qrt.VAZtN3lPSMWHwpoqYwx5OM/4/vSUE9q', NULL, '2018-02-04 11:57:07', 'Huỳnh Thúc Vinh', '23 Bùi Quang Là', '0988162722', NULL, 1, 0, '2018-02-04 05:35:55', '2018-02-04 11:57:07'),
+(10, 'phuongdh', 'phuongdh@dienkim.com', '$2y$10$5soi5omcKicGfF.Pvb0uF.a6c9aEckvbPgrg3Qkr0gcxpyo8j44QW', NULL, '2018-02-04 08:06:20', 'Đặng Hùng Phương', '26 Ngô Đức Kế', '0988222111', NULL, 2, NULL, '2018-02-04 08:06:20', '2018-02-04 08:08:20');
 
 -- --------------------------------------------------------
 
@@ -2435,7 +2467,9 @@ INSERT INTO `user_group_member` (`id`, `group_member_id`, `user_id`, `created_at
 (4, 1, 1, '2018-01-26 04:05:58', '2018-01-26 04:05:58'),
 (9, 4, 6, '2018-01-26 08:57:35', '2018-01-26 08:57:35'),
 (10, 4, 7, '2018-01-28 16:36:54', '2018-01-28 16:36:54'),
-(25, 3, 8, '2018-01-29 02:40:24', '2018-01-29 02:40:24');
+(25, 3, 8, '2018-01-29 02:40:24', '2018-01-29 02:40:24'),
+(27, 4, 10, '2018-02-04 15:06:20', '2018-02-04 15:06:20'),
+(28, 3, 9, '2018-02-04 16:48:12', '2018-02-04 16:48:12');
 
 -- --------------------------------------------------------
 
@@ -2733,7 +2767,7 @@ ALTER TABLE `video`
 -- AUTO_INCREMENT cho bảng `activations`
 --
 ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `album`
@@ -2817,13 +2851,13 @@ ALTER TABLE `group_privilege`
 -- AUTO_INCREMENT cho bảng `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `invoice_detail`
 --
 ALTER TABLE `invoice_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `menu`
@@ -2865,7 +2899,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=544;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=558;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2943,19 +2977,19 @@ ALTER TABLE `supporter`
 -- AUTO_INCREMENT cho bảng `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=492;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `user_group_member`
 --
 ALTER TABLE `user_group_member`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `video`
