@@ -10,31 +10,25 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 <h2 class="tieu-de margin-top-15">
 	Danh sách đơn hàng
 </h2>	
-<form method="post" name="frm" class="margin-top-5 box-article frm-vip" enctype="multipart/form-data">
-	<div class="portlet light bordered">
-		<div class="portlet-title padding-top-15">
-			<div class="alert alert-success" id="alert" style="display: none">
+<form method="post" name="frm" class="margin-top-5 box-article frm-vip padding-top-5" enctype="multipart/form-data">
+	{{ csrf_field() }}    		
+	<input type="hidden" name="sort_json" id="sort_json" value="" />
+	<div class="alert alert-success" id="alert" style="display: none">
 				<strong>Success!</strong> 
 			</div>
-			
+	<div class="row padding-top-15">
+		<div class="col-md-12">		
 			<div class="actions">
-				<div class="table-toolbar">
-					<div class="row">
-						<div class="col-md-12">													
-							<a href="javascript:void(0)" onclick="updateStatus(1)" class="btn blue">Hiển thị <i class="fa fa-eye"></i></a> 
-							<a href="javascript:void(0)" onclick="updateStatus(0)" class="btn yellow">Ẩn <i class="fa fa-eye-slash"></i></a> 
-							<a href="javascript:void(0)" onclick="sort()" class="btn grey-cascade">Sắp xếp <i class="fa fa-sort"></i></a> 
-							<a href="javascript:void(0)" onclick="trash()" class="btn red">Xóa <i class="fa fa-trash"></i></a> 	
-							{{ csrf_field() }}    		
-							<input type="hidden" name="sort_json" id="sort_json" value="" />	
-						</div>                                                
-					</div>
-				</div>    
-			</div>                                 
-		</div>
-		<div class="portlet-body margin-top-15">	
-			<div class="col-lg-12">
-				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-invoice">
+				<a href="javascript:void(0)" onclick="updateStatus(1)" class="btn blue">Hiển thị <i class="fa fa-eye"></i></a> 
+				<a href="javascript:void(0)" onclick="updateStatus(0)" class="btn yellow">Ẩn <i class="fa fa-eye-slash"></i></a> 
+				<a href="javascript:void(0)" onclick="sort()" class="btn grey-cascade">Sắp xếp <i class="fa fa-sort"></i></a> 
+				<a href="javascript:void(0)" onclick="trash()" class="btn red">Xóa <i class="fa fa-trash"></i></a> 	
+			</div>																		
+		</div>                                                
+	</div>
+	<div class="row margin-top-15">	
+		<div class="col-lg-12">
+			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-invoice">
 				<thead>
 					<tr>
 						<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>                
@@ -50,10 +44,9 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 				</thead>
 				<tbody>                                                
 				</tbody>
-				</table>
-			</div>
-			<div class="clr"></div>				
+			</table>
 		</div>
+		<div class="clr"></div>				
 	</div>	
 </form>
 <script type="text/javascript" language="javascript">	

@@ -1,3 +1,4 @@
+
 function checkAllAgent(cid){
 	var tbl=$(cid).closest("table");	
 	var checkStatus = cid.checked;
@@ -83,6 +84,22 @@ function addToCart(product_id,ajaxurl){
 }
 function hideMsg() {
 	$('.alert-system').fadeOut();
+} 
+var timeout;
+var second_timeout=3000;
+function showMsg(ctrlID,msg,type_msg){		
+	$('#'+ctrlID).removeClass();	
+	$('#'+ctrlID).addClass("alert");			
+	$('#'+ctrlID).addClass(type_msg);
+	$('#'+ctrlID).find("strong").text(msg);		
+	$('#'+ctrlID).fadeIn();		
+	if (timeout != null){
+        clearTimeout(timeout);
+	}
+	timeout = setTimeout(hideMsg2, second_timeout,ctrlID);			 
+}
+function hideMsg2(ctrlID) {
+	$('#'+ctrlID).fadeOut();
 } 
 function PhanCachSoTien(Ctrl) {
     var vMoney = Ctrl.value;

@@ -1543,6 +1543,9 @@ form[name='frm-search']{
     color: #fff;
     padding: 0 8px;
 }
+.actions{
+    float: right;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

@@ -74,14 +74,14 @@ class InvoiceController extends Controller {
         $fullname 				       =	trim($request->fullname)	;
         $address 					       = 	trim($request->address);
         $phone	                 =	trim($request->phone);
-        $mobilephone             =  trim($request->mobilephone);
-        $fax                     =  trim($request->fax);
+        
         $sort_order 			       =	trim($request->sort_order);
         $status 				         =  trim($request->status);        
         $data 		               =  array();
         $info 		               =  array();
         $error 		               =  array();
         $item		                 =  null;
+        
         $checked 	= 1;                      
         if(empty($sort_order)){
              $checked = 0;
@@ -103,12 +103,12 @@ class InvoiceController extends Controller {
         $item->fullname 		=	$fullname;
         $item->address 			=	$address;
         $item->phone 		    =	$phone;            
-        $item->mobilephone  = $mobilephone;
-        $item->fax          = $fax;           
+        
         $item->sort_order 	=	(int)@$sort_order;
         $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save();  	
+        
         $info = array(
           'type_msg' 			=> "has-success",
           'msg' 				=> 'Lưu dữ liệu thành công',

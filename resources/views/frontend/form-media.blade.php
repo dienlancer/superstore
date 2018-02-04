@@ -9,43 +9,35 @@ $linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
 </div>   
 <form class="margin-top-5 padding-top-5 box-article frm-vip" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
     {{ csrf_field() }}           
-    <div class="portlet light bordered">
-        <div class="portlet-title margin-top-5">            
+    <div class="row">
+        <div class="col-md-12"> 
             <div class="actions">
-             <div class="table-toolbar">
-                <div class="row">
-                    <div class="col-md-12">                        
-                        <a class="btn purple" href="javascript:void(0);" onclick="save();">Lưu</a>
-                        <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>                    </div>                                                
-                    </div>
-                </div>    
-            </div>
+                <a class="btn purple" href="javascript:void(0);" onclick="save();">Lưu</a>
+            <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>
+            </div>                       
+                                                                             
         </div>
-        <div class="portlet-body form ">        
-            <div class="form-body">
-                <div class="row margin-top-15">
-                    <div class="form-group col-md-12">
-                        <a href="javascript:void(0);" onclick="addRow();" class="btn btn-sm green"> Thêm mới
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                </div>                
-                <div class="row margin-top-15">
-                    <div class="form-group col-md-12">
-                        <table class="table table-bordered table-recursive setting-system">
-                            <thead>
-                                <tr>
-                                    <th width="20%">File</th>                                    
-                                    <th width="1%"></th>                                
-                                </tr>
-                            </thead>  
-                            <tbody></tbody>                                                                       
-                        </table>
-                    </div> 
-                </div>     
-            </div>            
+    </div>    
+    <div class="row margin-top-15">
+        <div class="form-group col-md-12">
+            <a href="javascript:void(0);" onclick="addRow();" class="btn btn-sm green"> Thêm mới
+                <i class="fa fa-plus"></i>
+            </a>
         </div>
-    </div>
+    </div>                
+    <div class="row margin-top-15">
+        <div class="form-group col-md-12">
+            <table class="table table-bordered table-recursive setting-system">
+                <thead>
+                    <tr>
+                        <th width="20%">File</th>                                    
+                        <th width="1%"></th>                                
+                    </tr>
+                </thead>  
+                <tbody></tbody>                                                                       
+            </table>
+        </div> 
+    </div>     
 </form>
 <script type="text/javascript" language="javascript">
     function uploadFileImport(ctrl_image){    

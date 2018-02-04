@@ -11,60 +11,56 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 <h2 class="tieu-de margin-top-15">
 	Danh sách sản phẩm
 </h2>		
-<form method="post" name="frm" class="margin-top-5 box-article frm-vip" enctype="multipart/form-data">
-	<div class="portlet light bordered">
-		<div class="portlet-title padding-top-15">
-			<div class="alert alert-success" id="alert" style="display: none">
+<form method="post" name="frm" class="margin-top-5 box-article frm-vip padding-top-5" enctype="multipart/form-data">
+	{{ csrf_field() }}
+	<div class="alert alert-success" id="alert" style="display: none">
 				<strong>Success!</strong> 
-			</div>			  
+			</div>
+	<div class="row padding-top-15">
+		<div class="col-md-12">	
 			<div class="actions">
-				<div class="table-toolbar">
-					<div class="row">
-						<div class="col-md-12">													
-							<a href="<?php echo $linkNew; ?>" class="btn green">Thêm mới <i class="fa fa-plus"></i></a> 							
-							<a href="javascript:void(0)" onclick="trash();" class="btn red">Xóa <i class="fa fa-trash"></i></a> 	
-						</div>                                                
-					</div>
-				</div>    
-			</div>                                 
+				<a href="<?php echo $linkNew; ?>" class="btn green">Thêm mới <i class="fa fa-plus"></i></a> 							
+				<a href="javascript:void(0)" onclick="trash();" class="btn red">Xóa <i class="fa fa-trash"></i></a> 	
+			</div>																
+		</div> 
+		<div class="clr"></div>                                               
+	</div>	
+	<div class="row margin-top-15">
+		<div class="col-md-4">
+			<div><b>Loại sản phẩm</b>  </div>
+			<div><?php echo $ddlCategoryProduct ; ?></div>
+		</div>            
+		<div class="col-md-4">
+			<div><b>Sản phẩm</b>  </div>
+			<div><?php echo $inputFilterSearch; ?></div>
+		</div>            
+		<div class="col-md-4">				
+			<div>&nbsp;</div>
+			<div><button type="button" class="btn" onclick="getList();">Tìm kiếm</button>                                         </div>				
+			           
+		</div>   
+		<div class="clr"></div>             
+	</div>   	
+	<div class="row margin-top-15">	
+		<div class="col-md-12">
+			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-product">
+				<thead>
+					<tr>
+						<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>  						
+						<th>Sản phẩm</th>							
+						<th>Nhóm</th>						
+						<th width="1%">Hình ảnh</th>        					
+						<th width="20%">Duyệt</th>							
+						<th width="1%">Sửa</th>  
+						<th width="1%">Xóa</th>                     
+					</tr>
+				</thead>
+				<tbody>                                                
+				</tbody>
+			</table>
 		</div>	
-		<div class="row margin-top-15">
-			<div class="col-md-4">
-				<div><b>Loại sản phẩm</b>  </div>
-				<div><?php echo $ddlCategoryProduct ; ?></div>
-			</div>            
-			<div class="col-md-4">
-				<div><b>Sản phẩm</b>  </div>
-				<div><?php echo $inputFilterSearch; ?></div>
-			</div>            
-			<div class="col-md-4">
-				<div>&nbsp;</div>
-				<div>
-					<button type="button" class="btn" onclick="getList();">Tìm kiếm</button>                                         
-				</div>                
-			</div>                
-		</div>   	
-		<div class="portlet-body margin-top-15">	
-			<div class="col-md-12">
-				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-product">
-					<thead>
-						<tr>
-							<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>  						
-							<th>Sản phẩm</th>							
-							<th>Nhóm</th>						
-							<th width="1%">Hình ảnh</th>        					
-							<th width="20%">Duyệt</th>							
-							<th width="1%">Sửa</th>  
-							<th width="1%">Xóa</th>                     
-						</tr>
-					</thead>
-					<tbody>                                                
-					</tbody>
-				</table>
-			</div>	
-			<div class="clr"></div>			
-		</div>	
-	</div>
+		<div class="clr"></div>			
+	</div>	
 </form>
 <script type="text/javascript" language="javascript">	
 	function getList() {  	
@@ -125,10 +121,10 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  								            		
+				showMsg('alert',data.msg,data.type_msg);
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
-				spinner.hide();
-				alert('Đã xoá');   
+				spinner.hide();				  
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();
@@ -166,10 +162,10 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {				              	
+				showMsg('alert',data.msg,data.type_msg);
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
-				spinner.hide();
-				alert('Đã xoá'); 
+				spinner.hide();				
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();
