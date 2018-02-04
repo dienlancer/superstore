@@ -1,6 +1,7 @@
 var vMemberTable           =   null;
 var vProductTable           =   null;
 var vMediaTable           =   null;
+var vInvoiceTable           =   null;
 var basicTable = function () {    
     var initMemberTable = function () {
         vMemberTable = $('#tbl-member').DataTable({
@@ -46,6 +47,26 @@ var basicTable = function () {
             ]
         });        
     };
+    var initInvoiceTable = function () {
+        vInvoiceTable = $('#tbl-invoice').DataTable({
+            aLengthMenu: [
+                [10, -1],
+                [10, "All"]
+            ],
+            iDisplayLength: -1,
+            columns: [                
+                { data: "checked"       },               
+                { data: "code"      },
+                { data: "username"      },   
+                { data: "email"         },     
+                { data: "fullname"      },                            
+                { data: "sort_order"    },
+                { data: "status"        },                  
+                { data: "edited"        },         
+                { data: "deleted"       },                
+            ]
+        });        
+    };
     return {
         init: function () {
             if (!jQuery().dataTable){
@@ -53,7 +74,8 @@ var basicTable = function () {
             }        
             initMemberTable();    
             initProductTable();  
-            initMediaTable();      
+            initMediaTable();    
+            initInvoiceTable();  
         }
     };
 }();

@@ -12,7 +12,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 	Danh sách sản phẩm
 </h2>		
 <form method="post" name="frm" class="margin-top-5 box-article frm-vip" enctype="multipart/form-data">
-	<div class="portlet-body">
+	<div class="portlet light bordered">
 		<div class="portlet-title padding-top-15">
 			<div class="alert alert-success" id="alert" style="display: none">
 				<strong>Success!</strong> 
@@ -53,7 +53,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 							<th>Sản phẩm</th>							
 							<th>Nhóm</th>						
 							<th width="1%">Hình ảnh</th>        					
-							<th width="10%">Duyệt</th>							
+							<th width="20%">Duyệt</th>							
 							<th width="1%">Sửa</th>  
 							<th width="1%">Xóa</th>                     
 						</tr>

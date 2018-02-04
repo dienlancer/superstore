@@ -977,8 +977,6 @@ class IndexController extends Controller {
       			$item->fullname     =   $fullname;
       			$item->address      =   $address;
       			$item->phone        =   $phone;            
-      			$item->status       =   1;  
-      			$item->sort_order   =   1;  
       			$item->created_at   =   date("Y-m-d H:i:s",time());
       			$item->updated_at   =   date("Y-m-d H:i:s",time());
       			$item->save(); 

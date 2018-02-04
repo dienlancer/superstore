@@ -392,7 +392,7 @@ Route::post("load-data-member",["as"=>"frontend.index.loadDataMember","uses"=>"f
 Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","uses"=>"frontend\IndexController@loadDataSupporter"]);		
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);
 Route::match(["get","post"],"lien-he-voi-chung-toi",["as"=>"frontend.index.contactUs","uses"=>"frontend\IndexController@contactUs"]);
-/* begin đăng sản phẩm */
+
 Route::group(["prefix"=>"product"],function(){
 	Route::match(["get","post"],"list",["as"=>"frontend.product.getList","uses"=>"frontend\ProductController@getList"]);		
 	Route::post("load-data",["as"=>"frontend.product.loadData","uses"=>"frontend\ProductController@loadData"]);	
@@ -406,8 +406,19 @@ Route::group(["prefix"=>"product"],function(){
 	Route::post("upload-file",["as"=>"frontend.product.uploadFile","uses"=>"frontend\ProductController@uploadFile"]);
 	Route::post("create-alias",["as"=>"frontend.product.createAlias","uses"=>"frontend\ProductController@createAlias"]);
 });
-/* end đăng sản phẩm */
-/* begin media */
+
+Route::group(["prefix"=>"invoice"],function(){		
+		Route::get("list",["as"=>"frontend.invoice.getList","uses"=>"frontend\InvoiceController@getList"]);
+		Route::post("load-data",["as"=>"frontend.invoice.loadData","uses"=>"frontend\InvoiceController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"frontend.invoice.getForm","uses"=>"frontend\InvoiceController@getForm"]);
+		Route::post("save",["as"=>"frontend.invoice.save","uses"=>"frontend\InvoiceController@save"]);
+		Route::post("delete-item",["as"=>"frontend.invoice.deleteItem","uses"=>"frontend\InvoiceController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"frontend.invoice.sortOrder","uses"=>"frontend\InvoiceController@sortOrder"]);
+		Route::post("update-status",["as"=>"frontend.invoice.updateStatus","uses"=>"frontend\InvoiceController@updateStatus"]);
+		Route::post("change-status",["as"=>"frontend.invoice.changeStatus","uses"=>"frontend\InvoiceController@changeStatus"]);
+		Route::post("trash",["as"=>"frontend.invoice.trash","uses"=>"frontend\InvoiceController@trash"]);
+	});
+
 Route::group(["prefix"=>"media"],function(){		
 	Route::get("list",["as"=>"frontend.media.getList","uses"=>"frontend\MediaController@getList"]);
 	Route::post("load-data",["as"=>"frontend.media.loadData","uses"=>"frontend\MediaController@loadData"]);		
@@ -417,5 +428,5 @@ Route::group(["prefix"=>"media"],function(){
 	Route::post("trash",["as"=>"frontend.media.trash","uses"=>"frontend\MediaController@trash"]);		
 	Route::post("upload-file",["as"=>"frontend.media.uploadFile","uses"=>"frontend\MediaController@uploadFile"]);	
 });
-/* end media */
+
 ?>

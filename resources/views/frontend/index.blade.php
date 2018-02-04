@@ -15,8 +15,10 @@ switch ($component) {
     case 'security':    
     case "list-product":
     case "list-media":
+    case "list-invoice":
     case "form-product":                
     case "form-media":
+    case "form-invoice":
         $wrapper='container-fluid';
         $col_left='col-lg-2';
         $col_right='col-lg-10';
@@ -137,8 +139,10 @@ switch ($component) {
                 case 'security':                
                 case "list-product":
                 case "list-media":
+                case "list-invoice":
                 case "form-product":                
                 case "form-media":
+                case "form-invoice":
                 $arrUser =array();   
                 $user = Sentinel::forceCheck(); 
                 if(!empty($user)){                
@@ -165,12 +169,13 @@ switch ($component) {
                             if(array_key_exists('thanh-vien-vip', $newData)){                                   
                                     ?>
                                     <li><a href="<?php echo route('frontend.product.getList'); ?>">Sản phẩm</a></li>                                    
-                                    <li><a href="<?php echo route('frontend.media.getList'); ?>">Media</a></li>
+                                    <li><a href="<?php echo route('frontend.media.getList'); ?>">Media</a></li>                                    
                                     <?php 
                                 }
-                            ?>
+                            ?>                            
                             <li><a href="<?php echo route("frontend.index.viewAccount"); ?>">Thông tin tài khoản</a></li>
                             <li><a href="<?php echo route("frontend.index.viewSecurity"); ?>">Đổi mật khẩu</a></li>
+                            <li><a href="<?php echo route('frontend.invoice.getList'); ?>">Hóa đơn</a></li>
                             <li><a href="<?php echo route("frontend.index.getLgout"); ?>">Thoát</a></li>
                         </ul>
                     </div>
@@ -251,7 +256,13 @@ switch ($component) {
                 break;    
                 case "form-media":
                 ?>@include("frontend.form-media")<?php   
-                break;                                                                      
+                break;  
+                case "list-invoice":
+                ?>@include("frontend.list-invoice")<?php   
+                break;    
+                case "form-invoice":
+                ?>@include("frontend.form-invoice")<?php   
+                break;                                                                    
             }
             ?>
         </div>

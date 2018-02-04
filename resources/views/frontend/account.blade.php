@@ -1,7 +1,7 @@
  <h2 class="tieu-de margin-top-15">
     Tài khoản
 </h2>
-<form method="post" name="frm" class="margin-top-5 box-article">
+<form method="post" name="frm" class="padding-top-5 margin-top-5 box-article">
     {{ csrf_field() }}
     <input type="hidden" name="username" value="<?php echo @$data["username"]; ?>" />   
     <?php                           

@@ -48,6 +48,7 @@ class ProductController extends Controller {
   public function getList(){
     $component="list-product";
     $layout="two-column";
+    $controller=$this->_controller; 
     $arrUser=array();              
     $user = Sentinel::forceCheck(); 
     if(!empty($user)){                
@@ -59,7 +60,7 @@ class ProductController extends Controller {
     $arrCategoryProduct=CategoryProductModel::select("id","fullname","parent_id")->orderBy("sort_order","asc")->get()->toArray();
         $arrCategoryProductRecursive=array();              
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)  ;  
-    $controller=$this->_controller;       
+          
     return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive"));
   }  
   public function loadData(Request $request){   
@@ -96,6 +97,7 @@ class ProductController extends Controller {
   public function getForm($task,$id=""){     
     $component="form-product";
     $layout="two-column";
+    $controller=$this->_controller;  
     $arrUser=array();              
     $user = Sentinel::forceCheck(); 
     if(!empty($user)){                
@@ -120,7 +122,7 @@ class ProductController extends Controller {
     $arrCategoryParamRecursive=array();
     categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ; 
     categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ; 
-    $controller=$this->_controller;  
+    
     return view("frontend.index",compact("component","layout","controller","arrCategoryProductRecursive","arrCategoryParamRecursive","arrProductParam","arrRowData","task"));
   }
   public function save(Request $request){

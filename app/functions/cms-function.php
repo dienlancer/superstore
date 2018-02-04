@@ -2,7 +2,7 @@
 function cmsStatus($id,$statusValue,$kicked){
   $strStatus = ($statusValue == 0) ? 'unpublish' : 'publish';
   $xhtml    = '<a class="jgrid" id="status-'.$id.'" href="javascript:void(0)" onclick="changeStatus('.$id.','.$kicked.');">
-  <span class="state '.$strStatus.'"></span>
+  <span class="state '.$strStatus.'">&nbsp;</span>
   </a>';
   return $xhtml;
 }

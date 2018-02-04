@@ -98,7 +98,9 @@
  <div class="row">
  	<div class="col-md-8">
  		<form method="post" name="frmRegister">     	
- 			<input type="hidden" name="action" value="register-checkout" />			
+ 			<input type="hidden" name="action" value="register-checkout" />		
+ 			<input type="hidden" name="sort_order" value="1">          
+    		<input type="hidden" name="status" value="0">	
  			{{ csrf_field() }}
  			<table  class="com_product30" border="0" width="100%" cellpadding="0" cellspacing="0">  
  				<thead><tr><th>Đăng ký tài khoản</th></tr></thead>                 
