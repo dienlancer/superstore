@@ -1,3 +1,3 @@
-<?php 
-echo '<ul class="comproduct33"><li>Thanh toán thành công</li></ul>';    
-?>
+<ul class="alert-success margin-top-15">
+                <li>Thanh toán thành công</li>                           
+            </ul>

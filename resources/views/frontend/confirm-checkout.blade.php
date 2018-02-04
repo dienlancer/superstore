@@ -1,52 +1,50 @@
-<div class="page-title h-title">Xác nhận thanh toán</div>
-<?php
-$setting=getSettingSystem();
-$product_width = $setting['product_width']['field_value'];
-$product_height = $setting['product_height']['field_value'];
-     
-$ssName="vmart";
-$arrCart=array();
-if(Session::has($ssName)){    
-    $arrCart = @Session::get($ssName)["cart"];    
-}     
-if(count($arrCart) > 0){
-    ?>
-    <table id="com_product16" class="com_product16" cellpadding="0" cellspacing="0" width="100%">
+ <div class="tieu-de margin-top-15">Xác nhận thanh toán</div>
+ <?php
+ $setting=getSettingSystem();
+ $product_width = $setting['product_width']['field_value'];
+ $product_height = $setting['product_height']['field_value'];    
+ $ssName="vmart";
+ $arrCart=array();
+ if(Session::has($ssName)){    
+    $arrCart = @Session::get($ssName);    
+}   
+?>
+<table  class="com_product16 margin-top-5" cellpadding="0" cellspacing="0" width="100%">
     <thead>
-    <tr>    
-        <th align="center">Sản phẩm</th>
-        <th width="20%"><center>Giá</center></th>
-        <th  width="10%"><center>Số lượng</center></th>
-        <th width="20%"><center>Tổng giá</center></th>        
-    </tr>
+        <tr>    
+            <th align="center">Sản phẩm</th>
+            <th width="20%"><center>Giá</center></th>
+            <th  width="10%"><center>Số lượng</center></th>
+            <th width="20%"><center>Tổng giá</center></th>        
+        </tr>
     </thead>
     <tbody>
-    <?php   
-    $total_price=0;
-    $total_quantity=0;
-    foreach ($arrCart as $key => $value) {  
-        $product_id=$value["product_id"];      
-        $product_name=$value["product_name"];
-        $product_code=$value["product_code"];
-        $product_price=$value["product_price"];        
-        $product_image=    asset('/upload/'.$product_width."x".$product_height."-". $value["product_image"]) ;        
-        $product_link= url($value['product_alias'].'.html');           
-        $product_quantity=$value["product_quantity"];
-        $product_price=fnPrice($value["product_price"]) ;
-        $product_total_price=fnPrice($value["product_total_price"]) ;
-        $total_price+=(float)$value["product_total_price"];  
-        $total_quantity+=(float)$product_quantity;    
-        ?>
-        <tr>
-            
-            <td class="com_product20"><a href="<?php echo $product_link ?>"><?php echo $product_name; ?></a></td>
-            <td class="com_product21" align="right"><?php echo $product_price; ?></td>
-            <td align="center" class="com_product22"><?php echo $product_quantity; ?></td>
-            <td class="com_product23" align="right"><?php echo $product_total_price; ?></td>            
-        </tr>
-        <?php
-     } 
-    ?>                  
+        <?php   
+        $total_price=0;
+        $total_quantity=0;
+        foreach ($arrCart as $key => $value) {  
+            $product_id=$value["product_id"];      
+            $product_name=$value["product_name"];
+            $product_code=$value["product_code"];
+            $product_price=$value["product_price"];        
+            $product_image=    asset('/upload/'.$product_width."x".$product_height."-". $value["product_image"]) ;        
+            $product_link=route('frontend.index.index',[$value['product_alias']]) ;         
+            $product_quantity=$value["product_quantity"];
+            $product_price=fnPrice($value["product_price"]) ;
+            $product_total_price=fnPrice($value["product_total_price"]) ;
+            $total_price+=(float)$value["product_total_price"];  
+            $total_quantity+=(float)$product_quantity;    
+            ?>
+            <tr>
+
+                <td class="com_product20"><a href="<?php echo $product_link ?>"><?php echo $product_name; ?></a></td>
+                <td class="com_product21" align="right"><?php echo $product_price; ?></td>
+                <td align="center" class="com_product22"><?php echo $product_quantity; ?></td>
+                <td class="com_product23" align="right"><?php echo $product_total_price; ?></td>            
+            </tr>
+            <?php
+        } 
+        ?>                  
     </tbody>
     <tfoot>
         <tr>
@@ -59,67 +57,83 @@ if(count($arrCart) > 0){
         </tr>
     </tfoot>
 </table>
-    <?php
-}       
-$msg="";
-if(count($arrError) > 0){
-        $msg .= '<ul class="comproduct33">';        
-        foreach ($arrError as $key => $val){
-            $msg .= '<li>' . $val . '</li>';
+<?php                           
+ if(count($error) > 0 || count($success) > 0){
+    ?>
+    <div class="alert-system padding-top-5">
+        <?php                                           
+        if(count($error) > 0){
+            ?>
+            <ul class="alert-error">
+                <?php 
+                foreach ($error as $key => $value) {
+                    ?>
+                    <li><?php echo $value; ?></li>
+                    <?php
+                }
+                ?>                              
+            </ul>
+            <?php
         }
-        $msg .= '</ul>';
-    }   
-    echo $msg;
-?>
+        if(count($success) > 0){
+            ?>
+            <ul class="alert-success">
+                <?php 
+                foreach ($success as $key => $value) {
+                    ?>
+                    <li><?php echo $value; ?></li>
+                    <?php
+                }
+                ?>                              
+            </ul>
+            <?php
+        }
+        ?>  
+        <div class="clr"></div>                                            
+    </div>              
+    <?php
+ }
+ ?>
 <form method="post" name="frm">   
+    <input type="hidden" name="id" value="<?php echo @$data["id"]; ?>" />
+    <input type="hidden" name="username" value="<?php echo @$data["username"]; ?>" />
+    <input type="hidden" name="quantity" value="<?php echo @$total_quantity; ?>" />
+    <input type="hidden" name="total_price" value="<?php echo @$total_price; ?>" />                
+    {{ csrf_field() }}     
     <div class="col-md-6">
-        <table id="com_product30" class="com_product30" border="0" width="100%" cellpadding="0" cellspacing="0">                   
+        <table  class="com_product30" border="0" width="100%" cellpadding="0" cellspacing="0">                   
             <tbody>        
                 <tr>
                     <td align="right">Tài khoản</td>
-                    <td><?php echo @$arrData["username"]; ?></td>        
+                    <td><?php echo @$data["username"]; ?></td>        
                 </tr>                           
                 <tr>
                     <td align="right">Email</td>
-                    <td><input type="text" name="email" value="<?php echo @$arrData["email"]; ?>" /></td>                   
+                    <td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" /></td>                   
                 </tr>                     
                 <tr>
                     <td align="right">Tên</td>
-                    <td><input type="text" name="fullname" value="<?php echo @$arrData["fullname"]; ?>" /></td>            
+                    <td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" /></td>            
                 </tr>
                 <tr>
                     <td align="right">Địa chỉ</td>
-                    <td><input type="text" name="address" value="<?php echo @$arrData["address"]; ?>" /></td>            
+                    <td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" /></td>            
                 </tr>                
                 <tr>
                     <td align="right">Phone</td>
-                    <td><input type="text" name="phone" value="<?php echo @$arrData["phone"]; ?>" /></td>            
-                </tr>
-                <tr>
-                    <td align="right">Mobile phone</td>
-                    <td><input type="text" name="mobilephone" value="<?php echo @$arrData["mobilephone"]; ?>" /></td>            
-                </tr>
-                <tr>
-                    <td align="right">Fax</td>
-                    <td><input type="text" name="fax" value="<?php echo @$arrData["fax"]; ?>" /></td>            
-                </tr>   
+                    <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
+                </tr>                  
                 <tr>           
                     <td></td>
                     <td class="com_product31" align="right">
-                        <input name="btnChangeInfo" type="submit" class="com_product32" value="Cập nhật" />
-                        <input type="hidden" name="id" value="<?php echo @$arrData["id"]; ?>" />
-                        <input type="hidden" name="username" value="<?php echo @$arrData["username"]; ?>" />
-                        <input type="hidden" name="quantity" value="<?php echo @$total_quantity; ?>" />
-                        <input type="hidden" name="total_price" value="<?php echo @$total_price; ?>" />
-                        <input type="hidden" name="action" value="finished-checkout" />                    
-                        {{ csrf_field() }}                             
+                        <input name="btnChangeInfo" type="submit" class="com_product32" value="Cập nhật" />                                                
                     </td>                       
                 </tr> 
             </tbody>    
         </table>
     </div>
     <div class="col-md-6">
-        <table id="com_product30" class="com_product30" border="0" cellpadding="0" cellspacing="0">   
+        <table  class="com_product30" border="0" cellpadding="0" cellspacing="0">   
             <thead><tr><th>Hình thức thanh toán</th></tr></thead>     
             <tbody>        
                 <tr>
@@ -127,7 +141,7 @@ if(count($arrError) > 0){
                 </tr>                                               
                 <tr>
                     <td>
-                        <select id="payment_method" name="payment_method" onchange="changePaymentMethod(this.value);">
+                        <select class="payment_method_id" name="payment_method_id" onchange="changePaymentMethod(this.value);">
                             <?php 
                             for($i=0;$i<count($data_paymentmethod);$i++){
                                 $id=$data_paymentmethod[$i]["id"];
@@ -142,7 +156,7 @@ if(count($arrError) > 0){
                     </td>
                 </tr>
                 <tr>
-                    <td><span id="payment_method_content"></span></td>
+                    <td><span class="payment_method_content"></span></td>
                 </tr>                
             </tbody>    
         </table>
@@ -151,22 +165,21 @@ if(count($arrError) > 0){
 </form>
 <script type="text/javascript" language="javascript">
     function changePaymentMethod(id)    {
-      
-    var token=$("form[name='frm']").find("input[type='hidden'][name='_token']").val();   
-    var dataItem = {                 
-                    "id"                    : id,           
-                    "_token"                : token                            
-                };
-    $.ajax({
+        var token=$("input[type='hidden'][name='_token']").val();   
+        var dataItem = {                 
+            "id"                    : id,           
+            "_token"                : token                            
+        };
+        $.ajax({
             url         : '<?php echo route('frontend.index.getPaymentmethod'); ?>',
             type        : "POST",
             data        : dataItem,           
             success     : function(data, status, jsXHR){                            
-                            $("#payment_method_content").empty();
-                            if(data != null){
-                                $("#payment_method_content").append(data.content);
-                            }                           
-                        }
+                $(".payment_method_content").empty();
+                if(data != null){
+                    $(".payment_method_content").append(data.content);
+                }                           
+            }
         });
-}
+    }
 </script>

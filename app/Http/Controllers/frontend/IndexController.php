@@ -714,9 +714,9 @@ class IndexController extends Controller {
       	}
       	$data=DB::table('customer')
 				->join('project_member','customer.id','=','project_member.member_id')
-				->select('customer.id','customer.fullname','customer.email','customer.mobilephone','customer.address')
+				->select('customer.id','customer.fullname','customer.email','customer.address')
 				->where('project_member.project_id',(int)@$project_id)
-				->groupBy('customer.id','customer.fullname','customer.email','customer.mobilephone','customer.address')
+				->groupBy('customer.id','customer.fullname','customer.email','customer.address')
         ->orderBy('project_member.created_at','desc')
 				->get()->toArray();
 				$data=convertToArray($data);			
@@ -1010,7 +1010,6 @@ class IndexController extends Controller {
         $component="xac-nhan-thanh-toan";    
         $layout="full-width";   
         $id=0;  
-
         $arrUser=array();              
         $user = Sentinel::forceCheck(); 
         if(!empty($user)){                
@@ -1019,7 +1018,6 @@ class IndexController extends Controller {
         if(count($arrUser) == 0){
           return redirect()->route("frontend.index.loginCheckout");
         }      
-          
         $arrCart=array();
         if(Session::has($this->_ssNameCart)){
           $arrCart=Session::get($this->_ssNameCart);
@@ -1030,22 +1028,40 @@ class IndexController extends Controller {
         $data=User::find((int)$arrUser["id"])->toArray();    
         $id=(int)@$data["id"];
         if($request->isMethod('post')){
-          $data =$request->all();                   
-          $email=trim(@$request->email) ;   
-          $payment_method=trim(@$request->payment_method);                                 
-          if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#",$email )){
-            $error["email"] = 'Email is invalid';
+          $data             =   $request->all();                 
+          $email            =   trim(@$request->email) ;
+          $fullname         =   trim(@$request->fullname);
+          $address          =   trim(@$request->address);
+          $phone            =   trim(@$request->phone);  
+          $payment_method_id = trim(@$request->payment_method_id);                                      
+          if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
+            $error["email"] = 'Email không hợp lệ';
             $data["email"] = '';
             $flag = 0;
           }else{
-            $arrRowData=User::whereRaw("trim(lower(email)) = ? and id != ? ",[trim(mb_strtolower($email,'UTF-8')),(int)$id])->get()->toArray();
-            if(count($arrRowData) > 0){
+            $customer=User::whereRaw("trim(lower(email)) = ? and id != ?",[mb_strtolower($email,'UTF-8'),(int)@$id])->get()->toArray();
+            if(count($customer) > 0){
               $error["email"] = 'Email đã tồn tại';
               $data["email"] = ""; 
               $flag = 0;
             }
-          }
-          if((int)$payment_method==0){
+          }  
+          if(mb_strlen($fullname) < 6){
+            $error["fullname"] = 'Họ tên phải từ 6 ký tự trở lên';
+            $data["fullname"] = ""; 
+            $flag = 0;
+          }  
+          if(mb_strlen($address) < 6){
+            $error["address"] = 'Địa chỉ phải từ 6 ký tự trở lên';
+            $data["address"] = ""; 
+            $flag = 0;
+          }  
+          if(mb_strlen($phone) < 10){
+            $error["phone"] = 'Số điện thoại phải từ 10 ký tự trở lên';
+            $data["phone"] = ""; 
+            $flag = 0;
+          }        
+          if((int)@$payment_method_id==0){
             $error["payment_method"] = 'Xin vui lòng chọn 1 phương thức thanh toán';                      
             $flag = 0;
           }                                    
@@ -1058,7 +1074,7 @@ class IndexController extends Controller {
             $item->fullname=@$request->fullname;
             $item->address=@$request->address;
             $item->phone=@$request->phone;                 
-            $item->payment_method_id=(int)$payment_method;
+            $item->payment_method_id=(int)$payment_method_id;
             $item->quantity=(int)@$request->quantity;
             $item->total_price=(float)@$request->total_price;
             $item->status=0;  
@@ -1100,15 +1116,12 @@ class IndexController extends Controller {
             $component="hoan-tat-thanh-toan";                      
           }                         
         }
-        $data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content','sort_order','status')->get()->toArray();
+        $data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content')->get()->toArray();
         $data_paymentmethod[]=array(
           'id'=>0,
           'fullname'=>null,
           'alias'=>null,
-          'content'=>null,
-          'sort_order'=>1,
-          'status'=>1,
-
+          'content'=>null,          
         );
         return view("frontend.index",compact("component","error","data","success","layout","data_paymentmethod"));                   
       }      
