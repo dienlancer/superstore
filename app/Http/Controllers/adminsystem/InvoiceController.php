@@ -138,26 +138,26 @@ class InvoiceController extends Controller {
             return $info;
       }      
       public function deleteItem(Request $request){
-            $id                     =   (int)$request->id;              
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                                    
-            if($checked == 1){
-                $item               =   InvoiceModel::find((int)@$id);
-                $item->delete();            
-                InvoiceDetailModel::whereRaw("invoice_id = ?",[(int)@$id])->delete();
-            }        
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
+        $id                     =   (int)$request->id;              
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Xóa thành công";                                    
+        if($checked == 1){
+          $item               =   InvoiceModel::find((int)@$id);
+          $item->delete();            
+          InvoiceDetailModel::whereRaw("invoice_id = ?",[(int)@$id])->delete();
+        }        
+        $data                   =   $this->loadData($request);
+        $info = array(
+          'checked'           => $checked,
+          'type_msg'          => $type_msg,                
+          'msg'               => $msg,                
+          'data'              => $data
+        );
+        return $info;
       }
       public function updateStatus(Request $request){
-            $strID                 =   $request->str_id;     
+        $strID                 =   $request->str_id;     
         $status                 =   $request->status;            
         $checked                =   1;
         $type_msg               =   "alert-success";
@@ -165,27 +165,27 @@ class InvoiceController extends Controller {
         $strID=substr($strID, 0,strlen($strID) - 1);
         $arrID=explode(',',$strID);                 
         if(empty($strID)){
-                $checked                =   0;
-                $type_msg               =   "alert-warning";            
-                $msg                    =   "Vui lòng chọn ít nhất 1 phần tử";
-            }
-            if($checked==1){
-                foreach ($arrID as $key => $value) {
-                      if(!empty($value)){
-                        $item=InvoiceModel::find($value);
-                        $item->status=$status;
-                        $item->save();      
-                      }            
-                }
-            }         
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
+          $checked                =   0;
+          $type_msg               =   "alert-warning";            
+          $msg                    =   "Vui lòng chọn ít nhất 1 phần tử";
+        }
+        if($checked==1){
+          foreach ($arrID as $key => $value) {
+            if(!empty($value)){
+              $item=InvoiceModel::find($value);
+              $item->status=$status;
+              $item->save();      
+            }            
+          }
+        }         
+        $data                   =   $this->loadData($request);
+        $info = array(
+          'checked'           => $checked,
+          'type_msg'          => $type_msg,                
+          'msg'               => $msg,                
+          'data'              => $data
+        );
+        return $info;
       }
       public function trash(Request $request){
             $strID                 =   $request->str_id;               
