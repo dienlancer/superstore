@@ -12,6 +12,7 @@ $youtube_url=$setting['youtube_url']['field_value'];
 $instagram_url=$setting['instagram_url']['field_value'];
 $pinterest_url=$setting['pinterest_url']['field_value'];   
 $company=$setting['contacted_person']['field_value'];
+
 ?>
 <div class="wrapper-notice">
 	<div class="container">

@@ -12,8 +12,8 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 <form method="post" name="frm" class="margin-top-5 box-article frm-vip padding-top-5" enctype="multipart/form-data">
 	{{ csrf_field() }}	
 	<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+		<strong>Success!</strong> 
+	</div>
 	<div class="row padding-top-15">
 		<div class="col-md-12">	
 			<div class="actions">
@@ -45,8 +45,8 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 	function getList() {  	
 		var token = $('form[name="frm"] > input[name="_token"]').val();         
 		var dataItem={            
-            '_token': token,            
-        };
+			'_token': token,            
+		};
 		$.ajax({
 			url: '<?php echo $linkLoadData; ?>',
 			type: 'POST', 
@@ -131,7 +131,7 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 		$.ajax({
 			url: '<?php echo $linkTrash; ?>',
 			type: 'POST', 
-			             
+			
 			data: dataItem,
 			success: function (data, status, jqXHR) {
 				showMsg('alert',data.msg,data.type_msg);
@@ -151,5 +151,5 @@ $linkTrash			=	route('frontend.'.$controller.'.trash');
 		getList();
 	});
 </script>
-  
+
 

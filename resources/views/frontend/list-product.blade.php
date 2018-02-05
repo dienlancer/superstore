@@ -14,8 +14,8 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 <form method="post" name="frm" class="margin-top-5 box-article frm-vip padding-top-5" enctype="multipart/form-data">
 	{{ csrf_field() }}
 	<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+		<strong>Success!</strong> 
+	</div>
 	<div class="row padding-top-15">
 		<div class="col-md-12">	
 			<div class="actions">
@@ -37,7 +37,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 		<div class="col-md-4">				
 			<div>&nbsp;</div>
 			<div><button type="button" class="btn" onclick="getList();">Tìm kiếm</button>                                         </div>				
-			           
+
 		</div>   
 		<div class="clr"></div>             
 	</div>   	
@@ -65,14 +65,14 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 <script type="text/javascript" language="javascript">	
 	function getList() {  	
 		var token = $('input[name="_token"]').val(); 
-        var category_id=$('select[name="category_id"]').val();
-        var filter_search=$('input[name="filter_search"]').val();        
-        var dataItem={            
-            '_token': token,
-            'filter_search':filter_search,
-            'category_id':category_id,
-            
-        };       
+		var category_id=$('select[name="category_id"]').val();
+		var filter_search=$('input[name="filter_search"]').val();        
+		var dataItem={            
+			'_token': token,
+			'filter_search':filter_search,
+			'category_id':category_id,
+
+		};       
 		$.ajax({
 			url: '<?php echo $linkLoadData; ?>',
 			type: 'POST', 
@@ -120,11 +120,11 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			url: '<?php echo $linkDelete; ?>',
 			type: 'POST', 			
 			data: dataItem,
-			success: function (data, status, jqXHR) {  								            		
-				showMsg('alert',data.msg,data.type_msg);
+			success: function (data, status, jqXHR) {  				
+				showMsg('alert',data.msg,data.type_msg);               		
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
-				spinner.hide();				  
+				spinner.hide();
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();
@@ -161,11 +161,11 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			type: 'POST', 
 			             
 			data: dataItem,
-			success: function (data, status, jqXHR) {				              	
-				showMsg('alert',data.msg,data.type_msg);
+			success: function (data, status, jqXHR) {
+				showMsg('alert',data.msg,data.type_msg);  
 				vProductTable.clear().draw();
 				vProductTable.rows.add(data.data).draw();
-				spinner.hide();				
+				spinner.hide();
 			},
 			beforeSend  : function(jqXHR,setting){
 				spinner.show();

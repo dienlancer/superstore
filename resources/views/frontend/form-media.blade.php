@@ -15,18 +15,19 @@ $linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
                 <a class="btn purple" href="javascript:void(0);" onclick="save();">Lưu</a>
             <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>
             </div>                       
-                                                                             
+                                                                         
         </div>
     </div>    
-    <div class="row margin-top-15">
-        <div class="form-group col-md-12">
+    <div class="form-group margin-top-15">
+        <div class="col-md-12">
             <a href="javascript:void(0);" onclick="addRow();" class="btn btn-sm green"> Thêm mới
                 <i class="fa fa-plus"></i>
             </a>
         </div>
+                                                                     
     </div>                
-    <div class="row margin-top-15">
-        <div class="form-group col-md-12">
+    <div class="form-group margin-top-15">
+        <div class="col-md-12">
             <table class="table table-bordered table-recursive setting-system">
                 <thead>
                     <tr>
@@ -37,7 +38,9 @@ $linkUploadFile         =   route('frontend.'.$controller.'.uploadFile');
                 <tbody></tbody>                                                                       
             </table>
         </div> 
-    </div>     
+
+    </div> 
+    <div class="clr"></div>    
 </form>
 <script type="text/javascript" language="javascript">
     function uploadFileImport(ctrl_image){    

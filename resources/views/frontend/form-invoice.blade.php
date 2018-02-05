@@ -39,7 +39,7 @@ $product_height = $setting['product_height']['field_value'];
                     <a href="javascript:void(0);" onclick="save();" class="btn purple">Lưu&nbsp;<i class="fa fa-floppy-o"></i></a>                
                     <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>    
                 </div>
-            </div>
+            </div>            
         </div>
     </div>  
     <div class="row margin-top-15">
@@ -97,8 +97,6 @@ $product_height = $setting['product_height']['field_value'];
                 <?php echo $ddlPaymentMethod; ?>
                 <span class="help-block"></span>
             </div>
-
-
         </div>   
         <div class="form-group col-md-6">
             <label class="col-md-3 control-label"><b>Mã đơn hàng</b></label>
@@ -123,46 +121,46 @@ $product_height = $setting['product_height']['field_value'];
         <div class="col-lg-12">
             <div class="col-lg-12">
                 <table width="100%" id="com_product16" class="com_product16">
-                <thead>
-                    <tr>
-                        <th align="center"><center>Mã sản phẩm</center></th>
-                        <th align="center"><center>Tên sản phẩm</center></th>
-                        <th align="center"><center>Hình</center></th>
-                        <th align="center"><center>Giá</center></th>
-                        <th align="center"><center>Số lượng</center></th>
-                        <th align="center"><center>Thành tiền</center></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($arrInvoiceDetail as $key => $value) {
-                        $product_code=$value["product_code"];
-                        $product_name=$value["product_name"];
-                        $product_image=asset('/upload/'.$product_width . 'x'.$product_height.'-'.$value["product_image"]) ;                
-                        $product_price=fnPrice($value["product_price"]);
-                        $product_quantity=$value["product_quantity"];
-                        $product_total_price=fnPrice($value["product_total_price"]);
-                        ?>
+                    <thead>
                         <tr>
-                            <td align="center"><?php echo $product_code; ?></td>
-                            <td><?php echo $product_name; ?></td>
-                            <td width="10%" align="center"><img style="width:100%" src="<?php echo $product_image; ?>" /></td>
-                            <td align="right"><?php echo $product_price; ?></td>
-                            <td width="10%" align="center"><b><center><?php echo $product_quantity; ?></center></b> </td>
-                            <td width="15%" align="right"><b><?php echo $product_total_price; ?></b></td>
+                            <th align="center"><center>Mã sản phẩm</center></th>
+                            <th align="center"><center>Tên sản phẩm</center></th>
+                            <th align="center"><center>Hình</center></th>
+                            <th align="center"><center>Giá</center></th>
+                            <th align="center"><center>Số lượng</center></th>
+                            <th align="center"><center>Thành tiền</center></th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                    } 
-                    ?>              
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" align="center"><b>Tổng cộng</b></td>
-                        <td align="center"><b><?php echo (@$arrRowData["quantity"]); ?></b></td>
-                        <td align="right"><b><?php echo fnPrice(@$arrRowData["total_price"]); ?></b></td>
-                    </tr>
-                </tfoot>
-            </table>
+                        foreach ($arrInvoiceDetail as $key => $value) {
+                            $product_code=$value["product_code"];
+                            $product_name=$value["product_name"];
+                            $product_image=asset('/upload/'.$product_width . 'x'.$product_height.'-'.$value["product_image"]) ;                
+                            $product_price=fnPrice($value["product_price"]);
+                            $product_quantity=$value["product_quantity"];
+                            $product_total_price=fnPrice($value["product_total_price"]);
+                            ?>
+                            <tr>
+                                <td align="center"><?php echo $product_code; ?></td>
+                                <td><?php echo $product_name; ?></td>
+                                <td width="10%" align="center"><img style="width:100%" src="<?php echo $product_image; ?>" /></td>
+                                <td align="right"><?php echo $product_price; ?></td>
+                                <td width="10%" align="center"><b><center><?php echo $product_quantity; ?></center></b> </td>
+                                <td width="15%" align="right"><b><?php echo $product_total_price; ?></b></td>
+                            </tr>
+                            <?php
+                        } 
+                        ?>              
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" align="center"><b>Tổng cộng</b></td>
+                            <td align="center"><b><?php echo (@$arrRowData["quantity"]); ?></b></td>
+                            <td align="right"><b><?php echo fnPrice(@$arrRowData["total_price"]); ?></b></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>            
         </div>
     </div>   
@@ -177,7 +175,7 @@ $product_height = $setting['product_height']['field_value'];
         var fax             =   $('input[name="fax"]');
         var sort_order      =   $('input[name="sort_order"]');
         var status          =   $('select[name="status"]');
-                
+
         $(fullname).closest('.form-group').removeClass("has-error");
         $(address).closest('.form-group').removeClass("has-error");        
         $(phone).closest('.form-group').removeClass("has-error");

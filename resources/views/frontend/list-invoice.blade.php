@@ -14,8 +14,8 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 	{{ csrf_field() }}    		
 	<input type="hidden" name="sort_json" id="sort_json" value="" />
 	<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+		<strong>Success!</strong> 
+	</div>
 	<div class="row padding-top-15">
 		<div class="col-md-12">		
 			<div class="actions">
@@ -153,7 +153,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkUpdateStatus; ?>',
 			type: 'POST', 
-			             
+			
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
 				showMsg('alert',data.msg,data.type_msg);               		
@@ -192,7 +192,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkTrash; ?>',
 			type: 'POST', 
-			             
+			
 			data: dataItem,
 			success: function (data, status, jqXHR) {
 				showMsg('alert',data.msg,data.type_msg);  
@@ -216,7 +216,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkSortOrder; ?>',
 			type: 'POST', 
-			             
+			
 			data: dataItem,
 			success: function (data, status, jqXHR) {   	
 				showMsg('alert',data.msg,data.type_msg);  
@@ -246,7 +246,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 			$.ajax({
 				url: '<?php echo $linkLoadData; ?>',
 				type: 'POST', 
-				             
+				
 				data: dataItem,
 				async:false,
 				success: function (data, status, jqXHR) {  		
@@ -279,5 +279,5 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		getList();
 	});
 </script>
- 
+
 

@@ -56,167 +56,153 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
 	echo $inputSortOrder;
 	?>            	                                        
 	<div class="row margin-bottom-5">
-		<div class="col-md-12">
-			<label class="col-md-3 control-label"></label>
-			<div class="col-md-9">
-				<div class="actions"><a href="javascript:void(0);" onclick="save();" class="btn purple">Lưu&nbsp;<i class="fa fa-floppy-o"></i></a> </div>
-			</div>
-		</div> 
+		<label class="col-md-3 control-label"></label>
+		<div class="col-md-9">
+			<div class="actions"><a href="javascript:void(0);" onclick="save();" class="btn purple">Lưu&nbsp;<i class="fa fa-floppy-o"></i></a> </div>
+		</div>
+		
 	</div>            
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Sản phẩm</b></label>
-			<div class="col-md-9">
-				<?php echo $inputFullName; ?>
-				<span class="help-block"></span>
-			</div>
-		</div> 
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Sản phẩm</b></label>
+		<div class="col-md-9">
+			<?php echo $inputFullName; ?>
+			<span class="help-block"></span>
+		</div>
+		
 	</div>
-	<div class="row">  
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Alias</b></label>
-			<div class="col-md-9">
-				<?php echo $inputAlias; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>     
+	<div class="form-group">  
+		<label class="col-md-3 control-label"><b>Alias</b></label>
+		<div class="col-md-9">
+			<?php echo $inputAlias; ?>
+			<span class="help-block"></span>
+		</div>   
+		
 	</div>      		
-	<div class="row"> 
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Giá</b></label>
-			<div class="col-md-9">
-				<?php echo $inputPrice; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>      
+	<div class="form-group"> 
+		<label class="col-md-3 control-label"><b>Giá</b></label>
+		<div class="col-md-9">
+			<?php echo $inputPrice; ?>
+			<span class="help-block"></span>
+		</div>    
+		
 	</div>    
-	<div class="row"> 
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Giá khuyến mãi</b></label>
-			<div class="col-md-9">
-				<?php echo $inputSalePrice; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>      
-	</div>    
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Loại sản phẩm</b></label>
-			<div class="col-md-9">
-				<?php echo $ddlCategoryProduct; ?>
-				<span class="help-block"></span>
-			</div>
-		</div> 
-	</div>
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Thuộc tính</b></label>
-			<div class="col-md-9">
-				<?php echo $ddlCategoryParam; ?>
-				<span class="help-block"></span>
-			</div>
-		</div> 
-	</div>
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Kích thước</b></label>
-			<div class="col-md-9">
-				<?php echo $inputSizeType; ?>
-				<span class="help-block"></span>
-			</div>
+	<div class="form-group"> 
+		<label class="col-md-3 control-label"><b>Giá khuyến mãi</b></label>
+		<div class="col-md-9">
+			<?php echo $inputSalePrice; ?>
+			<span class="help-block"></span>
 		</div>   
+		
+	</div>    
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Loại sản phẩm</b></label>
+		<div class="col-md-9">
+			<?php echo $ddlCategoryProduct; ?>
+			<span class="help-block"></span>
+		</div>
+		
+	</div>
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Thuộc tính</b></label>
+		<div class="col-md-9">
+			<?php echo $ddlCategoryParam; ?>
+			<span class="help-block"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Kích thước</b></label>
+		<div class="col-md-9">
+			<?php echo $inputSizeType; ?>
+			<span class="help-block"></span>
+		</div> 
+		
 	</div> 
-	<div class="row">                      
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Hình</b></label>
-			<div class="col-md-4">
-				<input type="file" id="image" name="image"  />   
-				<div class="picture-area"><?php echo $picture; ?>                      </div>
-				<div class="clr"></div>
+	<div class="form-group">                      
+		<label class="col-md-3 control-label"><b>Hình</b></label>
+		<div class="col-md-4">
+			<input type="file" name="image"  />   
+			<div class="picture-area"><?php echo $picture; ?>                      </div>
+			
+		</div>
+		<div class="col-md-5">
+			<div>
+				<a href="javascript:void(0);" onclick="addRow();" class="btn"> Thêm mới
 
+				</a>
 			</div>
-			<div class="col-md-5">
-				<div>
-					<a href="javascript:void(0);" onclick="addRow();" class="btn"> Thêm mới
-
-					</a>
-				</div>
-				<table class="table-image" border="0" cellpadding="0" cellspacing="0" border="1" width="100%">
-					<thead>
-						<tr>                                    
-							<th><center>Thumbnails</center></th>                                  
-							<th ></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						if(count($arrRowData) > 0){
-							$arrProductChildImage=json_decode(@$arrRowData['child_image']);    
-							if(count($arrProductChildImage) > 0){
-								foreach ($arrProductChildImage as $key => $value) {
-									$featuredImg=url("/upload/" . $product_width . "x" . $product_height . "-".@$value);
-									?>
-									<tr>
-										<td align="center" valign="middle">
-											<img src="<?php echo $featuredImg; ?>" width="<?php echo ((int)$product_width/6); ?>" />
-											<input type="hidden" name="product_child_image_hidden" value="<?php echo $value; ?>" />
-										</td>
-										<td align="center" valign="middle">
-											<a href="javascript:void(0);"  onclick="removeRow(this);"><img src="<?php echo url("/public/adminsystem/images/delete-icon.png"); ?>" /></a>
-										</td>
-									</tr>
-									<?php
-								}                                            
-							}    
-						}   
-						?>                                    
-					</tbody>
-				</table>    
-			</div>
-		</div>     
+			<table class="table-image" border="0" cellpadding="0" cellspacing="0" border="1" width="100%">
+				<thead>
+					<tr>                                    
+						<th><center>Thumbnails</center></th>                                  
+						<th ></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					if(count($arrRowData) > 0){
+						$arrProductChildImage=json_decode(@$arrRowData['child_image']);    
+						if(count($arrProductChildImage) > 0){
+							foreach ($arrProductChildImage as $key => $value) {
+								$featuredImg=url("/upload/" . $product_width . "x" . $product_height . "-".@$value);
+								?>
+								<tr>
+									<td align="center" valign="middle">
+										<img src="<?php echo $featuredImg; ?>" width="<?php echo ((int)$product_width/6); ?>" />
+										<input type="hidden" name="product_child_image_hidden" value="<?php echo $value; ?>" />
+									</td>
+									<td align="center" valign="middle">
+										<a href="javascript:void(0);"  onclick="removeRow(this);"><img src="<?php echo url("/public/adminsystem/images/delete-icon.png"); ?>" /></a>
+									</td>
+								</tr>
+								<?php
+							}                                            
+						}    
+					}   
+					?>                                    
+				</tbody>
+			</table>    
+		</div>    
+		
 	</div>  
-	<div class="row">  
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Meta keyword</b></label>
-			<div class="col-md-9">
-				<?php echo $inputMetakeyword; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>     
+	<div class="form-group">  
+		<label class="col-md-3 control-label"><b>Meta keyword</b></label>
+		<div class="col-md-9">
+			<?php echo $inputMetakeyword; ?>
+			<span class="help-block"></span>
+		</div>    
+		
 	</div>
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Meta description</b></label>
-			<div class="col-md-9">                            
-				<?php echo $inputMetadescription; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>   
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Meta description</b></label>
+		<div class="col-md-9">                            
+			<?php echo $inputMetadescription; ?>
+			<span class="help-block"></span>
+		</div>
+		
 	</div>
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Giới thiệu</b></label>
-			<div class="col-md-9">                            
-				<?php echo $inputIntro; ?>
-				<span class="help-block"></span>
-			</div>
-		</div>     
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Giới thiệu</b></label>
+		<div class="col-md-9">                            
+			<?php echo $inputIntro; ?>
+			<span class="help-block"></span>
+		</div> 
+		
 	</div> 
-	<div class="row">
-		<div class="form-group col-md-12">
-			<label class="col-md-3 control-label"><b>Chi tiết</b></label>
-			<div class="col-md-9">                            
-				<?php echo $inputDetail; ?>
-				<span class="help-block"></span>
-				<script type="text/javascript" language="javascript">
-					CKEDITOR.replace('detail',{
-						height:300
-					});
-				</script>
-				<span class="help-block"></span>
-			</div>
-		</div>                       
-	</div> 		  
+	<div class="form-group">
+		<label class="col-md-3 control-label"><b>Chi tiết</b></label>
+		<div class="col-md-9">                            
+			<?php echo $inputDetail; ?>
+			<span class="help-block"></span>
+			<script type="text/javascript" language="javascript">
+				CKEDITOR.replace('detail',{
+					height:300
+				});
+			</script>
+			<span class="help-block"></span>
+		</div>    
+
+	</div> 	
+	<div class="clr"></div>	  
 </form>
 <script type="text/javascript" language="javascript">
 	
