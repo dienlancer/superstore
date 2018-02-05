@@ -321,34 +321,34 @@ class ProductController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
-                    $checked                =   0;
-                    $type_msg               =   "alert-warning";            
-                    $msg                    =   "Please choose at least one item to delete";
+        $strID                 =   $request->str_id;               
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
+          $checked     =   0;
+          $type_msg           =   "alert-warning";            
+          $msg                =   "Please choose at least one item";
+        }
+        if($checked==1){
+          foreach ($arrID as $key => $value) {
+            if(!empty($value)){
+              $item=ProductModel::find($value);
+              $item->status=$status;
+              $item->save();      
+            }            
           }
-          if($checked==1){
-              foreach ($arrID as $key => $value) {
-                if(!empty($value)){
-                    $item=ProductModel::find($value);
-                    $item->status=$status;
-                    $item->save();      
-                }            
-              }
-          }                 
-          $data                   =   $this->loadData($request);
-          $info = array(
-            'checked'           => $checked,
-            'type_msg'          => $type_msg,                
-            'msg'               => $msg,                
-            'data'              => $data
-          );
-          return $info;
+        }                 
+        $data                   =   $this->loadData($request);
+        $info = array(
+          'checked'           => $checked,
+          'type_msg'          => $type_msg,                
+          'msg'               => $msg,                
+          'data'              => $data
+        );
+        return $info;
       }
       public function trash(Request $request){
             $strID                 =   $request->str_id;               
@@ -356,7 +356,7 @@ class ProductController extends Controller {
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";                  
             $strID=substr($strID, 0,strlen($strID) - 1);
-            $arrID=explode(',',$strID);            
+            $arrID=explode(',',$strID);                 
             if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            

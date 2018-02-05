@@ -341,7 +341,7 @@ return $info;
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";                  
             $strID=substr($strID, 0,strlen($strID) - 1);
-            $arrID=explode(',',$strID);            
+            $arrID=explode(',',$strID);                 
             if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
