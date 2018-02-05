@@ -149,11 +149,18 @@ class InvoiceController extends Controller {
             $id                     =   (int)$request->id;              
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                                    
+            $msg                    =   "Xóa thành công";      
+            $arrUser=array();              
+            $user = Sentinel::forceCheck(); 
+            if(!empty($user)){                
+              $arrUser = $user->toArray();    
+            }                                
             if($checked == 1){
-                $item               =   InvoiceModel::find((int)@$id);
-                $item->delete();            
-                InvoiceDetailModel::whereRaw("invoice_id = ?",[(int)@$id])->delete();
+                $data = InvoiceModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->select('id')->get();
+                if(count($data) > 0){
+                  InvoiceModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->delete();
+                  InvoiceDetailModel::whereRaw("invoice_id = ?",[(int)@$id])->delete();
+                }                                  
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -199,7 +206,12 @@ class InvoiceController extends Controller {
             $checked                =   1;
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;    
+            $arrID                  =   explode(",", $str_id)  ; 
+            $arrUser=array();              
+            $user = Sentinel::forceCheck(); 
+            if(!empty($user)){                
+              $arrUser = $user->toArray();    
+            }     
             if(empty($str_id)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
@@ -207,11 +219,11 @@ class InvoiceController extends Controller {
             }
             if($checked == 1){                
               $strID = implode(',',$arrID);       
-              $strID = substr($strID, 0,strlen($strID) - 1);            
+              $strID = substr($strID, 0,strlen($strID) - 1); 
               $sqlDeleteInvoice       = "DELETE FROM `invoice`        WHERE `id`          IN (".$strID.")";        
               $sqlDeleteInvoiceDetail = "DELETE FROM `invoice_detail` WHERE `invoice_id`  IN (".$strID.")";       
               DB::statement($sqlDeleteInvoice);
-              DB::statement($sqlDeleteInvoiceDetail); 
+              DB::statement($sqlDeleteInvoiceDetail);                      
             }
             $data                   =   $this->loadData($request);
             $info = array(

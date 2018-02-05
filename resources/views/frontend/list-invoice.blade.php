@@ -16,16 +16,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 	<div class="alert alert-success" id="alert" style="display: none">
 		<strong>Success!</strong> 
 	</div>
-	<div class="row padding-top-15">
-		<div class="col-md-12">		
-			<div class="actions">
-				<a href="javascript:void(0)" onclick="updateStatus(1)" class="btn blue">Hiển thị <i class="fa fa-eye"></i></a> 
-				<a href="javascript:void(0)" onclick="updateStatus(0)" class="btn yellow">Ẩn <i class="fa fa-eye-slash"></i></a> 
-				<a href="javascript:void(0)" onclick="sort()" class="btn grey-cascade">Sắp xếp <i class="fa fa-sort"></i></a> 
-				<a href="javascript:void(0)" onclick="trash()" class="btn red">Xóa <i class="fa fa-trash"></i></a> 	
-			</div>																		
-		</div>                                                
-	</div>
+	
 	<div class="row margin-top-15">	
 		<div class="col-lg-12">
 			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-invoice">
@@ -36,10 +27,10 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 						<th>Username</th>
 						<th>Email</th>
 						<th>Tên khách hàng</th>						
-						<th width="10%">Sắp xếp</th>
+						<th>Ngày mua</th>
 						<th width="10%">Trạng thái</th>							
-						<th width="1%">Sửa</th>  
-						<th width="1%">Xóa</th>                   
+						<th width="1%">Xem</th>  
+						          
 					</tr>
 				</thead>
 				<tbody>                                                
@@ -153,7 +144,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkUpdateStatus; ?>',
 			type: 'POST', 
-			
+
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
 				showMsg('alert',data.msg,data.type_msg);               		
@@ -192,7 +183,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkTrash; ?>',
 			type: 'POST', 
-			
+
 			data: dataItem,
 			success: function (data, status, jqXHR) {
 				showMsg('alert',data.msg,data.type_msg);  
@@ -216,7 +207,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 		$.ajax({
 			url: '<?php echo $linkSortOrder; ?>',
 			type: 'POST', 
-			
+
 			data: dataItem,
 			success: function (data, status, jqXHR) {   	
 				showMsg('alert',data.msg,data.type_msg);  
@@ -246,7 +237,7 @@ $linkSortOrder		=	route('frontend.'.$controller.'.sortOrder');
 			$.ajax({
 				url: '<?php echo $linkLoadData; ?>',
 				type: 'POST', 
-				
+
 				data: dataItem,
 				async:false,
 				success: function (data, status, jqXHR) {  		

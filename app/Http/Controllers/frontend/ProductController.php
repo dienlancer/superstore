@@ -315,10 +315,15 @@ return $info;
             $user = Sentinel::forceCheck(); 
             if(!empty($user)){                
               $arrUser = $user->toArray();    
+            }   
+            $data=InvoiceDetailModel::whereRaw("product_id = ?",[(int)@$id])->select('id')->get()->toArray();
+            if(count($data) > 0){
+              $checked                =   0;
+              $type_msg               =   "alert-warning";            
+              $msg                    =   "Phần tử có dữ liệu con. Vui lòng không xoá";
             }                                   
             if($checked == 1){
-              $item = ProductModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->delete();
-                $item->delete();                
+             ProductModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->delete();                  
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -344,8 +349,14 @@ return $info;
             if(empty($str_id)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
-              $msg                =   "Please choose at least one item to delete";
+              $msg                =   "Vui lòng chọn ít nhất 1 phần tử để xóa";
             }
+            $data=DB::table('invoice_detail')->whereIn('product_id',@$arrID)->select('id')->get()->toArray();             
+            if(count($data) > 0){
+              $checked                =   0;
+              $type_msg               =   "alert-warning";            
+              $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+            }   
             if($checked == 1){                
                   $strID = implode(',',$arrID);   
                   $strID=substr($strID, 0,strlen($strID) - 1);

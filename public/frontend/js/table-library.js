@@ -59,11 +59,10 @@ var basicTable = function () {
                 { data: "code"      },
                 { data: "username"      },   
                 { data: "email"         },     
-                { data: "fullname"      },                            
-                { data: "sort_order"    },
+                { data: "fullname"      },
+                { data: "created_at"      },                                            
                 { data: "status"        },                  
-                { data: "edited"        },         
-                { data: "deleted"       },                
+                { data: "edited"        },                                 
             ]
         });        
     };

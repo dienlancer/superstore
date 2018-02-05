@@ -6,19 +6,17 @@ $linkSave               =   route('frontend.'.$controller.'.save');
 $inputCode              =   '<input type="text" class="form-control" name="code"  disabled            value="'.@$arrRowData['code'].'">';
 $inputUsername          =   '<input type="text" class="form-control" name="username"  disabled          value="'.@$arrRowData['username'].'">';
 $inputEmail             =   '<input type="text" class="form-control" name="email"      disabled             value="'.@$arrRowData['email'].'">';
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"           value="'.@$arrRowData['fullname'].'">';  
-$inputAddress           =   '<input type="text" class="form-control" name="address"              value="'.@$arrRowData['address'].'">'; 
-$inputPhone             =   '<input type="text" class="form-control" name="phone"             value="'.@$arrRowData['phone'].'">';  
-$inputMobilephone       =   '<input type="text" class="form-control" name="mobilephone"     value="'.@$arrRowData['mobilephone'].'">';  
-$inputFax               =   '<input type="text" class="form-control" name="fax"   id="fax"        value="'.@$arrRowData['fax'].'">';  
+$inputFullName          =   '<input type="text" class="form-control" name="fullname" disabled          value="'.@$arrRowData['fullname'].'">';  
+$inputAddress           =   '<input type="text" class="form-control" name="address"   disabled           value="'.@$arrRowData['address'].'">'; 
+$inputPhone             =   '<input type="text" class="form-control" name="phone"       disabled      value="'.@$arrRowData['phone'].'">';  
 $lblQuantity            =   number_format((int)@$arrRowData['quantity'],0,".",",");
 $lblTotalPrice          =   number_format((int)@$arrRowData['total_price'],0,".",",");
 
 $ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id","payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled');
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"disabled");
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"  disabled   value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 $setting= getSettingSystem();
@@ -30,19 +28,8 @@ $product_height = $setting['product_height']['field_value'];
 </h2>   
 <form method="post" name="frm" class="margin-top-5 box-article frm-vip" enctype="multipart/form-data">
     {{ csrf_field() }}                                  
-    <?php echo  $inputID; ?>
+    <?php echo  $inputID; ?>    
     <div class="row padding-top-15">
-        <div class="col-md-12">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-9">
-                <div class="actions">
-                    <a href="javascript:void(0);" onclick="save();" class="btn purple">Lưu&nbsp;<i class="fa fa-floppy-o"></i></a>                
-                    <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>    
-                </div>
-            </div>            
-        </div>
-    </div>  
-    <div class="row margin-top-15">
         <div class="form-group col-md-6">
             <label class="col-md-3 control-label"><b>Username</b></label>
             <div class="col-md-9">
