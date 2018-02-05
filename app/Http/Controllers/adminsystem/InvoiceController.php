@@ -29,8 +29,8 @@ class InvoiceController extends Controller {
         if(!empty(@$request->filter_search)){
           $query->where('invoice.fullname','like','%'.trim(@$request->filter_search).'%');
         }
-        $data=$query->select('invoice.id','invoice.code','invoice.username','invoice.fullname','invoice.address','invoice.phone','invoice.mobilephone','invoice.fax','invoice.quantity','invoice.total_price','invoice.status','invoice.sort_order','invoice.created_at','invoice.updated_at')
-        ->groupBy('invoice.id','invoice.code','invoice.username','invoice.fullname','invoice.address','invoice.phone','invoice.mobilephone','invoice.fax','invoice.quantity','invoice.total_price','invoice.status','invoice.sort_order','invoice.created_at','invoice.updated_at')
+        $data=$query->select('invoice.id','invoice.code','invoice.username','invoice.email','invoice.fullname','invoice.address','invoice.phone','invoice.quantity','invoice.total_price','invoice.status','invoice.sort_order','invoice.created_at','invoice.updated_at')
+        ->groupBy('invoice.id','invoice.code','invoice.username','invoice.email','invoice.fullname','invoice.address','invoice.phone','invoice.quantity','invoice.total_price','invoice.status','invoice.sort_order','invoice.created_at','invoice.updated_at')
         ->orderBy('invoice.sort_order', 'asc')->get()->toArray()     ;              
         $data=convertToArray($data);    
         $data=invoiceConverter($data,$this->_controller);            
@@ -67,9 +67,7 @@ class InvoiceController extends Controller {
         $id 					           =	trim($request->id)	;        
         $fullname 				       =	trim($request->fullname)	;
         $address 					       = 	trim($request->address);
-        $phone	                 =	trim($request->phone);
-        $mobilephone             =  trim($request->mobilephone);
-        $fax                     =  trim($request->fax);
+        $phone	                 =	trim($request->phone);                
         $sort_order 			       =	trim($request->sort_order);
         $status 				         =  trim($request->status);        
         $data 		               =  array();
@@ -97,8 +95,8 @@ class InvoiceController extends Controller {
         $item->fullname 		=	$fullname;
         $item->address 			=	$address;
         $item->phone 		    =	$phone;            
-        $item->mobilephone  = $mobilephone;
-        $item->fax          = $fax;           
+        
+                   
         $item->sort_order 	=	(int)@$sort_order;
         $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	

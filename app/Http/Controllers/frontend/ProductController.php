@@ -336,30 +336,29 @@ return $info;
       }
      
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;      
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);            
+            if(empty($strID)){
+              $checked     =   0;
+              $type_msg           =   "alert-warning";            
+              $msg                =   "Please choose at least one item to delete";
+            }
             $arrUser=array();              
             $user = Sentinel::forceCheck(); 
             if(!empty($user)){                
               $arrUser = $user->toArray();    
-            }        
-            if(empty($str_id)){
-              $checked     =   0;
-              $type_msg           =   "alert-warning";            
-              $msg                =   "Vui lòng chọn ít nhất 1 phần tử để xóa";
-            }
+            }                    
             $data=DB::table('invoice_detail')->whereIn('product_id',@$arrID)->select('id')->get()->toArray();             
             if(count($data) > 0){
               $checked                =   0;
               $type_msg               =   "alert-warning";            
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }   
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
+            if($checked == 1){                                  
                   $sql = "DELETE FROM `product` WHERE `id` IN  (".$strID.") and `user_id` =  ".(int)@$arrUser['id'];                         
                   DB::statement($sql);                 
             }

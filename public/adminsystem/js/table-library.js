@@ -709,7 +709,7 @@ var basicTable = function () {
                 { data: "username"      },   
                 { data: "email"         },     
                 { data: "fullname"      },            
-                { data: "mobilephone"   },            
+                { data: "phone"   },            
                 { data: "sort_order"    },
                 { data: "status"        },                  
                 { data: "edited"        },         
