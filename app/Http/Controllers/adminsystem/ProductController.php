@@ -321,7 +321,8 @@ class ProductController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-        $strID                 =   $request->str_id;               
+        $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
         $checked                =   1;
         $type_msg               =   "alert-success";
         $msg                    =   "Cập nhật thành công";                  
@@ -360,7 +361,7 @@ class ProductController extends Controller {
             if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
-              $msg                =   "Please choose at least one item to delete";
+              $msg                =   "Please choose at least one item";
             }
             $data=DB::table('invoice_detail')->whereIn('product_id',@$arrID)->select('id')->get()->toArray();             
             if(count($data) > 0){

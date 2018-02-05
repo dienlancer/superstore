@@ -189,12 +189,13 @@ class GroupMemberController extends Controller {
       }
    
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;    
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
@@ -216,9 +217,7 @@ class GroupMemberController extends Controller {
               $type_msg               =   "alert-warning";            
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }   
-            if($checked == 1){                
-              $strID = implode(',',$arrID);       
-              $strID = substr($strID, 0,strlen($strID) - 1);            
+            if($checked == 1){                              
               $sqlDeleteGroupMember = "DELETE FROM `group_member` WHERE `id` IN (".$strID.")";        
               $sqlDeleteGroupPrivilege = "DELETE FROM `group_privilege` WHERE `group_member_id` IN (".$strID.")";       
               DB::statement($sqlDeleteGroupMember);

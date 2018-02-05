@@ -240,13 +240,14 @@ class ModuleItemController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;          
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Please choose at least one item to delete";
@@ -270,19 +271,18 @@ class ModuleItemController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Please choose at least one item to delete";
             }
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
+            if($checked == 1){                                  
                   $sql = "DELETE FROM `module_item` WHERE `id` IN  (".$strID.")";                      
                   DB::statement($sql);        
             }
