@@ -380,6 +380,7 @@ Route::match(["get","post"],"dang-nhap",["as"=>"frontend.index.login","uses"=>"f
 Route::match(["get","post"],"bao-mat",["as"=>"frontend.index.viewSecurity","uses"=>"frontend\IndexController@viewSecurity"]);
 Route::match(["get","post"],"lien-he",["as"=>"frontend.index.contact","uses"=>"frontend\IndexController@contact"]);
 Route::get("thanh-toan",["as"=>"frontend.index.checkout","uses"=>"frontend\IndexController@checkout"]);
+Route::get("hoan-tat-giao-dich",["as"=>"frontend.index.finishCheckout","uses"=>"frontend\IndexController@finishCheckout"]);
 Route::match(["get","post"],"xac-nhan-thanh-toan",["as"=>"frontend.index.confirmCheckout","uses"=>"frontend\IndexController@confirmCheckout"]);
 Route::match(["get","post"],"dang-nhap-thanh-toan",["as"=>"frontend.index.loginCheckout","uses"=>"frontend\IndexController@loginCheckout"]);
 Route::get("hoa-don",["as"=>"frontend.index.getInvoice","uses"=>"frontend\IndexController@getInvoice"]);

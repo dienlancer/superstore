@@ -1111,7 +1111,7 @@ class IndexController extends Controller {
             if(Session::has($this->_ssNameCart)){
               Session::forget($this->_ssNameCart);
             }                   
-            $component="hoan-tat-thanh-toan";                      
+                                  
           }                         
         }
         $data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content')->get()->toArray();
@@ -1122,7 +1122,12 @@ class IndexController extends Controller {
           'content'=>null,          
         );
         return view("frontend.index",compact("component","error","data","success","layout","data_paymentmethod"));                   
-      }      
+      }    
+      public function finishCheckout(){
+        $component="hoan-tat-thanh-toan";    
+        $layout="full-width";   
+        return view("frontend.index",compact("component","layout"));       
+      }  
       public function loginCheckout(Request $request){          
         $flag=1;
         $error=array();
