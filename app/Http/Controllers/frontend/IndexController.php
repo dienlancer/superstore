@@ -1008,7 +1008,7 @@ class IndexController extends Controller {
         $data=array();        
         $component="xac-nhan-thanh-toan";    
         $layout="full-width";   
-        $id=0;  
+        $id=0;         
         $arrUser=array();              
         $user = Sentinel::forceCheck(); 
         if(!empty($user)){                
@@ -1064,7 +1064,8 @@ class IndexController extends Controller {
             $error["payment_method"] = 'Xin vui lòng chọn 1 phương thức thanh toán';                      
             $flag = 0;
           }                                    
-          if($flag==1){                        
+          if($flag==1){    
+          $nlcheckout= new NL_CheckOutV3('1de82c0699bc0982f8d75e16529d9881','ab534f473c9deb56a49626c28d1fcfed','dien.toannang@gmail.com','https://www.nganluong.vn/checkout.api.nganluong.post.php');                    
             $paymentmethod=PaymentMethodModel::find((int)@$payment_method_id)->toArray();        
             $payment_method_alias=$paymentmethod['alias'];              
             $order_code=randomCodeNumber();              
@@ -1077,13 +1078,53 @@ class IndexController extends Controller {
             $return_url=route('frontend.index.saveInvoice');
             $cancel_url=route('frontend.index.cancelInvoice');
             $buyer_fullname=@$request->fullname;
-            $buyer_email=$request->email;
-            $buyer_mobile=$request->phone;
-            $buyer_address=$request->address;
+            $buyer_email=@$request->email;
+            $buyer_mobile=@$request->phone;
+            $buyer_address=@$request->address;
+            $array_items=array();
+            $arrCart=array();
+            if(Session::has($this->_ssNameCart)){
+              $arrCart=Session::get($this->_ssNameCart);
+            }         
+            if(count($arrCart) > 0){
+              $k=1;
+              $j=0;
+              foreach ($arrCart as $key => $value) {                
+                $product_id=$value["product_id"];    
+                $product_code=$value["product_code"];  
+                $product_name=$value["product_name"];              
+                $product_alias=$value["product_alias"];                                      
+                $product_image=   $value["product_image"] ;        
+                $product_price=$value["product_price"];                                  
+                $product_quantity=$value["product_quantity"];                         
+                $product_total_price=$value["product_total_price"];
+                $array_items[$j]= 
+                  array(
+                    'item_name'.$k => $product_name,
+                    'item_quantity'.$k => $product_quantity,
+                    'item_amount'.$k => $product_total_price,
+                    'item_url'.$k => route('frontend.index.index',[$product_alias])
+                  );
+                $k++;
+                $j++;
+              }              
+            }    
+            $array_items=array();      
             switch ($payment_method_alias) {
               case 'NL':
-              $nlcheckout= new NL_CheckOutV3('1de82c0699bc0982f8d75e16529d9881','ab534f473c9deb56a49626c28d1fcfed','dien.toannang@gmail.com','https://www.nganluong.vn/checkout.api.nganluong.post.php');
+              $nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
+                        $fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
+                        $buyer_address,$array_items);
+              echo "<pre>".print_r($nlcheckout,true)."</pre>";
+              echo "<pre>".print_r($nl_result,true)."</pre>";
+              if ($nl_result->error_code =='00'){
+                echo "<pre>".print_r($nl_result->checkout_url,true)."</pre>";
 
+              }else{
+                echo $nl_result->error_message;
+              }
+              
+              //return redirect((string)$nl_result->checkout_url);
               break;              
               default:
               $item = new InvoiceModel;

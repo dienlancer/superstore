@@ -146,10 +146,12 @@
                             for($i=0;$i<count($data_paymentmethod);$i++){
                                 $id=$data_paymentmethod[$i]["id"];
                                 $fullname=$data_paymentmethod[$i]["fullname"];
-                                if((int)@$data["payment_method"] == (int)$id)
+                                if((int)@$data["payment_method_id"] == (int)$id){
                                     echo '<option selected value="'.$id.'">'.$fullname.'</option>';                               
-                                else
+                                }
+                                else{
                                     echo '<option          value="'.$id.'">'.$fullname.'</option>';                               
+                                }
                             }
                             ?>                                                    
                         </select>
