@@ -1026,7 +1026,7 @@ class IndexController extends Controller {
         $data=User::find((int)$arrUser["id"])->toArray();    
         $id=(int)@$data["id"];
         if($request->isMethod('post')){
-          $data             =   $request->all();                 
+          $data             =   @$request->all();                 
           $email            =   trim(@$request->email) ;
           $fullname         =   trim(@$request->fullname);
           $address          =   trim(@$request->address);

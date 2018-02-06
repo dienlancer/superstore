@@ -126,7 +126,7 @@
                 <tr>           
                     <td></td>
                     <td class="com_product31" align="right">
-                        <input name="btnChangeInfo" type="submit" class="com_product32" value="Cập nhật" />                                                
+                        <a href="javascript:void(0);" class="com_product32 thanh-toan-thuong" style="display: block" onclick="document.forms['frm'].submit();">Thanh toán</a> 
                     </td>                       
                 </tr> 
             </tbody>    
