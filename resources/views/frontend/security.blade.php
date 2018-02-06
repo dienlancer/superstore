@@ -48,11 +48,11 @@
             </tr>                           
             <tr>
                 <td align="right">Mật khẩu</td>
-                <td><input type="password" name="password"  /></td>        
+                <td><input type="password" name="password" class="contact-input"  /></td>        
             </tr>
             <tr>
                 <td align="right">Xác nhận mật khẩu</td>
-                <td><input type="password" name="password_confirm" /></td>        
+                <td><input type="password" name="password_confirm" class="contact-input" /></td>        
             </tr>   
             <tr>           
                 <td></td>

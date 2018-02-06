@@ -45,7 +45,7 @@ if(count($arrCart) > 0){
 	 	<tr>			
 			<td class="com_product20"><a href="<?php echo $product_link ?>"><?php echo $product_name; ?></a></td>
 			<td align="right" class="com_product21"><?php echo $product_price_text; ?></td>
-			<td align="center" class="com_product22"><input type="text" onkeypress="return isNumberKey(event)" value="<?php echo $product_quantity; ?>" size="4" class="com_product19" name="quantity[<?php echo $product_id; ?>]">		
+			<td align="center" class="com_product22"><input  type="text" onkeypress="return isNumberKey(event)" value="<?php echo $product_quantity; ?>" size="4" class="com_product19" name="quantity[<?php echo $product_id; ?>]">		
 			</td>
 			<td align="right" class="com_product23"><?php echo $product_total_price_text; ?></td>
 			<td align="center" class="com_product24"><a href="<?php echo $delete_link; ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>

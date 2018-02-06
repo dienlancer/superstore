@@ -48,19 +48,19 @@
             </tr>                               
             <tr>
                 <td align="right">Email</td>
-                <td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" /></td>                   
+                <td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" class="contact-input" /></td>                   
             </tr>                     
             <tr>
                 <td align="right">Tên</td>
-                <td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" /></td>            
+                <td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" class="contact-input" /></td>            
             </tr>
             <tr>
                 <td align="right">Địa chỉ</td>
-                <td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" /></td>            
+                <td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" class="contact-input" /></td>            
             </tr>                
             <tr>
                 <td align="right">Phone</td>
-                <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
+                <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" class="contact-input" /></td>            
             </tr>                          
             <tr>           
                 <td></td>

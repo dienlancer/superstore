@@ -307,6 +307,9 @@ switch ($component) {
                 case "hoa-don":                                                
                 ?>@include("frontend.invoice")<?php
                 break; 
+                case "cancel-invoice":                                                
+                ?>@include("frontend.cancel-invoice")<?php
+                break; 
             }  
             ?>            
         </div> 

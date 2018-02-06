@@ -43,11 +43,11 @@
         <tbody>        
             <tr>
                 <td align="right">Tài khoản</td>
-                <td><input type="text" name="username" /></td>        
+                <td><input type="text" name="username" class="contact-input" /></td>        
             </tr>       
             <tr>
                 <td align="right">Mật khẩu</td>
-                <td><input type="password" name="password" /></td>        
+                <td><input type="password" name="password" class="contact-input" /></td>        
             </tr>            
             <tr>           
                 <td></td>

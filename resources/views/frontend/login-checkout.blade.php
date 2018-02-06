@@ -107,31 +107,31 @@
  				<tbody>        
  					<tr>
  						<td align="right">Tài khoản</td>
- 						<td><input type="text" name="username" value="<?php echo @$data["username"]; ?>" /></td>        
+ 						<td><input type="text" name="username" value="<?php echo @$data["username"]; ?>" class="contact-input" /></td>        
  					</tr>       
  					<tr>
  						<td align="right">Mật khẩu</td>
- 						<td><input type="password" name="password" value="<?php echo @$data["password"]; ?>" /></td>        
+ 						<td><input type="password" name="password" value="<?php echo @$data["password"]; ?>" class="contact-input" /></td>        
  					</tr>
  					<tr>
  						<td align="right">Xác nhận mật khẩu</td>
- 						<td><input type="password" name="password_confirm" value="<?php echo @$data["password_confirm"]; ?>" /></td>        
+ 						<td><input type="password" name="password_confirm" value="<?php echo @$data["password_confirm"]; ?>" class="contact-input" /></td>        
  					</tr>               
  					<tr>
  						<td align="right">Email</td>
- 						<td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" /></td>                   
+ 						<td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" class="contact-input" /></td>                   
  					</tr>                     
  					<tr>
  						<td align="right">Tên</td>
- 						<td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" /></td>            
+ 						<td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" class="contact-input" /></td>            
  					</tr>
  					<tr>
  						<td align="right">Địa chỉ</td>
- 						<td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" /></td>            
+ 						<td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" class="contact-input" /></td>            
  					</tr>                
  					<tr>
  						<td align="right">Phone</td>
- 						<td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
+ 						<td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" class="contact-input" /></td>            
  					</tr>                                        
  					<tr>           
  						<td></td>
@@ -151,10 +151,10 @@
 
  				<thead><tr><th>Đăng nhập thanh toán</th></tr></thead>   
  				<tbody><tr>
- 					<td colspan="2"><input type="text" name="username" value=""></td>
+ 					<td colspan="2"><input type="text" name="username" value="" class="contact-input" ></td>
  				</tr>
  				<tr>
- 					<td colspan="2"><input type="password" name="password" value=""></td>
+ 					<td colspan="2"><input type="password" name="password" value="" class="contact-input" ></td>
  				</tr>
  				<tr>           
  					<td></td>

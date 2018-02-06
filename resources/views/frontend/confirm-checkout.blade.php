@@ -100,8 +100,8 @@
     <input type="hidden" name="quantity" value="<?php echo @$total_quantity; ?>" />
     <input type="hidden" name="total_price" value="<?php echo @$total_price; ?>" />                
     {{ csrf_field() }}     
-    <div class="col-md-6">
-        <table  class="com_product30" border="0" width="100%" cellpadding="0" cellspacing="0">                   
+    <div class="col-md-4">
+        <table class="com-product-51"  border="0" width="100%" cellpadding="0" cellspacing="0">                   
             <tbody>        
                 <tr>
                     <td align="right">Tài khoản</td>
@@ -109,31 +109,31 @@
                 </tr>                           
                 <tr>
                     <td align="right">Email</td>
-                    <td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" /></td>                   
+                    <td><input type="text" name="email" value="<?php echo @$data["email"]; ?>" class="contact-input" /></td>                   
                 </tr>                     
                 <tr>
                     <td align="right">Tên</td>
-                    <td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" /></td>            
+                    <td><input type="text" name="fullname" value="<?php echo @$data["fullname"]; ?>" class="contact-input" /></td>            
                 </tr>
                 <tr>
                     <td align="right">Địa chỉ</td>
-                    <td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" /></td>            
+                    <td><input type="text" name="address" value="<?php echo @$data["address"]; ?>" class="contact-input" /></td>            
                 </tr>                
                 <tr>
                     <td align="right">Phone</td>
-                    <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" /></td>            
+                    <td><input type="text" name="phone" value="<?php echo @$data["phone"]; ?>" class="contact-input" /></td>            
                 </tr>                  
                 <tr>           
                     <td></td>
                     <td class="com_product31" align="right">
-                        <a href="javascript:void(0);" class="com_product32 thanh-toan-thuong" style="display: block" onclick="document.forms['frm'].submit();">Thanh toán</a> 
+                        <a href="javascript:void(0);" class="com_product32 thanh-toan-thuong" onclick="document.forms['frm'].submit();">Thanh toán</a> 
                     </td>                       
                 </tr> 
             </tbody>    
         </table>
     </div>
-    <div class="col-md-6">
-        <table  class="com_product30" border="0" cellpadding="0" cellspacing="0">   
+    <div class="col-md-8">
+        <table  class="com-product-51" border="0" cellpadding="0" cellspacing="0">   
             <thead><tr><th>Hình thức thanh toán</th></tr></thead>     
             <tbody>        
                 <tr>
@@ -141,7 +141,7 @@
                 </tr>                                               
                 <tr>
                     <td>
-                        <select class="payment_method_id" name="payment_method_id" onchange="changePaymentMethod(this.value);">
+                        <select class="contact-input" name="payment_method_id" onchange="changePaymentMethod(this.value);">
                             <?php 
                             for($i=0;$i<count($data_paymentmethod);$i++){
                                 $id=$data_paymentmethod[$i]["id"];
@@ -156,7 +156,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><span class="payment_method_content"></span></td>
+                    <td><div class="boxContent" ><span class="payment_method_content"></span></div></td>
                 </tr>                
             </tbody>    
         </table>
@@ -176,7 +176,9 @@
             data        : dataItem,           
             success     : function(data, status, jsXHR){                            
                 $(".payment_method_content").empty();
+                $(".boxContent").hide();
                 if(data != null){
+                    $(".boxContent").show();
                     $(".payment_method_content").append(data.content);
                 }                           
             }

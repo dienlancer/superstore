@@ -33,8 +33,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("sort-order",["as"=>"adminsystem.payment-method.sortOrder","uses"=>"adminsystem\PaymentMethodController@sortOrder"]);
 		Route::post("update-status",["as"=>"adminsystem.payment-method.updateStatus","uses"=>"adminsystem\PaymentMethodController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.payment-method.changeStatus","uses"=>"adminsystem\PaymentMethodController@changeStatus"]);
-		Route::post("trash",["as"=>"adminsystem.payment-method.trash","uses"=>"adminsystem\PaymentMethodController@trash"]);		
-		Route::post("create-alias",["as"=>"adminsystem.payment-method.createAlias","uses"=>"adminsystem\PaymentMethodController@createAlias"]);
+		Route::post("trash",["as"=>"adminsystem.payment-method.trash","uses"=>"adminsystem\PaymentMethodController@trash"]);				
 	});
 	Route::group(["prefix"=>"setting-system"],function(){		
 		Route::get("list",["as"=>"adminsystem.setting-system.getList","uses"=>"adminsystem\SettingSystemController@getList"]);
@@ -381,6 +380,8 @@ Route::match(["get","post"],"bao-mat",["as"=>"frontend.index.viewSecurity","uses
 Route::match(["get","post"],"lien-he",["as"=>"frontend.index.contact","uses"=>"frontend\IndexController@contact"]);
 Route::get("thanh-toan",["as"=>"frontend.index.checkout","uses"=>"frontend\IndexController@checkout"]);
 Route::get("hoan-tat-giao-dich",["as"=>"frontend.index.finishCheckout","uses"=>"frontend\IndexController@finishCheckout"]);
+Route::get("luu-don-hang",["as"=>"frontend.index.saveInvoice","uses"=>"frontend\IndexController@saveInvoice"]);
+Route::get("huy-giao-dich",["as"=>"frontend.index.cancelInvoice","uses"=>"frontend\IndexController@cancelInvoice"]);
 Route::match(["get","post"],"xac-nhan-thanh-toan",["as"=>"frontend.index.confirmCheckout","uses"=>"frontend\IndexController@confirmCheckout"]);
 Route::match(["get","post"],"dang-nhap-thanh-toan",["as"=>"frontend.index.loginCheckout","uses"=>"frontend\IndexController@loginCheckout"]);
 Route::get("hoa-don",["as"=>"frontend.index.getInvoice","uses"=>"frontend\IndexController@getInvoice"]);

@@ -33,7 +33,7 @@
                 "app/functions/define-function.php",
                 "app/functions/common-function.php",
                 "app/functions/recursive-converter.php",
-                "app/functions/module-function.php"
+                "app/functions/module-function.php"                
         ]
     },
     "autoload-dev": {
