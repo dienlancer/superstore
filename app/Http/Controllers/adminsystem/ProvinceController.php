@@ -222,8 +222,8 @@ class ProvinceController extends Controller {
           $msg                =   "Vui lòng chọn ít nhất một phần tử";
         }
         if($checked == 1){                                  
-          $sql = "DELETE FROM `province` WHERE `id` IN  (".$strID.")";                                                 
-          DB::statement($sql);                                    
+
+          DB::table('province')->whereIn('id',@$arrID)->delete();                                      
         }
         $data                   =   $this->loadData($request);
         $info = array(

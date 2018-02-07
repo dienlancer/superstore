@@ -302,11 +302,9 @@ class ArticleController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
-            if($checked == 1){                                  
-                  $sqlDeleteArticle = "DELETE FROM `article` WHERE `id` IN  (".$strID.")";                     
-                  $sqlDeleteArticleCategory = "DELETE FROM `article_category` WHERE `article_id` IN (".$strID.")";                     
-                  DB::statement($sqlDeleteArticle);
-                  DB::statement($sqlDeleteArticleCategory);           
+            if($checked == 1){                                    
+                  DB::table('article')->whereIn('id',@$arrID)->delete();   
+                  DB::table('article_category')->whereIn('article_id',@$arrID)->delete();           
             }
             $data                   =   $this->loadData($request);
             $info = array(

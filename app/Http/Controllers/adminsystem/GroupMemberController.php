@@ -218,10 +218,8 @@ class GroupMemberController extends Controller {
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }   
             if($checked == 1){                              
-              $sqlDeleteGroupMember = "DELETE FROM `group_member` WHERE `id` IN (".$strID.")";        
-              $sqlDeleteGroupPrivilege = "DELETE FROM `group_privilege` WHERE `group_member_id` IN (".$strID.")";       
-              DB::statement($sqlDeleteGroupMember);
-              DB::statement($sqlDeleteGroupPrivilege);
+              DB::table('group_member')->whereIn('id',@$arrID)->delete();   
+              DB::table('group_privilege')->whereIn('group_member_id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

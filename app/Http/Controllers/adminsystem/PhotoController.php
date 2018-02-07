@@ -201,8 +201,7 @@ class PhotoController extends Controller {
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
             if($checked == 1){                                  
-                  $sqlDeletePhoto = "DELETE FROM `photo` WHERE `id` IN  (".$strID.")";                                      
-                  DB::statement($sqlDeletePhoto);                                   
+                  DB::table('photo')->whereIn('id',@$arrID)->delete();                                
             }
             $data                   =   $this->loadData($request);
             $info = array(

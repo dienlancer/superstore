@@ -224,9 +224,8 @@ class CategoryBannerController extends Controller {
         $type_msg               =   "alert-warning";            
         $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
       }   
-      if($checked == 1){                                          
-        $sql = "DELETE FROM `category_banner` WHERE `id` IN (".$strID.")";                            
-        DB::statement($sql);    
+      if($checked == 1){                                                  
+        DB::table('category_banner')->whereIn('id',@$arrID)->delete();   
       }
       $data                   =   $this->loadData($request);
       $info = array(

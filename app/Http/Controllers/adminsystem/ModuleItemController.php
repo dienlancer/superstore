@@ -283,8 +283,8 @@ class ModuleItemController extends Controller {
               $msg                =   "Please choose at least one item to delete";
             }
             if($checked == 1){                                  
-                  $sql = "DELETE FROM `module_item` WHERE `id` IN  (".$strID.")";                      
-                  DB::statement($sql);        
+
+                  DB::table('module_item')->whereIn('id',@$arrID)->delete();        
             }
             $data                   =   $this->loadData($request);
             $info = array(

@@ -199,12 +199,9 @@ class InvoiceController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
             }
-            if($checked == 1){                
-                        
-              $sqlDeleteInvoice       = "DELETE FROM `invoice`        WHERE `id`          IN (".$strID.")";        
-              $sqlDeleteInvoiceDetail = "DELETE FROM `invoice_detail` WHERE `invoice_id`  IN (".$strID.")";       
-              DB::statement($sqlDeleteInvoice);
-              DB::statement($sqlDeleteInvoiceDetail); 
+            if($checked == 1){                              
+              DB::table('invoice')->whereIn('id',@$arrID)->delete();   
+              DB::table('invoice_detail')->whereIn('id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

@@ -157,10 +157,8 @@ class PrivilegeController extends Controller {
               $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
             }
             if($checked == 1){                                  
-                  $sqlDeletePrivilege = "DELETE FROM `privilege` WHERE `id` IN (".$strID.")";       
-                  $sqlDeleteGroupPrivilege = "DELETE FROM `group_privilege` WHERE `privilege_id` IN (".$strID.")";        
-                  DB::statement($sqlDeletePrivilege);
-                  DB::statement($sqlDeleteGroupPrivilege);
+                  DB::table('privilege')->whereIn('id',@$arrID)->delete();   
+                  DB::table('group_privilege')->whereIn('privilege_id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

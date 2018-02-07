@@ -267,8 +267,8 @@ class ProjectController extends Controller {
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }   
             if($checked == 1){                                 
-                  $sql = "DELETE FROM `project` WHERE `id` IN  (".$strID.")";                                               
-                  DB::statement($sql);                                   
+     
+                  DB::table('project')->whereIn('id',@$arrID)->delete();                             
             }
             $data                   =   $this->loadData($request);
             $info = array(

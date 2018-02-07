@@ -254,9 +254,8 @@ class ProjectArticleController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
             }
-            if($checked == 1){                                  
-                  $sqlDeleteProjectArticle = "DELETE FROM `project_article` WHERE `id` IN  (".$strID.")";                               
-                  DB::statement($sqlDeleteProjectArticle);                  
+            if($checked == 1){                                   
+                  DB::table('project_article')->whereIn('id',@$arrID)->delete();                
             }
             $data                   =   $this->loadData($request);
             $info = array(

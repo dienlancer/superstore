@@ -260,10 +260,8 @@ class UserController extends Controller {
             if($checked == 1){
                 $item = User::find((int)@$id);
                 $item->delete();            
-                $sqlActivation = "DELETE FROM `activations` WHERE `user_id` IN  (".$id.")";
-                $sqlUserGroupMember = "DELETE FROM `user_group_member` WHERE `user_id` IN  (".$id.")";
-                DB::statement($sqlActivation);    
-                DB::statement($sqlUserGroupMember);
+                DB::table('activations')->whereIn('user_id',@$arrID)->delete();   
+                DB::table('user_group_member')->whereIn('user_id',@$arrID)->delete();   
             }        
             $data                   =   $this->loadData($request);
             $info = array(

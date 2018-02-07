@@ -284,9 +284,8 @@ class MenuController extends Controller {
           }
           
           if($checked == 1){        
-            $strID = implode(',',$arrID);               
-            $sql = 'DELETE FROM `menu` WHERE `id` IN ('.$strID.') ';                 
-            DB::statement($sql);          
+      
+            DB::table('menu')->whereIn('id',@$arrID)->delete();   
             
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList",[(int)@$menu_type_id])->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 

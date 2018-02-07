@@ -257,9 +257,8 @@ class VideoController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
             }
-            if($checked == 1){                                  
-                  $sqlDeleteVideo = "DELETE FROM `video` WHERE `id` IN  (".$strID.")";                               
-                  DB::statement($sqlDeleteVideo);                  
+            if($checked == 1){                                      
+                  DB::table('video')->whereIn('id',@$arrID)->delete();            
             }
             $data                   =   $this->loadData($request);
             $info = array(

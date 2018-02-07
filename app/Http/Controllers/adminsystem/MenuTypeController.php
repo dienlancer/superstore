@@ -225,8 +225,8 @@ class MenuTypeController extends Controller {
         $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
       }   
       if($checked == 1){                                                               
-        $sql = "DELETE FROM `menu_type` WHERE `id` IN (".$strID.")";                                  
-        DB::statement($sql);    
+
+        DB::table('menu_type')->whereIn('id',@$arrID)->delete();   
       }
       $data                   =   $this->loadData($request);
       $info = array(

@@ -225,8 +225,8 @@ class SupporterController extends Controller {
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
             if($checked == 1){                                  
-                  $sqlDeleteSupporter = "DELETE FROM `supporter` WHERE `id` IN  (".$strID.")";                                                 
-                  DB::statement($sqlDeleteSupporter);                                    
+
+                  DB::table('supporter')->whereIn('id',@$arrID)->delete();                                   
             }
             $data                   =   $this->loadData($request);
             $info = array(

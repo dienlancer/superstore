@@ -249,8 +249,7 @@ class OrganizationController extends Controller {
             }
             if($checked == 1){                
                   
-                  $sql = "DELETE FROM `organization` WHERE `id` IN  (".$strID.")";                                                 
-                  DB::statement($sql);                                    
+                  DB::table('organization')->whereIn('id',@$arrID)->delete();                                      
             }
             $data                   =   $this->loadData($request);
             $info = array(

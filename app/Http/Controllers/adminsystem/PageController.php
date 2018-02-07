@@ -251,9 +251,8 @@ class PageController extends Controller {
           $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
         }
         if($checked == 1){                
-          
-          $sql = "DELETE FROM `page` WHERE `id` IN  (".$strID.")";                                  
-          DB::statement($sql);                  
+        
+          DB::table('page')->whereIn('id',@$arrID)->delete();                  
         }
         $data                   =   $this->loadData($request);
         $info = array(

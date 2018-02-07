@@ -209,8 +209,7 @@ class BannerController extends Controller {
               $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
             }
             if($checked == 1){                                  
-                  $sqlDeleteBanner = "DELETE FROM `banner` WHERE `id` IN  (".$strID.")";                         
-                  DB::statement($sqlDeleteBanner);
+                  DB::table('banner')->whereIn('id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

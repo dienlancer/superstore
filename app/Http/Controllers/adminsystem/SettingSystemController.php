@@ -227,8 +227,8 @@ class SettingSystemController extends Controller {
           $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
         }
         if($checked == 1){                          
-          $sql = "DELETE FROM `setting_system` WHERE `id` IN  (".$strID.")";                                 
-          DB::statement($sql);                  
+     
+          DB::table('setting_system')->whereIn('id',@$arrID)->delete();         
         }
         $data                   =   $this->loadData($request);
         $info = array(

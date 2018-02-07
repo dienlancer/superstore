@@ -300,10 +300,8 @@ class CategoryProductController extends Controller {
               }                
             }
           }
-          if($checked == 1){                
-            $strID = implode(',',$arrID);                     
-            $sql = "DELETE FROM `category_product` WHERE `id` IN (".$strID.")";                 
-            DB::statement($sql);    
+          if($checked == 1){                            
+            DB::table('category_product')->whereIn('id',@$arrID)->delete();   
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{

@@ -221,9 +221,8 @@ class DistrictController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
-            if($checked == 1){                                  
-                  $sql = "DELETE FROM `district` WHERE `id` IN  (".$strID.")";                                                 
-                  DB::statement($sql);                                    
+            if($checked == 1){                                                    
+                  DB::table('district')->whereIn('id',@$arrID)->delete();                               
             }
             $data                   =   $this->loadData($request);
             $info = array(
