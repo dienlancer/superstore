@@ -201,7 +201,7 @@ class InvoiceController extends Controller {
             }
             if($checked == 1){                              
               DB::table('invoice')->whereIn('id',@$arrID)->delete();   
-              DB::table('invoice_detail')->whereIn('id',@$arrID)->delete();   
+              DB::table('invoice_detail')->whereIn('invoice_id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(
