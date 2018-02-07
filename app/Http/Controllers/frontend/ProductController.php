@@ -358,9 +358,8 @@ return $info;
               $type_msg               =   "alert-warning";            
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }   
-            if($checked == 1){                                  
-                  $sql = "DELETE FROM `product` WHERE `id` IN  (".$strID.") and `user_id` =  ".(int)@$arrUser['id'];                         
-                  DB::statement($sql);                 
+            if($checked == 1){                                                     
+                  DB::table('product')->whereIn('id',@$arrID)->where('user_id',(int)@$arrUser['id'])->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(
