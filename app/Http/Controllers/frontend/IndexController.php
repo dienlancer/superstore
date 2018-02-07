@@ -1110,16 +1110,14 @@ class IndexController extends Controller {
                 $j++;
               }              
             }                
-            $nlcheckout= new NL_CheckOutV3('1de82c0699bc0982f8d75e16529d9881','ab534f473c9deb56a49626c28d1fcfed','dien.toannang@gmail.com','https://www.nganluong.vn/checkout.api.nganluong.post.php');               
+            $nlcheckout= new NL_CheckOutV3('36680','matkhauketnoi','demo@nganluong.vn','https://www.nganluong.vn/checkout.api.nganluong.post.php');               
             switch ($payment_method_alias) {
               case 'NL':
               $nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
                         $fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
-                        $buyer_address,$array_items);
-              echo "<pre>".print_r($nlcheckout,true)."</pre>";
-              echo "<pre>".print_r($nl_result,true)."</pre>";
-              if ($nl_result->error_code =='00'){
-                echo "<pre>".print_r($nl_result->checkout_url,true)."</pre>";
+                        $buyer_address,$array_items);              
+              if ($nl_result->error_code =='00'){                
+                return redirect((string)$nl_result->checkout_url);
 
               }else{
                 echo $nl_result->error_message;
