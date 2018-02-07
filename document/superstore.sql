@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 06, 2018 lúc 01:44 PM
+-- Thời gian đã tạo: Th2 07, 2018 lúc 04:05 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -1398,7 +1398,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (574, 8, 'uaRVCHac02KAjEWxDiFmDPas2xYNUqAX', '2018-02-05 20:04:45', '2018-02-05 20:04:45'),
 (579, 1, 'tnf6HppP4rV0x45qbHoz4BGfoD47gWbI', '2018-02-06 01:01:51', '2018-02-06 01:01:51'),
 (580, 1, 'FZe4gTDXRLFyUZ3A17o0qnX95A1OSwer', '2018-02-06 01:01:51', '2018-02-06 01:01:51'),
-(583, 8, 'tqm9bi8D3RLI8zOnKZsKAn7a7cJKmj3Y', '2018-02-06 03:00:07', '2018-02-06 03:00:07');
+(583, 8, 'tqm9bi8D3RLI8zOnKZsKAn7a7cJKmj3Y', '2018-02-06 03:00:07', '2018-02-06 03:00:07'),
+(584, 1, '8IZWzK4wl0Xk01HPV8Vh1koOFhdBwZWF', '2018-02-06 19:27:14', '2018-02-06 19:27:14'),
+(586, 1, '15ABJfq0cryamDZ5TV6HD9Mba3p0Uyff', '2018-02-06 20:03:27', '2018-02-06 20:03:27');
 
 -- --------------------------------------------------------
 
@@ -1619,9 +1621,9 @@ INSERT INTO `product_param` (`id`, `product_id`, `param_id`, `created_at`, `upda
 (297, 4, 45, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
 (298, 4, 48, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
 (299, 4, 51, '2018-02-03 11:43:17', '2018-02-03 11:43:17'),
-(300, 14, 11, '2018-02-05 02:47:22', '2018-02-05 02:47:22'),
-(301, 15, 12, '2018-02-05 02:47:38', '2018-02-05 02:47:38'),
-(302, 27, 5, '2018-02-05 04:32:34', '2018-02-05 04:32:34');
+(302, 27, 5, '2018-02-05 04:32:34', '2018-02-05 04:32:34'),
+(303, 14, 10, '2018-02-07 02:28:19', '2018-02-07 02:28:19'),
+(304, 15, 5, '2018-02-07 02:28:44', '2018-02-07 02:28:44');
 
 -- --------------------------------------------------------
 
@@ -2424,7 +2426,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-06 01:01:51', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-02-06 01:01:51'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-06 20:03:27', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-02-06 20:03:27'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 3, 0, '2018-01-26 01:57:35', '2018-02-04 08:08:20'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 4, 0, '2018-01-28 09:40:59', '2018-02-04 08:08:20'),
 (8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-06 03:00:07', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 5, 0, '2018-02-05 20:06:26', '2018-02-06 03:00:07'),
@@ -2886,7 +2888,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=584;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=588;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2904,13 +2906,13 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `product_param`
 --
 ALTER TABLE `product_param`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
