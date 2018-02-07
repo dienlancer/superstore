@@ -34,6 +34,7 @@ use App\PhotoModel;
 use App\CategoryVideoModel;
 use App\VideoModel;
 use App\NL_CheckOutV3;
+use App\BaoKimPaymentPro;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Session;
@@ -1065,13 +1066,13 @@ class IndexController extends Controller {
             $flag = 0;
           }                                    
           if($flag==1){    
-          $nlcheckout= new NL_CheckOutV3('1de82c0699bc0982f8d75e16529d9881','ab534f473c9deb56a49626c28d1fcfed','dien.toannang@gmail.com','https://www.nganluong.vn/checkout.api.nganluong.post.php');                    
+                   
             $paymentmethod=PaymentMethodModel::find((int)@$payment_method_id)->toArray();        
             $payment_method_alias=$paymentmethod['alias'];              
             $order_code=randomCodeNumber();              
             $total_amount=(float)@$request->total_price;           
-            $payment_type=$payment_method_alias;
-            $order_description='';
+            $payment_type=0;
+            $order_description='Thanh toán qua ngân lượng';
             $tax_amount=0;
             $fee_shipping=0;
             $discount_amount=0;
@@ -1108,8 +1109,8 @@ class IndexController extends Controller {
                 $k++;
                 $j++;
               }              
-            }    
-            $array_items=array();      
+            }                
+            $nlcheckout= new NL_CheckOutV3('1de82c0699bc0982f8d75e16529d9881','ab534f473c9deb56a49626c28d1fcfed','dien.toannang@gmail.com','https://www.nganluong.vn/checkout.api.nganluong.post.php');               
             switch ($payment_method_alias) {
               case 'NL':
               $nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
@@ -1124,8 +1125,11 @@ class IndexController extends Controller {
                 echo $nl_result->error_message;
               }
               
-              //return redirect((string)$nl_result->checkout_url);
-              break;              
+              break;  
+              case 'BK':
+              $baokim = new BaoKimPaymentPro();
+              echo "<pre>".print_r($baokim,true)."</pre>";
+              break;            
               default:
               $item = new InvoiceModel;
               $item->code=$order_code;
