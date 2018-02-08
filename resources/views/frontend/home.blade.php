@@ -2,6 +2,8 @@
 @section("content")
 <?php 
 use App\ProjectModel;
+use App\CategoryProductModel;
+use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 $telephone=$setting['telephone']['field_value'];
 $email_to=$setting['email_to']['field_value'];
@@ -42,28 +44,51 @@ $company=$setting['contacted_person']['field_value'];
 </div>
 <div class="wapper-body">
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-4">
+		<div class="row">			
+			<?php 
+			$dataCategoryProduct=CategoryProductModel::whereRaw('parent_id = ?',[0])->select('id','fullname','alias','image')->orderBy('sort_order','asc')->get()->toArray();
+			$k=1;
+			foreach ($dataCategoryProduct as $key => $value) {
+				$fullname=$value['fullname'];
+				$permalink=route('frontend.index.index',[$value['alias']]);
+				$featuredImg=asset('upload/'.$value['image']) ;
+				?>
+				<div class="col-lg-4">
+					<div class="margin-top-15">
+						<div class="relative">
+							<center><figure><center><a href="<?php echo $permalink; ?>"><img src="<?php echo $featuredImg; ?>"></a></center></figure></center>
+							<div class="walking-box-title"><a href="<?php echo $permalink; ?>"><span><?php echo $fullname; ?></span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						</div>					
+					</div>			
+				</div>
+				<?php
+				if($k%3==0 || $k==count($dataCategoryProduct)){
+					echo '<div class="clr"></div>';
+				}
+				$k++;
+			}
+			?>
+			<!--<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng tắm</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['dien-thoai-may-tinh']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['dien-thoai-may-tinh']); ?>"><span>Phòng tắm</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>					
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ăn</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['thoi-trang-nu']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['thoi-trang-nu']); ?>"><span>Phòng ăn</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng ngủ</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['thoi-trang-nam']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['thoi-trang-nam']); ?>"><span>Phòng ngủ</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>						
 				</div>		
 			</div>
@@ -73,24 +98,24 @@ $company=$setting['contacted_person']['field_value'];
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Phòng thể dục</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['giay-dep-tui-xach']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['giay-dep-tui-xach']); ?>"><span>Phòng thể dục</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Sitting room</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['phu-kien-so-camera']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['phu-kien-so-camera']); ?>"><span>Sitting room</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>In the car</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['me-be-do-choi']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['me-be-do-choi']); ?>"><span>In the car</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
@@ -100,28 +125,28 @@ $company=$setting['contacted_person']['field_value'];
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Shopping Trolleys</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['dong-ho-phu-kien']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['dong-ho-phu-kien']); ?>"><span>Shopping Trolleys</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>				
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Walking stick &amp; Accessories</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['nha-cua-tan-trang-nha']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['nha-cua-tan-trang-nha']); ?>"><span>Walking stick &amp; Accessories</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
 			<div class="col-lg-4">
 				<div class="margin-top-15">
 					<div class="relative">
-						<center><figure><center><a href="javascript:void(0);"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
-						<div class="walking-box-title"><a href="javascript:void(0);"><span>Rollators</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
+						<center><figure><center><a href="<?php echo route('frontend.index.index',['tivi-thiet-bi-am-thanh']); ?>"><img src="<?php echo asset('upload/bathroom.jpg'); ?>"></a></center></figure></center>
+						<div class="walking-box-title"><a href="<?php echo route('frontend.index.index',['tivi-thiet-bi-am-thanh']); ?>"><span>Rollators</span><span class="margin-left-5"><i class="fas fa-arrow-right"></i></span></a></div>
 					</div>	
 				</div>			
 			</div>
-			<div class="clr"></div>
+			<div class="clr"></div>-->
 		</div>	
 	</div>
 </div>

@@ -58,9 +58,9 @@ class CategoryProductController extends Controller {
         ->get()
         ->toArray();        
         $data=convertToArray($data);
-        $data=categoryArticleConverter($data,$this->_controller);   
+        $data=categoryProductConverter($data,$this->_controller);   
         $data_recursive=array();
-        categoryArticleRecursive($data,0,null,$data_recursive);          
+        categoryProductRecursive($data,0,null,$data_recursive);          
         $data=$data_recursive;        
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-list";         
@@ -334,12 +334,15 @@ class CategoryProductController extends Controller {
           return view("adminsystem.no-access");
         }      
       }
-    public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $product_width=$setting['product_width']['field_value'];
-    $product_height=$setting['product_height']['field_value'];
-      uploadImage($_FILES["image"],$product_width,$product_height);
-    }
+    public function uploadFile(Request $request){                     
+        $fileObj=$_FILES["image"];          
+        $fileName="";
+        if($fileObj['tmp_name'] != null){                
+          $fileName   = $fileObj['name'];
+          $file_path=base_path("upload".DS.$fileName);
+          @copy($fileObj['tmp_name'],$file_path);                   
+        }   
+      }
     public function createAlias(Request $request){
           $id                =  trim($request->id)  ; 
           $fullname                =  trim($request->fullname)  ;        

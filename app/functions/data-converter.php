@@ -494,7 +494,7 @@ function categoryProductConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty($data[$i]["image"])){
-                $link_image=url("/upload/" . $product_width.'x'.$product_height . "-".$data[$i]["image"]);            
+                $link_image=url("/upload/" .$data[$i]["image"]);            
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }            
             $result[$i] = array(
