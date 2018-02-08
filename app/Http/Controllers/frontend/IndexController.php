@@ -45,6 +45,7 @@ class IndexController extends Controller {
   var $_pageRange=4;
   var $_ssNameUser="vmuser";
   var $_ssNameCart="vmart";      
+  var $_ssNameInvoice="vminvoice";
   public function getHome(Request $request){       
     $flag=1;
         $error=array();
@@ -1033,7 +1034,8 @@ class IndexController extends Controller {
       		$fullname         =   trim(@$request->fullname);
       		$address          =   trim(@$request->address);
       		$phone            =   trim(@$request->phone);  
-      		$payment_method_id = trim(@$request->payment_method_id);                                      
+      		$payment_method_id = trim(@$request->payment_method_id);    
+      		$bank_code 			=trim(@$request->bankcode);      		                                 
       		if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
       			$error["email"] = 'Email không hợp lệ';
       			$data["email"] = '';
@@ -1064,7 +1066,7 @@ class IndexController extends Controller {
       		if((int)@$payment_method_id==0){
       			$error["payment_method"] = 'Xin vui lòng chọn 1 phương thức thanh toán';                      
       			$flag = 0;
-      		}         
+      		}             		  
       		/* begin test payment-method */
       		$paymentmethod=PaymentMethodModel::find((int)@$payment_method_id)->toArray();        
       		$payment_method_alias=$paymentmethod['alias'];              
@@ -1076,7 +1078,7 @@ class IndexController extends Controller {
       		$fee_shipping=0;
       		$discount_amount=0;
       		$return_url=route('frontend.index.saveInvoice');
-      		$cancel_url=route('frontend.index.cancelInvoice');
+      		$cancel_url=route('frontend.index.saveInvoice');
       		$buyer_fullname=@$request->fullname;
       		$buyer_email=@$request->email;
       		$buyer_mobile=@$request->phone;
@@ -1111,65 +1113,73 @@ class IndexController extends Controller {
       		}                
       		$nlcheckout= new NL_CheckOutV3('36680','matkhauketnoi','demo@nganluong.vn','https://www.nganluong.vn/checkout.api.nganluong.post.php');
       		switch ($payment_method_alias) {
+      			case 'VISA':
+      			$nl_result= $nlcheckout->VisaCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
+      				$fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
+      				$buyer_address,$array_items,$bank_code);
+      			if(empty($bank_code)){
+      				$error["bank_code"] = 'Vui lòng chọn mã ngân hàng';                      
+      				$flag = 0;
+      			}
+      			break; 
       			case 'NL':
       			$nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
       				$fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
-      				$buyer_address,$array_items);              
-      			break;        			
+      				$buyer_address,$array_items);    
+      			break;           			
+      			case 'ATM_ONLINE':
+      			$nl_result= $nlcheckout->BankCheckout($order_code,$total_amount,$bank_code,$payment_type,$order_description,$tax_amount,
+      				$fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
+      				$buyer_address,$array_items) ;
+      			if(empty($bank_code)){
+      				$error["bank_code"] = 'Vui lòng chọn mã ngân hàng';                      
+      				$flag = 0;
+      			}
+      			break;  
+      			case 'NH_OFFLINE':
+      			$nl_result= $nlcheckout->officeBankCheckout($order_code, $total_amount, $bank_code, $payment_type, $order_description, $tax_amount, $fee_shipping, $discount_amount, $return_url, $cancel_url, $buyer_fullname, $buyer_email, $buyer_mobile, $buyer_address, $array_items);
+      			if(empty($bank_code)){
+      				$error["bank_code"] = 'Vui lòng chọn mã ngân hàng';                      
+      				$flag = 0;
+      			}
+      			break;
+      			case 'ATM_OFFLINE':
+      			$nl_result= $nlcheckout->BankOfflineCheckout($order_code, $total_amount, $bank_code, $payment_type, $order_description, $tax_amount, $fee_shipping, $discount_amount, $return_url, $cancel_url, $buyer_fullname, $buyer_email, $buyer_mobile, $buyer_address, $array_items);
+      			if(empty($bank_code)){
+      				$error["bank_code"] = 'Vui lòng chọn mã ngân hàng';                      
+      				$flag = 0;
+      			}
+      			break;
+      			case 'IB_ONLINE':      			
+      			$nl_result= $nlcheckout->IBCheckout($order_code, $total_amount, $bank_code, $payment_type, $order_description, $tax_amount, $fee_shipping, $discount_amount, $return_url, $cancel_url, $buyer_fullname, $buyer_email, $buyer_mobile, $buyer_address, $array_items);
+      			if(empty($bank_code)){
+      				$error["bank_code"] = 'Vui lòng chọn mã ngân hàng';                      
+      				$flag = 0;
+      			}
+      			break;
+      			case 'CREDIT_CARD_PREPAID':
+      			$nl_result = $nlcheckout->PrepaidVisaCheckout($order_code, $total_amount, $payment_type, $order_description, $tax_amount, $fee_shipping, $discount_amount, $return_url, $cancel_url, $buyer_fullname, $buyer_email, $buyer_mobile, $buyer_address, $array_items, $bank_code);
+      			break;			
       		}
       		if (strcmp($nl_result->error_code, '00')  != 0){                
       			$error["payment_method"] = $nl_result->error_message;                      
       			$flag = 0;
       		}
       		/* end test payment-method */                           
-      		if($flag==1){                                                  
-      			$item = new InvoiceModel;
-      			$item->code=$order_code;
-      			$item->customer_id  = (int)@$id;
-      			$item->username     = @$request->username;
-      			$item->email        = @$request->email;
-      			$item->fullname     = @$request->fullname;
-      			$item->address      = @$request->address;
-      			$item->phone=@$request->phone;                 
-      			$item->payment_method_id=(int)@$payment_method_id;
-      			$item->quantity=(int)@$request->quantity;
-      			$item->total_price=(float)@$request->total_price;
-      			$item->status=0;  
-      			$item->sort_order=1;
-      			$item->created_at=date("Y-m-d H:i:s",time());
-      			$item->updated_at=date("Y-m-d H:i:s",time());
-      			$item->save();                           
-      			$arrCart=array();
-      			if(Session::has($this->_ssNameCart)){
-      				$arrCart=Session::get($this->_ssNameCart);
-      			}         
-      			if(count($arrCart) > 0){
-      				foreach ($arrCart as $key => $value) {
-      					$invoice_id=$item->id;
-      					$product_id=$value["product_id"];    
-      					$product_code=$value["product_code"];  
-      					$product_name=$value["product_name"];                                                    
-      					$product_image=   $value["product_image"] ;        
-      					$product_price=$value["product_price"];                                  
-      					$product_quantity=$value["product_quantity"];                         
-      					$product_total_price=$value["product_total_price"];
-      					$itemInvoiceDetail=new InvoiceDetailModel;                          
-      					$itemInvoiceDetail->invoice_id=$invoice_id;
-      					$itemInvoiceDetail->product_id=$product_id;
-      					$itemInvoiceDetail->product_code=$product_code;
-      					$itemInvoiceDetail->product_name=$product_name;
-      					$itemInvoiceDetail->product_image=$product_image;
-      					$itemInvoiceDetail->product_price=$product_price;
-      					$itemInvoiceDetail->product_quantity=$product_quantity;
-      					$itemInvoiceDetail->product_total_price=$product_total_price;
-      					$itemInvoiceDetail->created_at=date("Y-m-d H:i:s",time());
-      					$itemInvoiceDetail->updated_at=date("Y-m-d H:i:s",time());
-      					$itemInvoiceDetail->save();
-      				}
-      			}                           
-      			if(Session::has($this->_ssNameCart)){
-      				Session::forget($this->_ssNameCart);
-      			}                                                                        
+      		if($flag==1){   
+      			$data_invoice=array();
+      			$data_invoice['code'] 				=	$order_code;
+      			$data_invoice['customer_id']  		= 	(int)@$id;
+      			$data_invoice['username']     		= 	@$request->username;
+      			$data_invoice['email']        		= 	@$request->email;
+      			$data_invoice['fullname']     		= 	@$request->fullname;
+      			$data_invoice['address']      		= 	@$request->address;
+      			$data_invoice['phone'] 				=	@$request->phone;                 
+      			$data_invoice['payment_method_id']	=	(int)@$payment_method_id;
+      			$data_invoice['quantity'] 			=	(int)@$request->quantity;
+      			$data_invoice['total_price'] 		=	(float)@$request->total_price;
+      			Session::put($this->_ssNameInvoice,$data_invoice);
+      			return redirect((string)$nl_result->checkout_url);                                                     			                                                      
       		}                         
       	}
       	$data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content')->get()->toArray();
@@ -1182,7 +1192,75 @@ class IndexController extends Controller {
       	return view("frontend.index",compact("component","error","data","success","layout","data_paymentmethod"));                   
       }    
       public function saveInvoice(){
-        
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.login"); 
+      	}
+		$arrCart=array();
+      	if(Session::has($this->_ssNameCart)){
+      		$arrCart=Session::get($this->_ssNameCart);
+      	} 
+      	if(count($arrCart) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
+      	$data_invoice=array();
+      	if(Session::has($this->_ssNameInvoice)){
+      		$data_invoice=Session::get($this->_ssNameInvoice);
+      	} 
+      	if(count($data_invoice) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
+      	$item = new InvoiceModel;
+      	$item->code 				=	$data_invoice['code'];
+      	$item->customer_id  		= 	(int)@$data_invoice['customer_id'];
+      	$item->username     		= 	@$data_invoice['username'];
+      	$item->email        		= 	@$data_invoice['email'];
+      	$item->fullname     		= 	@$data_invoice['fullname'];
+      	$item->address      		= 	@$data_invoice['address'];
+      	$item->phone 				=	@$data_invoice['phone'];                 
+      	$item->payment_method_id 	=	(int)@$data_invoice['payment_method_id'];
+      	$item->quantity 			=	(int)@$data_invoice['quantity'];
+      	$item->total_price 			=	(float)@$data_invoice['total_price'];
+      	$item->status=0;  
+      	$item->sort_order=1;
+      	$item->created_at=date("Y-m-d H:i:s",time());
+      	$item->updated_at=date("Y-m-d H:i:s",time());
+      	$item->save();                           
+      	$arrCart=array();
+      	if(Session::has($this->_ssNameCart)){
+      		$arrCart=Session::get($this->_ssNameCart);
+      	}         
+      	if(count($arrCart) > 0){
+      		foreach ($arrCart as $key => $value) {
+      			$invoice_id=$item->id;
+      			$product_id=$value["product_id"];    
+      			$product_code=$value["product_code"];  
+      			$product_name=$value["product_name"];                                                    
+      			$product_image=   $value["product_image"] ;        
+      			$product_price=$value["product_price"];                                  
+      			$product_quantity=$value["product_quantity"];                         
+      			$product_total_price=$value["product_total_price"];
+      			$itemInvoiceDetail=new InvoiceDetailModel;                          
+      			$itemInvoiceDetail->invoice_id=$invoice_id;
+      			$itemInvoiceDetail->product_id=$product_id;
+      			$itemInvoiceDetail->product_code=$product_code;
+      			$itemInvoiceDetail->product_name=$product_name;
+      			$itemInvoiceDetail->product_image=$product_image;
+      			$itemInvoiceDetail->product_price=$product_price;
+      			$itemInvoiceDetail->product_quantity=$product_quantity;
+      			$itemInvoiceDetail->product_total_price=$product_total_price;
+      			$itemInvoiceDetail->created_at=date("Y-m-d H:i:s",time());
+      			$itemInvoiceDetail->updated_at=date("Y-m-d H:i:s",time());
+      			$itemInvoiceDetail->save();
+      		}
+      	}                           
+      	if(Session::has($this->_ssNameCart)){
+      		Session::forget($this->_ssNameCart);
+      	}                 
       }
       public function cancelInvoice(){
         $component="cancel-invoice";    
@@ -1404,13 +1482,7 @@ class IndexController extends Controller {
                             'permalink'=>route('frontend.index.viewCart')
                           );
         return $dataReturn;
-      } 
-      public function showInvoiceDetail(){
-        $id=$_GET['id'];        
-        $data=array();
-        $data=InvoiceDetailModel::whereRaw('invoice_id = ?',[(int)$id])->get()->toArray();  
-        return $data; 
-      }
+      }       
       public function getPaymentmethod(Request $request){
          $id=$request->id;
          $data=array();

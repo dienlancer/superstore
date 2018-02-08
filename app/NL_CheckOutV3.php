@@ -464,8 +464,7 @@ use Illuminate\Database\Eloquent\Model;
 						'buyer_mobile'			=> $buyer_mobile, //Điện thoại người mua
 						'buyer_address'			=> $buyer_address, //Địa chỉ người mua hàng
 						'total_item'			=> count($array_items) //Tổng số sản phẩm trong đơn hàng
-					);
-				 echo "<pre>".print_r($params,true)."</pre>";
+					);				 
 					$post_field = '';
 					foreach ($params as $key => $value){
 						if ($post_field != '') $post_field .= '&';
