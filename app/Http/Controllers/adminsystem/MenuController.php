@@ -131,7 +131,8 @@ class MenuController extends Controller {
             $fullname 				   =	  trim($request->fullname)	;
             $alias               =    trim($request->alias);          
             $parent_id	         =		trim($request->parent_id);
-            $menu_type_id        =    trim($request->menu_type_id);      
+            $menu_type_id        =    trim($request->menu_type_id);  
+            $menu_class          =    trim($request->menu_class);    
             $sort_order 			   =		trim($request->sort_order);
             $status 				     =		trim($request->status);          
             $data 		           =    array();
@@ -165,7 +166,8 @@ class MenuController extends Controller {
                 if(count($parent) > 0){
                     $level=(int)$parent->toArray()["level"]+1;                
                 }                     
-                $item->level             =  (int)$level;            
+                $item->level             =  (int)$level; 
+                $item->menu_class        = @$menu_class;           
                 $item->sort_order 	     =	(int)$sort_order;
                 $item->status 			     =  (int)$status;    
                 $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	

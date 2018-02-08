@@ -165,9 +165,9 @@ class CategoryProductController extends Controller {
         
         $item->meta_keyword     = $meta_keyword;
         $item->meta_description = $meta_description;           
-        $item->parent_id 		=	(int)$category_id;            
-        $item->sort_order 	=	(int)$sort_order;
-        $item->status 			=	(int)$status;    
+        $item->parent_id 		=	(int)@$category_id;            
+        $item->sort_order 	=	(int)@$sort_order;
+        $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save(); 
         $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
