@@ -34,7 +34,6 @@ use App\PhotoModel;
 use App\CategoryVideoModel;
 use App\VideoModel;
 use App\NL_CheckOutV3;
-use App\BaoKimPaymentPro;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Session;
