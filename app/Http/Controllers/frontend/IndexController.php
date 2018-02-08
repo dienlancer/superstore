@@ -1260,17 +1260,67 @@ class IndexController extends Controller {
       	}                           
       	if(Session::has($this->_ssNameCart)){
       		Session::forget($this->_ssNameCart);
-      	}                 
+      	}
+      	if(Session::has($this->_ssNameInvoice)){
+      		Session::forget($this->_ssNameInvoice);
+      	}   
+      	$component="hoan-tat-thanh-toan";    
+        $layout="full-width";   
+        return view("frontend.index",compact("component","layout"));                     
       }
       public function cancelInvoice(){
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.login"); 
+      	}
+		$arrCart=array();
+      	if(Session::has($this->_ssNameCart)){
+      		$arrCart=Session::get($this->_ssNameCart);
+      	} 
+      	if(count($arrCart) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
+      	$data_invoice=array();
+      	if(Session::has($this->_ssNameInvoice)){
+      		$data_invoice=Session::get($this->_ssNameInvoice);
+      	} 
+      	if(count($data_invoice) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
         $component="cancel-invoice";    
         $layout="full-width";   
         return view("frontend.index",compact("component","layout"));       
       }
       public function finishCheckout(){
-        $component="hoan-tat-thanh-toan";    
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.login"); 
+      	}
+		$arrCart=array();
+      	if(Session::has($this->_ssNameCart)){
+      		$arrCart=Session::get($this->_ssNameCart);
+      	} 
+      	if(count($arrCart) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
+      	$data_invoice=array();
+      	if(Session::has($this->_ssNameInvoice)){
+      		$data_invoice=Session::get($this->_ssNameInvoice);
+      	} 
+      	if(count($data_invoice) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}    
+      	$component="hoan-tat-thanh-toan";    
         $layout="full-width";   
-        return view("frontend.index",compact("component","layout"));       
+        return view("frontend.index",compact("component","layout"));                  
       }  
       public function loginCheckout(Request $request){          
         $flag=1;
