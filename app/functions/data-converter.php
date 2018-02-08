@@ -1069,7 +1069,7 @@ function categoryProductComponentConverter($data=array(),$controller,$menu_type_
             $link_image="";
             $image="";
             if(!empty($data[$i]["image"])){
-                $link_image=url("/upload/" . $product_width.'x'.$product_height . "-".$data[$i]["image"]);            
+                $link_image=url("/upload/".$data[$i]["image"]);            
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }         
             $linkMenu=route('adminsystem.menu.getForm',['add',$menu_type_id,0,$data[$i]["alias"]]);
