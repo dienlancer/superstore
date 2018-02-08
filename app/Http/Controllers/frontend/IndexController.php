@@ -1003,191 +1003,183 @@ class IndexController extends Controller {
         return redirect()->route($link); 
       }
       public function confirmCheckout(Request $request){
-        $flag=1;
-        $error=array();
-        $success=array();  
-        $data=array();        
-        $component="xac-nhan-thanh-toan";    
-        $layout="full-width";   
-        $id=0;         
-        $arrUser=array();              
-        $user = Sentinel::forceCheck(); 
-        if(!empty($user)){                
-          $arrUser = $user->toArray();    
-        }      
-        if(count($arrUser) == 0){
-          return redirect()->route("frontend.index.loginCheckout");
-        }      
-        $arrCart=array();
-        if(Session::has($this->_ssNameCart)){
-          $arrCart=Session::get($this->_ssNameCart);
-        } 
-        if(count($arrCart) == 0){
-          return redirect()->route("frontend.index.viewCart");   
-        }      
-        $data=User::find((int)$arrUser["id"])->toArray();    
-        $id=(int)@$data["id"];
-        if($request->isMethod('post')){
-          $data             =   @$request->all();                 
-          $email            =   trim(@$request->email) ;
-          $fullname         =   trim(@$request->fullname);
-          $address          =   trim(@$request->address);
-          $phone            =   trim(@$request->phone);  
-          $payment_method_id = trim(@$request->payment_method_id);                                      
-          if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
-            $error["email"] = 'Email không hợp lệ';
-            $data["email"] = '';
-            $flag = 0;
-          }else{
-            $customer=User::whereRaw("trim(lower(email)) = ? and id != ?",[mb_strtolower($email,'UTF-8'),(int)@$id])->get()->toArray();
-            if(count($customer) > 0){
-              $error["email"] = 'Email đã tồn tại';
-              $data["email"] = ""; 
-              $flag = 0;
-            }
-          }  
-          if(mb_strlen($fullname) < 6){
-            $error["fullname"] = 'Họ tên phải từ 6 ký tự trở lên';
-            $data["fullname"] = ""; 
-            $flag = 0;
-          }  
-          if(mb_strlen($address) < 6){
-            $error["address"] = 'Địa chỉ phải từ 6 ký tự trở lên';
-            $data["address"] = ""; 
-            $flag = 0;
-          }  
-          if(mb_strlen($phone) < 10){
-            $error["phone"] = 'Số điện thoại phải từ 10 ký tự trở lên';
-            $data["phone"] = ""; 
-            $flag = 0;
-          }        
-          if((int)@$payment_method_id==0){
-            $error["payment_method"] = 'Xin vui lòng chọn 1 phương thức thanh toán';                      
-            $flag = 0;
-          }                                    
-          if($flag==1){    
-                   
-            $paymentmethod=PaymentMethodModel::find((int)@$payment_method_id)->toArray();        
-            $payment_method_alias=$paymentmethod['alias'];              
-            $order_code=randomCodeNumber();              
-            $total_amount=(float)@$request->total_price;           
-            $payment_type=0;
-            $order_description='Thanh toán qua ngân lượng';
-            $tax_amount=0;
-            $fee_shipping=0;
-            $discount_amount=0;
-            $return_url=route('frontend.index.saveInvoice');
-            $cancel_url=route('frontend.index.cancelInvoice');
-            $buyer_fullname=@$request->fullname;
-            $buyer_email=@$request->email;
-            $buyer_mobile=@$request->phone;
-            $buyer_address=@$request->address;
-            $array_items=array();
-            $arrCart=array();
-            if(Session::has($this->_ssNameCart)){
-              $arrCart=Session::get($this->_ssNameCart);
-            }         
-            if(count($arrCart) > 0){
-              $k=1;
-              $j=0;
-              foreach ($arrCart as $key => $value) {                
-                $product_id=$value["product_id"];    
-                $product_code=$value["product_code"];  
-                $product_name=$value["product_name"];              
-                $product_alias=$value["product_alias"];                                      
-                $product_image=   $value["product_image"] ;        
-                $product_price=$value["product_price"];                                  
-                $product_quantity=$value["product_quantity"];                         
-                $product_total_price=$value["product_total_price"];
-                $array_items[$j]= 
-                  array(
-                    'item_name'.$k => $product_name,
-                    'item_quantity'.$k => $product_quantity,
-                    'item_amount'.$k => $product_total_price,
-                    'item_url'.$k => route('frontend.index.index',[$product_alias])
-                  );
-                $k++;
-                $j++;
-              }              
-            }                
-            $nlcheckout= new NL_CheckOutV3('36680','matkhauketnoi','demo@nganluong.vn','https://www.nganluong.vn/checkout.api.nganluong.post.php');               
-            switch ($payment_method_alias) {
-              case 'NL':
-              $nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
-                        $fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
-                        $buyer_address,$array_items);              
-              if ($nl_result->error_code =='00'){                
-                return redirect((string)$nl_result->checkout_url);
-
-              }else{
-                echo $nl_result->error_message;
-              }
-              
-              break;  
-              case 'BK':
-              $baokim = new BaoKimPaymentPro();
-              echo "<pre>".print_r($baokim,true)."</pre>";
-              break;            
-              default:
-              $item = new InvoiceModel;
-              $item->code=$order_code;
-              $item->customer_id  = (int)@$id;
-              $item->username     = (int)@$data["username"];
-              $item->email        = @$request->email;
-              $item->fullname     = @$request->fullname;
-              $item->address      = @$request->address;
-              $item->phone=@$request->phone;                 
-              $item->payment_method_id=(int)@$payment_method_id;
-              $item->quantity=(int)@$request->quantity;
-              $item->total_price=(float)@$request->total_price;
-              $item->status=0;  
-              $item->sort_order=1;
-              $item->created_at=date("Y-m-d H:i:s",time());
-              $item->updated_at=date("Y-m-d H:i:s",time());
-              $item->save();                           
-              $arrCart=array();
-              if(Session::has($this->_ssNameCart)){
-                $arrCart=Session::get($this->_ssNameCart);
-              }         
-              if(count($arrCart) > 0){
-                foreach ($arrCart as $key => $value) {
-                  $invoice_id=$item->id;
-                  $product_id=$value["product_id"];    
-                  $product_code=$value["product_code"];  
-                  $product_name=$value["product_name"];                                                    
-                  $product_image=   $value["product_image"] ;        
-                  $product_price=$value["product_price"];                                  
-                  $product_quantity=$value["product_quantity"];                         
-                  $product_total_price=$value["product_total_price"];
-                  $itemInvoiceDetail=new InvoiceDetailModel;                          
-                  $itemInvoiceDetail->invoice_id=$invoice_id;
-                  $itemInvoiceDetail->product_id=$product_id;
-                  $itemInvoiceDetail->product_code=$product_code;
-                  $itemInvoiceDetail->product_name=$product_name;
-                  $itemInvoiceDetail->product_image=$product_image;
-                  $itemInvoiceDetail->product_price=$product_price;
-                  $itemInvoiceDetail->product_quantity=$product_quantity;
-                  $itemInvoiceDetail->product_total_price=$product_total_price;
-                  $itemInvoiceDetail->created_at=date("Y-m-d H:i:s",time());
-                  $itemInvoiceDetail->updated_at=date("Y-m-d H:i:s",time());
-                  $itemInvoiceDetail->save();
-                }
-              }                           
-              if(Session::has($this->_ssNameCart)){
-                Session::forget($this->_ssNameCart);
-              }               
-              break;
-            }                                                                  
-          }                         
-        }
-        $data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content')->get()->toArray();
-        $data_paymentmethod[]=array(
-          'id'=>0,
-          'fullname'=>null,
-          'alias'=>null,
-          'content'=>null,          
-        );
-        return view("frontend.index",compact("component","error","data","success","layout","data_paymentmethod"));                   
+      	$flag=1;
+      	$error=array();
+      	$success=array();  
+      	$data=array();        
+      	$component="xac-nhan-thanh-toan";    
+      	$layout="full-width";   
+      	$id=0;         
+      	$arrUser=array();              
+      	$user = Sentinel::forceCheck(); 
+      	if(!empty($user)){                
+      		$arrUser = $user->toArray();    
+      	}      
+      	if(count($arrUser) == 0){
+      		return redirect()->route("frontend.index.loginCheckout");
+      	}      
+      	$arrCart=array();
+      	if(Session::has($this->_ssNameCart)){
+      		$arrCart=Session::get($this->_ssNameCart);
+      	} 
+      	if(count($arrCart) == 0){
+      		return redirect()->route("frontend.index.viewCart");   
+      	}      
+      	$data=User::find((int)$arrUser["id"])->toArray();    
+      	$id=(int)@$data["id"];
+      	if($request->isMethod('post')){
+      		$data             =   @$request->all();                 
+      		$email            =   trim(@$request->email) ;
+      		$fullname         =   trim(@$request->fullname);
+      		$address          =   trim(@$request->address);
+      		$phone            =   trim(@$request->phone);  
+      		$payment_method_id = trim(@$request->payment_method_id);                                      
+      		if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#", mb_strtolower($email,'UTF-8')   )){
+      			$error["email"] = 'Email không hợp lệ';
+      			$data["email"] = '';
+      			$flag = 0;
+      		}else{
+      			$customer=User::whereRaw("trim(lower(email)) = ? and id != ?",[mb_strtolower($email,'UTF-8'),(int)@$id])->get()->toArray();
+      			if(count($customer) > 0){
+      				$error["email"] = 'Email đã tồn tại';
+      				$data["email"] = ""; 
+      				$flag = 0;
+      			}
+      		}  
+      		if(mb_strlen($fullname) < 6){
+      			$error["fullname"] = 'Họ tên phải từ 6 ký tự trở lên';
+      			$data["fullname"] = ""; 
+      			$flag = 0;
+      		}  
+      		if(mb_strlen($address) < 6){
+      			$error["address"] = 'Địa chỉ phải từ 6 ký tự trở lên';
+      			$data["address"] = ""; 
+      			$flag = 0;
+      		}  
+      		if(mb_strlen($phone) < 10){
+      			$error["phone"] = 'Số điện thoại phải từ 10 ký tự trở lên';
+      			$data["phone"] = ""; 
+      			$flag = 0;
+      		}        
+      		if((int)@$payment_method_id==0){
+      			$error["payment_method"] = 'Xin vui lòng chọn 1 phương thức thanh toán';                      
+      			$flag = 0;
+      		}         
+      		/* begin test payment-method */
+      		$paymentmethod=PaymentMethodModel::find((int)@$payment_method_id)->toArray();        
+      		$payment_method_alias=$paymentmethod['alias'];              
+      		$order_code=randomCodeNumber();              
+      		$total_amount=(float)@$request->total_price;           
+      		$payment_type=0;
+      		$order_description='Thanh toán qua ngân lượng';
+      		$tax_amount=0;
+      		$fee_shipping=0;
+      		$discount_amount=0;
+      		$return_url=route('frontend.index.saveInvoice');
+      		$cancel_url=route('frontend.index.cancelInvoice');
+      		$buyer_fullname=@$request->fullname;
+      		$buyer_email=@$request->email;
+      		$buyer_mobile=@$request->phone;
+      		$buyer_address=@$request->address;
+      		$array_items=array();
+      		$arrCart=array();
+      		if(Session::has($this->_ssNameCart)){
+      			$arrCart=Session::get($this->_ssNameCart);
+      		}         
+      		if(count($arrCart) > 0){
+      			$k=1;
+      			$j=0;
+      			foreach ($arrCart as $key => $value) {                
+      				$product_id=$value["product_id"];    
+      				$product_code=$value["product_code"];  
+      				$product_name=$value["product_name"];              
+      				$product_alias=$value["product_alias"];                                      
+      				$product_image=   $value["product_image"] ;        
+      				$product_price=$value["product_price"];                                  
+      				$product_quantity=$value["product_quantity"];                         
+      				$product_total_price=$value["product_total_price"];
+      				$array_items[$j]= 
+      				array(
+      					'item_name'.$k => $product_name,
+      					'item_quantity'.$k => $product_quantity,
+      					'item_amount'.$k => $product_total_price,
+      					'item_url'.$k => route('frontend.index.index',[$product_alias])
+      				);
+      				$k++;
+      				$j++;
+      			}              
+      		}                
+      		$nlcheckout= new NL_CheckOutV3('36680','matkhauketnoi','demo@nganluong.vn','https://www.nganluong.vn/checkout.api.nganluong.post.php');
+      		switch ($payment_method_alias) {
+      			case 'NL':
+      			$nl_result= $nlcheckout->NLCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
+      				$fee_shipping,$discount_amount,$return_url,$cancel_url,$buyer_fullname,$buyer_email,$buyer_mobile, 
+      				$buyer_address,$array_items);              
+      			break;        			
+      		}
+      		if (strcmp($nl_result->error_code, '00')  != 0){                
+      			$error["payment_method"] = $nl_result->error_message;                      
+      			$flag = 0;
+      		}
+      		/* end test payment-method */                           
+      		if($flag==1){                                                  
+      			$item = new InvoiceModel;
+      			$item->code=$order_code;
+      			$item->customer_id  = (int)@$id;
+      			$item->username     = @$request->username;
+      			$item->email        = @$request->email;
+      			$item->fullname     = @$request->fullname;
+      			$item->address      = @$request->address;
+      			$item->phone=@$request->phone;                 
+      			$item->payment_method_id=(int)@$payment_method_id;
+      			$item->quantity=(int)@$request->quantity;
+      			$item->total_price=(float)@$request->total_price;
+      			$item->status=0;  
+      			$item->sort_order=1;
+      			$item->created_at=date("Y-m-d H:i:s",time());
+      			$item->updated_at=date("Y-m-d H:i:s",time());
+      			$item->save();                           
+      			$arrCart=array();
+      			if(Session::has($this->_ssNameCart)){
+      				$arrCart=Session::get($this->_ssNameCart);
+      			}         
+      			if(count($arrCart) > 0){
+      				foreach ($arrCart as $key => $value) {
+      					$invoice_id=$item->id;
+      					$product_id=$value["product_id"];    
+      					$product_code=$value["product_code"];  
+      					$product_name=$value["product_name"];                                                    
+      					$product_image=   $value["product_image"] ;        
+      					$product_price=$value["product_price"];                                  
+      					$product_quantity=$value["product_quantity"];                         
+      					$product_total_price=$value["product_total_price"];
+      					$itemInvoiceDetail=new InvoiceDetailModel;                          
+      					$itemInvoiceDetail->invoice_id=$invoice_id;
+      					$itemInvoiceDetail->product_id=$product_id;
+      					$itemInvoiceDetail->product_code=$product_code;
+      					$itemInvoiceDetail->product_name=$product_name;
+      					$itemInvoiceDetail->product_image=$product_image;
+      					$itemInvoiceDetail->product_price=$product_price;
+      					$itemInvoiceDetail->product_quantity=$product_quantity;
+      					$itemInvoiceDetail->product_total_price=$product_total_price;
+      					$itemInvoiceDetail->created_at=date("Y-m-d H:i:s",time());
+      					$itemInvoiceDetail->updated_at=date("Y-m-d H:i:s",time());
+      					$itemInvoiceDetail->save();
+      				}
+      			}                           
+      			if(Session::has($this->_ssNameCart)){
+      				Session::forget($this->_ssNameCart);
+      			}                                                                        
+      		}                         
+      	}
+      	$data_paymentmethod=PaymentMethodModel::select('id','fullname','alias','content')->get()->toArray();
+      	$data_paymentmethod[]=array(
+      		'id'=>0,
+      		'fullname'=>null,
+      		'alias'=>null,
+      		'content'=>null,          
+      	);
+      	return view("frontend.index",compact("component","error","data","success","layout","data_paymentmethod"));                   
       }    
       public function saveInvoice(){
         
