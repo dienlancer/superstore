@@ -1077,7 +1077,7 @@ class IndexController extends Controller {
       		$fee_shipping=0;
       		$discount_amount=0;
       		$return_url=route('frontend.index.saveInvoice');
-      		$cancel_url=route('frontend.index.saveInvoice');
+      		$cancel_url=route('frontend.index.cancelInvoice');
       		$buyer_fullname=@$request->fullname;
       		$buyer_email=@$request->email;
       		$buyer_mobile=@$request->phone;
@@ -1109,8 +1109,12 @@ class IndexController extends Controller {
       				$k++;
       				$j++;
       			}              
-      		}                
-      		$nlcheckout= new NL_CheckOutV3('36680','matkhauketnoi','demo@nganluong.vn','https://www.nganluong.vn/checkout.api.nganluong.post.php');
+      		}             
+          $setting=getSettingSystem();
+          $merchant_id=$setting['merchant_id']['field_value'];
+          $merchant_pass=$setting['merchant_pass']['field_value'];
+          $receiver=$setting['receiver']['field_value'];   
+      		$nlcheckout= new NL_CheckOutV3($merchant_id,$merchant_pass,$receiver,'https://www.nganluong.vn/checkout.api.nganluong.post.php');
       		switch ($payment_method_alias) {
       			case 'VISA':
       			$nl_result= $nlcheckout->VisaCheckout($order_code,$total_amount,$payment_type,$order_description,$tax_amount,
