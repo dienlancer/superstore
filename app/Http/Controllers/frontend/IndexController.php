@@ -462,7 +462,7 @@ class IndexController extends Controller {
                 ->get()->toArray();   
         $items=convertToArray($data);                  
       }       
-      $layout="full-width";             
+      $layout="two-column";             
       break; 
       case 'product':
       $row=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();              
@@ -527,8 +527,17 @@ class IndexController extends Controller {
       }
     }
     $breadcrumb='';              
-    $breadcrumb= getBreadcrumb($alias);  
-    return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb"));                            
+    $breadcrumb= getBreadcrumb($alias);
+    switch ($component) {
+        case 'category-product':
+          return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb")); 
+          break;
+        
+        default:
+          return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb")); 
+          break;
+      }  
+                               
   }
       function addCart(){          
           $product_id=(int)($_POST["product_id"]);

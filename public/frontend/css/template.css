@@ -540,12 +540,9 @@ footer{
     margin-right: 10px;
 }
 .breadcrumb-title{
-    border: 1px solid #d8d8d8;
-    background: linear-gradient(to bottom, #ffffff , #F5F5F5);
-    font-size: 15px;
-    
+        font-size: 15px;
     text-transform: uppercase;
-    padding: 10px 10px;
+    padding: 10px 0px;
     font-weight: bold;
 }
 .breadcrumb-title a::after{
@@ -1546,6 +1543,27 @@ form[name='frm-search']{
 }
 .actions{
     float: right;
+}
+.cateprodhorizontalright li{
+    margin-left: 0;
+}
+.cateprodhorizontalright {
+    width: 100%;
+    list-style: none;
+
+}
+.cateprodhorizontalright li a{
+    display: block;
+    border-bottom:1px solid #dedede;
+    padding: 5px 5px
+}
+.cate-product-horizontal-right{
+    border-top: 2px solid #f14976;
+    border-left:1px solid #dedede;
+    border-right:1px solid #dedede;    
+}
+.breadcrumb-bg{
+        background-color: #f3f1f2;
 }
 ul.bankList {
         clear: both;
