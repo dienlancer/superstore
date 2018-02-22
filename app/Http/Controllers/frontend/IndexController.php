@@ -530,7 +530,7 @@ class IndexController extends Controller {
     $breadcrumb= getBreadcrumb($alias);
     switch ($component) {
         case 'category-product':
-          return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb")); 
+          return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb",'category')); 
           break;
         
         default:

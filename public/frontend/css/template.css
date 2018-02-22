@@ -1561,6 +1561,7 @@ form[name='frm-search']{
     border-top: 2px solid #f14976;
     border-left:1px solid #dedede;
     border-right:1px solid #dedede;    
+    background: #ffffff
 }
 .breadcrumb-bg{
         background-color: #f3f1f2;
@@ -1645,7 +1646,17 @@ ul.bankList {
     ul.cardList{
         list-style: none;
     }
-
+.slideshow-category .slick-slide{
+    display: flex;
+    justify-content: center;
+    
+}
+.nitendo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

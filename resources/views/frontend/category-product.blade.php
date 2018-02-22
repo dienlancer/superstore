@@ -1,64 +1,100 @@
 @extends("frontend.master")
 @section("content")
 <?php 
+use Illuminate\Support\Facades\DB;
 $seo_alias="";
 if(isset($alias)){
 	$seo_alias=$alias;
 }
+$data_category=array();
+getRecursiveCategoryProduct((int)@$category['parent_id'],$data_category);
+$theme_location='';
+if(count($data_category) > 0){	
+	$theme_location=$data_category[count($data_category)-1]['alias'];
+}else{
+	$theme_location=$category['alias'];
+}
 ?>
+<div class="breadcrumb-bg">
+	<div class="container">
+		<div class="col-lg-12">
+			<div class="breadcrumb-title">
+				<?php echo $breadcrumb; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="col-lg-12">
+		<div class="relative">
+			<?php 
+			$data_slideshow=getBanner($theme_location);
+			if(count($data_slideshow) > 0){
+				$slides=$data_slideshow["items"];
+				if(count($slides) > 0){
+					?>
+					<div class="slideshow-category">
+						<script type="text/javascript" language="javascript">        
+							$(document).ready(function(){
+								$(".slick-slideshow").slick({
+									dots: false,
+									infinite:false,
+									autoplay:true,
+									arrows:false,
+									adaptiveHeight:true,
+									slidesToShow: 1,
+									slidesToScroll: 1,        
+								});  
+							});     
+						</script>
+						<div class="slick-slideshow">    
+							<?php 
+							foreach ($slides as $key => $value) {
+								$alt=$value["alt"];
+								$featuredImg=asset('upload/'.$value["image"]);
+								?>
+								<div><img src="<?php echo $featuredImg; ?>" alt="<?php echo $alt; ?>" /></div>
+								<?php 
+							}
+							?>              
+						</div>
+					</div>
+					<?php
+				}  
+			}
+			?>	
+			<div class="nitendo">
+				<div class="col-lg-3 no-padding-left">
+					<div class="cate-product-horizontal-right">
+						<?php     
+						$args = array(                         
+							'menu_class'            => 'cateprodhorizontalright', 					                     
+							'before_wrapper'        => '',
+							'before_title'          => '',
+							'after_title'           => '',
+							'before_wrapper_ul'     =>  '',
+							'after_wrapper_ul'      =>  '',
+							'after_wrapper'         => ''     ,
+							'link_before'       	=> '', 
+							'link_after'        	=> '',                                        
+							'theme_location'        => $theme_location ,
+							'menu_li_actived'       => 'current-menu-item',
+							'menu_item_has_children'=> 'menu-item-has-children',
+							'alias'                 => $seo_alias
+						);                    
+						wp_nav_menu($args);
+						?>                 
+						<div class="clr"></div>
+					</div>
+				</div>
+				<div class="col-lg-9"></div>				
+			</div>
+		</div>	
+	</div>
+</div>
 <form method="post" class="frm" name="frm">
 	<input type="hidden" name="filter_page" value="1">         
 	{{ csrf_field() }}	
-	<div class="breadcrumb-bg">
-		<div class="container">
-			<div class="col-lg-12">
-				<?php 		
-				if(empty($breadcrumb)){
-					?>
-					<div class="tieu-de">
-						<?php echo $title; ?>		
-					</div>
-					<?php
-				}else{
-					?>
-					<div class="breadcrumb-title">
-						<?php echo $breadcrumb; ?>
-					</div>
-					<?php
-				}	
-				?>
-			</div>
-		</div>
-	</div>	
-	<div class="container">
-		<div class="col-lg-3">
-			<div class="cate-product-horizontal-right">
-				<?php     
-				$args = array(                         
-					'menu_class'            => 'cateprodhorizontalright', 					                     
-					'before_wrapper'        => '',
-					'before_title'          => '',
-					'after_title'           => '',
-					'before_wrapper_ul'     =>  '',
-					'after_wrapper_ul'      =>  '',
-					'after_wrapper'         => ''     ,
-					'link_before'       	=> '', 
-					'link_after'        	=> '',                                        
-					'theme_location'        => 'thoi-trang-nu' ,
-					'menu_li_actived'       => 'current-menu-item',
-					'menu_item_has_children'=> 'menu-item-has-children',
-					'alias'                 => $seo_alias
-				);                    
-				wp_nav_menu($args);
-				?>                 
-				<div class="clr"></div>
-			</div>
-		</div>
-		<div class="col-lg-9">
-			
-		</div>
-		<div class="clr"></div>
-	</div>	
 	<div class="container">
 		<div class="row">
 			<?php 	
