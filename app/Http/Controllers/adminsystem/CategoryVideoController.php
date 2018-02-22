@@ -177,7 +177,7 @@ class CategoryVideoController extends Controller {
             $checked                =   1;
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";      
-            $data=VideoModel::whereRaw("category_video_id = ?",[(int)@$id])->select('id')->get()->toArray();        
+            $data=VideoModel::whereRaw("category_id = ?",[(int)@$id])->select('id')->get()->toArray();        
             if(count($data) > 0){
               $checked                =   0;
               $type_msg               =   "alert-warning";            
@@ -239,7 +239,7 @@ class CategoryVideoController extends Controller {
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
-            $data=DB::table('video')->whereIn('category_video_id',@$arrID)->select('id')->get()->toArray();             
+            $data=DB::table('video')->whereIn('category_id',@$arrID)->select('id')->get()->toArray();             
             if(count($data) > 0){
               $checked                =   0;
               $type_msg               =   "alert-warning";            
