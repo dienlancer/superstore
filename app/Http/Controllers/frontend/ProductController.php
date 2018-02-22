@@ -257,11 +257,13 @@ if ($checked == 1) {
           // end upload product child image             
   $item->save();    
   $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
-  if(count($dataMenu) > 0){
-    $menu_id=(int)$dataMenu[0]['id'];
-    $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
-    DB::statement($sql);    
-  }   
+          if(count($dataMenu) > 0){
+            foreach ($dataMenu as $key => $value) {                   
+              $menu_id=(int)$value['id'];
+              $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
+                DB::statement($sql);    
+            }          
+          } 
   if(count(@$category_param_id)>0){                            
     $arrProductParam=ProductParamModel::whereRaw("product_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
     $arrCategoryParamID=array();
