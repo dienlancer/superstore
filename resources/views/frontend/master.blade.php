@@ -270,7 +270,7 @@ if(count($arrCart) > 0){
 				</div> 
 				<div class="col-lg-6">
 					<div class="searching">
-						<form action="<?php echo route('frontend.index.search'); ?>" method="post" name="frm-search">
+						<form action="<?php echo route('frontend.index.searchProduct'); ?>" method="post" name="frm-search">
 							{{ csrf_field() }}
 							<input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm" value="">
 							<a href="javascript:void(0);" onclick="document.forms['frm-search'].submit();">Tìm kiếm</a>

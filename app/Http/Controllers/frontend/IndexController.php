@@ -145,7 +145,8 @@ class IndexController extends Controller {
               echo '<script language="javascript" type="text/javascript">alert("Có sự cố trong quá trình gửi dữ liệu");</script>'; 
             }            
           }        
-        }        
+        }     
+        \Artisan::call('sitemap:auto');   
         return view("frontend.home",compact("component","error","data","success","alias","layout"));        
   }  
   public function search(Request $request){
@@ -205,7 +206,7 @@ class IndexController extends Controller {
   }
   public function searchProduct(Request $request){
     /* begin standard */    
-    $layout="two-column";                                                           
+    $layout="full-width";                                                           
     $totalItems=0;
     $totalItemsPerPage=0;
     $pageRange=0;      
@@ -247,14 +248,14 @@ class IndexController extends Controller {
     if(!empty(@$request->q)){
       $query->where('product.fullname','like', '%'.@$request->q.'%');
     }                     
-    $data=$query->select('product.id','product.alias','product.fullname','product.image','product.intro','product.count_view')
-    ->groupBy('product.id','product.alias','product.fullname','product.image','product.intro','product.count_view')
+    $data=$query->select('product.id','product.alias','product.fullname','product.price','product.sale_price','product.image','product.intro','product.count_view')
+    ->groupBy('product.id','product.alias','product.fullname','product.price','product.sale_price','product.image','product.intro','product.count_view')
     ->orderBy('product.created_at', 'desc')
     ->skip($position)
     ->take($totalItemsPerPage)
     ->get()->toArray();   
     $items=convertToArray($data);      
-    return view("frontend.index",compact("component","title","items","pagination","layout"));
+    return view("frontend.search",compact("component","title","items","pagination","layout"));
   }
   public function index(Request $request,$alias)
   {                     
@@ -528,6 +529,7 @@ class IndexController extends Controller {
     }
     $breadcrumb='';              
     $breadcrumb= getBreadcrumb($alias);
+    \Artisan::call('sitemap:auto');
     switch ($component) {
         case 'category-product':
           return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb",'category')); 
