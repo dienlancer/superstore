@@ -1,5 +1,4 @@
 <?php 
-use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 $seo=getSeo();
 $telephone=$setting['telephone']['field_value'];
@@ -220,7 +219,7 @@ if(count($arrCart) > 0){
 								<li ><a href="<?php echo $account_link; ?>" ><i class="fas fa-user" aria-hidden="true"></i>&nbsp;Đăng nhập</a></li>
 								<?php
 							}else{ 								
-								$dataGroupMember=DB::table('group_member')
+								$dataGroupMember=\DB::table('group_member')
 												->join('user_group_member','group_member.id','=','user_group_member.group_member_id')
 												->where('user_group_member.user_id',(int)@$arrUser['id'])
 												->select('group_member.alias')
