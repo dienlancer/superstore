@@ -235,39 +235,7 @@ switch ($controller) {
             </li>
         </ul>
     </li>
-    <li class="nav-item <?php echo $li_project_management; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-folder-open-o" ></i>
-            <span class="title">Quản lý dự án</span>
-            <span class="arrow"></span>
-        </a>
-        <ul class="sub-menu">                                    
-            <li class="nav-item  <?php echo $li_project; ?>">
-                <a href="{!! route('adminsystem.project.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Dự án</span>                                            
-                </a>                                                                      
-            </li>  
-            <li class="nav-item  <?php echo $li_project_article; ?>">
-                <a href="{!! route('adminsystem.project-article.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Tin tức</span>                                            
-                </a>                                                                      
-            </li>  
-            <li class="nav-item  <?php echo $li_province; ?>">
-                <a href="{!! route('adminsystem.province.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Tỉnh - Thành phố</span>                                            
-                </a>                                                                      
-            </li>   
-            <li class="nav-item  <?php echo $li_district; ?>">
-                <a href="{!! route('adminsystem.district.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Quận huyện</span>                                            
-                </a>                                                                      
-            </li>                        
-        </ul>
-    </li>
+    
     <li class="nav-item <?php echo $li_album_management; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-folder-open-o" ></i>
@@ -310,18 +278,7 @@ switch ($controller) {
             </li>                        
         </ul>
     </li>
-    <li class="nav-item  <?php echo $li_supporter; ?>">
-        <a href="{!! route('adminsystem.supporter.getList') !!}" class="nav-link nav-toggle">
-            <i class="icon-notebook"></i>
-            <span class="title">Tiếp lửa</span>                                            
-        </a>                                                                      
-    </li>
-    <li class="nav-item  <?php echo $li_organization; ?>">
-        <a href="{!! route('adminsystem.organization.getList') !!}" class="nav-link nav-toggle">
-            <i class="icon-notebook"></i>
-            <span class="title">Tổ chức</span>                                            
-        </a>                                                                      
-    </li>
+    
     <li class="nav-item  <?php echo $li_media; ?>">
         <a href="{!! route('adminsystem.media.getList') !!}" class="nav-link nav-toggle">
             <i class="icon-notebook"></i>

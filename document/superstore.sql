@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 24, 2018 lúc 06:51 AM
+-- Thời gian đã tạo: Th2 25, 2018 lúc 01:41 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -194,7 +194,27 @@ INSERT INTO `banner` (`id`, `category_id`, `caption`, `alt`, `image`, `page_url`
 (26, 2, '', '', 'partner-12.png', '', 20, 1, '2018-01-20 04:27:50', '2018-01-20 04:27:50'),
 (27, 2, '', '', 'partner-13.png', '', 21, 1, '2018-01-20 04:28:00', '2018-01-20 04:28:05'),
 (28, 5, 'Thời trang nữ', 'Thời trang nữ', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-22 16:19:19', '2018-02-22 17:44:45'),
-(29, 5, 'Thời trang nữ', 'thoi-trang-nu', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-22 16:19:35', '2018-02-22 17:44:53');
+(29, 5, 'Thời trang nữ', 'thoi-trang-nu', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-22 16:19:35', '2018-02-22 17:44:53'),
+(30, 7, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:13:48', '2018-02-25 12:13:48'),
+(31, 7, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:13:55', '2018-02-25 12:13:55'),
+(32, 8, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:14:08', '2018-02-25 12:14:08'),
+(33, 8, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:14:14', '2018-02-25 12:14:14'),
+(34, 9, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:14:27', '2018-02-25 12:14:27'),
+(35, 9, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:14:33', '2018-02-25 12:14:33'),
+(36, 10, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:14:43', '2018-02-25 12:14:43'),
+(37, 10, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:14:50', '2018-02-25 12:14:50'),
+(38, 11, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:15:00', '2018-02-25 12:15:00'),
+(39, 11, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:15:08', '2018-02-25 12:15:08'),
+(40, 12, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:15:20', '2018-02-25 12:15:20'),
+(41, 12, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:15:25', '2018-02-25 12:15:25'),
+(42, 13, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:15:37', '2018-02-25 12:15:37'),
+(43, 13, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:15:43', '2018-02-25 12:15:43'),
+(44, 14, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:15:54', '2018-02-25 12:15:54'),
+(45, 14, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:16:00', '2018-02-25 12:16:00'),
+(46, 15, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:16:11', '2018-02-25 12:16:11'),
+(47, 15, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:16:17', '2018-02-25 12:16:17'),
+(48, 6, '', '', 'thoi-trang-nu-1.jpg', '', 1, 1, '2018-02-25 12:16:33', '2018-02-25 12:16:33'),
+(49, 6, '', '', 'thoi-trang-nu-2.jpg', '', 2, 1, '2018-02-25 12:16:39', '2018-02-25 12:16:39');
 
 -- --------------------------------------------------------
 
@@ -250,8 +270,18 @@ CREATE TABLE `category_banner` (
 
 INSERT INTO `category_banner` (`id`, `fullname`, `theme_location`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
 (1, 'Slideshow', 'slideshow', 1, 1, '2017-12-16 05:02:58', '2017-12-28 08:45:44'),
-(2, 'Đối tác', 'doi-tac', 1, 2, '2017-12-26 04:32:09', '2017-12-26 04:38:35'),
-(5, 'Thời trang nữ', 'thoi-trang-nu', 1, 1, '2018-02-22 16:18:56', '2018-02-22 16:18:56');
+(2, 'Đối tác', 'doi-tac', 1, 12, '2017-12-26 04:32:09', '2018-02-25 12:13:20'),
+(5, 'Thời trang nữ', 'thoi-trang-nu', 1, 2, '2018-02-22 16:18:56', '2018-02-25 12:13:20'),
+(6, 'Điện thoại máy tính', 'dien-thoai-may-tinh', 1, 13, '2018-02-25 12:10:15', '2018-02-25 12:13:20'),
+(7, 'Thời trang nam', 'thoi-trang-nam', 1, 3, '2018-02-25 12:10:28', '2018-02-25 12:13:20'),
+(8, 'Giày dép túi xách', 'giay-dep-tui-xach', 1, 4, '2018-02-25 12:10:49', '2018-02-25 12:13:20'),
+(9, 'Phụ kiện số camera', 'phu-kien-so-camera', 1, 5, '2018-02-25 12:11:10', '2018-02-25 12:13:20'),
+(10, 'Mẹ  bé - Đồ chơi', 'me-be-do-choi', 1, 6, '2018-02-25 12:11:27', '2018-02-25 12:13:20'),
+(11, 'Đồng hồ phụ kiện', 'dong-ho-phu-kien', 1, 7, '2018-02-25 12:11:47', '2018-02-25 12:13:20'),
+(12, 'Nhà cửa tân trang nhà', 'nha-cua-tan-trang-nha', 1, 8, '2018-02-25 12:12:08', '2018-02-25 12:13:20'),
+(13, 'Sức khỏe sắc đẹp', 'suc-khoe-sac-dep', 1, 9, '2018-02-25 12:12:26', '2018-02-25 12:13:20'),
+(14, 'Tivi thiết bị âm thanh', 'tivi-thiet-bi-am-thanh', 1, 10, '2018-02-25 12:12:42', '2018-02-25 12:13:20'),
+(15, 'Dụng cụ thể thao', 'dung-cu-the-thao', 1, 11, '2018-02-25 12:13:00', '2018-02-25 12:13:20');
 
 -- --------------------------------------------------------
 
@@ -1647,7 +1677,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (623, 1, 'Ul8BpMVjUeWF98UrKmTgSPUtkv9Xic9A', '2018-02-23 22:37:41', '2018-02-23 22:37:41'),
 (624, 1, 'qKGsmyQqNwNTYgTG5O9sEJrmibWsYdVD', '2018-02-23 22:37:41', '2018-02-23 22:37:41'),
 (625, 1, 'C7VKdFfGrpXWoomUQCmBXO02hcu8fGCO', '2018-02-23 22:39:35', '2018-02-23 22:39:35'),
-(626, 1, '220mzZp1oL38PQ2d8VhliYoNo7UxHm67', '2018-02-23 22:39:35', '2018-02-23 22:39:35');
+(626, 1, '220mzZp1oL38PQ2d8VhliYoNo7UxHm67', '2018-02-23 22:39:35', '2018-02-23 22:39:35'),
+(627, 1, 'al5sb4g355hIHLH0BIP0ejesi0XPo5Di', '2018-02-25 05:09:49', '2018-02-25 05:09:49'),
+(628, 1, 'ZJXzKSM1VX1qqAWf6unOvBqLY9a6Hb6P', '2018-02-25 05:09:49', '2018-02-25 05:09:49');
 
 -- --------------------------------------------------------
 
@@ -2651,7 +2683,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-23 22:39:35', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-02-23 22:39:35'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-02-25 05:09:49', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-02-25 05:09:49'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 3, 0, '2018-01-26 01:57:35', '2018-02-04 08:08:20'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 4, 0, '2018-01-28 09:40:59', '2018-02-04 08:08:20'),
 (8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-23 01:16:10', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 5, 0, '2018-02-05 20:06:26', '2018-02-23 01:16:10'),
@@ -3007,7 +3039,7 @@ ALTER TABLE `article_category`
 -- AUTO_INCREMENT cho bảng `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT cho bảng `category_article`
@@ -3019,7 +3051,7 @@ ALTER TABLE `category_article`
 -- AUTO_INCREMENT cho bảng `category_banner`
 --
 ALTER TABLE `category_banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `category_param`
@@ -3115,7 +3147,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=629;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
