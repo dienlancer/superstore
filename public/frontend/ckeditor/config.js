@@ -4,6 +4,6 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.filebrowserBrowseUrl = '/superstore/public/frontend/ckfinder/ckfinder.html',
-    config.filebrowserUploadUrl = '/superstore/public/frontend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+	config.filebrowserBrowseUrl = '/public/frontend/ckfinder/ckfinder.html',
+    config.filebrowserUploadUrl = '/public/frontend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
 };

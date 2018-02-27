@@ -311,7 +311,8 @@ class ProductController extends Controller {
             }                 
             if($checked == 1){
               $item = ProductModel::find((int)@$id);
-                $item->delete();                
+                $item->delete();     
+                ProductParamModel::whereRaw("product_id = ?",[(int)@$id])->delete();           
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -375,7 +376,8 @@ class ProductController extends Controller {
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }  
             if($checked == 1){                
-                  DB::table('product')->whereIn('id',@$arrID)->delete();                                              
+                  DB::table('product')->whereIn('id',@$arrID)->delete(); 
+                  DB::table('product_param')->whereIn('product_id',@$arrID)->delete();                                              
             }
             $data                   =   $this->loadData($request);
             $info = array(

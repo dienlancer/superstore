@@ -325,7 +325,8 @@ return $info;
               $msg                    =   "Phần tử có dữ liệu con. Vui lòng không xoá";
             }                                   
             if($checked == 1){
-             ProductModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->delete();                  
+             ProductModel::whereRaw('id = ? and user_id = ?',[(int)@$id,(int)@$arrUser['id']])->delete();         
+             ProductParamModel::whereRaw("product_id = ?",[(int)@$id])->delete();            
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -362,6 +363,7 @@ return $info;
             }   
             if($checked == 1){                                                     
                   DB::table('product')->whereIn('id',@$arrID)->where('user_id',(int)@$arrUser['id'])->delete();   
+                  DB::table('product_param')->whereIn('product_id',@$arrID)->delete();      
             }
             $data                   =   $this->loadData($request);
             $info = array(
