@@ -20,7 +20,7 @@ $li_district='';
 $li_product_management='';
 $li_category_product='';
 $li_product='';
-$li_customer='';
+
 $li_payment_method='';
 $li_invoice='';
 $li_category_param='';
@@ -99,10 +99,7 @@ switch ($controller) {
     $li_product='active open';
     $li_product_management='active open';
     break;
-    case 'customer': 
-    $li_customer='active open';
-    $li_product_management='active open';
-    break;
+    
     case 'payment-method':     
     $li_payment_method='active open';
     $li_product_management='active open';
@@ -209,12 +206,7 @@ switch ($controller) {
                     <span class="title">Sản phẩm</span>                                            
                 </a>                                                                      
             </li>
-            <li class="nav-item  <?php echo $li_customer; ?>">
-                <a href="{!! route('adminsystem.customer.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Khách hàng</span>                                            
-                </a>                                                                      
-            </li>
+            
             <li class="nav-item <?php echo $li_payment_method; ?> ">
                 <a href="{!! route('adminsystem.payment-method.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
