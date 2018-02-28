@@ -18,6 +18,9 @@ if(count($data_category) > 0){
 <div class="breadcrumb-bg">
 	<div class="container">
 		<div class="col-lg-12">
+			<?php 			
+			$breadcrumb= getBreadCrumbCategoryProduct($category);		
+			?>
 			<div class="breadcrumb-title">
 				<?php echo $breadcrumb; ?>
 			</div>
