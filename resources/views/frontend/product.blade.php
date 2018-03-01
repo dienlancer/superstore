@@ -118,8 +118,7 @@ if(count($item) > 0){
                 	echo $html_price;
                 	?>
                 </div>
-                <div class="box-product-param">
-                	{{ csrf_field() }}
+                <div class="box-product-param">                	
                 	<!-- begin xuất xứ -->
                 	<?php 
                 	$dataParamFather=CategoryParamModel::whereRaw('alias = ?',['xuat-xu'])->select('id')->orderBy('sort_order','asc')->get()->toArray();

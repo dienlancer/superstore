@@ -526,17 +526,15 @@ class IndexController extends Controller {
       if(!empty($category['meta_description'])){
         $meta_description=$category['meta_description'];
       }
-    }
-    $breadcrumb='';              
-    $breadcrumb= getBreadcrumb($alias);
+    }    
     \Artisan::call('sitemap:auto');
     switch ($component) {
         case 'category-product':
-          return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb",'category')); 
+          return view("frontend.category-product",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout",'category')); 
           break;
         
         default:
-          return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb")); 
+          return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","category")); 
           break;
       }  
                                
