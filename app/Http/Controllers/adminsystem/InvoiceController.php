@@ -94,9 +94,7 @@ class InvoiceController extends Controller {
         }  
         $item->fullname 		=	$fullname;
         $item->address 			=	$address;
-        $item->phone 		    =	$phone;            
-        
-                   
+        $item->phone 		    =	$phone;                               
         $item->sort_order 	=	(int)@$sort_order;
         $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	

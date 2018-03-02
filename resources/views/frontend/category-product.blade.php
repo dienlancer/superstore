@@ -19,7 +19,12 @@ if(count($data_category) > 0){
 	<div class="container">
 		<div class="col-lg-12">
 			<?php 			
-			$breadcrumb= getBreadCrumbCategoryProduct($category);		
+			if(@$category != null){
+				$breadcrumb= getBreadCrumbCategoryProduct(@$category);			
+			}
+			else{
+				$breadcrumb='<a href="'.url('/').'">Trang chủ</a><a href="javascript:void(0);">Tìm kiếm</a>';
+			}	
 			?>
 			<div class="breadcrumb-title">
 				<?php echo $breadcrumb; ?>
