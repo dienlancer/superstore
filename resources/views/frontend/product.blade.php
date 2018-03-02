@@ -173,10 +173,6 @@ if(count($item) > 0){
                     }   
                     ?>                
                     <!-- end xuất xứ -->        
-                	 
-                	
-                	
-                	
                 	<!-- begin màu -->
                 	<?php 
                 	$dataParamFather=CategoryParamModel::whereRaw('alias = ?',['mau'])->select('id')->orderBy('sort_order','asc')->get()->toArray();
