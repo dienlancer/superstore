@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 05, 2018 lúc 10:48 AM
+-- Thời gian đã tạo: Th3 09, 2018 lúc 12:48 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -1283,7 +1283,10 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (642, 1, 'XVme4a2UYb5AFHcGmMvVnbQQWQT1z9ps', '2018-03-02 08:49:47', '2018-03-02 08:49:47'),
 (643, 1, 'ViEM9EDeW3Ydyt5tSAY2JMQ2orqdCMDZ', '2018-03-02 08:49:47', '2018-03-02 08:49:47'),
 (644, 1, 'VZuXl5Ak7r0E6APnd1dhnXU3zJ37m65n', '2018-03-05 02:29:09', '2018-03-05 02:29:09'),
-(645, 1, 'WUrnkHqC6lQX0ofJTnV2fcwGCKKNJj8i', '2018-03-05 02:29:09', '2018-03-05 02:29:09');
+(645, 1, 'WUrnkHqC6lQX0ofJTnV2fcwGCKKNJj8i', '2018-03-05 02:29:09', '2018-03-05 02:29:09'),
+(646, 1, 'Ni1YspZoJtF05bFAydLq8EG3MEhpcghL', '2018-03-05 08:28:04', '2018-03-05 08:28:04'),
+(647, 1, 'ZAPuNQfvv2iPIAwguj54axlpfRZk4Iat', '2018-03-05 08:28:04', '2018-03-05 08:28:04'),
+(648, 1, '7aQxt5QjSwFBzJzAnYMkccjEJ55HUjwK', '2018-03-05 09:57:02', '2018-03-05 09:57:02');
 
 -- --------------------------------------------------------
 
@@ -2341,7 +2344,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-03-05 02:29:09', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-03-05 02:29:09'),
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$U.H6.rf5/X4JpVnA/WyQwOD9a.dWtbQFWtp3wqxjJBu8w9BJg3Q9K', NULL, '2018-03-05 09:57:02', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 6, 1, '2017-11-12 07:23:56', '2018-03-05 09:57:02'),
 (6, 'helenangochong', 'helenangoc@dienkim.com', '$2y$10$/cSr2zKOI5RUAo9XD2K5DuVwB554IWn3k16RwF37pFSxYFouMOmbi', NULL, '2018-01-26 04:32:49', 'Hồ Thị Ngọc Hồng', '12 Tân Canh', '0988162755', NULL, 3, 0, '2018-01-26 01:57:35', '2018-02-04 08:08:20'),
 (7, 'langong', 'thaithuonglangong@dienkim.com', '$2y$10$W38P0cEq8qVYSiXYAKQVCOKb7ZkN4t7uN1trgm38V2wSKjtacybxe', NULL, '2018-01-28 09:54:51', 'Thái Thượng Lãng Ông', '13 Tân Canh', '0988162774', NULL, 4, 0, '2018-01-28 09:40:59', '2018-02-04 08:08:20'),
 (8, 'tiennv', 'tiennv@dienkim.com', '$2y$10$9sq3u.mDu/Bk1vvpv4sU7.Ior67wjHR5n1slgsv/sz63zBQxAfZ4K', NULL, '2018-02-28 02:39:00', 'Nguyễn Văn Tiến', '14 Tân Canh', '0988152782', NULL, 5, 0, '2018-02-05 20:06:26', '2018-02-28 02:39:00'),
@@ -2793,7 +2796,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=646;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=649;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
