@@ -1639,7 +1639,7 @@ ul.bankList {
     left: 0;
     width: 100%;
 }
-@media (max-width: 767px){    
+@media (max-width: 768px){    
     div.mobilemenu{
         display: block;
         background: #ffffff;
@@ -1684,8 +1684,6 @@ ul.bankList {
     	text-align: center;
     }
 
-}
-@media (max-width: 543px){
 
     .searching{
         width: 100%;
@@ -1695,7 +1693,7 @@ ul.bankList {
         margin-top: 15px;
     }
     .hotline{
-    	text-align: center;
+        text-align: center;
     }
     .searching{
         padding: 40px 0px 0px 0px;
