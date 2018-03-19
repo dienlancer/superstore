@@ -32,6 +32,8 @@ if(count($data_category) > 0){
 		</div>
 	</div>
 </div>
+<h1 style="display: none;"><?php echo @$category['fullname']; ?></h1>
+	<h2 style="display: none;"><?php echo @$meta_description; ?></h2>
 <div class="container">
 	<div class="col-lg-12">
 		<div class="relative">
