@@ -5,7 +5,7 @@ $linkLoadData		=	route('frontend.'.$controller.'.loadData');
 $linkCancel			=	route('frontend.'.$controller.'.getList');
 $linkDelete			=	route('frontend.'.$controller.'.deleteItem');
 $linkTrash			=	route('frontend.'.$controller.'.trash');
-$ddlCategoryProduct     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryProductRecursive, 0,"");
+$ddlCategoryProduct     =   cmsSelectboxCategory('category_id', 'form-control', $arrCategoryProductRecursive, 0,"");
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
 ?>
 <h2 class="tieu-de margin-top-15">

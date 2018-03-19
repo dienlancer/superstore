@@ -15,8 +15,8 @@ $inputStatus                =   '<input type="hidden" name="status"  value="'.@$
 $inputIntro            =   '<textarea  name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputDetail            =   '<textarea name="detail" rows="5" cols="100" class="form-control" >'.@$arrRowData['detail'].'</textarea>'; 
 $inputSortOrder         =   '<input type="hidden" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'"  >';
-$ddlCategoryProduct      =   cmsSelectboxCategory("category_id","category_id","form-control",@$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
-$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id","category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrProductParam,"");
+$ddlCategoryProduct      =   cmsSelectboxCategory("category_id","form-control",@$arrCategoryProductRecursive,@$arrRowData['category_id'],"");
+$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrProductParam,"");
 $inputSizeType         =   '<input type="text" class="form-control" name="size_type"     value="'.@$arrRowData['size_type'].'">';
 $id                     =   (count(@$arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
